@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GroundAttlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 2
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 2
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
+    totalSpriteSurfaceArea: 3014656
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -8799811600886014544, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: -8089951463463920682, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 8831649495129602440, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 1851746582638814707, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: -6679025942621075987, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 2634335898532115766, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 2872783091976863455, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: -3844774462577775674, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: -1257389993609766307, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 6547180001074763156, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 6993767741485162940, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 3551852757152063585, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: -6561176830546430810, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: -320358460337859356, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: -3770861071097816783, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 4365705102118528655, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 4328937951837304667, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 2486023096301081313, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 8853528482768404046, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 585743289677671922, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 2643033215455597726, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 6984502915325246349, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 8793704834800627554, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: -4956577152522499599, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: -3305954188670079014, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 7947151937298174823, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: -8834437243934003524, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: -926000357434778792, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 6852458669386237878, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  - {fileID: 3037222672616680189, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - grass_tiled_12
+  - grass_tiled_10
+  - grass_tiled_17
+  - grass_tiled_18
+  - grass_tiled_19
+  - grass_tiled_7
+  - grass_tiled_6
+  - grass_tiled_5
+  - grass_tiled_4
+  - grass_tiled_2
+  - grass_tiled_0
+  - grass_tiled_8
+  - grass_tiled_38
+  - grass_tiled_41
+  - grass_tiled_39
+  - grass_tiled_43
+  - grass_tiled_35
+  - grass_tiled_29
+  - grass_tiled_44
+  - grass_tiled_37
+  - grass_tiled_30
+  - grass_tiled_26
+  - grass_tiled_31
+  - grass_tiled_25
+  - grass_tiled_32
+  - grass_tiled_24
+  - grass_tiled_33
+  - grass_tiled_22
+  - grass_tiled_21
+  - grass_tiled_20
+  m_RenderDataMap: {}
+  m_Tag: GroundAttlas
+  m_IsVariant: 0

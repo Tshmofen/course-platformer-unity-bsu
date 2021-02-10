@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CharacterAtllas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 16
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 2
+      generateMipMaps: 1
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 2
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: c1f047abacc0a4b47a9a1e9973c7dac8, type: 3}
+    totalSpriteSurfaceArea: 1529760
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -4690252166896579769, guid: 6eaa4d6573cbbd84ea4d793422710d77, type: 3}
+  - {fileID: -7888976400355039610, guid: 6eaa4d6573cbbd84ea4d793422710d77, type: 3}
+  - {fileID: 4358012318890858939, guid: 6eaa4d6573cbbd84ea4d793422710d77, type: 3}
+  - {fileID: 8653907779585095253, guid: 6eaa4d6573cbbd84ea4d793422710d77, type: 3}
+  - {fileID: 5802453505210849344, guid: 6eaa4d6573cbbd84ea4d793422710d77, type: 3}
+  - {fileID: -3763507483378980390, guid: 6eaa4d6573cbbd84ea4d793422710d77, type: 3}
+  - {fileID: -1316006876113350441, guid: 6eaa4d6573cbbd84ea4d793422710d77, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - leg_right
+  - body
+  - leg_left
+  - hand_right
+  - head
+  - neck
+  - hand_left
+  m_RenderDataMap: {}
+  m_Tag: CharacterAtllas
+  m_IsVariant: 0
