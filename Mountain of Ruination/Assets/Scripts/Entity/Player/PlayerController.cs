@@ -167,7 +167,7 @@ namespace Assets.Scripts.Entity.Player
 
         private void UpdateCombatState()
         {
-            if (IsAiming && ToAttack && !deliver.IsDeliveringDamage)
+            if (IsAiming && ToAttack && !deliver.isInAttack)
                 StartAttack();
             MoveTargetAim();
             SwitchActualAim(IsAiming);

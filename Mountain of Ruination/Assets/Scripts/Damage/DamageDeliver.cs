@@ -10,12 +10,8 @@ namespace Assets.Scripts.Damage
         private BoxCollider2D damageCollider;
 
         public DamageStats stats;
-
-        public bool IsDeliveringDamage
-        {
-            get => damageCollider.enabled;
-            set => damageCollider.enabled = value;
-        }
+        
+        public bool isInAttack;
 
         public DamageType Type { get; set; }
 
@@ -26,7 +22,7 @@ namespace Assets.Scripts.Damage
         private void Start()
         {
             damageCollider = GetComponent<BoxCollider2D>();
-            IsDeliveringDamage = false;
+            damageCollider.enabled = false;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

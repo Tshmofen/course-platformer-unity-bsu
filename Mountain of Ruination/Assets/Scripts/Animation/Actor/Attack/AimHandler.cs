@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Animation.Actor.Attack
 {
-    public class AttackHandler : StateMachineBehaviour
+    public class AimHandler : StateMachineBehaviour
     {
         #region Unity calls
 
@@ -11,14 +11,12 @@ namespace Assets.Scripts.Animation.Actor.Attack
         {
             PlayerController controller = animator.GetComponent<PlayerController>();
             controller.DisplayActualAim = false;
-            controller.deliver.IsDeliveringDamage = true;
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             PlayerController controller = animator.GetComponent<PlayerController>();
             controller.DisplayActualAim = true;
-            controller.deliver.IsDeliveringDamage = false;
             controller.actualAim.RestorePosition(controller.IsFacingRight);
             animator.SetTrigger("toAim");
         }
