@@ -157,7 +157,7 @@ namespace Assets.Scripts.Entity.Player
             if (IsAiming && InputUtil.GetSpecialAbility())
             {
                 float targetX = targetAim.Position.x;
-                if (targetX > 0.7 && !IsFacingRight || targetX < -0.7 && IsFacingRight)
+                if (targetX > 0.1 && !IsFacingRight || targetX < -0.1 && IsFacingRight)
                 {
                     FlipDirection();
                     actualAim.FlipX();
