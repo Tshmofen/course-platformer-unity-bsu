@@ -1,13 +1,7 @@
-﻿using Assets.Scripts.Damage;
-using UnityEngine;
-
-namespace Assets.Scripts.Entity.Enemy
+﻿namespace Assets.Scripts.Entity.Enemy
 {
-    public class EnemyManager : MonoBehaviour
+    public class EnemyManager : EntityManager
     {
-        [Header("Attached objects")]
-        public DamageDeliver weapon;
-        public DamageReceiver health;
         public EnemyController enemy;
     }
 }

@@ -11,12 +11,11 @@ GameObject:
   - component: {fileID: 5260039356515124995}
   - component: {fileID: 5260039356515124994}
   - component: {fileID: 5260039356515125052}
-  - component: {fileID: 5260039356515125055}
   - component: {fileID: 5260039356515125053}
   - component: {fileID: 5260039356515125054}
   - component: {fileID: 5260039356515124993}
   - component: {fileID: 5260039356515124992}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Scarecrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5260039356515124997}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.609, y: 1.37, z: 0.84843445}
+  m_LocalPosition: {x: -7.609, y: 1.37, z: 0}
   m_LocalScale: {x: 0.7112, y: 0.7112, z: 0.7112}
   m_Children:
   - {fileID: 13004843442747381}
@@ -114,25 +113,6 @@ MonoBehaviour:
     m_Extent: {x: 0.70794344, y: 1.0001252, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
---- !u!95 &5260039356515125055
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5260039356515124997}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8797b41c0ee453e4e9c681dcc0cc561e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!61 &5260039356515125053
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -199,7 +179,7 @@ MonoBehaviour:
     m_Bits: 512
   triggerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -247,7 +227,7 @@ MonoBehaviour:
   gravity: 20
   pathNodes: 060000000700000008000000
   nodeRadius: 0.1
-  animator: {fileID: 5260039356515125055}
+  animator: {fileID: 0}
 --- !u!1 &5260039356596892901
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039356596892898}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039356823118829}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039357220609264}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039357248826632}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +358,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039357268912998}
-  m_Layer: 0
+  - component: {fileID: 3650312624376784179}
+  - component: {fileID: 742657096}
+  m_Layer: 7
   m_Name: ScarecrowEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,6 +383,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &3650312624376784179
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5260039357268913001}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8797b41c0ee453e4e9c681dcc0cc561e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &742657096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5260039357268913001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27fd2638279ec7e46bb753365bd00b95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 0}
+  health: {fileID: 1179284848}
+  enemy: {fileID: 5260039356515124992}
 --- !u!1 &5260039357605441561
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +426,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039357605441558}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +457,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039357798168187}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,7 +490,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 13004843442747381}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +525,7 @@ GameObject:
   - component: {fileID: 5012918619442225762}
   - component: {fileID: 1179284850}
   - component: {fileID: 1179284848}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,7 +540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8079245082144805267}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.609, y: 1.37, z: 0.84843445}
+  m_LocalPosition: {x: -7.609, y: 1.37, z: 0}
   m_LocalScale: {x: 0.7112, y: 0.7112, z: 0.7112}
   m_Children: []
   m_Father: {fileID: 5260039357268912998}
@@ -600,4 +616,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1303a0b7a6f444580fc180693453c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 5260039356515125055}
+  animator: {fileID: 3650312624376784179}

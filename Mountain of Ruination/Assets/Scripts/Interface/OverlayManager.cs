@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Util;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Interface
@@ -9,6 +10,15 @@ namespace Assets.Scripts.Interface
         #region Fields and properties
 
         public GameObject damagePopUp;
+
+        #endregion
+
+        #region Unity Calls
+
+        private void Start()
+        {
+            InterfaceUtil.overlayManager = this;
+        }
 
         #endregion
 

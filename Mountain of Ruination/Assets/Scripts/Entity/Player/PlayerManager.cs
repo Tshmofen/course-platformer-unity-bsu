@@ -1,14 +1,10 @@
-﻿using Assets.Scripts.Damage;
-using Assets.Scripts.Entity.Player;
+﻿using Assets.Scripts.Entity.Player;
 using UnityEngine;
 
 namespace Assets.Scripts.Entity
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : EntityManager
     {
-        [Header("Attached objects")]
-        public DamageDeliver weapon;
-        public DamageReceiver health;
         public PlayerController player;
         public Animator animator;
     }

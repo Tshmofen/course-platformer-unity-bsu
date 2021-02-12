@@ -24,22 +24,6 @@ namespace Assets.Scripts.Damage
             IsReceiveDamage = true;
         }
 
-        private void OnTriggerEnter2D(Collider2D collider)
-        {
-            Debug.Log("are you fucking receiver ???????????????");
-        }
-
-
-        /*private void OnTriggerEnter2D(Collider2D collision)
-        {
-            Debug.Log("asdasd");
-            DamageDeliver deliver = collision.GetComponent<DamageDeliver>();
-            if (deliver != null)
-            {
-                ReceiveDamage(deliver.Stats, deliver.Type);
-            }
-        }*/
-
         #endregion
 
         #region Public
@@ -55,7 +39,7 @@ namespace Assets.Scripts.Damage
                 abovePosition.x /= 2;
                 abovePosition.y /= 2;
                 InterfaceUtil
-                    .GetOverlayManager()
+                    .overlayManager
                     .ShowPopUp(transform.position + abovePosition, damageAmount.ToString(), 1);
 
                 if (health.CurrentHealth <= 0)

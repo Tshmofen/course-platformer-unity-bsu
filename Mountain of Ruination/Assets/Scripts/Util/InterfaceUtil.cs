@@ -7,16 +7,7 @@ namespace Assets.Scripts.Util
     {
         #region Fields and properties
 
-        public const string OverlayPath = "/Interface/Overlay";
-
-        #endregion
-
-        #region Public
-
-        public static OverlayManager GetOverlayManager()
-        {
-            return GameObject.Find(OverlayPath).GetComponent<OverlayManager>();
-        }
+        public static OverlayManager overlayManager;
 
         #endregion
     }

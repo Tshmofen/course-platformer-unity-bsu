@@ -24,10 +24,10 @@ namespace Assets.Scripts.Damage
             Stats = GetComponent<DamageStats>();
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collider)
         {
             Debug.Log("Deliver");
-            DamageReceiver receiver = collision.GetComponent<DamageReceiver>();
+            DamageReceiver receiver = collider.GetComponent<DamageReceiver>();
             if (receiver != null && isInAttack)
             {
                 receiver.ReceiveDamage(Stats, Type);
