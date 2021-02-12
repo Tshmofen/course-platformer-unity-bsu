@@ -13,7 +13,7 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Entity
   - Player
   - Ground
   - PostProcess
@@ -45,7 +45,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
+  - name: Entity
     uniqueID: 4147402095
     locked: 0
   - name: Level

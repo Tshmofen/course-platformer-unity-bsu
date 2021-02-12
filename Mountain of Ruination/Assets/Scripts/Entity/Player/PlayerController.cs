@@ -19,8 +19,7 @@ namespace Assets.Scripts.Entity.Player
         private Vector2 velocity;
         private bool wasToContinueJump;
 
-        private MovementController character;
-        private Animator animator;
+        private MovementController movement;
 
         #endregion
 
@@ -41,8 +40,8 @@ namespace Assets.Scripts.Entity.Player
         public float CircleSpeedCenter;
         public float CircleSpeedEdge;
 
-        [Header("Damage Delivering")]
-        public DamageDeliver deliver;
+        [Header("External")]
+        public PlayerManager manager;
 
         #endregion
 
@@ -87,8 +86,7 @@ namespace Assets.Scripts.Entity.Player
 
         private void Start()
         {
-            character = GetComponent<MovementController>();
-            animator = GetComponent<Animator>();
+            movement = GetComponent<MovementController>();
 
             targetAim.ChangePosition(new Vector2(1, 0));
             Cursor.lockState = CursorLockMode.Locked;
@@ -123,7 +121,7 @@ namespace Assets.Scripts.Entity.Player
 
         private void UpdatePosition()
         {
-            if (ToJump && character.isGrounded)
+            if (ToJump && movement.isGrounded)
             {
                 velocity.y = Mathf.Sqrt(2f * jumpHeight * gravity);
                 wasToContinueJump = true;
@@ -140,10 +138,10 @@ namespace Assets.Scripts.Entity.Player
 
             float speed = (IsMovingBackwards) ? backwardsSpeed : moveSpeed;
             velocity.x = speed * MoveX;
-            velocity.y -= gravity * Time.deltaTime;
+            velocity.y -= gravity * Time.deltaTime; // (m/s^2)
 
-            character.move(velocity * Time.deltaTime);
-            velocity = character.velocity;
+            movement.move(velocity * Time.deltaTime);
+            velocity = movement.velocity;
         }
 
         private void UpdateDirection()
@@ -167,7 +165,7 @@ namespace Assets.Scripts.Entity.Player
 
         private void UpdateCombatState()
         {
-            if (IsAiming && ToAttack && !deliver.isInAttack)
+            if (IsAiming && ToAttack && !manager.weapon.isInAttack)
                 StartAttack();
             MoveTargetAim();
             SwitchActualAim(IsAiming);
@@ -181,14 +179,14 @@ namespace Assets.Scripts.Entity.Player
 
         private void UpdateAnimation()
         {
-            animator.SetFloat("velocityScaleX", GetHorizontalMoveScale());
-            animator.SetFloat("velocityY", velocity.y);
-            animator.SetBool("inFall", !character.isGrounded);
+            manager.animator.SetFloat("velocityScaleX", GetHorizontalMoveScale());
+            manager.animator.SetFloat("velocityY", velocity.y);
+            manager.animator.SetBool("inFall", !movement.isGrounded);
 
-            animator.SetBool("isAiming", IsAiming);
-            animator.SetFloat("weaponX", actualAim.Position.x * (IsFacingRight ? 1 : -1));
+            manager.animator.SetBool("isAiming", IsAiming);
+            manager.animator.SetFloat("weaponX", actualAim.Position.x * (IsFacingRight ? 1 : -1));
             if (IsAiming && !WasAiming)
-                animator.SetTrigger("toAim");
+                manager.animator.SetTrigger("toAim");
         }
 
         #endregion
@@ -222,19 +220,19 @@ namespace Assets.Scripts.Entity.Player
             if (actualAim.Position.x > 0.7071f && IsFacingRight
                 || actualAim.Position.x < -0.7071f && !IsFacingRight)
             {
-                animator.SetTrigger("toAttackPierce");
-                deliver.Type = DamageType.PierceDamage;
+                manager.animator.SetTrigger("toAttackPierce");
+                manager.weapon.Type = DamageType.PierceDamage;
             }
             else if (actualAim.Position.x > -0.7071f && IsFacingRight
                  || actualAim.Position.x < 0.7071f && !IsFacingRight)
             {
-                animator.SetTrigger("toAttackLight");
-                deliver.Type = DamageType.LightDamage;
+                manager.animator.SetTrigger("toAttackLight");
+                manager.weapon.Type = DamageType.LightDamage;
             }
             else
             {
-                animator.SetTrigger("toAttackHeavy");
-                deliver.Type = DamageType.HeavyDamage;
+                manager.animator.SetTrigger("toAttackHeavy");
+                manager.weapon.Type = DamageType.HeavyDamage;
             }
         }
 

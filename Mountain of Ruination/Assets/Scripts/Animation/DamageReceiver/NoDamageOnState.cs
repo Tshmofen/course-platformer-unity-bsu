@@ -9,12 +9,12 @@ namespace Assets.Scripts.Entity.Animation
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<DamageReceiver>().IsReceiveDamage = false;
+            animator.GetComponent<PlayerManager>().health.IsReceiveDamage = false;
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<DamageReceiver>().IsReceiveDamage = true;
+            animator.GetComponent<PlayerManager>().health.IsReceiveDamage = true;
         }
 
         #endregion

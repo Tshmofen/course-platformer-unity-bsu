@@ -2,18 +2,16 @@
 
 namespace Assets.Scripts.Damage
 {
-    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(BoxCollider2D), typeof(DamageStats))]
     public class DamageDeliver : MonoBehaviour
     {
         #region Fields and properties
-
-        private BoxCollider2D damageCollider;
-
-        public DamageStats stats;
         
         public bool isInAttack;
 
         public DamageType Type { get; set; }
+        public BoxCollider2D DamageCollider { get; set; }
+        public DamageStats Stats { get; set; }
 
         #endregion
 
@@ -21,16 +19,18 @@ namespace Assets.Scripts.Damage
 
         private void Start()
         {
-            damageCollider = GetComponent<BoxCollider2D>();
-            damageCollider.enabled = false;
+            DamageCollider = GetComponent<BoxCollider2D>();
+            DamageCollider.enabled = false;
+            Stats = GetComponent<DamageStats>();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            Debug.Log("asdasd");
             DamageReceiver receiver = collision.GetComponent<DamageReceiver>();
             if (receiver != null)
             {
-                receiver.ReceiveDamage(stats, Type);
+                receiver.ReceiveDamage(Stats, Type);
             }
         }
 

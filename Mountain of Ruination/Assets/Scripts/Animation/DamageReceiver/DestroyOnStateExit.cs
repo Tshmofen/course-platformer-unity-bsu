@@ -9,7 +9,7 @@ namespace Assets.Scripts.Entity.Animation
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<DamageReceiver>().DestroyReceiver();
+            animator.GetComponent<PlayerManager>().health.DestroyReceiver();
         }
 
         #endregion

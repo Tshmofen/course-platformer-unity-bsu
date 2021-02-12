@@ -9,7 +9,8 @@ namespace Assets.Scripts.Damage
         #region Fields and properties
 
         private HealthStats health;
-        private Animator animator;
+
+        public Animator animator;
 
         public bool IsReceiveDamage { get; set; }
 
@@ -20,8 +21,17 @@ namespace Assets.Scripts.Damage
         private void Start()
         {
             health = GetComponent<HealthStats>();
-            animator = GetComponent<Animator>();
             IsReceiveDamage = true;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            Debug.Log("asdasd");
+            DamageDeliver deliver = collision.GetComponent<DamageDeliver>();
+            if (deliver != null)
+            {
+                ReceiveDamage(deliver.Stats, deliver.Type);
+            }
         }
 
         #endregion
