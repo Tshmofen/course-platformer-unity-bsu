@@ -24,7 +24,13 @@ namespace Assets.Scripts.Damage
             IsReceiveDamage = true;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            Debug.Log("are you fucking receiver ???????????????");
+        }
+
+
+        /*private void OnTriggerEnter2D(Collider2D collision)
         {
             Debug.Log("asdasd");
             DamageDeliver deliver = collision.GetComponent<DamageDeliver>();
@@ -32,7 +38,7 @@ namespace Assets.Scripts.Damage
             {
                 ReceiveDamage(deliver.Stats, deliver.Type);
             }
-        }
+        }*/
 
         #endregion
 

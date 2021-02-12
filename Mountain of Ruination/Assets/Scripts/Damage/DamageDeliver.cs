@@ -26,9 +26,9 @@ namespace Assets.Scripts.Damage
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log("asdasd");
+            Debug.Log("Deliver");
             DamageReceiver receiver = collision.GetComponent<DamageReceiver>();
-            if (receiver != null)
+            if (receiver != null && isInAttack)
             {
                 receiver.ReceiveDamage(Stats, Type);
             }
