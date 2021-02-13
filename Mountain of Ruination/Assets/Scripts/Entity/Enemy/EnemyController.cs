@@ -11,8 +11,11 @@ namespace Assets.Scripts.Entity.Enemy
         #region Fields and properties
 
         private Vector2 velocity;
+        private float direction;
         private int nodeIndex;
+
         private bool isMoveToEnd;
+        private bool isFacingRight;
 
         private MovementController movement;
         private PathFinder pathFinder;
@@ -22,12 +25,13 @@ namespace Assets.Scripts.Entity.Enemy
         #region Public fields
 
         [Header("Movement")]
-        public float speed = 4;
+        public float speed = 1;
+        public float directionStep = 0.01f;
         public float gravity = 20;
         public int[] pathNodes;
         public float nodeRadius;
         [Header("External")]
-        public Animator animator;
+        public EnemyManager manager;
 
         #endregion 
 
@@ -36,9 +40,10 @@ namespace Assets.Scripts.Entity.Enemy
         void Start()
         {
             movement = GetComponent<MovementController>();
-            animator = GetComponent<Animator>();
             pathFinder = QPathFinder.PathFinder.Instance;
             pathFinder.graphData.ReGenerateIDs();
+
+            isFacingRight = true;
 
             nodeIndex = 0;
         }
@@ -51,31 +56,51 @@ namespace Assets.Scripts.Entity.Enemy
             else if (patrolPath.length != 0)
                 moveByPath();
             */
-            moveByPath();
+            MoveByPath();
+            UpdateAnimationState();
         }
 
         #endregion
 
         #region Update Parts 
 
-        private void moveByPath()
+        private void MoveByPath()
         {
             Node node = pathFinder.graphData.GetNode(pathNodes[nodeIndex]);
             float difference = node.Position.x - transform.position.x;
             if (difference > nodeRadius)
-                move(1);
+            {
+                ChangeDirection(directionStep);
+                move();
+            }
             else if (difference < -nodeRadius)
-                move(-1);
+            {
+                ChangeDirection(-directionStep);
+                move();
+            }
             else
+            {
                 nodeIndex = getNextPathIndex();
+            }
+        }
 
+        private void UpdateAnimationState()
+        {
+            manager.animator.SetFloat("velocityX", velocity.x / speed);
         }
 
         #endregion
 
         #region Support Methods
 
-        private void move(int direction)
+        private void ChangeDirection(float delta)
+        {
+            direction += delta * Time.deltaTime;
+            direction = (direction > 1) ? 1 : direction;
+            direction = (direction < -1) ? -1 : direction;
+        }
+
+        private void move()
         {
             velocity.y -= gravity * Time.deltaTime; // (m/s^2)
             velocity.x = speed * direction;

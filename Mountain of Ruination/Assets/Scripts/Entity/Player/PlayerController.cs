@@ -218,6 +218,7 @@ namespace Assets.Scripts.Entity.Player
                 velocityScale = Math.Abs(velocity.x / moveSpeed);
             }
 
+
             return velocityScale;
         }
 
