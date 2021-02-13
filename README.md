@@ -12,5 +12,5 @@ To-do list for the project is [[here]](../../projects/1)
 
 **Authors**  
 *Ivanov Timofey  
-Edvard Krayniy  
+Edward Krainiy  
 Mathew Danilevich* 
