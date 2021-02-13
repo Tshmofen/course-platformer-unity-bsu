@@ -14,13 +14,13 @@ namespace Assets.Scripts.Entity.Player
 
         #region Fields private
 
-        private bool wasAiming;
         private bool isAiming;
-        private Vector2 velocity;
+        private bool wasMovingSlope;
+        private bool wasAiming;
         private bool wasToContinueJump;
 
-        private MovementController character;
-        private Animator animator;
+        private Vector2 velocity;
+        private MovementController movement;
 
         #endregion
 
@@ -41,8 +41,8 @@ namespace Assets.Scripts.Entity.Player
         public float CircleSpeedCenter;
         public float CircleSpeedEdge;
 
-        [Header("Damage Delivering")]
-        public DamageDeliver deliver;
+        [Header("External")]
+        public PlayerManager manager;
 
         #endregion
 
@@ -56,6 +56,16 @@ namespace Assets.Scripts.Entity.Player
             {
                 bool isBackwards = MoveX > 0 && !IsFacingRight || MoveX < 0 && IsFacingRight;
                 return IsAiming && isBackwards;
+            }
+        }
+        public bool IsGrounded 
+        {
+            get
+            {
+                bool grounded = wasMovingSlope || movement.isGrounded;
+                wasMovingSlope = movement.collisionState.movingDownSlope 
+                    || movement.collisionState.movingUpSlope;
+                return grounded;
             }
         }
 
@@ -87,8 +97,7 @@ namespace Assets.Scripts.Entity.Player
 
         private void Start()
         {
-            character = GetComponent<MovementController>();
-            animator = GetComponent<Animator>();
+            movement = GetComponent<MovementController>();
 
             targetAim.ChangePosition(new Vector2(1, 0));
             Cursor.lockState = CursorLockMode.Locked;
@@ -119,11 +128,17 @@ namespace Assets.Scripts.Entity.Player
             ToContinueJump = InputUtil.GetContinuousJump();
             IsAiming      ^= InputUtil.GetCombatMode();
             ToAttack       = InputUtil.GetAttack();
+
+            if (!IsAiming && ToAttack)
+            {
+                IsAiming = true;
+                ToAttack = false;
+            }
         }
 
         private void UpdatePosition()
         {
-            if (ToJump && character.isGrounded)
+            if (ToJump && IsGrounded)
             {
                 velocity.y = Mathf.Sqrt(2f * jumpHeight * gravity);
                 wasToContinueJump = true;
@@ -140,10 +155,10 @@ namespace Assets.Scripts.Entity.Player
 
             float speed = (IsMovingBackwards) ? backwardsSpeed : moveSpeed;
             velocity.x = speed * MoveX;
-            velocity.y -= gravity * Time.deltaTime;
+            velocity.y -= gravity * Time.deltaTime; // (m/s^2)
 
-            character.move(velocity * Time.deltaTime);
-            velocity = character.velocity;
+            movement.move(velocity * Time.deltaTime);
+            velocity = movement.velocity;
         }
 
         private void UpdateDirection()
@@ -157,7 +172,7 @@ namespace Assets.Scripts.Entity.Player
             if (IsAiming && InputUtil.GetSpecialAbility())
             {
                 float targetX = targetAim.Position.x;
-                if (targetX > 0.7 && !IsFacingRight || targetX < -0.7 && IsFacingRight)
+                if (targetX > 0.1 && !IsFacingRight || targetX < -0.1 && IsFacingRight)
                 {
                     FlipDirection();
                     actualAim.FlipX();
@@ -167,7 +182,7 @@ namespace Assets.Scripts.Entity.Player
 
         private void UpdateCombatState()
         {
-            if (IsAiming && ToAttack && !deliver.isInAttack)
+            if (IsAiming && ToAttack && !manager.weapon.isInAttack)
                 StartAttack();
             MoveTargetAim();
             SwitchActualAim(IsAiming);
@@ -181,14 +196,14 @@ namespace Assets.Scripts.Entity.Player
 
         private void UpdateAnimation()
         {
-            animator.SetFloat("velocityScaleX", GetHorizontalMoveScale());
-            animator.SetFloat("velocityY", velocity.y);
-            animator.SetBool("inFall", !character.isGrounded);
+            manager.animator.SetFloat("velocityScaleX", GetHorizontalMoveScale());
+            manager.animator.SetFloat("velocityY", velocity.y);
+            manager.animator.SetBool("inFall", !IsGrounded);
 
-            animator.SetBool("isAiming", IsAiming);
-            animator.SetFloat("weaponX", actualAim.Position.x * (IsFacingRight ? 1 : -1));
+            manager.animator.SetBool("isAiming", IsAiming);
+            manager.animator.SetFloat("weaponX", actualAim.Position.x * (IsFacingRight ? 1 : -1));
             if (IsAiming && !WasAiming)
-                animator.SetTrigger("toAim");
+                manager.animator.SetTrigger("toAim");
         }
 
         #endregion
@@ -214,6 +229,7 @@ namespace Assets.Scripts.Entity.Player
                 velocityScale = Math.Abs(velocity.x / moveSpeed);
             }
 
+
             return velocityScale;
         }
 
@@ -222,19 +238,19 @@ namespace Assets.Scripts.Entity.Player
             if (actualAim.Position.x > 0.7071f && IsFacingRight
                 || actualAim.Position.x < -0.7071f && !IsFacingRight)
             {
-                animator.SetTrigger("toAttackPierce");
-                deliver.Type = DamageType.PierceDamage;
+                manager.animator.SetTrigger("toAttackPierce");
+                manager.weapon.Type = DamageType.PierceDamage;
             }
             else if (actualAim.Position.x > -0.7071f && IsFacingRight
                  || actualAim.Position.x < 0.7071f && !IsFacingRight)
             {
-                animator.SetTrigger("toAttackLight");
-                deliver.Type = DamageType.LightDamage;
+                manager.animator.SetTrigger("toAttackLight");
+                manager.weapon.Type = DamageType.LightDamage;
             }
             else
             {
-                animator.SetTrigger("toAttackHeavy");
-                deliver.Type = DamageType.HeavyDamage;
+                manager.animator.SetTrigger("toAttackHeavy");
+                manager.weapon.Type = DamageType.HeavyDamage;
             }
         }
 

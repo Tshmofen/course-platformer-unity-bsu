@@ -9,7 +9,8 @@ namespace Assets.Scripts.Damage
         #region Fields and properties
 
         private HealthStats health;
-        private Animator animator;
+
+        public Animator animator;
 
         public bool IsReceiveDamage { get; set; }
 
@@ -20,7 +21,6 @@ namespace Assets.Scripts.Damage
         private void Start()
         {
             health = GetComponent<HealthStats>();
-            animator = GetComponent<Animator>();
             IsReceiveDamage = true;
         }
 
@@ -39,7 +39,7 @@ namespace Assets.Scripts.Damage
                 abovePosition.x /= 2;
                 abovePosition.y /= 2;
                 InterfaceUtil
-                    .GetOverlayManager()
+                    .overlayManager
                     .ShowPopUp(transform.position + abovePosition, damageAmount.ToString(), 1);
 
                 if (health.CurrentHealth <= 0)

@@ -47,7 +47,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Skeleton/hips/chest
+    path: Player/Skeleton/hips/chest
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -99,7 +99,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Skeleton/hips/chest/rib/shoulder_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -142,7 +142,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -194,7 +194,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Skeleton/hips/chest/rib/shoulder_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -228,7 +228,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -262,7 +262,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -305,7 +305,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -321,7 +321,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Skeleton/hips/chest/rib
+    path: Player/Skeleton/hips/chest/rib
   m_PositionCurves:
   - curve:
       serializedVersion: 2
@@ -356,7 +356,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
   m_ScaleCurves: []
   m_FloatCurves:
   - curve:
@@ -574,7 +574,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Skeleton/hips/chest
+    path: Player/Skeleton/hips/chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -611,7 +611,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Skeleton/hips/chest
+    path: Player/Skeleton/hips/chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -648,7 +648,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Skeleton/hips/chest
+    path: Player/Skeleton/hips/chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -703,7 +703,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Skeleton/hips/chest/rib/shoulder_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -758,7 +758,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Skeleton/hips/chest/rib/shoulder_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -813,7 +813,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Skeleton/hips/chest/rib/shoulder_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -859,7 +859,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -905,7 +905,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -951,7 +951,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1006,7 +1006,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Skeleton/hips/chest/rib/shoulder_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1061,7 +1061,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Skeleton/hips/chest/rib/shoulder_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1116,7 +1116,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Skeleton/hips/chest/rib/shoulder_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1153,7 +1153,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1190,7 +1190,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1227,7 +1227,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1264,7 +1264,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1301,7 +1301,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1338,7 +1338,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1384,7 +1384,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1430,7 +1430,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1476,7 +1476,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1495,7 +1495,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Skeleton/hips/chest/rib
+    path: Player/Skeleton/hips/chest/rib
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1514,7 +1514,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Skeleton/hips/chest/rib
+    path: Player/Skeleton/hips/chest/rib
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1533,7 +1533,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Skeleton/hips/chest/rib
+    path: Player/Skeleton/hips/chest/rib
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1570,7 +1570,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1607,7 +1607,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1644,7 +1644,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1729,7 +1729,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Skeleton/hips/chest/rib/shoulder_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1739,7 +1739,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Skeleton/hips/chest/rib/shoulder_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1749,7 +1749,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Skeleton/hips/chest/rib/shoulder_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1759,7 +1759,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1769,7 +1769,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1779,7 +1779,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right/hand_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1789,7 +1789,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Skeleton/hips/chest/rib
+    path: Player/Skeleton/hips/chest/rib
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1799,7 +1799,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Skeleton/hips/chest/rib
+    path: Player/Skeleton/hips/chest/rib
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1809,7 +1809,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Skeleton/hips/chest/rib
+    path: Player/Skeleton/hips/chest/rib
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1819,7 +1819,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Skeleton/hips/chest/rib/shoulder_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1829,7 +1829,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Skeleton/hips/chest/rib/shoulder_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1839,7 +1839,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Skeleton/hips/chest/rib/shoulder_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1849,7 +1849,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1859,7 +1859,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1869,7 +1869,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Skeleton/hips/chest/rib/shoulder_right/forearm_right
+    path: Player/Skeleton/hips/chest/rib/shoulder_right/forearm_right
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1879,7 +1879,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1889,7 +1889,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1899,7 +1899,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left/hand_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1909,7 +1909,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Skeleton/hips/chest
+    path: Player/Skeleton/hips/chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1919,7 +1919,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Skeleton/hips/chest
+    path: Player/Skeleton/hips/chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1929,7 +1929,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Skeleton/hips/chest
+    path: Player/Skeleton/hips/chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1939,7 +1939,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1949,7 +1949,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1959,7 +1959,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Skeleton/hips/chest/rib/shoulder_left/forearm_left
+    path: Player/Skeleton/hips/chest/rib/shoulder_left/forearm_left
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

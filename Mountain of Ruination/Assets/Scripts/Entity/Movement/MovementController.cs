@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Entity.Movement
 {
-    [RequireComponent(typeof(BoxCollider2D), typeof(Rigidbody2D))]
+    [RequireComponent(typeof(BoxCollider2D))]
     public class MovementController : MonoBehaviour
     {
         #region internal types
@@ -26,6 +26,7 @@ namespace Assets.Scripts.Entity.Movement
             public bool becameGroundedThisFrame;
             public bool wasGroundedLastFrame;
             public bool movingDownSlope;
+            public bool movingUpSlope;
             public float slopeAngle;
 
             public bool hasCollision()
@@ -35,7 +36,7 @@ namespace Assets.Scripts.Entity.Movement
 
             public void reset()
             {
-                right = left = above = below = becameGroundedThisFrame = movingDownSlope = false;
+                right = left = above = below = becameGroundedThisFrame = movingDownSlope = movingUpSlope = false;
                 slopeAngle = 0f;
             }
 
@@ -138,10 +139,6 @@ namespace Assets.Scripts.Entity.Movement
 
         [HideInInspector]
         [NonSerialized]
-        public Rigidbody2D rigidBody2D;
-
-        [HideInInspector]
-        [NonSerialized]
         public CharacterCollisionState2D collisionState = new CharacterCollisionState2D();
 
         [HideInInspector]
@@ -189,7 +186,6 @@ namespace Assets.Scripts.Entity.Movement
             // cache some components
             transform = GetComponent<Transform>();
             boxCollider = GetComponent<BoxCollider2D>();
-            rigidBody2D = GetComponent<Rigidbody2D>();
 
             // here, we trigger our properties that have setters with bodies
             skinWidth = _skinWidth;
@@ -245,6 +241,7 @@ namespace Assets.Scripts.Entity.Movement
             collisionState.reset();
             _raycastHitsThisFrame.Clear();
             _isGoingUpSlope = false;
+            collisionState.movingUpSlope = false;
 
             primeRaycastOrigins();
 
@@ -452,6 +449,7 @@ namespace Assets.Scripts.Entity.Movement
                     }
 
                     _isGoingUpSlope = true;
+                    collisionState.movingUpSlope = true;
                     collisionState.below = true;
                     collisionState.slopeAngle = -angle;
                 }
@@ -508,7 +506,10 @@ namespace Assets.Scripts.Entity.Movement
                     // this is a hack to deal with the top of slopes. if we walk up a slope and reach the apex we can get in a situation
                     // where our ray gets a hit that is less then skinWidth causing us to be ungrounded the next frame due to residual velocity.
                     if (!isGoingUp && deltaMovement.y > 0.00001f)
+                    {
+                        collisionState.movingUpSlope = true;
                         _isGoingUpSlope = true;
+                    }
 
                     // we add a small fudge factor for the float operations here. if our rayDistance is smaller
                     // than the width + fudge bail out because we have a direct impact

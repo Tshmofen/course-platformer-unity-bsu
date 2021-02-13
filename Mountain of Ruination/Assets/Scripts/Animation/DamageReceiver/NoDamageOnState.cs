@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Damage;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Entity.Animation
 {
@@ -9,12 +8,12 @@ namespace Assets.Scripts.Entity.Animation
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<DamageReceiver>().IsReceiveDamage = false;
+            animator.GetComponent<EntityManager>().health.IsReceiveDamage = false;
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<DamageReceiver>().IsReceiveDamage = true;
+            animator.GetComponent<EntityManager>().health.IsReceiveDamage = true;
         }
 
         #endregion
