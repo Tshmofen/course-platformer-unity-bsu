@@ -8,7 +8,6 @@ namespace Assets.Scripts.Entity.Animation
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            Debug.Log(animator.gameObject.name);
             animator.GetComponent<EntityManager>().health.IsReceiveDamage = false;
         }
 

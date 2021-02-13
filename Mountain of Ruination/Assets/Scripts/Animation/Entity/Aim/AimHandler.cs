@@ -11,16 +11,28 @@ namespace Assets.Scripts.Animation.Entity.Aim
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            PlayerController controller = animator.GetComponent<PlayerManager>().player;
-            controller.DisplayActualAim = false;
+            animator
+                .GetComponent<PlayerManager>()
+                .player
+                .DisplayActualAim = false;
+        }
+
+        public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            float state = stateInfo.normalizedTime;
+            state -= Mathf.Floor(state);
+            if (state > 0.45 || state > 0.55)
+            {
+                PlayerController player = animator.GetComponent<PlayerManager>().player;
+                player.actualAim.RestorePosition(player.IsFacingRight);
+            }    
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            PlayerController controller = animator.GetComponent<PlayerManager>().player;
-            controller.DisplayActualAim = true;
-            controller.actualAim.RestorePosition(controller.IsFacingRight);
-            animator.SetTrigger("toAim");
+            PlayerController player = animator.GetComponent<PlayerManager>().player;
+            player.DisplayActualAim = true;
+            player.actualAim.RestorePosition(player.IsFacingRight);
         }
 
         #endregion
