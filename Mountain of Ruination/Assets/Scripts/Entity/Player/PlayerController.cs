@@ -117,6 +117,12 @@ namespace Assets.Scripts.Entity.Player
             ToContinueJump = InputUtil.GetContinuousJump();
             IsAiming      ^= InputUtil.GetCombatMode();
             ToAttack       = InputUtil.GetAttack();
+
+            if (!IsAiming && ToAttack)
+            {
+                IsAiming = true;
+                ToAttack = false;
+            }
         }
 
         private void UpdatePosition()
