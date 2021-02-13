@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5260039356515124994}
   - component: {fileID: 5260039356515125052}
   - component: {fileID: 5260039356515125053}
-  - component: {fileID: 5260039356515125054}
   - component: {fileID: 5260039356515124993}
   - component: {fileID: 5260039356515124992}
   m_Layer: 7
@@ -30,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5260039356515124997}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.609, y: 1.37, z: 0}
+  m_LocalPosition: {x: -18.635, y: 2.734, z: 0}
   m_LocalScale: {x: 0.7112, y: 0.7112, z: 0.7112}
   m_Children:
   - {fileID: 13004843442747381}
@@ -139,27 +138,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8228164, y: 2.8125007}
   m_EdgeRadius: 0
---- !u!50 &5260039356515125054
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5260039356515124997}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &5260039356515124993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,23 +168,23 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 1.4141847
+      inSlope: -0.4141847
+      outSlope: -0.4141847
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.4141847
+      outSlope: -0.4141847
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
-    m_PreInfinity: 2
+    m_PreInfinity: 1
     m_PostInfinity: 2
     m_RotationOrder: 4
   totalHorizontalRays: 8
@@ -224,10 +202,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  directionStep: 0.5
   gravity: 20
   pathNodes: 060000000700000008000000
   nodeRadius: 0.1
-  animator: {fileID: 0}
+  manager: {fileID: 742657096}
 --- !u!1 &5260039356596892901
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +236,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5260039357798168187}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 99.56427}
 --- !u!1 &5260039356823118828
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +396,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   health: {fileID: 1179284848}
   enemy: {fileID: 5260039356515124992}
+  animator: {fileID: 3650312624376784179}
 --- !u!1 &5260039357605441561
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +520,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8079245082144805267}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.609, y: 1.37, z: 0}
+  m_LocalPosition: {x: -18.635, y: 2.734, z: 0}
   m_LocalScale: {x: 0.7112, y: 0.7112, z: 0.7112}
   m_Children: []
   m_Father: {fileID: 5260039357268912998}
