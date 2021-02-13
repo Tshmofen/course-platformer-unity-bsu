@@ -19,8 +19,8 @@ namespace Assets.Scripts.Entity.Player
 
         [Header("Type")]
         public bool CircleFollower;
-        [HideInInspector] public float speedCenter;
-        [HideInInspector] public float speedEdge;
+        [HideInInspector] public float speedCenter = 3.5f;
+        [HideInInspector] public float speedEdge = 1.5f;
         [HideInInspector] public AimCircle targetCircle;
 
         public Vector2 Position { get => position; }
