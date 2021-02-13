@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Entity.Movement
 {
-    [RequireComponent(typeof(BoxCollider2D), typeof(Rigidbody2D))]
+    [RequireComponent(typeof(BoxCollider2D))]
     public class MovementController : MonoBehaviour
     {
         #region internal types
@@ -138,10 +138,6 @@ namespace Assets.Scripts.Entity.Movement
 
         [HideInInspector]
         [NonSerialized]
-        public Rigidbody2D rigidBody2D;
-
-        [HideInInspector]
-        [NonSerialized]
         public CharacterCollisionState2D collisionState = new CharacterCollisionState2D();
 
         [HideInInspector]
@@ -189,7 +185,6 @@ namespace Assets.Scripts.Entity.Movement
             // cache some components
             transform = GetComponent<Transform>();
             boxCollider = GetComponent<BoxCollider2D>();
-            rigidBody2D = GetComponent<Rigidbody2D>();
 
             // here, we trigger our properties that have setters with bodies
             skinWidth = _skinWidth;
