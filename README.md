@@ -5,7 +5,7 @@ Coursework for BSU on creating a game based on the Unity Engine.
 ---
 
 **Links**  
-Initial Description is [[here]](Design%20Docs/inital-plot-rus.md)  
+Initial Description is [[here]](Docs/Design/inital-plot-rus.md)  
 To-do list for the project is [[here]](../../projects/1)
 
 ---
