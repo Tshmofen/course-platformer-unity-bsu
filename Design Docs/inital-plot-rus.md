@@ -1,5 +1,5 @@
 # Mountain of Ruination / Гора Разорения
-Action-platformer с элементами rogue-lite и видом сбоку. 
+Action-platformer с элементами rogue-like и видом сбоку. 
 
 ## Core геймплей
 Основой геймплея служит комбинирование разных типов атак (для начала: легкий,
