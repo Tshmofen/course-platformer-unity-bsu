@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Entity.Movement;
 using QPathFinder;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Entity.Enemy
@@ -10,25 +11,51 @@ namespace Assets.Scripts.Entity.Enemy
 
         #region Fields and properties
 
-        private Vector2 velocity;
-        private float direction;
-        private int nodeIndex;
+        private Vector2 player;
+        private Vector2 target;
+        private bool isRightToTarget;
+        private bool isLeftToTarget;
 
+        private int nodeIndex;
         private bool isMoveToEnd;
 
+        private Vector2 velocity;
+        private float direction;
+       
         private MovementController movement;
         private PathFinder pathFinder;
 
+        public bool IsPlayerNearby
+        {
+            get
+            {
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRadius, playerLayer);
+                if (colliders.Length != 0)
+                {
+                    player = colliders[0].transform.position;
+                    Vector2 direction = player - (Vector2)transform.position;
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, direction.magnitude, groundLayer);
+                    return hit.collider == null;
+                }
+                return false;
+            }
+        }
+
         #endregion
 
-        #region Public fields
+        #region Initial Fields
 
         [Header("Movement")]
         public float speed = 1;
         public float directionStep = 0.01f;
         public float gravity = 20;
+        [Header("Patrolling")]
         public int[] pathNodes;
-        public float nodeRadius;
+        public float targetRadius = 0.2f;
+        [Header("Detection")]
+        public LayerMask playerLayer;
+        public LayerMask groundLayer;
+        public float detectionRadius = 5;
         [Header("External")]
         public EnemyManager manager;
 
@@ -41,19 +68,29 @@ namespace Assets.Scripts.Entity.Enemy
             movement = GetComponent<MovementController>();
             pathFinder = PathFinder.Instance;
             pathFinder.graphData.ReGenerateIDs();
+            isMoveToEnd = true;
 
             nodeIndex = 0;
+            Node node = pathFinder.graphData.GetNode(pathNodes[nodeIndex]);
+            target = node.Position;
         }
 
         void Update()
         {
-            /*
-            if (isPlayerNearby && canMoveToPlayer) 
-                moveToPlayer();
-            else if (patrolPath.length != 0)
-                moveByPath();
-            */
-            MoveByPath();
+            /*if (IsPlayerNearby)
+            {
+                int nearestNode = pathFinder.FindNearestNode(playerPosition);
+                pathFinder.FindShortestPathOfNodes(CurrentNode, nearestNode, Execution.Synchronous, nodes =>
+                {
+                    if (nodes.Count != 0)
+                    {
+
+                    }
+                });
+            }*/
+            UpdateTargetDistance();
+            GoToPatroll();
+            Move();
             UpdateAnimationState();
         }
 
@@ -61,23 +98,33 @@ namespace Assets.Scripts.Entity.Enemy
 
         #region Update Parts 
 
-        private void MoveByPath()
+        private void UpdateTargetDistance()
         {
-            Node node = pathFinder.graphData.GetNode(pathNodes[nodeIndex]);
-            float difference = node.Position.x - transform.position.x;
-            if (difference > nodeRadius)
+            isRightToTarget = target.x - transform.position.x < -targetRadius;
+            isLeftToTarget  = target.x - transform.position.x > targetRadius;
+        }
+
+        private void GoToPatroll()
+        {
+            if (!isRightToTarget && !isLeftToTarget)
+            { 
+                nodeIndex = GetNextNodeIndex();
+                Node node = pathFinder.graphData.GetNode(pathNodes[nodeIndex]);
+                target = node.Position;
+            }
+        }
+
+        private void Move()
+        {
+            if (isLeftToTarget)
             {
                 ChangeDirection(directionStep);
-                move();
+                ChangePosition();
             }
-            else if (difference < -nodeRadius)
+            if (isRightToTarget)
             {
                 ChangeDirection(-directionStep);
-                move();
-            }
-            else
-            {
-                nodeIndex = getNextPathIndex();
+                ChangePosition();
             }
         }
 
@@ -97,7 +144,7 @@ namespace Assets.Scripts.Entity.Enemy
             direction = (direction < -1) ? -1 : direction;
         }
 
-        private void move()
+        private void ChangePosition()
         {
             velocity.y -= gravity * Time.deltaTime; // (m/s^2)
             velocity.x = speed * direction;
@@ -106,7 +153,7 @@ namespace Assets.Scripts.Entity.Enemy
             velocity = movement.velocity;
         }
 
-        private int getNextPathIndex()
+        private int GetNextNodeIndex()
         {
             int index = nodeIndex;
             index += (isMoveToEnd) ? 1 : -1;
@@ -116,7 +163,7 @@ namespace Assets.Scripts.Entity.Enemy
                 index -= 2;
                 isMoveToEnd = false;
             }
-            else if (index < 0)
+            if (index < 0)
             {
                 index += 2;
                 isMoveToEnd = true;

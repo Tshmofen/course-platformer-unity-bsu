@@ -202,10 +202,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  directionStep: 0.5
+  directionStep: 0.75
   gravity: 20
-  pathNodes: 060000000700000008000000
-  nodeRadius: 0.1
+  pathNodes: 0600000005000000060000000700000006000000
+  targetRadius: 0.1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  detectionRadius: 2.5
   manager: {fileID: 742657096}
 --- !u!1 &5260039356596892901
 GameObject:
