@@ -3,7 +3,7 @@ using Assets.Scripts.Entity;
 using Assets.Scripts.Entity.Player;
 using UnityEngine;
 
-namespace Assets.Scripts.Animation.Entity.Aim
+namespace Assets.Scripts.Animation.Entity.Player.Aim
 {
     public class AimHandler : StateMachineBehaviour
     {
@@ -26,7 +26,7 @@ namespace Assets.Scripts.Animation.Entity.Aim
             {
                 PlayerController player = animator.GetComponent<PlayerManager>().player;
                 player.actualAim.RestorePosition(player.IsFacingRight);
-            }    
+            }
         }
 
         // aim showing

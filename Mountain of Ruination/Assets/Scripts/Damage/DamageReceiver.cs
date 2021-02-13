@@ -72,7 +72,7 @@ namespace Assets.Scripts.Damage
         public void DestroyReceiver()
         {
             GetComponent<SpriteRenderer>().enabled = false;
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
         #endregion

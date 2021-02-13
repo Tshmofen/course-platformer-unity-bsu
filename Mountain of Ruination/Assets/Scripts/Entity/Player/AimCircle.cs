@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Scripts.Entity.Player.Aim
+namespace Assets.Scripts.Entity.Player
 {
     public class AimCircle : MonoBehaviour
     {
@@ -13,7 +13,7 @@ namespace Assets.Scripts.Entity.Player.Aim
         public GameObject targetObject;
 
         [Header("Position")]
-        public float radius;
+        public float radius = 1.3f;
         public float offsetX;
         public float offsetY;
 
@@ -56,7 +56,7 @@ namespace Assets.Scripts.Entity.Player.Aim
                 if (targetX < position.x)
                 {
                     position.x -= speed * Time.deltaTime;
-                    position.x = (position.x < targetX) ? targetX : position.x; 
+                    position.x = (position.x < targetX) ? targetX : position.x;
                 }
                 else
                 {

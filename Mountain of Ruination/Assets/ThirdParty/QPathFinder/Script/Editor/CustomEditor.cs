@@ -1,8 +1,5 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System;
-using System.Reflection;
-using System.Collections.Generic;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace QPathFinder
 {
@@ -29,13 +26,13 @@ namespace QPathFinder
             EditorGUILayout.Space();
         }
 
-        public static GUIStyle GetStyleWithRichText ( GUIStyle style = null )
+        public static GUIStyle GetStyleWithRichText(GUIStyle style = null)
         {
             style = style != null ? style : new GUIStyle();
             style.richText = true;
             return style;
         }
-        public static GUIStyle SetAlignmentForText ( TextAnchor anchor, GUIStyle style = null )
+        public static GUIStyle SetAlignmentForText(TextAnchor anchor, GUIStyle style = null)
         {
             style = style != null ? style : new GUIStyle();
             style.alignment = anchor;

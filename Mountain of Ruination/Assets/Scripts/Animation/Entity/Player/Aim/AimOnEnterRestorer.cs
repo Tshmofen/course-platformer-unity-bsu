@@ -2,7 +2,7 @@
 using Assets.Scripts.Entity.Player;
 using UnityEngine;
 
-namespace Assets.Scripts.Animation.Entity.Aim
+namespace Assets.Scripts.Animation.Player.Aim
 {
     public class AimOnEnterRestorer : StateMachineBehaviour
     {

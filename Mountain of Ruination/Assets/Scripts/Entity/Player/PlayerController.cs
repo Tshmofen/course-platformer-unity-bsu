@@ -1,9 +1,8 @@
 ﻿using Assets.Scripts.Damage;
+using Assets.Scripts.Entity.Movement;
 using Assets.Scripts.Util;
 using System;
 using UnityEngine;
-using Assets.Scripts.Entity.Movement;
-using Assets.Scripts.Entity.Player.Aim;
 
 namespace Assets.Scripts.Entity.Player
 {
@@ -58,12 +57,12 @@ namespace Assets.Scripts.Entity.Player
                 return IsAiming && isBackwards;
             }
         }
-        public bool IsGrounded 
+        public bool IsGrounded
         {
             get
             {
                 bool grounded = wasMovingSlope || movement.isGrounded;
-                wasMovingSlope = movement.collisionState.movingDownSlope 
+                wasMovingSlope = movement.collisionState.movingDownSlope
                     || movement.collisionState.movingUpSlope;
                 return grounded;
             }
@@ -119,15 +118,15 @@ namespace Assets.Scripts.Entity.Player
         #endregion
 
         #region Update parts
-       
+
         private void GetControls()
         {
-            MoveX          = InputUtil.GetMove().x;
-            MouseDelta     = InputUtil.GetMousePositionDelta();
-            ToJump         = InputUtil.GetJump();
+            MoveX = InputUtil.GetMove().x;
+            MouseDelta = InputUtil.GetMousePositionDelta();
+            ToJump = InputUtil.GetJump();
             ToContinueJump = InputUtil.GetContinuousJump();
-            IsAiming      ^= InputUtil.GetCombatMode();
-            ToAttack       = InputUtil.GetAttack();
+            IsAiming ^= InputUtil.GetCombatMode();
+            ToAttack = InputUtil.GetAttack();
 
             if (!IsAiming && ToAttack)
             {
