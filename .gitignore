@@ -1,2 +1,5 @@
-# Unity .gitignore is already in its own directory
+# There are already Unity .gitignore in project directory
 # use this file to ignore other external files
+
+/[Bb]uild/
+/[Bb]uilds/
