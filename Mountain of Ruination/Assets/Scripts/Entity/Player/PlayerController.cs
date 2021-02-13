@@ -14,11 +14,12 @@ namespace Assets.Scripts.Entity.Player
 
         #region Fields private
 
-        private bool wasAiming;
         private bool isAiming;
-        private Vector2 velocity;
+        private bool wasMovingSlope;
+        private bool wasAiming;
         private bool wasToContinueJump;
 
+        private Vector2 velocity;
         private MovementController movement;
 
         #endregion
@@ -55,6 +56,16 @@ namespace Assets.Scripts.Entity.Player
             {
                 bool isBackwards = MoveX > 0 && !IsFacingRight || MoveX < 0 && IsFacingRight;
                 return IsAiming && isBackwards;
+            }
+        }
+        public bool IsGrounded 
+        {
+            get
+            {
+                bool grounded = wasMovingSlope || movement.isGrounded;
+                wasMovingSlope = movement.collisionState.movingDownSlope 
+                    || movement.collisionState.movingUpSlope;
+                return grounded;
             }
         }
 
@@ -127,7 +138,7 @@ namespace Assets.Scripts.Entity.Player
 
         private void UpdatePosition()
         {
-            if (ToJump && movement.isGrounded)
+            if (ToJump && IsGrounded)
             {
                 velocity.y = Mathf.Sqrt(2f * jumpHeight * gravity);
                 wasToContinueJump = true;
@@ -187,7 +198,7 @@ namespace Assets.Scripts.Entity.Player
         {
             manager.animator.SetFloat("velocityScaleX", GetHorizontalMoveScale());
             manager.animator.SetFloat("velocityY", velocity.y);
-            manager.animator.SetBool("inFall", !movement.isGrounded);
+            manager.animator.SetBool("inFall", !IsGrounded);
 
             manager.animator.SetBool("isAiming", IsAiming);
             manager.animator.SetFloat("weaponX", actualAim.Position.x * (IsFacingRight ? 1 : -1));

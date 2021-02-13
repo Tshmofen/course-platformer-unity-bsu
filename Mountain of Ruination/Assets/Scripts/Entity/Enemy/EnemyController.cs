@@ -15,7 +15,6 @@ namespace Assets.Scripts.Entity.Enemy
         private int nodeIndex;
 
         private bool isMoveToEnd;
-        private bool isFacingRight;
 
         private MovementController movement;
         private PathFinder pathFinder;
@@ -40,10 +39,8 @@ namespace Assets.Scripts.Entity.Enemy
         void Start()
         {
             movement = GetComponent<MovementController>();
-            pathFinder = QPathFinder.PathFinder.Instance;
+            pathFinder = PathFinder.Instance;
             pathFinder.graphData.ReGenerateIDs();
-
-            isFacingRight = true;
 
             nodeIndex = 0;
         }
