@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Entity.Movement;
 using QPathFinder;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +17,8 @@ namespace Assets.Scripts.Entity.Enemy
         private bool isRightToTarget;
         private bool isLeftToTarget;
 
-        private int nodeIndex;
+        private int pathIndex;
+        private int nextNode;
         private bool isMoveToEnd;
 
         private Vector2 velocity;
@@ -25,6 +27,7 @@ namespace Assets.Scripts.Entity.Enemy
         private MovementController movement;
         private PathFinder pathFinder;
 
+        // also set player position in vector player
         public bool IsPlayerNearby
         {
             get
@@ -40,6 +43,7 @@ namespace Assets.Scripts.Entity.Enemy
                 return false;
             }
         }
+        public bool CanMoveToPlayer { get; set; }
 
         #endregion
 
@@ -56,6 +60,7 @@ namespace Assets.Scripts.Entity.Enemy
         public LayerMask playerLayer;
         public LayerMask groundLayer;
         public float detectionRadius = 5;
+        public float playerCheckPeriod = 0.2f;
         [Header("External")]
         public EnemyManager manager;
 
@@ -70,26 +75,24 @@ namespace Assets.Scripts.Entity.Enemy
             pathFinder.graphData.ReGenerateIDs();
             isMoveToEnd = true;
 
-            nodeIndex = 0;
-            Node node = pathFinder.graphData.GetNode(pathNodes[nodeIndex]);
+            pathIndex = 0;
+            Node node = pathFinder.graphData.GetNode(pathNodes[pathIndex]);
             target = node.Position;
+
+            StartCoroutine("DoPlayerCheck");
         }
 
         void Update()
         {
-            /*if (IsPlayerNearby)
-            {
-                int nearestNode = pathFinder.FindNearestNode(playerPosition);
-                pathFinder.FindShortestPathOfNodes(CurrentNode, nearestNode, Execution.Synchronous, nodes =>
-                {
-                    if (nodes.Count != 0)
-                    {
-
-                    }
-                });
-            }*/
             UpdateTargetDistance();
-            GoToPatroll();
+
+            Debug.Log(CanMoveToPlayer);
+
+            if (CanMoveToPlayer)
+                GoToPlayer();
+            else
+                GoToPatroll();
+
             Move();
             UpdateAnimationState();
         }
@@ -104,12 +107,17 @@ namespace Assets.Scripts.Entity.Enemy
             isLeftToTarget  = target.x - transform.position.x > targetRadius;
         }
 
+        private void GoToPlayer()
+        {
+            target = player;
+        }
+
         private void GoToPatroll()
         {
             if (!isRightToTarget && !isLeftToTarget)
             { 
-                nodeIndex = GetNextNodeIndex();
-                Node node = pathFinder.graphData.GetNode(pathNodes[nodeIndex]);
+                pathIndex = GetNextNodeIndex();
+                Node node = pathFinder.graphData.GetNode(pathNodes[pathIndex]);
                 target = node.Position;
             }
         }
@@ -117,15 +125,12 @@ namespace Assets.Scripts.Entity.Enemy
         private void Move()
         {
             if (isLeftToTarget)
-            {
                 ChangeDirection(directionStep);
-                ChangePosition();
-            }
-            if (isRightToTarget)
-            {
+            else if (isRightToTarget)
                 ChangeDirection(-directionStep);
-                ChangePosition();
-            }
+            else
+                ChangeDirection(directionStep, true);
+            ChangePosition();
         }
 
         private void UpdateAnimationState()
@@ -137,11 +142,63 @@ namespace Assets.Scripts.Entity.Enemy
 
         #region Support Methods
 
-        private void ChangeDirection(float delta)
+        private IEnumerator DoPlayerCheck()
         {
-            direction += delta * Time.deltaTime;
-            direction = (direction > 1) ? 1 : direction;
-            direction = (direction < -1) ? -1 : direction;
+            while(true)
+            {
+                CheckIfCanGoToPlayer();
+                yield return new WaitForSeconds(playerCheckPeriod);
+            }
+        }
+
+        private void CheckIfCanGoToPlayer()
+        {
+            if (!IsPlayerNearby)
+            {
+                CanMoveToPlayer = false;
+                return;
+            }
+
+            int nearest = pathFinder.FindNearestNode(player);
+            int current = pathFinder.FindNearestNode(transform.position);
+            CanMoveToPlayer = false;
+            pathFinder.FindShortestPathOfNodes(current, nearest, Execution.Synchronous, nodes =>
+            {
+                if (nodes != null && nodes.Count != 0)
+                {
+                    for (int i = 1; i < nodes.Count; i++)
+                    {
+                        if (nodes[i].pathDistance != 0)
+                            return;
+                    }
+                    CanMoveToPlayer = true;
+                }
+            });
+        }
+
+        // when toZero is true, delta should be positive
+        private void ChangeDirection(float delta, bool toZero = false)
+        {
+            delta *= Time.deltaTime;
+            if (!toZero)
+            {
+                direction += delta;
+                direction = (direction > 1) ? 1 : direction;
+                direction = (direction < -1) ? -1 : direction;
+            }
+            else
+            {
+                if (direction > 0)
+                {
+                    direction -= delta;
+                    direction = (direction < 0) ? 0 : direction;
+                }
+                else if (direction < 0)
+                {
+                    direction += delta;
+                    direction = (direction > 0) ? 0 : direction;
+                }  
+            }
         }
 
         private void ChangePosition()
@@ -155,7 +212,7 @@ namespace Assets.Scripts.Entity.Enemy
 
         private int GetNextNodeIndex()
         {
-            int index = nodeIndex;
+            int index = pathIndex;
             index += (isMoveToEnd) ? 1 : -1;
 
             if (index == pathNodes.Length)
