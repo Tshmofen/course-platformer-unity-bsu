@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Damage;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Entity.Animation
 {
@@ -9,7 +8,7 @@ namespace Assets.Scripts.Entity.Animation
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<PlayerManager>().health.DestroyReceiver();
+            animator.GetComponent<EntityManager>().health.DestroyReceiver();
         }
 
         #endregion

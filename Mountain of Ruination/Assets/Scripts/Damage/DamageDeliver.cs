@@ -6,7 +6,7 @@ namespace Assets.Scripts.Damage
     public class DamageDeliver : MonoBehaviour
     {
         #region Fields and properties
-        
+
         public bool isInAttack;
 
         public DamageType Type { get; set; }

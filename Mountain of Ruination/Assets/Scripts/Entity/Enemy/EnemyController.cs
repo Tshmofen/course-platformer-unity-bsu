@@ -1,5 +1,7 @@
 ﻿using Assets.Scripts.Entity.Movement;
 using QPathFinder;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Entity.Enemy
@@ -10,25 +12,55 @@ namespace Assets.Scripts.Entity.Enemy
 
         #region Fields and properties
 
-        private Vector2 velocity;
-        private float direction;
-        private int nodeIndex;
+        private Vector2 player;
+        private Vector2 target;
+        private bool isRightToTarget;
+        private bool isLeftToTarget;
 
+        private int pathIndex;
+        private int nextNode;
         private bool isMoveToEnd;
 
+        private Vector2 velocity;
+        private float direction;
+       
         private MovementController movement;
         private PathFinder pathFinder;
 
+        // also set player position in vector player
+        public bool IsPlayerNearby
+        {
+            get
+            {
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRadius, playerLayer);
+                if (colliders.Length != 0)
+                {
+                    player = colliders[0].transform.position;
+                    Vector2 direction = player - (Vector2)transform.position;
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, direction.magnitude, groundLayer);
+                    return hit.collider == null;
+                }
+                return false;
+            }
+        }
+        public bool CanMoveToPlayer { get; set; }
+
         #endregion
 
-        #region Public fields
+        #region Initial Fields
 
         [Header("Movement")]
         public float speed = 1;
         public float directionStep = 0.01f;
         public float gravity = 20;
+        [Header("Patrolling")]
         public int[] pathNodes;
-        public float nodeRadius;
+        public float targetRadius = 0.2f;
+        [Header("Detection")]
+        public LayerMask playerLayer;
+        public LayerMask groundLayer;
+        public float detectionRadius = 5;
+        public float playerCheckPeriod = 0.2f;
         [Header("External")]
         public EnemyManager manager;
 
@@ -41,19 +73,25 @@ namespace Assets.Scripts.Entity.Enemy
             movement = GetComponent<MovementController>();
             pathFinder = PathFinder.Instance;
             pathFinder.graphData.ReGenerateIDs();
+            isMoveToEnd = true;
 
-            nodeIndex = 0;
+            pathIndex = 0;
+            Node node = pathFinder.graphData.GetNode(pathNodes[pathIndex]);
+            target = node.Position;
+
+            StartCoroutine("DoPlayerCheck");
         }
 
         void Update()
         {
-            /*
-            if (isPlayerNearby && canMoveToPlayer) 
-                moveToPlayer();
-            else if (patrolPath.length != 0)
-                moveByPath();
-            */
-            MoveByPath();
+            UpdateTargetDistance();
+
+            if (CanMoveToPlayer)
+                GoToPlayer();
+            else
+                GoToPatroll();
+
+            Move();
             UpdateAnimationState();
         }
 
@@ -61,24 +99,36 @@ namespace Assets.Scripts.Entity.Enemy
 
         #region Update Parts 
 
-        private void MoveByPath()
+        private void UpdateTargetDistance()
         {
-            Node node = pathFinder.graphData.GetNode(pathNodes[nodeIndex]);
-            float difference = node.Position.x - transform.position.x;
-            if (difference > nodeRadius)
-            {
+            isRightToTarget = target.x - transform.position.x < -targetRadius;
+            isLeftToTarget  = target.x - transform.position.x > targetRadius;
+        }
+
+        private void GoToPlayer()
+        {
+            target = player;
+        }
+
+        private void GoToPatroll()
+        {
+            if (!isRightToTarget && !isLeftToTarget)
+            { 
+                pathIndex = GetNextNodeIndex();
+                Node node = pathFinder.graphData.GetNode(pathNodes[pathIndex]);
+                target = node.Position;
+            }
+        }
+
+        private void Move()
+        {
+            if (isLeftToTarget)
                 ChangeDirection(directionStep);
-                move();
-            }
-            else if (difference < -nodeRadius)
-            {
+            else if (isRightToTarget)
                 ChangeDirection(-directionStep);
-                move();
-            }
             else
-            {
-                nodeIndex = getNextPathIndex();
-            }
+                ChangeDirection(directionStep, true);
+            ChangePosition();
         }
 
         private void UpdateAnimationState()
@@ -90,14 +140,66 @@ namespace Assets.Scripts.Entity.Enemy
 
         #region Support Methods
 
-        private void ChangeDirection(float delta)
+        private IEnumerator DoPlayerCheck()
         {
-            direction += delta * Time.deltaTime;
-            direction = (direction > 1) ? 1 : direction;
-            direction = (direction < -1) ? -1 : direction;
+            while(true)
+            {
+                CheckIfCanGoToPlayer();
+                yield return new WaitForSeconds(playerCheckPeriod);
+            }
         }
 
-        private void move()
+        private void CheckIfCanGoToPlayer()
+        {
+            if (!IsPlayerNearby)
+            {
+                CanMoveToPlayer = false;
+                return;
+            }
+
+            int nearest = pathFinder.FindNearestNode(player);
+            int current = pathFinder.FindNearestNode(transform.position);
+            CanMoveToPlayer = false;
+            pathFinder.FindShortestPathOfNodes(current, nearest, Execution.Synchronous, nodes =>
+            {
+                if (nodes != null && nodes.Count != 0)
+                {
+                    for (int i = 1; i < nodes.Count; i++)
+                    {
+                        if (nodes[i].pathDistance != 0)
+                            return;
+                    }
+                    CanMoveToPlayer = true;
+                }
+            });
+        }
+
+        // when toZero is true, delta should be positive
+        private void ChangeDirection(float delta, bool toZero = false)
+        {
+            delta *= Time.deltaTime;
+            if (!toZero)
+            {
+                direction += delta;
+                direction = (direction > 1) ? 1 : direction;
+                direction = (direction < -1) ? -1 : direction;
+            }
+            else
+            {
+                if (direction > 0)
+                {
+                    direction -= delta;
+                    direction = (direction < 0) ? 0 : direction;
+                }
+                else if (direction < 0)
+                {
+                    direction += delta;
+                    direction = (direction > 0) ? 0 : direction;
+                }  
+            }
+        }
+
+        private void ChangePosition()
         {
             velocity.y -= gravity * Time.deltaTime; // (m/s^2)
             velocity.x = speed * direction;
@@ -106,9 +208,9 @@ namespace Assets.Scripts.Entity.Enemy
             velocity = movement.velocity;
         }
 
-        private int getNextPathIndex()
+        private int GetNextNodeIndex()
         {
-            int index = nodeIndex;
+            int index = pathIndex;
             index += (isMoveToEnd) ? 1 : -1;
 
             if (index == pathNodes.Length)
@@ -116,7 +218,7 @@ namespace Assets.Scripts.Entity.Enemy
                 index -= 2;
                 isMoveToEnd = false;
             }
-            else if (index < 0)
+            if (index < 0)
             {
                 index += 2;
                 isMoveToEnd = true;

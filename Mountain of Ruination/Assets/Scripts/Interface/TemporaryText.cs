@@ -33,7 +33,7 @@ namespace Assets.Scripts.Interface
 
         private void Update()
         {
-            UpdateRenderState();   
+            UpdateRenderState();
         }
 
         #endregion
@@ -52,7 +52,7 @@ namespace Assets.Scripts.Interface
 
             if (opacity == 0)
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
         }
 

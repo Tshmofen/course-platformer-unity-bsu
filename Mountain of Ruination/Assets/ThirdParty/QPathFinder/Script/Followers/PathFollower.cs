@@ -50,9 +50,9 @@ namespace QPathFinder
 
         public void Follow(List<object> pointsToFollow, float moveSpeed, bool autoRotate)
         {
-            this._pathToFollow = pointsToFollow;
+            _pathToFollow = pointsToFollow;
             this.moveSpeed = moveSpeed;
-            this.alignToPath = autoRotate;
+            alignToPath = autoRotate;
 
             StopFollowing();
             _currentIndex = 0;
