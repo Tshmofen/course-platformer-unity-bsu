@@ -86,8 +86,6 @@ namespace Assets.Scripts.Entity.Enemy
         {
             UpdateTargetDistance();
 
-            Debug.Log(CanMoveToPlayer);
-
             if (CanMoveToPlayer)
                 GoToPlayer();
             else
