@@ -8,8 +8,16 @@ namespace Assets.Scripts.Interface.Menu
     {
         public void StartNewGame()
         {
-            Debug.Log("IsCalled??/");
             SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
+        }
+
+        public void ExitTheGame()
+        {
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #endif
+
+            Application.Quit();
         }
     }
 }

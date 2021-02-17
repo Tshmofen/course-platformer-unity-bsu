@@ -14,8 +14,7 @@ namespace Assets.Scripts.Interface.Overlay
         #endregion
 
         #region Unity Calls
-
-        private void Start()
+        private void Awake()
         {
             InterfaceUtil.overlayManager = this;
         }
