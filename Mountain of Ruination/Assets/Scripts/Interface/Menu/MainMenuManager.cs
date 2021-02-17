@@ -1,17 +1,29 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Interface.Menu
 {
     public class MainMenuManager : MonoBehaviour
     {
-        public void StartNewGame()
+        public Button initialButton;
+
+        private void Start()
+        {
+            initialButton.Select();
+        }
+
+        public void HandleNewGame()
         {
             SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
         }
 
-        public void ExitTheGame()
+        public void HandleOptions()
+        {
+
+        }
+
+        public void HandleExit()
         {
             #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
