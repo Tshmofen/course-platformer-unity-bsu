@@ -210,7 +210,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1074580035}
         m_TargetAssemblyTypeName: Assets.Scripts.Interface.Menu.MainMenuManager,
           Assembly-CSharp
-        m_MethodName: StartNewGame
+        m_MethodName: HandleNewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -538,6 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d56fe9540db17448f1c0680ad78901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialButton: {fileID: 130458015}
 --- !u!1 &1089796741
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,7 +846,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1074580035}
         m_TargetAssemblyTypeName: Assets.Scripts.Interface.Menu.MainMenuManager,
           Assembly-CSharp
-        m_MethodName: ExitTheGame
+        m_MethodName: HandleExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -995,7 +996,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1636899362}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1074580035}
+        m_TargetAssemblyTypeName: Assets.Scripts.Interface.Menu.MainMenuManager,
+          Assembly-CSharp
+        m_MethodName: HandleOptions
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1636899362
 MonoBehaviour:
   m_ObjectHideFlags: 0
