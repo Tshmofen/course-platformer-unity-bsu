@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Util;
+﻿using Assets.Scripts.Entity;
+using Assets.Scripts.Util;
 using UnityEngine;
 
 namespace Assets.Scripts.Damage
@@ -11,6 +12,7 @@ namespace Assets.Scripts.Damage
         private HealthStats health;
 
         public Animator animator;
+        public EntityManager manager;
 
         public bool IsReceiveDamage { get; set; }
 
@@ -71,8 +73,7 @@ namespace Assets.Scripts.Damage
 
         public void DestroyReceiver()
         {
-            GetComponent<SpriteRenderer>().enabled = false;
-            Destroy(gameObject);
+            manager.destroyer.DestroyEntity();
         }
 
         #endregion

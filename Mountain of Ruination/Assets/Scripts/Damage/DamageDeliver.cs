@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Entity;
+using UnityEngine;
 
 namespace Assets.Scripts.Damage
 {
@@ -7,7 +8,10 @@ namespace Assets.Scripts.Damage
     {
         #region Fields and properties
 
+        [Header("Combat")]
         public bool isInAttack;
+        [Header("External")]
+        public EntityManager manager;
 
         public DamageType Type { get; set; }
         public BoxCollider2D DamageCollider { get; set; }
@@ -31,6 +35,19 @@ namespace Assets.Scripts.Damage
             {
                 receiver.ReceiveDamage(Stats, Type);
             }
+        }
+
+        #endregion
+
+        #region Public
+
+        public void ToAttack()
+        {
+            if (!isInAttack)
+            {
+                manager.animator.SetTrigger("toAttack");
+            }
+            manager.animator.SetBool("isInAttack", isInAttack);
         }
 
         #endregion

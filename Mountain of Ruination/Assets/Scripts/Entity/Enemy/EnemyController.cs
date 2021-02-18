@@ -61,6 +61,8 @@ namespace Assets.Scripts.Entity.Enemy
         public LayerMask groundLayer;
         public float detectionRadius = 5;
         public float playerCheckPeriod = 0.2f;
+        [Header("Combat")]
+        public float attackRadius = 0.5f;
         [Header("External")]
         public EnemyManager manager;
 
@@ -87,9 +89,9 @@ namespace Assets.Scripts.Entity.Enemy
             UpdateTargetDistance();
 
             if (CanMoveToPlayer)
-                GoToPlayer();
+                UpdatePlayerChase();
             else
-                GoToPatroll();
+                UpdatePatrolling();
 
             Move();
             UpdateAnimationState();
@@ -105,12 +107,20 @@ namespace Assets.Scripts.Entity.Enemy
             isLeftToTarget  = target.x - transform.position.x > targetRadius;
         }
 
-        private void GoToPlayer()
+        private void UpdatePlayerChase()
         {
             target = player;
+
+            // this isInAttack bool is neccessary to handle first frame 
+            // before animation when weapon isInAttack not set yet
+            float distance = (target - (Vector2)transform.position).magnitude;
+            if (distance < attackRadius)
+            {
+                manager.weapon.ToAttack();
+            }
         }
 
-        private void GoToPatroll()
+        private void UpdatePatrolling()
         {
             if (!isRightToTarget && !isLeftToTarget)
             { 
