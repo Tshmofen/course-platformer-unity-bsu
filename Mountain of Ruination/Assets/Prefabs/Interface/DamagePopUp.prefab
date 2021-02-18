@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1706807250271480284}
   - component: {fileID: 1706807250271480283}
   - component: {fileID: 1706807250271480282}
-  - component: {fileID: 1706807250271480285}
+  - component: {fileID: 3708852692143276225}
   m_Layer: 5
   m_Name: DamagePopUp
   m_TagString: Untagged
@@ -80,7 +80,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Damage
---- !u!114 &1706807250271480285
+--- !u!114 &3708852692143276225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1706807250271480287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31fde8d01958fd047a88eb08036b7c66, type: 3}
+  m_Script: {fileID: 11500000, guid: 7714f2913b592b8439ec6431e85b1d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 1

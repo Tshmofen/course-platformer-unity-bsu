@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Interface;
+﻿using Assets.Scripts.Interface.Overlay;
 
 namespace Assets.Scripts.Util
 {
