@@ -1,92 +1,105 @@
-﻿using Assets.Scripts.Entity.Movement;
-using QPathFinder;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
+using Entity.Movement;
+using ThirdParty.QPathFinder.Script;
 using UnityEngine;
 
-namespace Assets.Scripts.Entity.Enemy
+namespace Entity.Enemy
 {
     [RequireComponent(typeof(MovementController))]
     public class EnemyController : MonoBehaviour
     {
-
         #region Fields and properties
 
-        private Vector2 player;
-        private Vector2 target;
-        private bool isRightToTarget;
-        private bool isLeftToTarget;
+        private Vector2 _player;
+        private Vector2 _target;
+        private bool _isRightToTarget;
+        private bool _isLeftToTarget;
 
-        private int pathIndex;
-        private int nextNode;
-        private bool isMoveToEnd;
+        private int _pathIndex;
+        private bool _isMoveToEnd;
 
-        private Vector2 velocity;
-        private float direction;
-       
-        private MovementController movement;
-        private PathFinder pathFinder;
+        private Vector2 _velocity;
+        private float _direction;
+
+        private MovementController _movement;
+        private PathFinder _pathFinder;
 
         // also set player position in vector player
-        public bool IsPlayerNearby
+        private bool IsPlayerNearby
         {
             get
             {
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRadius, playerLayer);
-                if (colliders.Length != 0)
+                Vector2 position = transform.position;
+                var colliders = new Collider2D[1];
+                var size = Physics2D.OverlapCircleNonAlloc(
+                    position,
+                    detectionRadius,
+                    colliders,
+                    playerLayer
+                );
+
+                if (size != 0)
                 {
-                    player = colliders[0].transform.position;
-                    Vector2 direction = player - (Vector2)transform.position;
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, direction.magnitude, groundLayer);
-                    return hit.collider == null;
+                    _player = colliders[0].transform.position;
+                    var direction = _player - position;
+                    var hit = Physics2D.Raycast(position, direction, direction.magnitude, groundLayer);
+                    return hit.collider is null;
                 }
+
                 return false;
             }
         }
-        public bool CanMoveToPlayer { get; set; }
+
+        private bool CanMoveToPlayer { get; set; }
 
         #endregion
 
         #region Initial Fields
 
-        [Header("Movement")]
+        [Header("Movement")] 
         public float speed = 1;
         public float directionStep = 0.01f;
         public float gravity = 20;
-        [Header("Patrolling")]
+        
+        [Header("Patrolling")] 
         public int[] pathNodes;
         public float targetRadius = 0.2f;
-        [Header("Detection")]
+        
+        [Header("Detection")] 
         public LayerMask playerLayer;
         public LayerMask groundLayer;
         public float detectionRadius = 5;
         public float playerCheckPeriod = 0.2f;
-        [Header("Combat")]
+        
+        [Header("Combat")] 
         public float attackRadius = 0.5f;
-        [Header("External")]
-        public EnemyManager manager;
 
-        #endregion 
+        [Header("External")] 
+        public EnemyManager manager;
+        private static readonly int VelocityX = Animator.StringToHash("velocityX");
+
+        #endregion
 
         #region Unity Calls
 
-        void Start()
+        private void Start()
         {
-            movement = GetComponent<MovementController>();
-            pathFinder = PathFinder.Instance;
-            pathFinder.graphData.ReGenerateIDs();
-            isMoveToEnd = true;
+            _movement = GetComponent<MovementController>();
+            _pathFinder = PathFinder.Instance;
+            _pathFinder.graphData.ReGenerateIDs();
+            _isMoveToEnd = true;
 
-            pathIndex = 0;
-            Node node = pathFinder.graphData.GetNode(pathNodes[pathIndex]);
-            target = node.Position;
+            _pathIndex = 0;
+            var node = _pathFinder.graphData.GetNode(pathNodes[_pathIndex]);
+            _target = node.Position;
 
-            StartCoroutine("DoPlayerCheck");
+            // start every {playerCheckPeriod} seconds check of player position
+            StartCoroutine(nameof(DoPlayerCheck));
         }
 
-        void Update()
+        private void Update()
         {
-            UpdateTargetDistance();
+            UpdatePositionToTarget();
 
             if (CanMoveToPlayer)
                 UpdatePlayerChase();
@@ -99,66 +112,71 @@ namespace Assets.Scripts.Entity.Enemy
 
         #endregion
 
-        #region Update Parts 
+        #region Update Parts
 
-        private void UpdateTargetDistance()
+        private void UpdatePositionToTarget()
         {
-            isRightToTarget = target.x - transform.position.x < -targetRadius;
-            isLeftToTarget  = target.x - transform.position.x > targetRadius;
+            var position = transform.position;
+            _isRightToTarget = _target.x - position.x < -targetRadius;
+            _isLeftToTarget = _target.x - position.x > targetRadius;
         }
 
+        // set player position as target
         private void UpdatePlayerChase()
         {
-            target = player;
-
-            // this isInAttack bool is neccessary to handle first frame 
-            // before animation when weapon isInAttack not set yet
-            float distance = (target - (Vector2)transform.position).magnitude;
-            if (distance < attackRadius)
-            {
-                manager.weapon.ToAttack();
-            }
+            _target = _player;
+            var distance = (_target - (Vector2) transform.position).magnitude;
+            if (distance < attackRadius) manager.weapon.ToAttack();
         }
 
+        // set target as one of path nodes
         private void UpdatePatrolling()
         {
-            if (!isRightToTarget && !isLeftToTarget)
-            { 
-                pathIndex = GetNextNodeIndex();
-                Node node = pathFinder.graphData.GetNode(pathNodes[pathIndex]);
-                target = node.Position;
+            if (!_isRightToTarget && !_isLeftToTarget)
+            {
+                _pathIndex = GetNextNodeIndex();
+                var node = _pathFinder.graphData.GetNode(pathNodes[_pathIndex]);
+                _target = node.Position;
             }
         }
 
+        // changes direction if needed and move to target
         private void Move()
         {
-            if (isLeftToTarget)
+            if (_isLeftToTarget)
                 ChangeDirection(directionStep);
-            else if (isRightToTarget)
+            else if (_isRightToTarget)
                 ChangeDirection(-directionStep);
             else
                 ChangeDirection(directionStep, true);
             ChangePosition();
         }
 
+        // update animation
         private void UpdateAnimationState()
         {
-            manager.animator.SetFloat("velocityX", velocity.x / speed);
+            manager.animator.SetFloat(VelocityX, _velocity.x / speed);
         }
 
         #endregion
 
         #region Support Methods
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private IEnumerator DoPlayerCheck()
         {
-            while(true)
+            while (true)
             {
                 CheckIfCanGoToPlayer();
                 yield return new WaitForSeconds(playerCheckPeriod);
             }
+            // ReSharper disable once IteratorNeverReturns
         }
 
+        // find nearest nodes to the player and to the current entity
+        // and then check if there is a path between them
+        // if the path is found, then on the next frame this entity
+        // would chase the player
         private void CheckIfCanGoToPlayer()
         {
             if (!IsPlayerNearby)
@@ -167,71 +185,73 @@ namespace Assets.Scripts.Entity.Enemy
                 return;
             }
 
-            int nearest = pathFinder.FindNearestNode(player);
-            int current = pathFinder.FindNearestNode(transform.position);
+            var nearest = _pathFinder.FindNearestNode(_player);
+            var current = _pathFinder.FindNearestNode(transform.position);
             CanMoveToPlayer = false;
-            pathFinder.FindShortestPathOfNodes(current, nearest, Execution.Synchronous, nodes =>
+            _pathFinder.FindShortestPathOfNodes(current, nearest, Execution.Synchronous, nodes =>
             {
                 if (nodes != null && nodes.Count != 0)
                 {
-                    for (int i = 1; i < nodes.Count; i++)
-                    {
+                    for (var i = 1; i < nodes.Count; i++)
                         if (nodes[i].pathDistance != 0)
                             return;
-                    }
                     CanMoveToPlayer = true;
                 }
             });
         }
 
+        // smoothly change direction according to time
         // when toZero is true, delta should be positive
         private void ChangeDirection(float delta, bool toZero = false)
         {
             delta *= Time.deltaTime;
             if (!toZero)
             {
-                direction += delta;
-                direction = (direction > 1) ? 1 : direction;
-                direction = (direction < -1) ? -1 : direction;
+                _direction += delta;
+                _direction = _direction > 1 ? 1 : _direction;
+                _direction = _direction < -1 ? -1 : _direction;
             }
             else
             {
-                if (direction > 0)
+                if (_direction > 0)
                 {
-                    direction -= delta;
-                    direction = (direction < 0) ? 0 : direction;
+                    _direction -= delta;
+                    _direction = _direction < 0 ? 0 : _direction;
                 }
-                else if (direction < 0)
+                else if (_direction < 0)
                 {
-                    direction += delta;
-                    direction = (direction > 0) ? 0 : direction;
-                }  
+                    _direction += delta;
+                    _direction = _direction > 0 ? 0 : _direction;
+                }
             }
         }
 
+        // interact with movement controller to move entity
         private void ChangePosition()
         {
-            velocity.y -= gravity * Time.deltaTime; // (m/s^2)
-            velocity.x = speed * direction;
+            _velocity.y -= gravity * Time.deltaTime; // (m/s^2)
+            _velocity.x = speed * _direction;
 
-            movement.move(velocity * Time.deltaTime);
-            velocity = movement.velocity;
+            _movement.Move(_velocity * Time.deltaTime);
+            _velocity = _movement.Velocity;
         }
 
+        // iterates over pathNodes from the start to the end, and then in backwards
         private int GetNextNodeIndex()
         {
-            int index = pathIndex;
-            index += (isMoveToEnd) ? 1 : -1;
+            var index = _pathIndex;
+            index += _isMoveToEnd ? 1 : -1;
 
             if (index == pathNodes.Length)
             {
                 index -= 2;
-                isMoveToEnd = false;
+                _isMoveToEnd = false;
             }
+
             if (index < 0)
             {
                 index += 2;
-                isMoveToEnd = true;
+                _isMoveToEnd = true;
             }
 
             return index;

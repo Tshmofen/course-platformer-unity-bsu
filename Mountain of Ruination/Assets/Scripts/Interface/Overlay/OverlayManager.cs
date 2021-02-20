@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Util;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using Util;
 
-namespace Assets.Scripts.Interface.Overlay
+namespace Interface.Overlay
 {
     [RequireComponent(typeof(Canvas))]
     public class OverlayManager : MonoBehaviour
@@ -14,18 +14,21 @@ namespace Assets.Scripts.Interface.Overlay
         #endregion
 
         #region Unity Calls
+
         private void Awake()
         {
-            InterfaceUtil.overlayManager = this;
+            InterfaceUtil.OverlayManager = this;
         }
 
         #endregion
 
         #region Public
 
+        // ReSharper disable once PossibleNullReferenceException
+        // shows popup over the target that flies away and disappears
         public void ShowPopUp(Vector2 worldPosition, string text, float lifeTime)
         {
-            GameObject newPopUp = Instantiate(damagePopUp, gameObject.transform);
+            var newPopUp = Instantiate(damagePopUp, gameObject.transform);
             newPopUp.GetComponent<Text>().text = text;
             newPopUp.GetComponent<TemporaryText>().lifeTime = lifeTime;
             newPopUp.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(worldPosition);

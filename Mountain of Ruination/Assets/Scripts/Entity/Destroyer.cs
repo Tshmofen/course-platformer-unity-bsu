@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Entity
+namespace Entity
 {
     [RequireComponent(typeof(EntityManager))]
     public class Destroyer : MonoBehaviour
@@ -9,7 +9,7 @@ namespace Assets.Scripts.Entity
 
         public void DestroyEntity()
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
         #endregion

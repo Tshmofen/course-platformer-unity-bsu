@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Util
+// ReSharper disable UnusedMember.Global
+namespace Util
 {
     public static class InputUtil
     {
@@ -8,7 +9,7 @@ namespace Assets.Scripts.Util
 
         public static Vector2 GetMove()
         {
-            Vector2 move = Vector2.zero;
+            var move = Vector2.zero;
             move.x = Input.GetAxis("Horizontal");
             move.y = Input.GetAxis("Vertical");
             return move;
@@ -51,14 +52,15 @@ namespace Assets.Scripts.Util
 
         public static Vector2 GetMouseDeltaToCenter()
         {
-            Vector2 center = new Vector2(Screen.width, Screen.height) / 2;
-            return (Vector2)Input.mousePosition - center;
+            var center = new Vector2(Screen.width, Screen.height) / 2;
+            return (Vector2) Input.mousePosition - center;
         }
 
         public static Vector2 GetMouseDeltaToObject(GameObject @object)
         {
+            // ReSharper disable once PossibleNullReferenceException
             Vector2 objectPosition = Camera.main.WorldToScreenPoint(@object.transform.position);
-            return (Vector2)Input.mousePosition - objectPosition;
+            return (Vector2) Input.mousePosition - objectPosition;
         }
 
         #endregion

@@ -1,7 +1,4 @@
-﻿using Assets.Scripts.Entity.Player;
-using UnityEngine;
-
-namespace Assets.Scripts.Entity
+﻿namespace Entity.Player
 {
     public class PlayerManager : EntityManager
     {

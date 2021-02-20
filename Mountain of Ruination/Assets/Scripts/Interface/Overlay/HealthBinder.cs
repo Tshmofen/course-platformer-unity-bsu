@@ -1,24 +1,23 @@
-using Assets.Scripts.Damage;
+using Damage;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Interface.Overlay
+namespace Interface.Overlay
 {
     [RequireComponent(typeof(Image))]
     public class HealthBinder : MonoBehaviour
     {
-        private Image image;
-
         public HealthStats health;
+        private Image _image;
 
         private void Start()
         {
-            image = GetComponent<Image>();   
+            _image = GetComponent<Image>();
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
-             image.fillAmount = health.CurrentHealth / health.maxHealth;
+            _image.fillAmount = health.CurrentHealth / health.maxHealth;
         }
     }
 }

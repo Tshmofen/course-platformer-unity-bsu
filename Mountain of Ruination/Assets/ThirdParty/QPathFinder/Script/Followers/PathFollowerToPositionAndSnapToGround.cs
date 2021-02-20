@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace QPathFinder
+namespace ThirdParty.QPathFinder.Script.Followers
 {
     public class PathFollowerToPositionAndSnapToGround : PathFollower
     {
@@ -30,12 +30,12 @@ namespace QPathFinder
                 return hitPos;
             }
 
-            if (QPathFinder.Logger.CanLogError)
+            if (Logger.CanLogError)
             {
-                QPathFinder.Logger.LogError("Ground not found at " + point + ". Could not snap to ground properly! Raycast origin: " + (point + offsetDistanceFromPoint * (-directionOfRayCast)) +
-                        " raycast direction:" + directionOfRayCast + " Distance of raycase:" + maxDistanceForRayCast);
+                Logger.LogError("Ground not found at " + point + ". Could not snap to ground properly! Raycast origin: " + (point + offsetDistanceFromPoint * (-directionOfRayCast)) +
+                                " raycast direction:" + directionOfRayCast + " Distance of raycase:" + maxDistanceForRayCast);
 
-                Debug.DrawLine(point + offsetDistanceFromPoint * (-directionOfRayCast), point + offsetDistanceFromPoint * (-directionOfRayCast) + directionOfRayCast * maxDistanceForRayCast, Color.red, QPathFinder.Logger.DrawLineDuration);
+                Debug.DrawLine(point + offsetDistanceFromPoint * (-directionOfRayCast), point + offsetDistanceFromPoint * (-directionOfRayCast) + directionOfRayCast * maxDistanceForRayCast, Color.red, Logger.DrawLineDuration);
             }
             return point;
         }
@@ -59,7 +59,7 @@ namespace QPathFinder
             var newTransformPos = Vector3.MoveTowards(_transform.position, targetPos, moveSpeed * Time.smoothDeltaTime);
             newTransformPos = AdjustPositionIfNeeded(newTransformPos); ;
 
-            if (QPathFinder.Logger.CanLogInfo) Debug.DrawLine(transform.position, newTransformPos, Color.blue, QPathFinder.Logger.DrawLineDuration);
+            if (Logger.CanLogInfo) Debug.DrawLine(transform.position, newTransformPos, Color.blue, Logger.DrawLineDuration);
 
             _transform.position = newTransformPos;
         }

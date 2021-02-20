@@ -1,9 +1,7 @@
-﻿
-using Assets.Scripts.Entity;
-using Assets.Scripts.Entity.Player;
+﻿using Entity.Player;
 using UnityEngine;
 
-namespace Assets.Scripts.Animation.Entity.Player.Aim
+namespace Animation.Entity.Player.Aim
 {
     public class AimHandler : StateMachineBehaviour
     {
@@ -21,10 +19,10 @@ namespace Assets.Scripts.Animation.Entity.Player.Aim
         // return aim to default position in the middle of animation to not interrupt its end or start
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            float state = stateInfo.normalizedTime % 1; // its fraction displays procent of execution
+            var state = stateInfo.normalizedTime % 1; // this fraction displays percent of execution
             if (state > 0.45 || state > 0.55)
             {
-                PlayerController player = animator.GetComponent<PlayerManager>().player;
+                var player = animator.GetComponent<PlayerManager>().player;
                 player.actualAim.RestorePosition(player.IsFacingRight);
             }
         }
@@ -32,7 +30,7 @@ namespace Assets.Scripts.Animation.Entity.Player.Aim
         // aim showing
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            PlayerController player = animator.GetComponent<PlayerManager>().player;
+            var player = animator.GetComponent<PlayerManager>().player;
             player.DisplayActualAim = true;
             player.actualAim.RestorePosition(player.IsFacingRight);
         }

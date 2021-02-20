@@ -1,21 +1,36 @@
-﻿using Assets.Scripts.Entity;
+﻿using Entity;
 using UnityEngine;
 
-namespace Assets.Scripts.Damage
+namespace Damage
 {
     [RequireComponent(typeof(BoxCollider2D), typeof(DamageStats))]
     public class DamageDeliver : MonoBehaviour
     {
+        #region Public
+
+        // toggle animation, that should handle collider enabling and isInAttack bool
+        public void ToAttack()
+        {
+            if (!isInAttack) manager.animator.SetTrigger(Attack);
+            manager.animator.SetBool(IsInAttack, isInAttack);
+        }
+
+        #endregion
+
         #region Fields and properties
 
-        [Header("Combat")]
+        [Header("Combat")] 
         public bool isInAttack;
-        [Header("External")]
+        [Header("External")] 
         public EntityManager manager;
 
+        // animation hashed strings
+        private static readonly int IsInAttack = Animator.StringToHash("isInAttack");
+        private static readonly int Attack = Animator.StringToHash("toAttack");
+
         public DamageType Type { get; set; }
-        public BoxCollider2D DamageCollider { get; set; }
-        public DamageStats Stats { get; set; }
+        private BoxCollider2D DamageCollider { get; set; }
+        private DamageStats Stats { get; set; }
 
         #endregion
 
@@ -28,26 +43,10 @@ namespace Assets.Scripts.Damage
             Stats = GetComponent<DamageStats>();
         }
 
-        private void OnTriggerEnter2D(Collider2D collider)
+        private void OnTriggerEnter2D(Collider2D otherCollider)
         {
-            DamageReceiver receiver = collider.GetComponent<DamageReceiver>();
-            if (receiver != null && isInAttack)
-            {
-                receiver.ReceiveDamage(Stats, Type);
-            }
-        }
-
-        #endregion
-
-        #region Public
-
-        public void ToAttack()
-        {
-            if (!isInAttack)
-            {
-                manager.animator.SetTrigger("toAttack");
-            }
-            manager.animator.SetBool("isInAttack", isInAttack);
+            var receiver = otherCollider.GetComponent<DamageReceiver>();
+            if (receiver != null && isInAttack) receiver.ReceiveDamage(Stats, Type);
         }
 
         #endregion

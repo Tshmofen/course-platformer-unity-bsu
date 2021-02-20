@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace QPathFinder
+namespace ThirdParty.QPathFinder.Script
 {
     public static class Logger
     {
@@ -12,7 +12,7 @@ namespace QPathFinder
             None = 4
         }
 
-        public static void SetLoggingLevel(QPathFinder.Logger.Level level)
+        public static void SetLoggingLevel(Logger.Level level)
         {
             m_logLevel = level;
         }
@@ -38,23 +38,23 @@ namespace QPathFinder
             Log(Level.Info, message, includeTimeStamp);
         }
 
-        public static void Log(QPathFinder.Logger.Level level, string message, bool includeTimeStamp = false)
+        public static void Log(Logger.Level level, string message, bool includeTimeStamp = false)
         {
             bool isEditorMode = IsRunningInEditorMode;
             if (includeTimeStamp)
                 message = "[Time:" + Time.realtimeSinceStartup + "]" + message;
 
-            if (level == QPathFinder.Logger.Level.Info)
+            if (level == Logger.Level.Info)
             {
                 if (m_logLevel <= level || isEditorMode)
                     Debug.Log("[QPathFinder:Info] " + message);
             }
-            else if (level == QPathFinder.Logger.Level.Warnings)
+            else if (level == Logger.Level.Warnings)
             {
                 if (m_logLevel <= level || isEditorMode)
                     Debug.LogWarning("[QPathFinder:Warn] " + message);
             }
-            else if (level == QPathFinder.Logger.Level.Errors)
+            else if (level == Logger.Level.Errors)
             {
                 if (m_logLevel <= level || isEditorMode)
                     Debug.LogError("[QPathFinder:Err] " + message);
@@ -69,6 +69,6 @@ namespace QPathFinder
         public static float DrawLineDuration { get; private set; }
 
         private static bool IsRunningInEditorMode { get { return !Application.isPlaying; } }
-        private static QPathFinder.Logger.Level m_logLevel = Level.Warnings;
+        private static Logger.Level m_logLevel = Level.Warnings;
     }
 }

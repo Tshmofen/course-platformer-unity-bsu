@@ -1,8 +1,8 @@
-using UnityEngine;
 using System.Collections;
+using TMPro;
+using UnityEngine;
 
-
-namespace TMPro.Examples
+namespace ThirdParty.TextMesh_Pro.Scripts
 {
     
     public class TeleType : MonoBehaviour

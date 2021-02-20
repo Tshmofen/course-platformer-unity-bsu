@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Damage
+namespace Damage
 {
     public class DamageStats : MonoBehaviour
     {
