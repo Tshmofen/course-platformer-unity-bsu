@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+﻿// ReSharper disable NotAccessedField.Global
 
-namespace Assets.Scripts.Entity.Enemy
+namespace Entity.Enemy
 {
     public class EnemyManager : EntityManager
     {
         public EnemyController enemy;
-        public Animator animator;
     }
 }

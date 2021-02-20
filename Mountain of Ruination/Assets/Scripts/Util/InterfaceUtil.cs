@@ -1,12 +1,13 @@
-﻿using Assets.Scripts.Interface.Overlay;
+﻿using Interface.Overlay;
 
-namespace Assets.Scripts.Util
+namespace Util
 {
     public static class InterfaceUtil
     {
         #region Fields and properties
 
-        public static OverlayManager overlayManager;
+        // the only overlay in scene, that will render interface
+        public static OverlayManager OverlayManager;
 
         #endregion
     }

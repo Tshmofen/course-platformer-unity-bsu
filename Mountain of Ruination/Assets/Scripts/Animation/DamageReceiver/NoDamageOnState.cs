@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Entity;
+using UnityEngine;
 
-namespace Assets.Scripts.Entity.Animation
+namespace Animation.DamageReceiver
 {
     public class NoDamageOnState : StateMachineBehaviour
     {

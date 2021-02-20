@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace QPathFinder
+namespace ThirdParty.QPathFinder.Script
 {
     public enum PathLineType
     {

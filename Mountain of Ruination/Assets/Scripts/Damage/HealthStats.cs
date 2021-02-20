@@ -1,9 +1,18 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Damage
+namespace Damage
 {
     public class HealthStats : MonoBehaviour
     {
+        #region Unity calls
+
+        private void Start()
+        {
+            CurrentHealth = maxHealth;
+        }
+
+        #endregion
+
         #region Fields and properties
 
         public float maxHealth;
@@ -12,15 +21,6 @@ namespace Assets.Scripts.Damage
         [Range(0, 1)] public float heavyArmor;
 
         public float CurrentHealth { get; set; }
-
-        #endregion
-
-        #region Unity calls
-
-        private void Start()
-        {
-            CurrentHealth = maxHealth;
-        }
 
         #endregion
     }

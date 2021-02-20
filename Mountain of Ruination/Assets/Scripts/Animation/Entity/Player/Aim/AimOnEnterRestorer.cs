@@ -1,8 +1,7 @@
-﻿using Assets.Scripts.Entity;
-using Assets.Scripts.Entity.Player;
+﻿using Entity.Player;
 using UnityEngine;
 
-namespace Assets.Scripts.Animation.Player.Aim
+namespace Animation.Entity.Player.Aim
 {
     public class AimOnEnterRestorer : StateMachineBehaviour
     {
@@ -10,7 +9,7 @@ namespace Assets.Scripts.Animation.Player.Aim
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            PlayerController controller = animator.GetComponent<PlayerManager>().player;
+            var controller = animator.GetComponent<PlayerManager>().player;
             controller.actualAim.RestorePosition(controller.IsFacingRight);
         }
 

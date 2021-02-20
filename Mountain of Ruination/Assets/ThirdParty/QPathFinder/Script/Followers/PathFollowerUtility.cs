@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace QPathFinder
+namespace ThirdParty.QPathFinder.Script.Followers
 {
     public enum SearchMode
     {
@@ -56,13 +56,13 @@ namespace QPathFinder
 
         public static PathFollower FollowPath(Transform transform, List<Vector3> points, float moveSpeed, bool autoRotateToDestination)
         {
-            if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("Initiated Follow path for transform " + transform.name, true);
+            if (Logger.CanLogInfo) Logger.LogInfo("Initiated Follow path for transform " + transform.name, true);
             var pathFollower = CreateOrGetPathFollowerToPosition(transform);
             if (points != null)
                 pathFollower.Follow(points, moveSpeed, autoRotateToDestination);
             else
             {
-                if (QPathFinder.Logger.CanLogError) QPathFinder.Logger.LogError("Could not find the path for path follower to follow!", true);
+                if (Logger.CanLogError) Logger.LogError("Could not find the path for path follower to follow!", true);
             }
             return pathFollower;
         }
@@ -77,13 +77,13 @@ namespace QPathFinder
 
         public static PathFollower FollowPath(Transform transform, List<Node> nodes, float moveSpeed, bool autoRotateToDestination)
         {
-            if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("Initiated Follow path for transform " + transform.name, true);
+            if (Logger.CanLogInfo) Logger.LogInfo("Initiated Follow path for transform " + transform.name, true);
             var pathFollower = CreateOrGetPathFollowerWithNodes(transform);
             if (nodes != null)
                 pathFollower.Follow(nodes, moveSpeed, autoRotateToDestination);
             else
             {
-                if (QPathFinder.Logger.CanLogError) QPathFinder.Logger.LogError("Could not find the path for path follower to follow!", true);
+                if (Logger.CanLogError) Logger.LogError("Could not find the path for path follower to follow!", true);
             }
             return pathFollower;
         }
@@ -113,13 +113,13 @@ namespace QPathFinder
                                                                 , int maxDistanceForRayCast = 40
                                                                  )
         {
-            if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("Initiated Follow path[With ground snap] for transform " + transform.name, true);
+            if (Logger.CanLogInfo) Logger.LogInfo("Initiated Follow path[With ground snap] for transform " + transform.name, true);
             var pathFollower = CreateWithSnapToGround(transform, directionOfRayCast, offsetDistanceFromPoint, offsetDistanceToFloatFromGround, maxDistanceForRayCast, groundGameObjectLayer);
             if (points != null)
                 pathFollower.Follow(points, moveSpeed, autoRotateToDestination);
             else
             {
-                if (QPathFinder.Logger.CanLogError) QPathFinder.Logger.LogError("Could not find the path for path follower to follow!", true);
+                if (Logger.CanLogError) Logger.LogError("Could not find the path for path follower to follow!", true);
             }
             return pathFollower;
         }
@@ -130,7 +130,7 @@ namespace QPathFinder
         /// <param name="transform">The gameobject which needs to stop moving</param>
         public static void StopFollowing(Transform transform)
         {
-            if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("Stopping FollowPath");
+            if (Logger.CanLogInfo) Logger.LogInfo("Stopping FollowPath");
             Stop(transform);
         }
 
@@ -146,7 +146,7 @@ namespace QPathFinder
 
             if (nearestPointFromEnd == -1 || nearestPointFromStart == -1)
             {
-                if (QPathFinder.Logger.CanLogError) QPathFinder.Logger.LogError("Could not find path between " + nearestPointFromStart + " and " + nearestPointFromEnd, true);
+                if (Logger.CanLogError) Logger.LogError("Could not find path between " + nearestPointFromStart + " and " + nearestPointFromEnd, true);
                 OnPathFound(null);
                 return;
             }
@@ -170,10 +170,10 @@ namespace QPathFinder
                 }
                 path = (pathType == PathLineType.Straight ? GetStraightPathPoints(allNodes) : GetCatmullRomCurvePathPoints(allNodes));
 
-                if (QPathFinder.Logger.CanLogInfo)
+                if (Logger.CanLogInfo)
                     for (int i = 1; i < path.Count; i++)
                     {
-                        Debug.DrawLine(path[i - 1], path[i], Color.red, QPathFinder.Logger.DrawLineDuration);
+                        Debug.DrawLine(path[i - 1], path[i], Color.red, Logger.DrawLineDuration);
                     }
 
                 OnPathFound(path);
@@ -190,12 +190,12 @@ namespace QPathFinder
             if (nearestPointFromStart != -1)
                 nearestPointFromEnd = manager.FindNearestNode(endPoint);
 
-            if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("Nearest point from start" + startPoint + " is " + nearestPointFromStart, true);
-            if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("Nearest point from end:" + endPoint + " is " + nearestPointFromEnd, true);
+            if (Logger.CanLogInfo) Logger.LogInfo("Nearest point from start" + startPoint + " is " + nearestPointFromStart, true);
+            if (Logger.CanLogInfo) Logger.LogInfo("Nearest point from end:" + endPoint + " is " + nearestPointFromEnd, true);
 
             if (nearestPointFromEnd == -1 || nearestPointFromStart == -1)
             {
-                if (QPathFinder.Logger.CanLogError) QPathFinder.Logger.LogError("Could not find path between " + nearestPointFromStart + " and " + nearestPointFromEnd, true);
+                if (Logger.CanLogError) Logger.LogError("Could not find path between " + nearestPointFromStart + " and " + nearestPointFromEnd, true);
                 OnPathFound(null);
                 return;
             }
@@ -219,7 +219,7 @@ namespace QPathFinder
                     }
                 }
 
-                if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("Search Mode " + searchMode.ToString() + " opted", true);
+                if (Logger.CanLogInfo) Logger.LogInfo("Search Mode " + searchMode.ToString() + " opted", true);
 
                 if (makeItMoreAccurate)
                 {
@@ -250,7 +250,7 @@ namespace QPathFinder
                             }
                             else
                             {
-                                if (QPathFinder.Logger.CanLogError) QPathFinder.Logger.LogInfo("Error occured while finding path");
+                                if (Logger.CanLogError) Logger.LogInfo("Error occured while finding path");
                             }
                         }
 
@@ -274,13 +274,13 @@ namespace QPathFinder
                             }
                             else
                             {
-                                if (QPathFinder.Logger.CanLogError) QPathFinder.Logger.LogInfo("Error occured while finding path");
+                                if (Logger.CanLogError) Logger.LogInfo("Error occured while finding path");
                             }
                         }
                     }
                     else
                     {
-                        if (QPathFinder.Logger.CanLogWarning) QPathFinder.Logger.LogWarning("Unable to get the best result due to less node count", true);
+                        if (Logger.CanLogWarning) Logger.LogWarning("Unable to get the best result due to less node count", true);
                     }
                 }
 
@@ -293,11 +293,11 @@ namespace QPathFinder
                     path = (pathType == PathLineType.Straight ? GetStraightPathPoints(allNodes) : GetCatmullRomCurvePathPoints(allNodes));
                 }
 
-                if (QPathFinder.Logger.CanLogInfo)
+                if (Logger.CanLogInfo)
                 {
                     for (int i = 1; i < path.Count; i++)
                     {
-                        Debug.DrawLine(path[i - 1], path[i], Color.red, QPathFinder.Logger.DrawLineDuration);
+                        Debug.DrawLine(path[i - 1], path[i], Color.red, Logger.DrawLineDuration);
                     }
                 }
 
@@ -312,7 +312,7 @@ namespace QPathFinder
             if (nodePoints == null)
                 return null;
 
-            if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("Straight line path choosen!");
+            if (Logger.CanLogInfo) Logger.LogInfo("Straight line path choosen!");
 
             List<Vector3> path = new List<Vector3>();
 
@@ -333,7 +333,7 @@ namespace QPathFinder
             if (nodePoints == null)
                 return null;
 
-            if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("CatmullRomCurve line path choosen!");
+            if (Logger.CanLogInfo) Logger.LogInfo("CatmullRomCurve line path choosen!");
 
             List<Vector3> path = new List<Vector3>();
 
@@ -377,12 +377,12 @@ namespace QPathFinder
             var pathFollower = transform.GetComponent<PathFollowerToPosition>();
             if (pathFollower == null)
             {
-                if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("PathFollower Script created and attached");
+                if (Logger.CanLogInfo) Logger.LogInfo("PathFollower Script created and attached");
                 pathFollower = transform.gameObject.AddComponent<PathFollowerToPosition>();
             }
             else
             {
-                if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("Using existing PathFollower Script to follow the path!");
+                if (Logger.CanLogInfo) Logger.LogInfo("Using existing PathFollower Script to follow the path!");
             }
             pathFollower._transform = transform;
             return pathFollower;
@@ -393,12 +393,12 @@ namespace QPathFinder
             var pathFollower = transform.GetComponent<PathFollowerWithNodes>();
             if (pathFollower == null)
             {
-                if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("PathFollower Script created and attached");
+                if (Logger.CanLogInfo) Logger.LogInfo("PathFollower Script created and attached");
                 pathFollower = transform.gameObject.AddComponent<PathFollowerWithNodes>();
             }
             else
             {
-                if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("Using existing PathFollower Script to follow the path!");
+                if (Logger.CanLogInfo) Logger.LogInfo("Using existing PathFollower Script to follow the path!");
             }
             pathFollower._transform = transform;
             return pathFollower;
@@ -409,12 +409,12 @@ namespace QPathFinder
             var pathFollower = transform.GetComponent<PathFollowerToPositionAndSnapToGround>();
             if (pathFollower == null)
             {
-                if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("PathFollowerSnapToGround Script created and attached");
+                if (Logger.CanLogInfo) Logger.LogInfo("PathFollowerSnapToGround Script created and attached");
                 pathFollower = transform.gameObject.AddComponent<PathFollowerToPositionAndSnapToGround>();
             }
             else
             {
-                if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("Using existing PathFollowerSnapToGround Script to follow the path!");
+                if (Logger.CanLogInfo) Logger.LogInfo("Using existing PathFollowerSnapToGround Script to follow the path!");
             }
 
             pathFollower.SetContext(directionOfRayCast, offsetDistanceFromPoint, offsetDistanceToFloatFromGround, maxDistanceForRayCast, groundLayer);
@@ -429,7 +429,7 @@ namespace QPathFinder
             if (pathFollower != null)
             {
                 pathFollower.StopFollowing(); GameObject.DestroyImmediate(pathFollower);
-                if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("PathFollower stopped and its Script is destroyed!");
+                if (Logger.CanLogInfo) Logger.LogInfo("PathFollower stopped and its Script is destroyed!");
             }
         }
 

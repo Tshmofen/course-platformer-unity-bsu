@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Background
+namespace Background
 {
     [ExecuteInEditMode]
     public class ParallaxLayer : MonoBehaviour
@@ -16,16 +16,12 @@ namespace Assets.Scripts.Background
 
         public void MoveX(float delta)
         {
-            Vector3 newPos = transform.localPosition;
-            newPos.x -= delta * parallaxFactorX;
-            transform.localPosition = newPos;
+            transform.localPosition -= new Vector3(delta * parallaxFactorX, 0, 0);
         }
 
         public void MoveY(float delta)
         {
-            Vector3 newPos = transform.localPosition;
-            newPos.y -= delta * parallaxFactorY;
-            transform.localPosition = newPos;
+            transform.localPosition -= new Vector3(0, delta * parallaxFactorY, 0);
         }
 
         #endregion

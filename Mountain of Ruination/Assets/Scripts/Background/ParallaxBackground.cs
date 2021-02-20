@@ -1,15 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Background
+namespace Background
 {
     [ExecuteInEditMode]
     public class ParallaxBackground : MonoBehaviour
     {
+        #region Update parts
+
+        private void UpdatePosition()
+        {
+            Vector2 newPosition = parallaxCamera.transform.position;
+            
+            // on position change move layers
+            if (newPosition != _oldPosition)
+            {
+                if (movingWithCamera)
+                    transform.position = newPosition;
+
+                if (Math.Abs(newPosition.x - _oldPosition.x) > Tolerance)
+                    MoveLayers(_oldPosition.x - newPosition.x, true);
+                if (Math.Abs(newPosition.y - _oldPosition.y) > Tolerance)
+                    MoveLayers(_oldPosition.y - newPosition.y, false);
+
+                _oldPosition = newPosition;
+            }
+        }
+
+        #endregion
+
         #region Fiels and properties
 
-        private Vector2 oldPosition;
-        private List<ParallaxLayer> parallaxLayers;
+        // float comparison epsilon
+        private const float Tolerance = 0.00001f;
+
+        private Vector2 _oldPosition;
+        private List<ParallaxLayer> _parallaxLayers;
 
         public Camera parallaxCamera;
         public bool movingWithCamera;
@@ -20,8 +47,8 @@ namespace Assets.Scripts.Background
 
         private void Start()
         {
-            oldPosition = parallaxCamera.transform.position;
-            parallaxLayers = new List<ParallaxLayer>();
+            _oldPosition = parallaxCamera.transform.position;
+            _parallaxLayers = new List<ParallaxLayer>();
             SetLayers();
         }
 
@@ -32,54 +59,31 @@ namespace Assets.Scripts.Background
 
         #endregion
 
-        #region Update parts
-
-        private void UpdatePosition()
-        {
-            Vector2 newPosition = parallaxCamera.transform.position;
-
-            if (newPosition != oldPosition)
-            {
-                if (movingWithCamera)
-                    transform.position = newPosition;
-
-                if (newPosition.x != oldPosition.x)
-                    MoveLayers(oldPosition.x - newPosition.x, true);
-                if (newPosition.y != oldPosition.y)
-                    MoveLayers(oldPosition.y - newPosition.y, false);
-
-                oldPosition = newPosition;
-            }
-        }
-
-        #endregion
-
         #region Support methods
 
+        // should be called, when changed number of layers
         private void SetLayers()
         {
-            parallaxLayers.Clear();
-            for (int i = 0; i < transform.childCount; i++)
+            _parallaxLayers.Clear();
+            for (var i = 0; i < transform.childCount; i++)
             {
-                ParallaxLayer layer = transform.GetChild(i).GetComponent<ParallaxLayer>();
+                var layer = transform.GetChild(i).GetComponent<ParallaxLayer>();
 
                 if (layer != null)
                 {
                     layer.name = "Layer-" + i;
-                    parallaxLayers.Add(layer);
+                    _parallaxLayers.Add(layer);
                 }
             }
         }
 
         private void MoveLayers(float delta, bool xDelta)
         {
-            foreach (ParallaxLayer layer in parallaxLayers)
-            {
+            foreach (var layer in _parallaxLayers)
                 if (xDelta)
                     layer.MoveX(delta);
                 else
                     layer.MoveY(delta);
-            }
         }
 
         #endregion

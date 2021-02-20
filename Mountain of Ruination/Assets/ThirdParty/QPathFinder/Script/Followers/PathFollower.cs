@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace QPathFinder
+namespace ThirdParty.QPathFinder.Script.Followers
 {
     public class PathFollower : MonoBehaviour
     {
@@ -79,7 +79,7 @@ namespace QPathFinder
         private IEnumerator FollowPath()
         {
             yield return null;
-            if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo(string.Format("[{0}] Follow(), Speed:{1}", name, moveSpeed));
+            if (Logger.CanLogInfo) Logger.LogInfo(string.Format("[{0}] Follow(), Speed:{1}", name, moveSpeed));
 
             while (true)
             {
@@ -97,7 +97,7 @@ namespace QPathFinder
                 yield return null;
             }
 
-            if (QPathFinder.Logger.CanLogInfo) QPathFinder.Logger.LogInfo("PathFollower completed!");
+            if (Logger.CanLogInfo) Logger.LogInfo("PathFollower completed!");
         }
 
         public virtual void MoveTo(int pointIndex)

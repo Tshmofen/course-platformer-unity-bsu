@@ -1,18 +1,29 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Interface.Menu
+namespace Interface.Menu
 {
     public class MainMenuManager : MonoBehaviour
     {
+        #region Unity assign
+
         public Button initialButton;
+
+        #endregion
+
+        #region Unity call
 
         private void Start()
         {
             initialButton.Select();
         }
 
+        #endregion
+
+        #region Support methods
+        
         public void HandleNewGame()
         {
             SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
@@ -20,16 +31,14 @@ namespace Assets.Scripts.Interface.Menu
 
         public void HandleOptions()
         {
-
         }
 
         public void HandleExit()
         {
-            #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-            #endif
-
+            EditorApplication.isPlaying = false;
             Application.Quit();
         }
+        
+        #endregion
     }
 }
