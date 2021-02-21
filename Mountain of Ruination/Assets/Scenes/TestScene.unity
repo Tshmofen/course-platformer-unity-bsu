@@ -7387,7 +7387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -14409,6 +14409,10 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 892715374}
+    - target: {fileID: 1235754538, guid: ad3a466a6ea228f43b191a3cb7055a52, type: 3}
+      propertyPath: isPlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1824402508, guid: ad3a466a6ea228f43b191a3cb7055a52, type: 3}
       propertyPath: manager
       value: 
@@ -15284,6 +15288,21 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 467535450}
+    - target: {fileID: 8393859204547512502, guid: 6caaa0bb0621819488391d9c7683f8a0,
+        type: 3}
+      propertyPath: damageHeavy
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393859204547512502, guid: 6caaa0bb0621819488391d9c7683f8a0,
+        type: 3}
+      propertyPath: damageLight
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393859204547512502, guid: 6caaa0bb0621819488391d9c7683f8a0,
+        type: 3}
+      propertyPath: damagePierce
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6caaa0bb0621819488391d9c7683f8a0, type: 3}
 --- !u!1001 &6806576901867631209

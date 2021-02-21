@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Entity;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Util;
 
 namespace Damage
@@ -37,9 +38,9 @@ namespace Damage
 
         public void DestroyReceiver()
         {
-            if (isPlayer)
+            if (disableOnDeath)
             {
-                
+                manager.gameObject.SetActive(false);
             }
             else
             {
@@ -53,7 +54,7 @@ namespace Damage
 
         private HealthStats _health;
 
-        public bool isPlayer;
+        public bool disableOnDeath;
         public EntityManager manager;
         
         // animation hashed strings

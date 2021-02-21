@@ -7,7 +7,7 @@ namespace Animation.DamageReceiver
     {
         #region Fields
 
-        [Range(0,1)] public float destroyTime = 0.85f;
+        [Range(0,1)] public float destroyTime = 0.95f;
         [Range(0,1)] public float timeTolerance = 0.05f;
 
         #endregion
