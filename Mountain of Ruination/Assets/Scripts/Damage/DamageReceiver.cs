@@ -42,21 +42,10 @@ namespace Damage
 
         #endregion
         
-        #region Unity calls
-
-        private void Start()
-        {
-            _health = GetComponent<HealthStats>();
-            IsReceiveDamage = true;
-        }
-
-        #endregion
-
         #region Fields and properties
 
         private HealthStats _health;
-
-        public Animator animator;
+        
         public EntityManager manager;
         
         // animation hashed strings
@@ -64,6 +53,16 @@ namespace Damage
         private static readonly int ToInjure = Animator.StringToHash("toInjure");
 
         public bool IsReceiveDamage { get; set; }
+
+        #endregion
+        
+        #region Unity calls
+
+        private void Start()
+        {
+            _health = GetComponent<HealthStats>();
+            IsReceiveDamage = true;
+        }
 
         #endregion
 
@@ -85,13 +84,13 @@ namespace Damage
         // toDie state should have corresponding behaviour
         private void StartDieState()
         {
-            animator.SetTrigger(ToDie);
+            manager.animator.SetTrigger(ToDie);
         }
 
         // toInjure state should have corresponding behaviour
         private void StartInjureState()
         {
-            animator.SetTrigger(ToInjure);
+            manager.animator.SetTrigger(ToInjure);
         }
 
         #endregion
