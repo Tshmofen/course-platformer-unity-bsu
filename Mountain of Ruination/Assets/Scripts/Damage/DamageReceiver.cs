@@ -37,7 +37,14 @@ namespace Damage
 
         public void DestroyReceiver()
         {
-            manager.destroyer.DestroyEntity();
+            if (isPlayer)
+            {
+                
+            }
+            else
+            {
+                manager.destroyer.DestroyEntity();
+            }
         }
 
         #endregion
@@ -45,7 +52,8 @@ namespace Damage
         #region Fields and properties
 
         private HealthStats _health;
-        
+
+        public bool isPlayer;
         public EntityManager manager;
         
         // animation hashed strings
