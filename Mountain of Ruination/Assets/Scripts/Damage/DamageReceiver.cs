@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using Entity;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Util;
 
 namespace Damage
