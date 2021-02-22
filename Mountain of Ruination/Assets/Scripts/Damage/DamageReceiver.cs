@@ -37,14 +37,7 @@ namespace Damage
 
         public void DestroyReceiver()
         {
-            if (disableOnDeath)
-            {
-                manager.gameObject.SetActive(false);
-            }
-            else
-            {
-                manager.destroyer.DestroyEntity();
-            }
+            manager.destroyer.DestroyEntity();
         }
 
         #endregion
@@ -52,8 +45,7 @@ namespace Damage
         #region Fields and properties
 
         private HealthStats _health;
-
-        public bool disableOnDeath;
+        
         public EntityManager manager;
         
         // animation hashed strings
