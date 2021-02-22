@@ -12,12 +12,12 @@ namespace Interface.Overlay
         private Vector3 _targetPosition;
 
         private CanvasRenderer _textRender;
-        private RectTransform _rect;
 
         #region Unity assign
 
         // how long will the text exist and dissolve
         public float lifeTime;
+        public float height = 0.25f;
         
         #endregion
 
@@ -28,10 +28,9 @@ namespace Interface.Overlay
         private void Start()
         {
             _textRender = GetComponent<CanvasRenderer>();
-            _rect = GetComponent<RectTransform>();
 
-            _targetPosition = _rect.position;
-            _targetPosition.y += _rect.rect.height;
+            _targetPosition = transform.position;
+            _targetPosition.y += height;
         }
 
         private void Update()
@@ -49,10 +48,10 @@ namespace Interface.Overlay
             _currentTime += Time.deltaTime;
 
             var opacity = Mathf.Lerp(1, 0, _currentTime / lifeTime);
-            var position = Vector3.Lerp(_rect.position, _targetPosition, _currentTime / lifeTime);
+            var position = Vector3.Lerp(transform.position, _targetPosition, _currentTime / lifeTime);
 
             _textRender.SetAlpha(opacity);
-            _rect.position = position;
+            transform.position = position;
 
             if (opacity == 0) Destroy(gameObject);
         }

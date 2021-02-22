@@ -31,7 +31,7 @@ namespace Interface.Overlay
             var newPopUp = Instantiate(damagePopUp, gameObject.transform);
             newPopUp.GetComponent<Text>().text = text;
             newPopUp.GetComponent<TemporaryText>().lifeTime = lifeTime;
-            newPopUp.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(worldPosition);
+            newPopUp.transform.position = worldPosition;
         }
 
         #endregion

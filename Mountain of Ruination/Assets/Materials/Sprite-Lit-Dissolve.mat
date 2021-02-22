@@ -57,7 +57,7 @@ Material:
     - _Edge: 0.05
     - _EnableExternalAlpha: 0
     - _Fade: 1
-    - _Scale: 25
+    - _Scale: 15
     - _WindDensirt: 10
     - _WindStrength: 0.1
     - _YAxisMultiplier: 0.7
