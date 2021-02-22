@@ -24,6 +24,8 @@ namespace Entity.Enemy
         private MovementController _movement;
         private PathFinder _pathFinder;
 
+        public bool IsLocked { get; set; }
+        
         // also set player position in vector player
         private bool IsPlayerNearby
         {
@@ -49,7 +51,6 @@ namespace Entity.Enemy
                 return false;
             }
         }
-
         private bool CanMoveToPlayer { get; set; }
 
         #endregion
@@ -99,6 +100,12 @@ namespace Entity.Enemy
 
         private void Update()
         {
+            if (IsLocked)
+            {
+                ChangePosition();
+                return;
+            }
+
             UpdatePositionToTarget();
 
             if (CanMoveToPlayer)
@@ -229,8 +236,9 @@ namespace Entity.Enemy
         // interact with movement controller to move entity
         private void ChangePosition()
         {
+            if (!IsLocked)
+                _velocity.x = speed * _direction;
             _velocity.y -= gravity * Time.deltaTime; // (m/s^2)
-            _velocity.x = speed * _direction;
 
             _movement.Move(_velocity * Time.deltaTime);
             _velocity = _movement.Velocity;
