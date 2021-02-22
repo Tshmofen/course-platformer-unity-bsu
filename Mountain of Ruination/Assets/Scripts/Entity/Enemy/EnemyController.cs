@@ -236,8 +236,7 @@ namespace Entity.Enemy
         // interact with movement controller to move entity
         private void ChangePosition()
         {
-            if (!IsLocked)
-                _velocity.x = speed * _direction;
+            _velocity.x = (!IsLocked) ? speed * _direction : 0;
             _velocity.y -= gravity * Time.deltaTime; // (m/s^2)
 
             _movement.Move(_velocity * Time.deltaTime);

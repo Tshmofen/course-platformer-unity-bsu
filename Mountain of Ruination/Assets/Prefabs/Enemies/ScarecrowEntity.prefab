@@ -286,7 +286,7 @@ MonoBehaviour:
   - {x: -0.10887591, y: 0.10408391, z: -0.000000008716597}
   m_ShapePathHash: -637210228
   m_Mesh: {fileID: 0}
-  m_InstanceId: -986072
+  m_InstanceId: -1580
 --- !u!1 &5260039356823118828
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +349,7 @@ MonoBehaviour:
   - {x: 0.035846002, y: 0.20643623, z: -0.000000008716597}
   m_ShapePathHash: 446105903
   m_Mesh: {fileID: 0}
-  m_InstanceId: -988664
+  m_InstanceId: -1570
 --- !u!1 &5260039357220609267
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   - {x: -0.08936656, y: 0.1141466, z: -0.000000008716597}
   m_ShapePathHash: 255708492
   m_Mesh: {fileID: 0}
-  m_InstanceId: -983728
+  m_InstanceId: -1564
 --- !u!1 &5260039357248826635
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dyingMaterial: {fileID: 2100000, guid: 0ead5c0fdc1b8844ba9a95c5ac36c041, type: 2}
+  noiseScale: 15
   disableOnDeath: 0
 --- !u!1 &5260039357605441561
 GameObject:
@@ -584,7 +585,7 @@ MonoBehaviour:
   - {x: 0.024668831, y: 0.056745257, z: -0.000000008716597}
   m_ShapePathHash: 2140057134
   m_Mesh: {fileID: 0}
-  m_InstanceId: -979358
+  m_InstanceId: -1552
 --- !u!1 &5260039357798168186
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +645,7 @@ MonoBehaviour:
   - {x: 0.04335555, y: 0.2625338, z: -0.000000008716597}
   m_ShapePathHash: 1505005298
   m_Mesh: {fileID: 0}
-  m_InstanceId: -981598
+  m_InstanceId: -1558
 --- !u!1 &5369368767460016876
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,3 +909,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 742657096}
+  healthBinderPrefab: {fileID: 0}

@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Entity;
+using Interface.Overlay;
 using UnityEngine;
 using Util;
 
@@ -16,19 +17,12 @@ namespace Damage
             {
                 var damageAmount = CalculateDamage(damage, type);
                 _health.CurrentHealth -= damageAmount;
+                if (_health.CurrentHealth < 0) _health.CurrentHealth = 0;
 
-                var abovePosition = GetComponent<BoxCollider2D>().bounds.size;
-                abovePosition.x /= 2;
-                abovePosition.y /= 2;
-                InterfaceUtil
-                    .OverlayManager
-                    .ShowPopUp(
-                        transform.position + abovePosition,
-                        damageAmount.ToString(CultureInfo.InvariantCulture),
-                        1
-                    );
-
-                if (_health.CurrentHealth <= 0)
+                ShowPopUp(damageAmount);
+                EnableHealthBar();
+                
+                if (_health.CurrentHealth == 0)
                     StartDieState();
                 else
                     StartInjureState();
@@ -44,9 +38,17 @@ namespace Damage
         
         #region Fields and properties
 
+        private static readonly string BindersPath = "/Interactive/Interface/Overlay/Enemies";
+        
         private HealthStats _health;
+        private BoxCollider2D _collider;
+
+        private GameObject _binder;
+        private bool _isBinderSet;
         
         public EntityManager manager;
+        public bool showHealthBar = true;
+        public GameObject healthBinderPrefab;
         
         // animation hashed strings
         private static readonly int ToDie = Animator.StringToHash("toDie");
@@ -61,7 +63,15 @@ namespace Damage
         private void Start()
         {
             _health = GetComponent<HealthStats>();
+            _collider = GetComponent<BoxCollider2D>();
             IsReceiveDamage = true;
+        }
+
+        // Also destroys created health bar
+        private void OnDestroy()
+        {
+            if (_isBinderSet)
+                Destroy(_binder);
         }
 
         #endregion
@@ -79,6 +89,35 @@ namespace Damage
             };
 
             return damageAmount < 1 ? 1 : damageAmount;
+        }
+
+        private void ShowPopUp(float damage)
+        {
+            var abovePosition = _collider.bounds.size;
+            abovePosition /= 2;
+            InterfaceUtil
+                .OverlayManager
+                .ShowPopUp(
+                    transform.position + abovePosition,
+                    damage.ToString(CultureInfo.InvariantCulture),
+                    1
+                );
+        }
+
+        private void EnableHealthBar()
+        {
+            if (showHealthBar && !_isBinderSet)
+            { 
+                _isBinderSet = true;
+                var binders = GameObject.Find(BindersPath);
+                _binder = Instantiate(healthBinderPrefab, binders.transform);
+                var binderScript = _binder.GetComponent<HealthBinder>();
+                
+                binderScript.health = _health;
+                binderScript.target = transform;
+                binderScript.isFollower = true;
+                binderScript.offset = _collider.bounds.size / 2;
+            }
         }
 
         // toDie state should have corresponding behaviour
