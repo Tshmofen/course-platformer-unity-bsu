@@ -13,17 +13,18 @@ namespace Ground
         private BoxCollider2D _collider;
         private ContactFilter2D _filter;
 
-        private float _heightDifference;
-        private float _currentHeight;
+        private Vector2 _moveDifference;
+        private float _time;
         private bool _movingUp = true;
 
         #endregion
         
         #region Unity assigns
 
-        [Header("Movement")]
-        public float moveHeight;
-        public float speed = 1;
+        [Header("Movement")] 
+        public Vector2 fromPoint;
+        public Vector2 toPoint;
+        public float oneWayTime = 1;
         [Header("Attachment")] 
         public LayerMask attachLayer;
         public float attachHeight;
@@ -61,33 +62,27 @@ namespace Ground
 
         private void UpdatePosition()
         {
-            _heightDifference = _currentHeight;
-            
-            if (_movingUp && _currentHeight > moveHeight || !_movingUp && _currentHeight < 0)
-                _movingUp = !_movingUp;
+            _moveDifference = transform.position;
 
-            if (_movingUp)
+            _time += (_movingUp) ? Time.deltaTime : -Time.deltaTime ;
+            transform.position = Vector2.Lerp(fromPoint, toPoint, _time / oneWayTime);
+
+            if (_time > oneWayTime || _time < 0)
             {
-                transform.position += Vector3.up * (speed * Time.deltaTime);
-                _currentHeight += speed * Time.deltaTime;
+                _time = (_time > oneWayTime) ? oneWayTime : 0;
+                _movingUp = !_movingUp;
             }
-            else
-            {
-                transform.position += Vector3.down * (speed * Time.deltaTime);
-                _currentHeight -= speed * Time.deltaTime;
-            }
-            
-            _heightDifference -= _currentHeight;
-            _heightDifference *= -1;
+
+            _moveDifference -= (Vector2)transform.position;
+            _moveDifference *= -1;
         }
 
         private void UpdateAttachedPosition()
         {
             foreach (var obj in _attached)
             {
-                obj.transform.position += Vector3.up * _heightDifference;
+                obj.transform.position += (Vector3)_moveDifference;
             }
-            Debug.Log(_attached.Count);
         }
         
 
