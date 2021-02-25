@@ -7,6 +7,35 @@ namespace Background
     [ExecuteInEditMode]
     public class ParallaxBackground : MonoBehaviour
     {
+        #region Fields and properties
+
+        // float comparison epsilon
+        private const float Tolerance = 0.00001f;
+
+        private Vector2 _oldPosition;
+        private List<ParallaxLayer> _parallaxLayers;
+
+        public Camera parallaxCamera;
+        public bool movingWithCamera;
+
+        #endregion
+        
+        #region Unity calls
+
+        private void Start()
+        {
+            _oldPosition = parallaxCamera.transform.position;
+            _parallaxLayers = new List<ParallaxLayer>();
+            SetLayers();
+        }
+
+        private void Update()
+        {
+            UpdatePosition();
+        }
+
+        #endregion
+        
         #region Update parts
 
         private void UpdatePosition()
@@ -29,36 +58,7 @@ namespace Background
         }
 
         #endregion
-
-        #region Fiels and properties
-
-        // float comparison epsilon
-        private const float Tolerance = 0.00001f;
-
-        private Vector2 _oldPosition;
-        private List<ParallaxLayer> _parallaxLayers;
-
-        public Camera parallaxCamera;
-        public bool movingWithCamera;
-
-        #endregion
-
-        #region Unity calls
-
-        private void Start()
-        {
-            _oldPosition = parallaxCamera.transform.position;
-            _parallaxLayers = new List<ParallaxLayer>();
-            SetLayers();
-        }
-
-        private void Update()
-        {
-            UpdatePosition();
-        }
-
-        #endregion
-
+        
         #region Support methods
 
         // should be called, when changed number of layers

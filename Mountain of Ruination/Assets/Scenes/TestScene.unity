@@ -732,6 +732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 165074377}
   - component: {fileID: 165074378}
+  - component: {fileID: 165074379}
   m_Layer: 11
   m_Name: sky
   m_TagString: Untagged
@@ -747,7 +748,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 165074376}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.21, y: -0.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.86708957, y: 0.86708957, z: 0.86708957}
   m_Children: []
   m_Father: {fileID: 1204105307}
@@ -804,6 +805,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &165074379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165074376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac9597ef82349268ed853b250bb2c4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillCamera: {fileID: 519420031}
 --- !u!4 &183279494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4932746941608690943, guid: 950df2c075c571d4385c1d7e101b3aa7,
@@ -15406,6 +15420,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1800919215}
     m_Modifications:
+    - target: {fileID: 859834427, guid: ad3a466a6ea228f43b191a3cb7055a52, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 859834427, guid: ad3a466a6ea228f43b191a3cb7055a52, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 859834427, guid: ad3a466a6ea228f43b191a3cb7055a52, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 902587489
+      objectReference: {fileID: 0}
     - target: {fileID: 2602221704312236989, guid: ad3a466a6ea228f43b191a3cb7055a52,
         type: 3}
       propertyPath: slopeCheckTime
@@ -15456,6 +15482,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1102064168}
+    - target: {fileID: 3487260239508988147, guid: ad3a466a6ea228f43b191a3cb7055a52,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3487260239508988147, guid: ad3a466a6ea228f43b191a3cb7055a52,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3487260239508988147, guid: ad3a466a6ea228f43b191a3cb7055a52,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 902587489
+      objectReference: {fileID: 0}
     - target: {fileID: 3487260239748497155, guid: ad3a466a6ea228f43b191a3cb7055a52,
         type: 3}
       propertyPath: m_Mesh
