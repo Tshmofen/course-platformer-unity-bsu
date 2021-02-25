@@ -22,6 +22,7 @@ namespace Entity.Player
         public float jumpHeight;
         public float jumpManualDumping;
         public float gravity;
+        public float slopeMoveUpdateDelay = 0.1f;
 
         [Header("Aim")] 
         public AimCircle actualAim;
@@ -60,6 +61,7 @@ namespace Entity.Player
         private bool _wasMovingSlope;
         private bool _wasToContinueJump;
 
+        private float _wasMovingSlopeTime;
         private Vector2 _velocity;
         private MovementController _movement;
         
@@ -90,8 +92,14 @@ namespace Entity.Player
             get
             {
                 var grounded = _wasMovingSlope || _movement.IsGrounded;
-                _wasMovingSlope = _movement.CollisionState.MovingDownSlope
-                                  || _movement.CollisionState.MovingUpSlope;
+                
+                if (_wasMovingSlope == false || Time.time - _wasMovingSlopeTime > slopeMoveUpdateDelay)
+                {
+                    _wasMovingSlopeTime = Time.time;
+                    _wasMovingSlope = _movement.CollisionState.MovingDownSlope 
+                                      || _movement.CollisionState.MovingUpSlope;
+                }
+
                 return grounded;
             }
         }

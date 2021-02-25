@@ -15406,6 +15406,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1800919215}
     m_Modifications:
+    - target: {fileID: 2602221704312236989, guid: ad3a466a6ea228f43b191a3cb7055a52,
+        type: 3}
+      propertyPath: slopeCheckTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602221704312236989, guid: ad3a466a6ea228f43b191a3cb7055a52,
+        type: 3}
+      propertyPath: slopeMoveUpdateDelay
+      value: 0.22
+      objectReference: {fileID: 0}
     - target: {fileID: 3487260238949834892, guid: ad3a466a6ea228f43b191a3cb7055a52,
         type: 3}
       propertyPath: m_Mesh
@@ -15782,6 +15792,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ScarecrowEntity
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260039357268913001, guid: 6caaa0bb0621819488391d9c7683f8a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6285249920362750683, guid: 6caaa0bb0621819488391d9c7683f8a0,
         type: 3}
