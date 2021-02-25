@@ -44,12 +44,13 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
-    totalSpriteSurfaceArea: 1966080
+    totalSpriteSurfaceArea: 2011755
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 2c123aa9a2e818a439113eed72b43087, type: 3}
   - {fileID: -8799811600886014544, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
   - {fileID: -8089951463463920682, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
   - {fileID: 8831649495129602440, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
@@ -81,6 +82,7 @@ SpriteAtlas:
   - {fileID: 6852458669386237878, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
   - {fileID: 3037222672616680189, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
   m_PackedSpriteNamesToIndex:
+  - elevator
   - grass_tiled_12
   - grass_tiled_10
   - grass_tiled_17
