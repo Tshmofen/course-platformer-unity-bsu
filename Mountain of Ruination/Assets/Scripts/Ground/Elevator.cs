@@ -87,6 +87,7 @@ namespace Ground
             {
                 obj.transform.position += Vector3.up * _heightDifference;
             }
+            Debug.Log(_attached.Count);
         }
         
 
