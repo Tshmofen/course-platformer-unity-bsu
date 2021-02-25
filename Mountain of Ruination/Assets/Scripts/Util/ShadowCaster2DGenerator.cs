@@ -56,10 +56,12 @@ namespace Util
         public static void GenerateShadowCasters()
         {
             var colliders = Object.FindObjectsOfType<CompositeCollider2D>();
-
+            var groundLayer = LayerMask.NameToLayer("Ground");
+            
             foreach (var t in colliders)
             {
-                GenerateTilemapShadowCasters(t);
+                if (t.gameObject.layer == groundLayer)
+                    GenerateTilemapShadowCasters(t);
             }
         }
      
@@ -100,9 +102,11 @@ namespace Util
                     pointsInPath3D.Add(t);
                 }
      
+                // The hashing function GetShapePathHash could be copied from the LightUtility class
                 var component = newShadowCaster.AddComponent<ShadowCaster2D>();
                 component.SetPath(pointsInPath3D.ToArray());
-                component.SetPathHash(Random.Range(int.MinValue, int.MaxValue)); // The hashing function GetShapePathHash could be copied from the LightUtility class
+                component.SetPathHash(Random.Range(int.MinValue, int.MaxValue));
+                component.selfShadows = true;
      
                 pointsInPath.Clear();
                 pointsInPath3D.Clear();

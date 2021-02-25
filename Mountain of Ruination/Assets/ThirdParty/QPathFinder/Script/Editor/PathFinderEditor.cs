@@ -1,16 +1,18 @@
-using System.Collections.Generic;
+using System.Linq;
 using ThirdParty.QPathFinder.Script;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Logger = ThirdParty.QPathFinder.Script.Logger;
 
+// ReSharper disable once CheckNamespace
 namespace QPathFinder
 {
     [CustomEditor(typeof(PathFinder))]
     public class PathFinderEditor : Editor
     {
-        enum SceneMode
+        private enum SceneMode
         {
             AddNode,
             EditNode,
@@ -21,14 +23,14 @@ namespace QPathFinder
         [MenuItem("GameObject/Create a 2D PathFinder in scene with a collider")]
         public static void Create2DPathFinderObjectInScene()
         {
-            if (GameObject.FindObjectOfType<PathFinder>() == null)
+            if (FindObjectOfType<PathFinder>() == null)
             {
                 var managerGo = new GameObject("PathFinder");
                 var colliderGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 colliderGo.name = "Ground";
-                colliderGo.GetComponent<Renderer>().sharedMaterial.SetColor("_Color", Color.black);
+                colliderGo.GetComponent<Renderer>().sharedMaterial.SetColor(ShaderColor, Color.black);
 
-                colliderGo.transform.localScale = new Vector3(100f, 100f, 1f); ;
+                colliderGo.transform.localScale = new Vector3(100f, 100f, 1f);
                 var boxCollider = colliderGo.AddComponent<BoxCollider>();
                 boxCollider.isTrigger = true;
 
@@ -43,14 +45,14 @@ namespace QPathFinder
         [MenuItem("GameObject/Create a 3D PathFinder in scene with a collider")]
         public static void Create3DPathFinderObjectInScene()
         {
-            if (GameObject.FindObjectOfType<PathFinder>() == null)
+            if (FindObjectOfType<PathFinder>() == null)
             {
                 var managerGo = new GameObject("PathFinder");
                 var colliderGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 colliderGo.name = "Ground";
-                colliderGo.GetComponent<Renderer>().sharedMaterial.SetColor("_Color", Color.green);
+                colliderGo.GetComponent<Renderer>().sharedMaterial.SetColor(ShaderColor, Color.green);
 
-                colliderGo.transform.localScale = new Vector3(100f, 1f, 100f); ;
+                colliderGo.transform.localScale = new Vector3(100f, 1f, 100f);
                 colliderGo.transform.position = Vector3.down * 20;
 
                 var boxCollider = colliderGo.AddComponent<BoxCollider>();
@@ -69,8 +71,8 @@ namespace QPathFinder
 
         public override void OnInspectorGUI()
         {
-            showDefaultInspector = EditorGUILayout.Toggle("Show Default inspector", showDefaultInspector);
-            if (showDefaultInspector)
+            _showDefaultInspector = EditorGUILayout.Toggle("Show Default inspector", _showDefaultInspector);
+            if (_showDefaultInspector)
             {
                 DrawDefaultInspector();
             }
@@ -83,24 +85,24 @@ namespace QPathFinder
 
         private void ShowNodesAndPathInInspector()
         {
-            script.graphData.nodeSize = EditorGUILayout.Slider("Node gizmo Size", script.graphData.nodeSize, 0.1f, 3f);
-            script.graphData.lineColor = EditorGUILayout.ColorField("Path Color", script.graphData.lineColor);
-            script.graphData.lineType = (PathLineType)EditorGUILayout.EnumPopup("Path Type", script.graphData.lineType);
-            script.graphData.heightFromTheGround = EditorGUILayout.FloatField("Offset from ground( Height )", script.graphData.heightFromTheGround);
-            script.graphData.groundColliderLayerName = EditorGUILayout.TextField("Ground collider layer name", script.graphData.groundColliderLayerName);
+            _script.graphData.nodeSize = EditorGUILayout.Slider("Node gizmo Size", _script.graphData.nodeSize, 0.1f, 3f);
+            _script.graphData.lineColor = EditorGUILayout.ColorField("Path Color", _script.graphData.lineColor);
+            _script.graphData.lineType = (PathLineType)EditorGUILayout.EnumPopup("Path Type", _script.graphData.lineType);
+            _script.graphData.heightFromTheGround = EditorGUILayout.FloatField("Offset from ground( Height )", _script.graphData.heightFromTheGround);
+            _script.graphData.groundColliderLayerName = EditorGUILayout.TextField("Ground collider layer name", _script.graphData.groundColliderLayerName);
             EditorGUILayout.Space();
             GUILayout.Label("<size=12><b>Nodes</b></size>", CustomGUI.GetStyleWithRichText());
 
-            if (script.graphData.nodes.Count > 0)
+            if (_script.graphData.nodes.Count > 0)
             {
-                showNodeIDsInTheScene = EditorGUILayout.Toggle("Show Node IDs in scene", showNodeIDsInTheScene);
+                _showNodeIDsInTheScene = EditorGUILayout.Toggle("Show Node IDs in scene", _showNodeIDsInTheScene);
 
-                List<Node> nodeList = script.graphData.nodes;
-                for (int j = 0; j < nodeList.Count; j++)
+                var nodeList = _script.graphData.nodes;
+                for (var j = 0; j < nodeList.Count; j++)
                 {
                     GUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField("\t" + "Node <Color=" + nodeGUITextColor + ">" + nodeList[j].autoGeneratedID + "</Color>", CustomGUI.GetStyleWithRichText(), GUILayout.Width(120f));
+                        EditorGUILayout.LabelField("\t" + "Node <Color=" + NodeGUITextColor + ">" + nodeList[j].autoGeneratedID + "</Color>", CustomGUI.GetStyleWithRichText(), GUILayout.Width(120f));
 
                         nodeList[j].SetPosition(EditorGUILayout.Vector3Field("", nodeList[j].Position));
                         EditorGUILayout.LabelField("Enable", EditorStyles.miniLabel, GUILayout.Width(50f)); nodeList[j].SetAsOpen(EditorGUILayout.Toggle(nodeList[j].IsOpen));
@@ -120,22 +122,22 @@ namespace QPathFinder
             EditorGUILayout.Space();
             GUILayout.Label("<size=12><b>Paths</b></size>", CustomGUI.GetStyleWithRichText());
 
-            if (script.graphData.paths.Count > 0)
+            if (_script.graphData.paths.Count > 0)
             {
-                showPathIDsInTheScene = EditorGUILayout.Toggle("Show Path IDs in scene", showPathIDsInTheScene);
-                drawPathsInTheScene = EditorGUILayout.Toggle("Draw Paths", drawPathsInTheScene);
-                showCostsInTheScene = EditorGUILayout.Toggle("Show Path Costs in scene", showCostsInTheScene);
+                _showPathIDsInTheScene = EditorGUILayout.Toggle("Show Path IDs in scene", _showPathIDsInTheScene);
+                _drawPathsInTheScene = EditorGUILayout.Toggle("Draw Paths", _drawPathsInTheScene);
+                _showCostsInTheScene = EditorGUILayout.Toggle("Show Path Costs in scene", _showCostsInTheScene);
 
-                List<Path> paths = script.graphData.paths;
-                for (int j = 0; j < paths.Count; j++)
+                var paths = _script.graphData.paths;
+                for (var j = 0; j < paths.Count; j++)
                 {
                     GUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField("\t" + "Path <Color=" + pathGUITextColor + ">" + paths[j].autoGeneratedID + "</Color>", CustomGUI.GetStyleWithRichText(), GUILayout.Width(120f));
+                        EditorGUILayout.LabelField("\t" + "Path <Color=" + PathGUITextColor + ">" + paths[j].autoGeneratedID + "</Color>", CustomGUI.GetStyleWithRichText(), GUILayout.Width(120f));
 
                         EditorGUILayout.LabelField("From", EditorStyles.miniLabel, GUILayout.Width(30f)); paths[j].IDOfA = EditorGUILayout.IntField(paths[j].IDOfA, GUILayout.Width(50f));
                         EditorGUILayout.LabelField("To", EditorStyles.miniLabel, GUILayout.Width(25f)); paths[j].IDOfB = EditorGUILayout.IntField(paths[j].IDOfB, GUILayout.Width(50f));
-                        EditorGUILayout.LabelField("<Color=" + costGUITextColor + ">" + "Cost" + "</Color>", CustomGUI.GetStyleWithRichText(EditorStyles.miniLabel), GUILayout.Width(30f)); paths[j].cost = EditorGUILayout.IntField(paths[j].cost, GUILayout.Width(50f));
+                        EditorGUILayout.LabelField("<Color=" + CostGUITextColor + ">" + "Cost" + "</Color>", CustomGUI.GetStyleWithRichText(EditorStyles.miniLabel), GUILayout.Width(30f)); paths[j].cost = EditorGUILayout.IntField(paths[j].cost, GUILayout.Width(50f));
 
                         EditorGUILayout.LabelField("One Way", EditorStyles.miniLabel, GUILayout.Width(50f)); paths[j].isOneWay = EditorGUILayout.Toggle(paths[j].isOneWay);
                         EditorGUILayout.LabelField("Enable", EditorStyles.miniLabel, GUILayout.Width(50f)); paths[j].isOpen = EditorGUILayout.Toggle(paths[j].isOpen);
@@ -163,83 +165,99 @@ namespace QPathFinder
 
         private void OnSceneGUI()
         {
-            int controlID = GUIUtility.GetControlID(FocusType.Passive);
+            var controlID = GUIUtility.GetControlID(FocusType.Passive);
             HandleUtility.AddDefaultControl(controlID);
             DrawGUIWindowOnScene();
             UpdateMouseInput();
 
-            if (sceneMode == SceneMode.AddNode)
+            switch (_sceneMode)
             {
-                DrawNodes(Color.green);
+                case SceneMode.AddNode:
+                    DrawNodes(Color.green);
+                    break;
+                case SceneMode.EditNode:
+                    DrawNodes(Color.magenta, true);
+                    break;
+                case SceneMode.ConnectPath:
+                    DrawNodes(Color.green,
+                        false, 
+                        _script.graphData.GetNode(_selectedNodeForConnectNodesMode),
+                        Color.red
+                        );
+                    break;
+                default:
+                    DrawNodes(Color.gray);
+                    break;
             }
-            else if (sceneMode == SceneMode.EditNode)
-            {
-                DrawNodes(Color.magenta, true);
-            }
-            else if (sceneMode == SceneMode.ConnectPath)
-            {
-                DrawNodes(Color.green, false, script.graphData.GetNode(selectedNodeForConnectNodesMode), Color.red);
-            }
-            else
-                DrawNodes(Color.gray);
             DrawPathLine();
             CheckGUIChanged();
         }
 
-        private void CheckGUIChanged()
+        private static void CheckGUIChanged()
         {
             if (GUI.changed)
             {
                 SceneView.RepaintAll();
             }
         }
+        
         private void DrawGUIWindowOnScene()
         {
-            GUILayout.Window(1, new Rect(0f, 25f, 70f, 80f),
-                                                            delegate (int windowID)
-                                                            {
-                                                                EditorGUILayout.BeginHorizontal();
-
-                                                                sceneMode = (SceneMode)GUILayout.SelectionGrid((int)sceneMode, new string[] { "Add Node", "Move Node", "Connect Nodes", "None" }, 1);
-
-                                                                GUI.color = Color.white;
-
-                                                                EditorGUILayout.EndHorizontal();
-                                                            }
-                            , "Mode");
-            GUILayout.Window(2, new Rect(0, 155f, 70f, 80f),
-                                                            delegate (int windowID)
-                                                            {
-                                                                EditorGUILayout.BeginVertical();
-
-                                                                if (GUILayout.Button("Delete Last Node"))
-                                                                    DeleteNode();
-
-                                                                if (GUILayout.Button("Delete Last Path"))
-                                                                    DeletePath();
-
-                                                                if (GUILayout.Button("Clear All"))
-                                                                {
-                                                                    ClearNodes();
-                                                                    ClearPaths();
-                                                                }
-
-                                                                if (GUILayout.Button("Refresh Data"))
-                                                                {
-                                                                    script.graphData.ReGenerateIDs();
-                                                                }
-                                                                GUI.color = Color.white;
-
-                                                                EditorGUILayout.EndVertical();
-                                                            }
-                                , "");
+            GUILayout.Window(
+                1,
+                new Rect(0f, 25f, 70f, 80f), 
+                delegate
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    _sceneMode = (SceneMode)GUILayout.SelectionGrid(
+                        (int)_sceneMode,
+                        new[]
+                        {
+                            "Add Node",
+                            "Move Node",
+                            "Connect Nodes",
+                            "None"
+                        }
+                        , 1
+                        );
+                    GUI.color = Color.white;
+                    EditorGUILayout.EndHorizontal();
+                }, 
+                "Mode"
+                );
+            GUILayout.Window(2,
+                new Rect(0, 155f, 70f, 80f),
+                delegate
+                {
+                    EditorGUILayout.BeginVertical();
+                    if (GUILayout.Button("Delete Last Node"))
+                        DeleteNode();
+                    if (GUILayout.Button("Delete Last Path"))
+                        DeletePath();
+                    if (GUILayout.Button("Clear All"))
+                    {
+                        ClearNodes();
+                        ClearPaths();
+                    }
+                    if (GUILayout.Button("Refresh Data"))
+                    {
+                        _script.graphData.ReGenerateIDs();
+                    }
+                    GUI.color = Color.white;
+                    EditorGUILayout.EndVertical();
+                }, 
+                "");
         }
 
-
-        private void DrawNodes(Color color, bool canMove = false, Node selectedNode = null, Color colorForSelected = default(Color))
+        private void DrawNodes(
+            Color color,
+            bool canMove = false, 
+            Node selectedNode = null, 
+            Color colorForSelected = default
+            )
         {
             Handles.color = color;
-            foreach (var node in script.graphData.nodes)
+            foreach (var node in _script.graphData.nodes)
             {
                 if (selectedNode != null && node == selectedNode)
                     Handles.color = colorForSelected;
@@ -247,9 +265,27 @@ namespace QPathFinder
                     Handles.color = color;
 
                 if (canMove)
-                    node.SetPosition(Handles.FreeMoveHandle(node.Position, Quaternion.identity, script.graphData.nodeSize, Vector3.zero, Handles.SphereHandleCap));
+                {
+                    node.SetPosition(
+                        Handles.FreeMoveHandle(
+                            node.Position,
+                            Quaternion.identity,
+                            _script.graphData.nodeSize,
+                            Vector3.zero,
+                            Handles.SphereHandleCap
+                        )
+                    );
+                }
                 else
-                    Handles.SphereHandleCap(0, node.Position, Quaternion.identity, script.graphData.nodeSize, EventType.Repaint);
+                {
+                    Handles.SphereHandleCap(
+                        0,
+                        node.Position,
+                        Quaternion.identity,
+                        _script.graphData.nodeSize,
+                        EventType.Repaint
+                        );
+                }
             }
             Handles.color = Color.white;
             DrawGUIDisplayForNodes();
@@ -258,50 +294,50 @@ namespace QPathFinder
 
         private void DrawPathLine()
         {
-            List<Path> paths = script.graphData.paths;
-            List<Node> nodes = script.graphData.nodes;
-            Vector3 currNode;
-            Vector2 guiPosition;
+            var paths = _script.graphData.paths;
+            var nodes = _script.graphData.nodes;
 
             if (paths == null || nodes == null)
                 return;
 
-            Handles.color = script.graphData.lineColor;
-            Node a, b;
+            Handles.color = _script.graphData.lineColor;
 
-            for (int i = 0; i < paths.Count; i++)
+            foreach (var path in paths.Where(path => path.isOpen))
             {
-                if (!paths[i].isOpen)
-                    continue;
+                Node a = null, b = null;
+                if (_script.graphData.nodesSorted.ContainsKey(path.IDOfA))
+                    a = _script.graphData.nodesSorted[path.IDOfA];
 
-                a = b = null;
-                if (script.graphData.nodesSorted.ContainsKey(paths[i].IDOfA))
-                    a = script.graphData.nodesSorted[paths[i].IDOfA];
-
-                if (script.graphData.nodesSorted.ContainsKey(paths[i].IDOfB))
-                    b = script.graphData.nodesSorted[paths[i].IDOfB];
+                if (_script.graphData.nodesSorted.ContainsKey(path.IDOfB))
+                    b = _script.graphData.nodesSorted[path.IDOfB];
 
                 if (a != null && b != null && a != b && a.IsOpen && b.IsOpen)
                 {
-                    if (drawPathsInTheScene)
+                    if (_drawPathsInTheScene)
                         Handles.DrawLine(a.Position, b.Position);
 
                     Handles.BeginGUI();
                     {
-                        currNode = (a.Position + b.Position) / 2;
-                        guiPosition = HandleUtility.WorldToGUIPoint(currNode);
-                        string str = "";
-                        if (showPathIDsInTheScene)
-                            str += "<Color=" + pathGUITextColor + ">" + paths[i].autoGeneratedID.ToString() + "</Color>";
-                        if (showCostsInTheScene)
+                        var currNode = (a.Position + b.Position) / 2;
+                        var guiPosition = HandleUtility.WorldToGUIPoint(currNode);
+                        var str = "";
+                        if (_showPathIDsInTheScene)
+                            str += "<Color=" + PathGUITextColor + ">" + path.autoGeneratedID + "</Color>";
+                        if (_showCostsInTheScene)
                         {
                             if (!string.IsNullOrEmpty(str))
                                 str += "<Color=" + "#ffffff" + ">" + "  Cost: " + "</Color>";
-                            str += "<Color=" + costGUITextColor + ">" + paths[i].cost.ToString() + "</Color>";
+                            str += "<Color=" + CostGUITextColor + ">" + path.cost + "</Color>";
                         }
 
                         if (!string.IsNullOrEmpty(str))
-                            GUI.Label(new Rect(guiPosition.x - 10, guiPosition.y - 30, 40, 20), str, CustomGUI.GetStyleWithRichText());
+                        {
+                            GUI.Label(
+                                new Rect(guiPosition.x - 10, guiPosition.y - 30, 40, 20),
+                                str,
+                                CustomGUI.GetStyleWithRichText()
+                            );
+                        }
                     }
                     Handles.EndGUI();
                 }
@@ -311,18 +347,19 @@ namespace QPathFinder
 
         private void DrawGUIDisplayForNodes()
         {
-            if (!showNodeIDsInTheScene)
+            if (!_showNodeIDsInTheScene)
                 return;
 
-            Node currNode;
-            Vector2 guiPosition;
             Handles.BeginGUI();
 
-            for (int i = 0; i < script.graphData.nodes.Count; i++)
+            foreach (var currNode in _script.graphData.nodes)
             {
-                currNode = script.graphData.nodes[i];
-                guiPosition = HandleUtility.WorldToGUIPoint(currNode.Position);
-                GUI.Label(new Rect(guiPosition.x - 10, guiPosition.y - 30, 20, 20), "<Color=" + nodeGUITextColor + ">" + currNode.autoGeneratedID.ToString() + "</Color>", CustomGUI.GetStyleWithRichText());
+                var guiPosition = HandleUtility.WorldToGUIPoint(currNode.Position);
+                GUI.Label(
+                    new Rect(guiPosition.x - 10, guiPosition.y - 30, 20, 20),
+                    "<Color=" + NodeGUITextColor + ">" + currNode.autoGeneratedID + "</Color>",
+                    CustomGUI.GetStyleWithRichText()
+                    );
             }
             Handles.EndGUI();
         }
@@ -331,95 +368,110 @@ namespace QPathFinder
 
         #region Input Method
 
-        void UpdateMouseInput()
+        private void UpdateMouseInput()
         {
-            Event e = Event.current;
-            if (e.type == EventType.MouseDown)
+            var e = Event.current;
+            switch (e.type)
             {
-                if (e.button == 0)
-                    OnMouseClick(e.mousePosition);
-            }
-            else if (e.type == EventType.MouseUp)
-            {
-                MarkThisDirty();
-                SceneView.RepaintAll();
+                case EventType.MouseDown:
+                {
+                    if (e.button == 0)
+                        OnMouseClick(e.mousePosition);
+                    break;
+                }
+                case EventType.MouseUp:
+                    MarkThisDirty();
+                    SceneView.RepaintAll();
+                    break;
             }
         }
 
-        void OnMouseClick(Vector2 mousePos)
+        private void OnMouseClick(Vector2 mousePos)
         {
-            if (sceneMode == SceneMode.AddNode)
+            switch (_sceneMode)
             {
-                LayerMask backgroundLayerMask = 1 << LayerMask.NameToLayer(script.graphData.groundColliderLayerName);
-                Ray ray = HandleUtility.GUIPointToWorldRay(mousePos);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, 100000f, backgroundLayerMask))
+                case SceneMode.AddNode:
                 {
-                    Vector3 hitPos = hit.point;
-                    hitPos += (-ray.direction.normalized) * script.graphData.heightFromTheGround;
-                    AddNode(hitPos);
-                }
-                else
-                    Logger.LogError("No collider detected with layer " + script.graphData.groundColliderLayerName + "! Could not add node! ");
-            }
-            else if (sceneMode == SceneMode.ConnectPath)
-            {
-                LayerMask backgroundLayerMask = 1 << LayerMask.NameToLayer(script.graphData.groundColliderLayerName);
-                Ray ray = HandleUtility.GUIPointToWorldRay(mousePos);
-                RaycastHit hit;
+                    LayerMask backgroundLayerMask = 
+                        1 << LayerMask.NameToLayer(_script.graphData.groundColliderLayerName);
+                    var ray = HandleUtility.GUIPointToWorldRay(mousePos);
 
-                if (Physics.Raycast(ray, out hit, 1000f, backgroundLayerMask))
-                {
-                    Vector3 hitPos = hit.point;
-                    TryAddPath(hitPos);
+                    if (Physics.Raycast(ray, out var hit, 100000f, backgroundLayerMask))
+                    {
+                        var hitPos = hit.point;
+                        hitPos += (-ray.direction.normalized) * _script.graphData.heightFromTheGround;
+                        AddNode(hitPos);
+                    }
+                    else
+                    {
+                        Logger.LogError("No collider detected with layer "
+                                        + _script.graphData.groundColliderLayerName
+                                        + "! Could not add node! ");
+                    }
+                    break;
                 }
-                else
-                    Logger.LogError("No collider detected with layer " + script.graphData.groundColliderLayerName + "! Could not add node! ");
+                case SceneMode.ConnectPath:
+                {
+                    LayerMask backgroundLayerMask = 
+                        1 << LayerMask.NameToLayer(_script.graphData.groundColliderLayerName);
+                    var ray = HandleUtility.GUIPointToWorldRay(mousePos);
+
+                    if (Physics.Raycast(ray, out var hit, 1000f, backgroundLayerMask))
+                    {
+                        var hitPos = hit.point;
+                        TryAddPath(hitPos);
+                    }
+                    else
+                    {
+                        Logger.LogError("No collider detected with layer "
+                                        + _script.graphData.groundColliderLayerName
+                                        + "! Could not add node! ");
+                    }
+                    break;
+                }
             }
         }
 
         #endregion
-
-
+        
         #region Node and Path methods
 
-        void AddNode(Vector3 position, int addIndex = -1)
+        private void AddNode(Vector3 position, int addIndex = -1)
         {
-            Node nodeAdded = new Node(position);
+            var nodeAdded = new Node(position);
             if (addIndex == -1)
-                script.graphData.nodes.Add(nodeAdded);
+                _script.graphData.nodes.Add(nodeAdded);
             else
-                script.graphData.nodes.Insert(addIndex, nodeAdded);
+                _script.graphData.nodes.Insert(addIndex, nodeAdded);
 
-            script.graphData.ReGenerateIDs();
+            _script.graphData.ReGenerateIDs();
 
             Logger.LogInfo("Node with ID:" + nodeAdded.autoGeneratedID + " Added!");
         }
 
-        void DeleteNode(int removeIndex = -1)
+        private void DeleteNode(int removeIndex = -1)
         {
-            List<Node> nodeList = script.graphData.nodes;
+            var nodeList = _script.graphData.nodes;
             if (nodeList == null || nodeList.Count == 0)
                 return;
 
             if (removeIndex == -1)
                 removeIndex = nodeList.Count - 1;
 
-            Node nodeRemoved = nodeList[removeIndex];
+            var nodeRemoved = nodeList[removeIndex];
             nodeList.RemoveAt(removeIndex);
-            script.graphData.ReGenerateIDs();
+            _script.graphData.ReGenerateIDs();
 
             Logger.LogInfo("Node with ID:" + nodeRemoved.autoGeneratedID + " Removed!");
         }
 
-        void ClearNodes()
+        private void ClearNodes()
         {
-            script.graphData.nodes.Clear();
+            _script.graphData.nodes.Clear();
             Logger.LogWarning("All Nodes are cleared!");
         }
 
-        void AddPath(int addIndex = -1, int from = -1, int to = -1)
+        private void AddPath(int addIndex = -1, int from = -1, int to = -1)
         {
             if (from != -1 && to != -1)
             {
@@ -428,63 +480,63 @@ namespace QPathFinder
                     Logger.LogError("Preventing from adding Path to the same node.");
                     return;
                 }
-                Path pd = script.graphData.GetPathBetween(from, to);
+                var pd = _script.graphData.GetPathBetween(from, to);
                 if (pd != null)
                 {
                     Logger.LogError("We already have a path between these nodes. New Path not added!");
                     return;
                 }
             }
-            Path newPath = new Path(from, to);
+            var newPath = new Path(from, to);
             if (addIndex == -1)
-                script.graphData.paths.Add(newPath);
+                _script.graphData.paths.Add(newPath);
             else
-                script.graphData.paths.Insert(addIndex, newPath);
-            script.graphData.ReGenerateIDs();
+                _script.graphData.paths.Insert(addIndex, newPath);
+            _script.graphData.ReGenerateIDs();
 
             Logger.LogInfo("Path with ID:" + newPath.autoGeneratedID + " Added");
         }
 
-        void DeletePath(int removeIndex = -1)
+        private void DeletePath(int removeIndex = -1)
         {
-            List<Path> pathList = script.graphData.paths;
+            var pathList = _script.graphData.paths;
             if (pathList == null || pathList.Count == 0)
                 return;
 
             if (removeIndex == -1)
                 removeIndex = pathList.Count - 1;
 
-            Path removedPath = pathList[removeIndex];
+            var removedPath = pathList[removeIndex];
             pathList.RemoveAt(removeIndex);
-            script.graphData.ReGenerateIDs();
+            _script.graphData.ReGenerateIDs();
 
             Logger.LogInfo("Path with ID:" + removedPath.autoGeneratedID + " Removed");
         }
 
-        void ClearPaths()
+        private void ClearPaths()
         {
-            script.graphData.paths.Clear();
+            _script.graphData.paths.Clear();
             Logger.LogWarning("All Paths are cleared!");
         }
 
-        void TryAddPath(Vector3 position)
+        private void TryAddPath(Vector3 position)
         {
-            Node selectedNode = script.graphData.GetNode(script.FindNearestNode(position));
+            var selectedNode = _script.graphData.GetNode(_script.FindNearestNode(position));
             if (selectedNode == null)
             {
                 Logger.LogError("Could not find any nearest Node to connect to!");
                 return;
             }
-            if (selectedNodeForConnectNodesMode != -1)
+            if (_selectedNodeForConnectNodesMode != -1)
             {
-                AddPath(-1, selectedNodeForConnectNodesMode, selectedNode.autoGeneratedID);
-                Logger.LogInfo("Connected " + selectedNodeForConnectNodesMode.ToString() + " and " + selectedNode.autoGeneratedID);
-                selectedNodeForConnectNodesMode = -1;
+                AddPath(-1, _selectedNodeForConnectNodesMode, selectedNode.autoGeneratedID);
+                Logger.LogInfo("Connected " + _selectedNodeForConnectNodesMode + " and " + selectedNode.autoGeneratedID);
+                _selectedNodeForConnectNodesMode = -1;
             }
             else
             {
-                selectedNodeForConnectNodesMode = selectedNode.autoGeneratedID;
-                Logger.LogInfo("Selected : " + selectedNodeForConnectNodesMode.ToString() + ". Now click another node to join these two");
+                _selectedNodeForConnectNodesMode = selectedNode.autoGeneratedID;
+                Logger.LogInfo("Selected : " + _selectedNodeForConnectNodesMode + ". Now click another node to join these two");
             }
         }
 
@@ -494,9 +546,10 @@ namespace QPathFinder
 
         private void OnEnable()
         {
-            sceneMode = SceneMode.None;
-            script = target as PathFinder;
-            script.graphData.ReGenerateIDs();
+            _sceneMode = SceneMode.None;
+            _script = target as PathFinder;
+            // ReSharper disable once PossibleNullReferenceException
+            _script.graphData.ReGenerateIDs();
         }
 
         // When anything in inspector is changed, this will mark the scene or the prefab dirty
@@ -505,33 +558,35 @@ namespace QPathFinder
             if (Application.isPlaying)
                 return;
 
-            if (PrefabUtility.GetCorrespondingObjectFromSource(script.gameObject) != null)
+            if (PrefabUtility.GetCorrespondingObjectFromSource(_script.gameObject) != null)
             {
                 //QPathFinder.Logger.LogInfo ( "Prefab for PathFinder found! Marked it Dirty ( Modified )");
-                EditorUtility.SetDirty(script);
+                EditorUtility.SetDirty(_script);
             }
             else
             {
                 //QPathFinder.Logger.LogInfo ( "Prefab for PathFinder Not found! Marked the scene as Dirty ( Modified )");
-                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
             }
         }
 
 
-        private SceneMode sceneMode;
-        private PathFinder script;
+        private SceneMode _sceneMode;
+        private PathFinder _script;
 
-        const string nodeGUITextColor = "#ff00ffff";
-        const string pathGUITextColor = "#00ffffff";
-        const string costGUITextColor = "#0000ffff";
+        private const string NodeGUITextColor = "#ff00ffff";
+        private const string PathGUITextColor = "#00ffffff";
+        private const string CostGUITextColor = "#0000ffff";
 
-        private int selectedNodeForConnectNodesMode = -1;
-        private bool showNodeIDsInTheScene = true;
-        private bool showPathIDsInTheScene = true;
-        private bool drawPathsInTheScene = true;
-        private bool showCostsInTheScene = false;
-        private bool showDefaultInspector = false;
+        private int _selectedNodeForConnectNodesMode = -1;
+        private bool _showNodeIDsInTheScene = true;
+        private bool _showPathIDsInTheScene = true;
+        private bool _drawPathsInTheScene = true;
+        private bool _showCostsInTheScene;
+        private bool _showDefaultInspector;
 
+        private static readonly int ShaderColor = Shader.PropertyToID("_Color");
+        
         #endregion
     }
 }
