@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4932746941608690942}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.212, y: -3.454, z: 0}
   m_LocalScale: {x: 0.2713098, y: 0.24429551, z: 0.36912897}
   m_Children: []
@@ -146,7 +146,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fromPoint: {x: -12.212, y: -3.454}
   toPoint: {x: -12.212, y: 3.596}
-  oneWayTime: 3
+  oneWayTime: 4
+  waitTime: 0.5
+  accelerationPart: 0.5
   attachLayer:
     serializedVersion: 2
     m_Bits: 384
