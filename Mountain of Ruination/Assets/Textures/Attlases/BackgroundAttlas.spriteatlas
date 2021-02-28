@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c48939419abc3af47ac7490f755c5109, type: 3}
-    totalSpriteSurfaceArea: 26306637
+    totalSpriteSurfaceArea: 44790093
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -61,13 +61,17 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a0398b1517032824da3d0ba68c409490, type: 3}
   - {fileID: 21300000, guid: 4e4e904555bd9b34da635e4a15a4e07c, type: 3}
   - {fileID: 21300000, guid: cb4ab5a5300dcf24eaf0658a4c7dff9f, type: 3}
+  - {fileID: 21300000, guid: 850ce7b512aa0844f83721beb015af41, type: 3}
+  - {fileID: 21300000, guid: 0c95ed2690a6dd540806bbef82ff1ab1, type: 3}
   - {fileID: 21300000, guid: 18ad3666f05b674499b413025f1a4227, type: 3}
   - {fileID: 21300000, guid: 63bd50a6c3fd26b439c10e599e94b853, type: 3}
   - {fileID: 21300000, guid: 4f97e6976d5c0f04c8d4cc318d41d323, type: 3}
+  - {fileID: 21300000, guid: 2c21cb0827028ed489fd57fe12ae91a7, type: 3}
   - {fileID: 21300000, guid: fd8e132a64c68724e83ef37f68f9c1c7, type: 3}
   - {fileID: 21300000, guid: 32f80e7a9ace3374d9e43d1933933410, type: 3}
   - {fileID: 21300000, guid: 70e32caafad415e489dea7aa867977e0, type: 3}
   - {fileID: 21300000, guid: db221b0bdb18e4748bbdcb1a3ace4495, type: 3}
+  - {fileID: 21300000, guid: 5eb85a6b3604b204c86539f57f3a9da2, type: 3}
   - {fileID: 21300000, guid: 4f896d7c37e46c34c9b57f2e7fed52c5, type: 3}
   - {fileID: 21300000, guid: 32eaedccff0c1ff4ebbb8f6d9d25fd57, type: 3}
   - {fileID: 21300000, guid: 5f9e50fddcbd27747be4ff005e67979b, type: 3}
@@ -86,13 +90,17 @@ SpriteAtlas:
   - cloud03
   - mountains_back
   - cloud02
+  - mountains_front
+  - mountains_back
   - cloud01
   - mountain01
   - sky
+  - mountains_sky
   - sky
   - cave
   - sky
   - mountain02
+  - mountains_main
   - mountain02
   - sky2
   - cloud02
