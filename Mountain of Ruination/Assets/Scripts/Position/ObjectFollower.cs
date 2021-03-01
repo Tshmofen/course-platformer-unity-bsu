@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Position
 {
@@ -11,7 +12,7 @@ namespace Position
 
         public bool customOffset;
         public Vector2 positionOffset;
-        public float angleOffset;
+        [Range(0, 360)] public float angleOffset;
         
         #endregion
 

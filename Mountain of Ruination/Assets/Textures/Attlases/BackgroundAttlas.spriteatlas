@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c48939419abc3af47ac7490f755c5109, type: 3}
-    totalSpriteSurfaceArea: 44790093
+    totalSpriteSurfaceArea: 44855629
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -72,6 +72,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 70e32caafad415e489dea7aa867977e0, type: 3}
   - {fileID: 21300000, guid: db221b0bdb18e4748bbdcb1a3ace4495, type: 3}
   - {fileID: 21300000, guid: 5eb85a6b3604b204c86539f57f3a9da2, type: 3}
+  - {fileID: 21300000, guid: b0036f4c8eb84104ea2ad889813de146, type: 3}
   - {fileID: 21300000, guid: 4f896d7c37e46c34c9b57f2e7fed52c5, type: 3}
   - {fileID: 21300000, guid: 32eaedccff0c1ff4ebbb8f6d9d25fd57, type: 3}
   - {fileID: 21300000, guid: 5f9e50fddcbd27747be4ff005e67979b, type: 3}
@@ -101,6 +102,7 @@ SpriteAtlas:
   - sky
   - mountain02
   - mountains_main
+  - moon
   - mountain02
   - sky2
   - cloud02
