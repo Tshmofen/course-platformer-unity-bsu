@@ -15,7 +15,7 @@ SpriteAtlas:
       compressionQuality: 50
       maxTextureSize: 2048
       textureCompression: 0
-      filterMode: 2
+      filterMode: 0
       generateMipMaps: 0
       readable: 0
       crunchedCompression: 0
@@ -23,7 +23,7 @@ SpriteAtlas:
     platformSettings:
     - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
-      m_MaxTextureSize: 4096
+      m_MaxTextureSize: 8192
       m_ResizeAlgorithm: 0
       m_TextureFormat: -1
       m_TextureCompression: 2
@@ -44,12 +44,13 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
-    totalSpriteSurfaceArea: 4502123
+    totalSpriteSurfaceArea: 4496450
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: f2e191499b1804746a5bc9ef3344cd24, type: 3}
   - {fileID: -7751154609379458535, guid: 815bc6697910ba94ebef1227070cd617, type: 3}
   - {fileID: 1964492147885115163, guid: 815bc6697910ba94ebef1227070cd617, type: 3}
   - {fileID: 6665656828693367960, guid: 815bc6697910ba94ebef1227070cd617, type: 3}
@@ -88,7 +89,6 @@ SpriteAtlas:
   - {fileID: 2494193451368479091, guid: 815bc6697910ba94ebef1227070cd617, type: 3}
   - {fileID: 7869698319530661429, guid: 815bc6697910ba94ebef1227070cd617, type: 3}
   - {fileID: -7399442417252559517, guid: 815bc6697910ba94ebef1227070cd617, type: 3}
-  - {fileID: 21300000, guid: 2c123aa9a2e818a439113eed72b43087, type: 3}
   - {fileID: -8799811600886014544, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
   - {fileID: -8089951463463920682, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
   - {fileID: 8831649495129602440, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
@@ -120,6 +120,7 @@ SpriteAtlas:
   - {fileID: 6852458669386237878, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
   - {fileID: 3037222672616680189, guid: 9cb21614f890d2f4aaccf4b1eeaa4f37, type: 3}
   m_PackedSpriteNamesToIndex:
+  - elevator
   - image_34
   - image_35
   - image_36
@@ -158,7 +159,6 @@ SpriteAtlas:
   - image_17
   - image_14
   - image_15
-  - elevator
   - grass_tiled_12
   - grass_tiled_10
   - grass_tiled_17

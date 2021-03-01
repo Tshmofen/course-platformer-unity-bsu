@@ -7,17 +7,16 @@ namespace Interface.Overlay
     public class TemporaryText : MonoBehaviour
     {
         #region Fields and properties
-
+        
         private float _currentTime;
-        private Vector3 _targetPosition;
-
         private CanvasRenderer _textRender;
 
         #region Unity assign
 
         // how long will the text exist and dissolve
         public float lifeTime;
-        public float height = 0.25f;
+        public Vector2 start;
+        public Vector2 end;
         
         #endregion
 
@@ -28,9 +27,6 @@ namespace Interface.Overlay
         private void Start()
         {
             _textRender = GetComponent<CanvasRenderer>();
-
-            _targetPosition = transform.position;
-            _targetPosition.y += height;
         }
 
         private void Update()
@@ -48,7 +44,7 @@ namespace Interface.Overlay
             _currentTime += Time.deltaTime;
 
             var opacity = Mathf.Lerp(1, 0, _currentTime / lifeTime);
-            var position = Vector3.Lerp(transform.position, _targetPosition, _currentTime / lifeTime);
+            var position = Vector2.Lerp(start, end, _currentTime / lifeTime);
 
             _textRender.SetAlpha(opacity);
             transform.position = position;

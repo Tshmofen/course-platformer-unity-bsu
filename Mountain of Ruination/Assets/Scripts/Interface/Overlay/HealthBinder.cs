@@ -52,7 +52,7 @@ namespace Interface.Overlay
         {
             if (isFollower)
             {
-                transform.position = target.position + (Vector3) offset;
+                transform.position = _camera.WorldToScreenPoint(target.position+ (Vector3) offset);
             }
         }
 

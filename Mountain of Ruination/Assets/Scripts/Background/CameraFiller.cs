@@ -1,21 +1,36 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Background
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class CameraFiller : MonoBehaviour
     {
+        #region Fields
+
         #region Unity assigns
 
         public Camera fillCamera;
 
         #endregion
-        
+
+        private float _previousSize;
+
+        #endregion
+
         #region Unity call
 
         private void Start()
         {
             FillView();
+            _previousSize = fillCamera.orthographicSize;
+        }
+
+        private void FixedUpdate()
+        {
+            var size = fillCamera.orthographicSize;
+            if (Math.Abs(size - _previousSize) > 0.01f) FillView(); 
+            _previousSize = size;
         }
 
         #endregion
