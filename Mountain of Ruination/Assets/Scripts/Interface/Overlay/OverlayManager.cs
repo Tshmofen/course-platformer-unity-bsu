@@ -31,8 +31,7 @@ namespace Interface.Overlay
         #endregion
 
         #region Public
-
-        // ReSharper disable once PossibleNullReferenceException
+        
         // shows popup over the target that flies away and disappears
         public void ShowPopUp(Vector2 worldPosition, string text, float lifeTime)
         {

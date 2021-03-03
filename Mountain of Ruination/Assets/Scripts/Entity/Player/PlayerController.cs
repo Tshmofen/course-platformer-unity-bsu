@@ -1,6 +1,7 @@
 ﻿using System;
 using Damage;
 using Entity.Movement;
+using Environment;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Util;
@@ -79,6 +80,8 @@ namespace Entity.Player
         public bool IsFacingRight { get; private set; }
         public bool DisplayActualAim { get; set; }
         public bool IsLocked { get; set; }
+        public bool IsInteractWithMovable { get; set; }
+        public MovableController CurrentMovable { get; set; }
         private bool IsMovingBackwards
         {
             get
@@ -173,18 +176,22 @@ namespace Entity.Player
                     _wasToContinueJump = false;
                 }
 
-                var speed = IsMovingBackwards ? backwardsSpeed : moveSpeed;
+                var speed = (IsMovingBackwards || IsInteractWithMovable )? backwardsSpeed : moveSpeed;
                 _velocity.x = speed * MoveX;
             }
             _velocity.y -= gravity * Time.deltaTime; // (m/s^2)
 
-            _movement.Move(_velocity * Time.deltaTime);
+            var move = (Vector3)_velocity * Time.deltaTime;
+            if (IsInteractWithMovable) CurrentMovable.VelocityX = _velocity.x;
+            _movement.Move(move);
             _velocity = _movement.Velocity;
         }
 
         // flips character is it's necessary
         private void UpdateDirection()
         {
+            if (IsInteractWithMovable) return;
+            
             if (!IsAiming)
             {
                 var input = InputUtil.GetMove();

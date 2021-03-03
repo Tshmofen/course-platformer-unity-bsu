@@ -12,7 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Movable
   - Entity
   - Player
   - Ground
@@ -22,7 +22,7 @@ TagManager:
   - Interface
   - Effects
   - GroundPath
-  - 
+  - Interactive
   - 
   - 
   - 

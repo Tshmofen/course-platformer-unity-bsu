@@ -35,6 +35,11 @@ namespace Util
             return Input.GetKeyDown(KeyCode.Mouse0);
         }
 
+        public static bool GetInteract()
+        {
+            return Input.GetKey(KeyCode.E);
+        }
+        
         public static bool GetContinuousAttack()
         {
             return Input.GetKey(KeyCode.Mouse0);
