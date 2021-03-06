@@ -1,7 +1,6 @@
 ﻿using System;
 using Damage;
 using Entity.Movement;
-using Environment;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Util;
@@ -80,8 +79,8 @@ namespace Entity.Player
         public bool IsFacingRight { get; private set; }
         public bool DisplayActualAim { get; set; }
         public bool IsLocked { get; set; }
-        public bool IsInteractWithMovable { get; set; }
-        public MovableController CurrentMovable { get; set; }
+        public bool IsControlTaken { get; set; }
+        
         private bool IsMovingBackwards
         {
             get
@@ -107,7 +106,6 @@ namespace Entity.Player
             }
         }
         
-
         #endregion
 
         #region Unity calls
@@ -125,6 +123,7 @@ namespace Entity.Player
 
         private void Update()
         {
+            if (IsControlTaken) return;
             GetControls();
             UpdateMovement();
             if (IsLocked) return;
@@ -176,13 +175,12 @@ namespace Entity.Player
                     _wasToContinueJump = false;
                 }
 
-                var speed = (IsMovingBackwards || IsInteractWithMovable )? backwardsSpeed : moveSpeed;
+                var speed = (IsMovingBackwards)? backwardsSpeed : moveSpeed;
                 _velocity.x = speed * MoveX;
             }
             _velocity.y -= gravity * Time.deltaTime; // (m/s^2)
 
             var move = (Vector3)_velocity * Time.deltaTime;
-            if (IsInteractWithMovable) CurrentMovable.VelocityX = _velocity.x;
             _movement.Move(move);
             _velocity = _movement.Velocity;
         }
@@ -190,8 +188,6 @@ namespace Entity.Player
         // flips character is it's necessary
         private void UpdateDirection()
         {
-            if (IsInteractWithMovable) return;
-            
             if (!IsAiming)
             {
                 var input = InputUtil.GetMove();
@@ -241,10 +237,17 @@ namespace Entity.Player
 
         #region Support methods
 
-        private void FlipDirection()
+        public void FlipDirection()
         {
             IsFacingRight = !IsFacingRight;
             transform.forward *= -1;
+        }
+
+        public void ResetPlayer()
+        {
+            _velocity = Vector2.zero;
+            SwitchActualAim(false);
+            UpdateAnimation();
         }
 
         // returns movement scale from -1 to 1

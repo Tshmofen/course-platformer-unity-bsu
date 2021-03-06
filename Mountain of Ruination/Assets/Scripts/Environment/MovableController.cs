@@ -17,48 +17,61 @@ namespace Environment
 
         #endregion
 
+        private bool _wasInteracts;
+        private bool _isInteracts;
         private Vector2 _velocity;
 
-        public float VelocityX
-        {
-            get => _velocity.x;
-            set => _velocity.x = value;
-        }
-        public float VelocityY
-        {
-            get => _velocity.y;
-            set => _velocity.y = value;
-        }
-        
         #endregion
 
         #region Unity calls
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (InputUtil.GetInteract())
-            {
-                player.CurrentMovable = this;
-                player.IsInteractWithMovable = true;
-            }
-            else
-            {
-                player.IsInteractWithMovable = false;
-                _velocity.x = 0;
-            }
+            _isInteracts ^= InputUtil.GetInteract();
+            if (_wasInteracts != _isInteracts)
+                TakeControl(_isInteracts);
+            _wasInteracts = _isInteracts;
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            player.IsInteractWithMovable = false;
-            _velocity.x = 0;
+            TakeControl(false);
         }
 
         private void Update()
         {
+            UpdatePosition();
+        }
+
+        #endregion
+
+        #region Update parts
+
+        private void UpdatePosition()
+        {
             _velocity.y -= gravity * Time.deltaTime;
             movement.Move(_velocity * Time.deltaTime);
             _velocity = movement.Velocity;
+        }
+
+        #endregion
+
+        #region Support methods
+
+        private void TakeControl(bool toTake)
+        {
+            player.IsControlTaken = toTake;
+            _isInteracts = toTake;
+            if (toTake)
+            {
+                var diff = transform.position.x - player.transform.position.x;
+                if (diff < 0 && player.IsFacingRight) player.FlipDirection();
+                player.ResetPlayer();
+            }
+            else
+            {
+                _velocity.x = 0;
+            }
         }
 
         #endregion
