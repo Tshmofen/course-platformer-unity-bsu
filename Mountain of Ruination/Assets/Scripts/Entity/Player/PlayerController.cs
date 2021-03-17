@@ -2,7 +2,6 @@
 using Damage;
 using Entity.Movement;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Util;
 
 namespace Entity.Player
@@ -12,6 +11,17 @@ namespace Entity.Player
     {
         #region Fields and properties
 
+        // animation hashes
+        private static readonly int HashVelocityScaleX = Animator.StringToHash("velocityScaleX");
+        private static readonly int HashVelocityY = Animator.StringToHash("velocityY");
+        private static readonly int HashInFall = Animator.StringToHash("inFall");
+        private static readonly int HashAiming = Animator.StringToHash("isAiming");
+        private static readonly int HashWeaponX = Animator.StringToHash("weaponX");
+        private static readonly int HashToAim = Animator.StringToHash("toAim");
+        private static readonly int HashToAttackPierce = Animator.StringToHash("toAttackPierce");
+        private static readonly int HashToAttackLight = Animator.StringToHash("toAttackLight");
+        private static readonly int HashToAttackHeavy = Animator.StringToHash("toAttackHeavy");
+        
         #region Unity assigns
 
         [Header("Horizontal Movement")] 
@@ -23,14 +33,6 @@ namespace Entity.Player
         public float jumpManualDumping;
         public float gravity;
         public float slopeMoveUpdateDelay = 0.1f;
-
-        [Header("Aim")] 
-        public AimCircle actualAim;
-        public AimCircle targetAim;
-        [FormerlySerializedAs("CircleSpeedCenter")]
-        public float circleSpeedCenter;
-        [FormerlySerializedAs("CircleSpeedEdge")]
-        public float circleSpeedEdge;
 
         [Header("External")] 
         public PlayerManager manager;
@@ -60,32 +62,20 @@ namespace Entity.Player
         private bool _isAiming;
         private bool _wasMovingSlope;
         private bool _wasToContinueJump;
+        private bool _isFacingRight;
 
         private float _wasMovingSlopeTime;
         private Vector2 _velocity;
         private MovementController _movement;
-        
-        // animation hashes
-        private static readonly int VelocityScaleX = Animator.StringToHash("velocityScaleX");
-        private static readonly int VelocityY = Animator.StringToHash("velocityY");
-        private static readonly int InFall = Animator.StringToHash("inFall");
-        private static readonly int Aiming = Animator.StringToHash("isAiming");
-        private static readonly int WeaponX = Animator.StringToHash("weaponX");
-        private static readonly int ToAim = Animator.StringToHash("toAim");
-        private static readonly int ToAttackPierce = Animator.StringToHash("toAttackPierce");
-        private static readonly int ToAttackLight = Animator.StringToHash("toAttackLight");
-        private static readonly int ToAttackHeavy = Animator.StringToHash("toAttackHeavy");
-        
-        public bool IsFacingRight { get; private set; }
-        public bool DisplayActualAim { get; set; }
+
+        private float _weaponX;
+
         public bool IsLocked { get; set; }
-        public bool IsControlTaken { get; set; }
-        
         private bool IsMovingBackwards
         {
             get
             {
-                var isBackwards = MoveX > 0 && !IsFacingRight || MoveX < 0 && IsFacingRight;
+                var isBackwards = MoveX > 0 && !_isFacingRight || MoveX < 0 && _isFacingRight;
                 return IsAiming && isBackwards;
             }
         }
@@ -113,17 +103,12 @@ namespace Entity.Player
         private void Start()
         {
             _movement = GetComponent<MovementController>();
-
-            targetAim.ChangePosition(new Vector2(1, 0));
             Cursor.lockState = CursorLockMode.Locked;
-            DisplayActualAim = true;
-
-            IsFacingRight = true;
+            _isFacingRight = true;
         }
 
         private void Update()
         {
-            if (IsControlTaken) return;
             GetControls();
             UpdateMovement();
             if (IsLocked) return;
@@ -146,11 +131,12 @@ namespace Entity.Player
             IsAiming ^= InputUtil.GetCombatMode();
             ToAttack = InputUtil.GetAttack();
 
+            /* Todo enable on combat animation appearing
             if (!IsAiming && ToAttack)
             {
                 IsAiming = true;
                 ToAttack = false;
-            }
+            }*/
         }
 
         // handles character movement and jumping using movement controller
@@ -191,17 +177,16 @@ namespace Entity.Player
             if (!IsAiming)
             {
                 var input = InputUtil.GetMove();
-                if (input.x > 0 && !IsFacingRight || input.x < 0 && IsFacingRight)
+                if (input.x > 0 && !_isFacingRight || input.x < 0 && _isFacingRight)
                     FlipDirection();
             }
 
             if (IsAiming && InputUtil.GetSpecialAbility())
             {
-                var targetX = targetAim.Position.x;
-                if (targetX > 0.1 && !IsFacingRight || targetX < -0.1 && IsFacingRight)
+                if (_weaponX > 0.1 && !_isFacingRight || _weaponX < -0.1 && _isFacingRight)
                 {
                     FlipDirection();
-                    actualAim.FlipX();
+                    _weaponX *= -1;
                 }
             }
         }
@@ -211,44 +196,46 @@ namespace Entity.Player
         {
             if (IsAiming && ToAttack && !manager.weapon.isInAttack)
                 StartAttack();
-            MoveTargetAim();
-            SwitchActualAim(IsAiming);
         }
 
         private void UpdateAimPositions()
         {
-            actualAim.CalculatePosition();
-            targetAim.CalculatePosition();
+            _weaponX += MouseDelta.x;
+            _weaponX = (_weaponX > 1) ? 1 : _weaponX;
+            _weaponX = (_weaponX < -1) ? -1 : _weaponX;
         }
 
         private void UpdateAnimation()
         {
-            manager.animator.SetFloat(VelocityScaleX, GetHorizontalMoveScale());
-            manager.animator.SetFloat(VelocityY, _velocity.y);
-            manager.animator.SetBool(InFall, !IsGrounded);
+            manager.animator.SetFloat(HashVelocityScaleX, GetHorizontalMoveScale());
+            manager.animator.SetFloat(HashVelocityY, _velocity.y);
+            manager.animator.SetBool(HashInFall, !IsGrounded);
 
-            manager.animator.SetBool(Aiming, IsAiming);
-            manager.animator.SetFloat(WeaponX, actualAim.Position.x * (IsFacingRight ? 1 : -1));
+            manager.animator.SetBool(HashAiming, IsAiming);
+            manager.animator.SetFloat(HashWeaponX, _weaponX * (_isFacingRight ? 1 : -1));
             if (IsAiming && !WasAiming)
-                manager.animator.SetTrigger(ToAim);
+                manager.animator.SetTrigger(HashToAim);
         }
 
         #endregion
 
+        #region Public
+
+        public void RestoreAimPosition()
+        {
+            _weaponX = (_isFacingRight) ? 1 : -1;
+        }
+
+        #endregion
+        
         #region Support methods
 
-        public void FlipDirection()
+        private void FlipDirection()
         {
-            IsFacingRight = !IsFacingRight;
+            _isFacingRight = !_isFacingRight;
             transform.forward *= -1;
         }
-
-        public void ResetPlayer()
-        {
-            _velocity = Vector2.zero;
-            SwitchActualAim(false);
-            UpdateAnimation();
-        }
+        
 
         // returns movement scale from -1 to 1
         // depends on current speed and direction
@@ -268,36 +255,23 @@ namespace Entity.Player
         // that depends on aim position
         private void StartAttack()
         {
-            if (actualAim.Position.x > 0.7071f && IsFacingRight
-                || actualAim.Position.x < -0.7071f && !IsFacingRight)
+            if (_weaponX > 0.7071f && _isFacingRight
+                || _weaponX < -0.7071f && !_isFacingRight)
             {
-                manager.animator.SetTrigger(ToAttackPierce);
+                manager.animator.SetTrigger(HashToAttackPierce);
                 manager.weapon.Type = DamageType.PierceDamage;
             }
-            else if (actualAim.Position.x > -0.7071f && IsFacingRight 
-                     || actualAim.Position.x < 0.7071f && !IsFacingRight)
+            else if (_weaponX > -0.7071f && _isFacingRight 
+                     || _weaponX < 0.7071f && !_isFacingRight)
             {
-                manager.animator.SetTrigger(ToAttackLight);
+                manager.animator.SetTrigger(HashToAttackLight);
                 manager.weapon.Type = DamageType.LightDamage;
             }
             else
             {
-                manager.animator.SetTrigger(ToAttackHeavy);
+                manager.animator.SetTrigger(HashToAttackHeavy);
                 manager.weapon.Type = DamageType.HeavyDamage;
             }
-        }
-
-        private void MoveTargetAim()
-        {
-            var speed = Mathf.Lerp(circleSpeedCenter, circleSpeedEdge, Mathf.Abs(targetAim.Position.x));
-            targetAim.ChangePosition(MouseDelta * (speed * Time.deltaTime));
-        }
-
-        // handles actual aim visibility
-        private void SwitchActualAim(bool enable)
-        {
-            actualAim.SpriteEnabled = enable && DisplayActualAim;
-            actualAim.IsLocked = !enable;
         }
 
         #endregion

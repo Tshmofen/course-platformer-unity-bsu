@@ -1,6 +1,4 @@
-﻿using Entity.Movement;
-using Entity.Player;
-using UnityEngine;
+﻿using UnityEngine;
 using Util;
 
 namespace Environment
@@ -10,16 +8,13 @@ namespace Environment
         #region Fields and properties
 
         #region Unity assigns
-
-        public float gravity = 20;
-        public PlayerController player;
-        public MovementController movement;
+        
+        public GameObject playerInteract;
+        public Rigidbody2D body;
 
         #endregion
-
-        private bool _wasInteracts;
-        private bool _isInteracts;
-        private Vector2 _velocity;
+        
+        private Vector3 _lastPosition;
 
         #endregion
 
@@ -27,53 +22,28 @@ namespace Environment
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            _isInteracts ^= InputUtil.GetInteract();
-            if (_wasInteracts != _isInteracts)
-                TakeControl(_isInteracts);
-            _wasInteracts = _isInteracts;
-        }
-
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            TakeControl(false);
-        }
-
-        private void Update()
-        {
-            UpdatePosition();
-        }
-
-        #endregion
-
-        #region Update parts
-
-        private void UpdatePosition()
-        {
-            _velocity.y -= gravity * Time.deltaTime;
-            movement.Move(_velocity * Time.deltaTime);
-            _velocity = movement.Velocity;
-        }
-
-        #endregion
-
-        #region Support methods
-
-        private void TakeControl(bool toTake)
-        {
-            player.IsControlTaken = toTake;
-            _isInteracts = toTake;
-            if (toTake)
+            if (other.gameObject != playerInteract)
             {
-                var diff = transform.position.x - player.transform.position.x;
-                if (diff < 0 && player.IsFacingRight) player.FlipDirection();
-                player.ResetPlayer();
+                _lastPosition = playerInteract.transform.position;
+                return;
             }
-            else
+            
+            if (InputUtil.GetInteract())
             {
-                _velocity.x = 0;
+                var diff =  playerInteract.transform.position - _lastPosition;
+                body.MovePosition(transform.position + diff);
             }
+
+            _lastPosition = playerInteract.transform.position;
+
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            
         }
 
         #endregion
+        
     }
 }

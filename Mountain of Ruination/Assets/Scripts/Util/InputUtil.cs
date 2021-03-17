@@ -37,7 +37,7 @@ namespace Util
 
         public static bool GetInteract()
         {
-            return Input.GetKeyDown(KeyCode.E);
+            return Input.GetKey(KeyCode.E);
         }
         
         public static bool GetContinuousAttack()
