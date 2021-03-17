@@ -1611,6 +1611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5b0ca5b4cb4c05953237bf93b793f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationStopSpeed: 10
 --- !u!50 &373470210
 Rigidbody2D:
   serializedVersion: 4
@@ -7738,6 +7739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5b0ca5b4cb4c05953237bf93b793f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationStopSpeed: 10
 --- !u!50 &1541198340
 Rigidbody2D:
   serializedVersion: 4
@@ -10517,6 +10519,18 @@ CompositeCollider2D:
         Y: -40000000
       - X: 40000000
         Y: -50000000
+      - X: 100
+        Y: -50000000
+      - X: 100
+        Y: -9999959
+      - X: 41
+        Y: -9999900
+      - X: -10000041
+        Y: -9999900
+      - X: -10000100
+        Y: -9999959
+      - X: -10000100
+        Y: -50000000
       - X: -70000000
         Y: -50000000
       - X: -80000000
@@ -10602,6 +10616,10 @@ CompositeCollider2D:
       - {x: 9.999994, y: -4}
       - {x: 5.9999943, y: -4.000003}
       - {x: 3.999994, y: -5}
+      - {x: 0.00001, y: -4.9999704}
+      - {x: -0.0000252, y: -0.99999}
+      - {x: -1.00001, y: -1.0000252}
+      - {x: -1.0000395, y: -5}
       - {x: -7.000005, y: -4.9999976}
       - {x: -8.000012, y: -4.500006}
       - {x: -9.000006, y: -5}
@@ -12956,6 +12974,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -1, y: -5, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 6
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 4, y: -5, z: 0}
     second:
       serializedVersion: 2
@@ -13166,6 +13194,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -1, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 6
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 18, y: -4, z: 0}
     second:
       serializedVersion: 2
@@ -13266,6 +13304,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -1, y: -3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 6
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 19, y: -3, z: 0}
     second:
       serializedVersion: 2
@@ -13331,6 +13379,16 @@ Tilemap:
       serializedVersion: 2
       m_TileIndex: 0
       m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 6
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -1, y: -2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 20
+      m_TileSpriteIndex: 19
       m_TileMatrixIndex: 0
       m_TileColorIndex: 6
       m_TileObjectToInstantiateIndex: 65535
@@ -13838,7 +13896,7 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 226
+  - m_RefCount: 229
     m_Data: {fileID: 11400000, guid: 067c7af67eef083469592b1ef52fc69e, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 6fe9cf9c2fb85394fa0c6ffe06d88146, type: 2}
@@ -13878,7 +13936,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 542c0eae96ca3a44d8deacb8827f23e3, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 42
+  - m_RefCount: 43
     m_Data: {fileID: 11400000, guid: 322bb9d26a3ef6647bf36a95580a1588, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: b665f9921b48e7641802104a133685b8, type: 2}
@@ -13905,7 +13963,7 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileSpriteArray:
-  - m_RefCount: 226
+  - m_RefCount: 229
     m_Data: {fileID: -7442466831354495073, guid: 101c179c15569714e8164b049a0f54d8,
       type: 3}
   - m_RefCount: 0
@@ -13949,7 +14007,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 42
+  - m_RefCount: 43
     m_Data: {fileID: 7509354994493868590, guid: 101c179c15569714e8164b049a0f54d8,
       type: 3}
   - m_RefCount: 0
@@ -13986,7 +14044,7 @@ Tilemap:
     m_Data: {fileID: 3408509812448030950, guid: 101c179c15569714e8164b049a0f54d8,
       type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 312
+  - m_RefCount: 316
     m_Data:
       e00: 1
       e01: 0
@@ -14017,7 +14075,7 @@ Tilemap:
     m_Data: {r: 3.0907e-41, g: 3.0907e-41, b: 3.0907e-41, a: 3.0907e-41}
   - m_RefCount: 0
     m_Data: {r: 3.0907e-41, g: 3.0907e-41, b: 3.0907e-41, a: 3.0907e-41}
-  - m_RefCount: 312
+  - m_RefCount: 316
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 0
     m_Data: {r: 3.0907e-41, g: 3.0907e-41, b: 3.0907e-41, a: 3.0907e-41}
@@ -14242,7 +14300,7 @@ GameObject:
   - component: {fileID: 1965841807}
   - component: {fileID: 1965841810}
   m_Layer: 16
-  m_Name: MovableTrigger
+  m_Name: MovableController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14327,6 +14385,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d835cde4fe904b75a7aed95efe093287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movableLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  radius: 3
   button: {fileID: 1608189999}
   manager: {fileID: 3487260239870348798}
 --- !u!1 &2014769821
@@ -14500,6 +14565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5b0ca5b4cb4c05953237bf93b793f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationStopSpeed: 10
 --- !u!1 &2043767721
 GameObject:
   m_ObjectHideFlags: 0
@@ -14979,7 +15045,7 @@ MonoBehaviour:
   jumpManualDumping: 5
   gravity: 20
   slopeMoveUpdateDelay: 0.22
-  mouseSpeed: 3
+  mouseSpeed: 7
   manager: {fileID: 3487260239870348798}
 --- !u!114 &1475437318056493030
 MonoBehaviour:

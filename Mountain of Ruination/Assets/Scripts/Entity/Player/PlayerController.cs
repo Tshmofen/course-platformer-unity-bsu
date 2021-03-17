@@ -74,10 +74,10 @@ namespace Entity.Player
         private bool _isFacingRight;
 
         private float _wasMovingSlopeTime;
-        private Vector2 _velocity;
-        private MovementController _movement;
-
         private float _weaponX;
+        private Vector2 _velocity;
+        private Vector2 _previousPosition;
+        private MovementController _movement;
 
         public Movable CurrentMovable { get; set; }
         public bool IsMovableAvailable { get; set; }
@@ -113,6 +113,7 @@ namespace Entity.Player
 
         private void Start()
         {
+            _previousPosition = transform.position;
             _movement = GetComponent<MovementController>();
             Cursor.lockState = CursorLockMode.Locked;
             _isFacingRight = true;
@@ -155,6 +156,7 @@ namespace Entity.Player
         // handles character movement and jumping using movement controller
         private void UpdateMovement()
         {
+            _previousPosition = transform.position;
             if (!IsLocked)
             {
                 if (ToJump && IsGrounded)
@@ -206,12 +208,16 @@ namespace Entity.Player
 
         private void UpdateInteracting()
         {
-            ToInteract = (!manager.movable.MovableChanged) && ToInteract;
-
             if (!_isAiming && ToInteract && IsMovableAvailable)
             {
                 manager.movable.IsCurrentMovableLocked = true;
-                CurrentMovable.Move(MouseDelta.normalized * mouseSpeed);
+                var position = (Vector2)transform.position;
+                CurrentMovable.Move(
+                    MouseDelta.normalized * mouseSpeed, 
+                    position,
+                    manager.movable.radius,
+                    position - _previousPosition
+                    );
             }
             else
             {

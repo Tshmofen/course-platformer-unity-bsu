@@ -6,10 +6,14 @@ using Util;
 
 namespace Environment
 {
+    [RequireComponent(typeof(CircleCollider2D))]
     public class MovableController : MonoBehaviour
     {
         #region Fields and properties
-        
+
+        public LayerMask movableLayer;
+        public LayerMask interactLayer;
+        public float radius = 3;
         [Header("External")]
         public InteractButton button;
         public PlayerManager manager;
@@ -19,7 +23,6 @@ namespace Environment
         private bool _isCurrentMovableSet;
         
         public bool IsCurrentMovableLocked { get; set; }
-        public bool MovableChanged { get; private set; }
 
         #endregion
 
@@ -27,6 +30,9 @@ namespace Environment
 
         private void Start()
         {
+            if (movableLayer  == default) movableLayer = LayerMask.NameToLayer("Movable");
+            if (interactLayer == default) interactLayer = LayerMask.NameToLayer("MovableInteract");
+            GetComponent<CircleCollider2D>().radius = radius;
             _movables = new List<Movable>();
         }
 
@@ -39,6 +45,8 @@ namespace Environment
 
         private void FixedUpdate()
         {
+            if (IsCurrentMovableLocked) return;
+            
             if (_movables.Count == 0)
             {
                 _isCurrentMovableSet = false;
@@ -57,8 +65,6 @@ namespace Environment
                 }
             }
             
-            MovableChanged = minMovable != _currentMovable;
-            if (IsCurrentMovableLocked && _movables.Contains(_currentMovable)) return;
             _currentMovable = minMovable;
             _isCurrentMovableSet = true;
         }
@@ -74,8 +80,11 @@ namespace Environment
 
             SwitchButton(true);
             button.transform.position = _currentMovable.transform.position;
+            
             manager.player.CurrentMovable = _currentMovable;
             manager.player.IsMovableAvailable = true;
+            _currentMovable.GravitationLocked = IsCurrentMovableLocked;
+            _currentMovable.gameObject.layer = (IsCurrentMovableLocked) ? interactLayer.value : movableLayer.value;
         }
 
         private void OnTriggerExit2D(Collider2D other)
