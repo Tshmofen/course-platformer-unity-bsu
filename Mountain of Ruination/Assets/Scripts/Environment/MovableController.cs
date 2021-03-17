@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using Entity.Player;
 using Interface.World;
 using UnityEngine;
 using Util;
@@ -10,13 +9,17 @@ namespace Environment
     public class MovableController : MonoBehaviour
     {
         #region Fields and properties
-
+        
+        [Header("External")]
         public InteractButton button;
+        public PlayerManager manager;
         
         private List<Movable> _movables;
-        private List<DistanceSortable<Movable>> _sortables;
         private Movable _currentMovable;
         private bool _isCurrentMovableSet;
+        
+        public bool IsCurrentMovableLocked { get; set; }
+        public bool MovableChanged { get; private set; }
 
         #endregion
 
@@ -25,7 +28,6 @@ namespace Environment
         private void Start()
         {
             _movables = new List<Movable>();
-            _sortables = new List<DistanceSortable<Movable>>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -43,14 +45,21 @@ namespace Environment
                 return;
             }
 
-            _sortables.Clear();
+            var minMovable = _movables[0];
+            var minDistance = (minMovable.transform.position - transform.position).magnitude;
             foreach (var movable in _movables)
             {
-                var distance = movable.transform.position - transform.position;
-                _sortables.Add(new DistanceSortable<Movable>(movable, distance.magnitude));
+                var distance = (movable.transform.position - transform.position).magnitude;
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    minMovable = movable;
+                }
             }
-            _sortables.Sort();
-            _currentMovable = _sortables[0].Item;
+            
+            MovableChanged = minMovable != _currentMovable;
+            if (IsCurrentMovableLocked && _movables.Contains(_currentMovable)) return;
+            _currentMovable = minMovable;
             _isCurrentMovableSet = true;
         }
 
@@ -59,11 +68,14 @@ namespace Environment
             if (!_isCurrentMovableSet)
             {
                 SwitchButton(false);
+                manager.player.IsMovableAvailable = false;
                 return;
             }
 
             SwitchButton(true);
             button.transform.position = _currentMovable.transform.position;
+            manager.player.CurrentMovable = _currentMovable;
+            manager.player.IsMovableAvailable = true;
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -83,24 +95,5 @@ namespace Environment
         }
 
         #endregion
-    }
-
-    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    public struct DistanceSortable<T> : IComparable<DistanceSortable<T>>
-    {
-        public T Item { get; set; }
-        public float Distance { get; set; }
- 
-        public DistanceSortable(T item, float distance)
-        {
-            Item = item;
-            Distance = distance;
-        }
-
-        public int CompareTo(DistanceSortable<T> other)
-        {
-            return Distance.CompareTo(other.Distance);
-        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Environment
 {
@@ -17,6 +16,15 @@ namespace Environment
         private void Start()
         {
             _body = GetComponent<Rigidbody2D>();
+        }
+
+        #endregion
+
+        #region Public
+
+        public void Move(Vector2 velocity)
+        {
+            _body.velocity = velocity;
         }
 
         #endregion

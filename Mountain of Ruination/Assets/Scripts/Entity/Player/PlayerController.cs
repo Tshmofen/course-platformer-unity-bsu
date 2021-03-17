@@ -1,6 +1,7 @@
 ﻿using System;
 using Damage;
 using Entity.Movement;
+using Environment;
 using UnityEngine;
 using Util;
 
@@ -11,6 +12,8 @@ namespace Entity.Player
     {
         #region Fields and properties
 
+        #region Hashes
+        
         // animation hashes
         private static readonly int HashVelocityScaleX = Animator.StringToHash("velocityScaleX");
         private static readonly int HashVelocityY = Animator.StringToHash("velocityY");
@@ -21,6 +24,8 @@ namespace Entity.Player
         private static readonly int HashToAttackPierce = Animator.StringToHash("toAttackPierce");
         private static readonly int HashToAttackLight = Animator.StringToHash("toAttackLight");
         private static readonly int HashToAttackHeavy = Animator.StringToHash("toAttackHeavy");
+        
+        #endregion
         
         #region Unity assigns
 
@@ -33,6 +38,9 @@ namespace Entity.Player
         public float jumpManualDumping;
         public float gravity;
         public float slopeMoveUpdateDelay = 0.1f;
+
+        [Header("Movables")] 
+        public float mouseSpeed = 1;
 
         [Header("External")] 
         public PlayerManager manager;
@@ -56,6 +64,7 @@ namespace Entity.Player
         }
         private bool WasAiming { get; set; }
         private bool ToAttack { get; set; }
+        private bool ToInteract { get; set; }
 
         #endregion
 
@@ -70,6 +79,8 @@ namespace Entity.Player
 
         private float _weaponX;
 
+        public Movable CurrentMovable { get; set; }
+        public bool IsMovableAvailable { get; set; }
         public bool IsLocked { get; set; }
         private bool IsMovingBackwards
         {
@@ -113,6 +124,7 @@ namespace Entity.Player
             UpdateMovement();
             if (IsLocked) return;
             UpdateDirection();
+            UpdateInteracting();
             UpdateCombatState();
             UpdateAimPositions();
             UpdateAnimation();
@@ -130,6 +142,7 @@ namespace Entity.Player
             ToContinueJump = InputUtil.GetContinuousJump();
             IsAiming ^= InputUtil.GetCombatMode();
             ToAttack = InputUtil.GetAttack();
+            ToInteract ^= InputUtil.GetInteract();
 
             /* Todo enable on combat animation appearing
             if (!IsAiming && ToAttack)
@@ -188,6 +201,21 @@ namespace Entity.Player
                     FlipDirection();
                     _weaponX *= -1;
                 }
+            }
+        }
+
+        private void UpdateInteracting()
+        {
+            ToInteract = (!manager.movable.MovableChanged) && ToInteract;
+
+            if (!_isAiming && ToInteract && IsMovableAvailable)
+            {
+                manager.movable.IsCurrentMovableLocked = true;
+                CurrentMovable.Move(MouseDelta.normalized * mouseSpeed);
+            }
+            else
+            {
+                manager.movable.IsCurrentMovableLocked = false;
             }
         }
 
