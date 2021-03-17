@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c48939419abc3af47ac7490f755c5109, type: 3}
-    totalSpriteSurfaceArea: 54953677
+    totalSpriteSurfaceArea: 38912797
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -81,6 +81,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5f9e50fddcbd27747be4ff005e67979b, type: 3}
   - {fileID: 21300000, guid: 7dae613e2740ac548a20ac64d66888f6, type: 3}
   - {fileID: 21300000, guid: bf66f81ff5312b0468db46a55bc8b271, type: 3}
+  - {fileID: 21300000, guid: 851af02f8ba31df42871acae71f3bda5, type: 3}
   - {fileID: 21300000, guid: f138225fb2758c641b40ae90c500db26, type: 3}
   - {fileID: 21300000, guid: 6ba24faf8b34f714793bd5fcd0b26f26, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -115,6 +116,7 @@ SpriteAtlas:
   - cloud02
   - mountains_main
   - mountain02
+  - stone
   - mountain01
   - doors
   m_RenderDataMap: {}
