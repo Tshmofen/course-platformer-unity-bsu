@@ -13,7 +13,7 @@ namespace Entity.Player
         #region Fields and properties
 
         #region Hashes
-        
+
         // animation hashes
         private static readonly int HashVelocityScaleX = Animator.StringToHash("velocityScaleX");
         private static readonly int HashVelocityY = Animator.StringToHash("velocityY");
@@ -24,35 +24,33 @@ namespace Entity.Player
         private static readonly int HashToAttackPierce = Animator.StringToHash("toAttackPierce");
         private static readonly int HashToAttackLight = Animator.StringToHash("toAttackLight");
         private static readonly int HashToAttackHeavy = Animator.StringToHash("toAttackHeavy");
-        
+        private static readonly int HashToJump = Animator.StringToHash("toJump");
+
         #endregion
-        
+
         #region Unity assigns
 
-        [Header("Horizontal Movement")] 
-        public float moveSpeed;
+        [Header("Horizontal Movement")] public float moveSpeed;
         public float backwardsSpeed;
 
-        [Header("Vertical Movement")] 
-        public float jumpHeight;
+        [Header("Vertical Movement")] public float jumpHeight;
         public float jumpManualDumping;
         public float gravity;
         public float slopeMoveUpdateDelay = 0.1f;
 
-        [Header("Movables")] 
-        public float mouseSpeed = 1;
+        [Header("Movables")] public float mouseSpeed = 1;
 
-        [Header("External")] 
-        public PlayerManager manager;
+        [Header("External")] public PlayerManager manager;
 
         #endregion
-        
+
         #region Input
 
         private float MoveX { get; set; }
         private Vector2 MouseDelta { get; set; }
         private bool ToJump { get; set; }
         private bool ToContinueJump { get; set; }
+
         private bool IsAiming
         {
             get => _isAiming;
@@ -62,6 +60,7 @@ namespace Entity.Player
                 _isAiming = value;
             }
         }
+
         private bool WasAiming { get; set; }
         private bool ToAttack { get; set; }
         private bool ToInteract { get; set; }
@@ -72,11 +71,11 @@ namespace Entity.Player
         private bool _wasMovingSlope;
         private bool _wasToContinueJump;
         private bool _isFacingRight;
+        private bool _playJumpAnimation;
 
         private float _wasMovingSlopeTime;
         private float _weaponX;
         private Vector2 _velocity;
-        private Vector2 _previousPosition;
         private MovementController _movement;
 
         public Movable CurrentMovable { get; set; }
@@ -95,25 +94,24 @@ namespace Entity.Player
             get
             {
                 var grounded = _wasMovingSlope || _movement.IsGrounded;
-                
+
                 if (_wasMovingSlope == false || Time.time - _wasMovingSlopeTime > slopeMoveUpdateDelay)
                 {
                     _wasMovingSlopeTime = Time.time;
-                    _wasMovingSlope = _movement.CollisionState.MovingDownSlope 
+                    _wasMovingSlope = _movement.CollisionState.MovingDownSlope
                                       || _movement.CollisionState.MovingUpSlope;
                 }
 
                 return grounded;
             }
         }
-        
+
         #endregion
 
         #region Unity calls
 
         private void Start()
         {
-            _previousPosition = transform.position;
             _movement = GetComponent<MovementController>();
             Cursor.lockState = CursorLockMode.Locked;
             _isFacingRight = true;
@@ -156,11 +154,11 @@ namespace Entity.Player
         // handles character movement and jumping using movement controller
         private void UpdateMovement()
         {
-            _previousPosition = transform.position;
             if (!IsLocked)
             {
                 if (ToJump && IsGrounded)
                 {
+                    _playJumpAnimation = true;
                     _velocity.y = Mathf.Sqrt(2f * jumpHeight * gravity);
                     _wasToContinueJump = true;
                 }
@@ -213,10 +211,10 @@ namespace Entity.Player
                 manager.movable.IsCurrentMovableLocked = true;
                 var position = (Vector2)transform.position;
                 CurrentMovable.Move(
-                    MouseDelta.normalized * mouseSpeed, 
+                    MouseDelta.normalized * mouseSpeed,
                     position,
-                    manager.movable.radius,
-                    position - _previousPosition
+                    _velocity,
+                    manager.movable.radius
                     );
             }
             else
@@ -247,8 +245,15 @@ namespace Entity.Player
 
             manager.animator.SetBool(HashAiming, IsAiming);
             manager.animator.SetFloat(HashWeaponX, _weaponX * (_isFacingRight ? 1 : -1));
-            if (IsAiming && !WasAiming)
-                manager.animator.SetTrigger(HashToAim);
+            if (IsAiming && !WasAiming) manager.animator.SetTrigger(HashToAim);
+            
+            if (_playJumpAnimation)
+            {
+                _playJumpAnimation = false; 
+                manager.animator.SetTrigger(HashToJump);
+            }
+            if (!_playJumpAnimation && manager.animator.GetBool(HashToJump)) 
+                manager.animator.SetBool(HashToJump, false);
         }
 
         #endregion

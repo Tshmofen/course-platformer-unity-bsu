@@ -33,22 +33,12 @@ namespace Environment
 
         #region Public
 
-        public void Move(Vector2 velocity, Vector2 playerPosition, float radius, Vector2 playerDifference)
+        public void Move(Vector2 moveVelocity, Vector2 playerPosition, Vector2 playerVelocity, float radius)
         {
-            if (playerDifference != Vector2.zero)
-            {
-                transform.position += (Vector3)playerDifference;
-            }
-
             var position = transform.position;
-            var newPosition = (Vector2) position + velocity * Time.deltaTime;
-            _body.velocity = ((newPosition - playerPosition).magnitude > radius) ? Vector2.zero : velocity;
-            
-            var distance = (Vector3)playerPosition - position;
-            if (distance.magnitude > radius)
-            {
-                transform.position += distance * (distance.magnitude - radius);
-            }
+            var velocity = moveVelocity + playerVelocity;
+            var newPosition = (Vector2)position + velocity * Time.deltaTime;
+            _body.velocity = ((newPosition - playerPosition).magnitude > radius) ? playerVelocity : velocity;
 
             if (_body.angularVelocity > 0)
             {
