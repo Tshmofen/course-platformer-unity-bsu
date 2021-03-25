@@ -247,13 +247,13 @@ namespace Entity.Player
             manager.animator.SetFloat(HashWeaponX, _weaponX * (_isFacingRight ? 1 : -1));
             if (IsAiming && !WasAiming) manager.animator.SetTrigger(HashToAim);
             
+            if (!_playJumpAnimation && manager.animator.GetBool(HashToJump)) 
+                manager.animator.SetBool(HashToJump, false);
             if (_playJumpAnimation)
             {
                 _playJumpAnimation = false; 
                 manager.animator.SetTrigger(HashToJump);
             }
-            if (!_playJumpAnimation && manager.animator.GetBool(HashToJump)) 
-                manager.animator.SetBool(HashToJump, false);
         }
 
         #endregion

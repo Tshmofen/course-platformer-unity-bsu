@@ -1,16 +1,34 @@
 fileFormatVersion: 2
-guid: aabfee113f54bb64b8e8520f8e0e025a
+guid: 1f0e5db92f2d41b4c929da8e45770689
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1673732733077124514
-    second: trees_0
+      213: 7554575809798379199
+    second: RedTreeWithLeaves_0
   - first:
-      213: 3611188691014843535
-    second: trees_1
+      213: -5304370109013495988
+    second: RedTreeWithLeaves_1
   - first:
-      213: 2249915519335348110
-    second: trees_2
+      213: 1783235011532029754
+    second: RedTreeWithLeaves_2
+  - first:
+      213: -7701635020715580992
+    second: RedTreeWithLeaves_3
+  - first:
+      213: 8297723124361629057
+    second: RedTreeWithLeaves_4
+  - first:
+      213: -5547898055092060650
+    second: RedTreeWithLeaves_5
+  - first:
+      213: -662974909241453155
+    second: RedTreeWithLeaves_6
+  - first:
+      213: -514728763895082487
+    second: RedTreeWithLeaves_7
+  - first:
+      213: 3635208802170071222
+    second: RedTreeWithLeaves_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -55,7 +73,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,55 +130,139 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: trees_0
+      name: RedTreeWithLeaves_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1002
-        height: 1021
+        width: 104
+        height: 97
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5a8ef372f4b5c8e0800000000000000
-      internalID: -1673732733077124514
+      spriteID: fb69ac35cae37d860800000000000000
+      internalID: 7554575809798379199
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: trees_1
+      name: RedTreeWithLeaves_1
       rect:
         serializedVersion: 2
-        x: 1031
+        x: 104
         y: 0
-        width: 904
-        height: 1015
+        width: 104
+        height: 97
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8cf8d84bf48d1230800000000000000
-      internalID: 3611188691014843535
+      spriteID: c4fec075d771366b0800000000000000
+      internalID: -5304370109013495988
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: trees_2
+      name: RedTreeWithLeaves_2
       rect:
         serializedVersion: 2
-        x: 1962
+        x: 208
         y: 0
-        width: 622
-        height: 1024
+        width: 104
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3ff7658bc25fb810800000000000000
+      internalID: 1783235011532029754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedTreeWithLeaves_3
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 0
+        width: 104
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c12a80f0cb4e1590800000000000000
+      internalID: -7701635020715580992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedTreeWithLeaves_4
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 0
+        width: 104
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18d8e18e73f672370800000000000000
+      internalID: 8297723124361629057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedTreeWithLeaves_5
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 0
+        width: 104
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61e3828ec18e103b0800000000000000
+      internalID: -5547898055092060650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedTreeWithLeaves_6
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 0
+        width: 104
+        height: 97
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,8 +270,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e873f988e3e493f10800000000000000
-      internalID: 2249915519335348110
+      spriteID: d959aa725d3acc6f0800000000000000
+      internalID: -662974909241453155
       vertices: []
       indices: 
       edges: []
