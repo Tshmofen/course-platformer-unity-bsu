@@ -16,13 +16,14 @@ namespace Environment
         public float radius = 3;
         [Header("External")]
         public InteractButton button;
+        public InteractPointer pointer;
         public PlayerManager manager;
         
         private List<Movable> _movables;
         private Movable _currentMovable;
-        private bool _isCurrentMovableSet;
-        
-        public bool IsCurrentMovableLocked { get; set; }
+        private Movable _minMovable;
+        private bool _isCurrentSet;
+        private bool _isMinSet;
 
         #endregion
 
@@ -35,23 +36,37 @@ namespace Environment
             GetComponent<CircleCollider2D>().radius = radius;
             _movables = new List<Movable>();
         }
-
-        private void OnTriggerEnter2D(Collider2D other)
+        
+        private void Update()
         {
-            if (!other.CompareTag(Tag.Movable)) return;
-            var movable = other.GetComponent<Movable>();
-            if (movable != null) _movables.Add(movable);
+            if (!_isCurrentSet && manager.player.IsInteracting && _isMinSet)
+            {
+                _currentMovable = _minMovable;
+                _isCurrentSet = true;
+                pointer.gameObject.SetActive(true);
+            }
+            
+            if (_isCurrentSet && !manager.player.IsInteracting)
+            {
+                _isCurrentSet = false;
+                pointer.gameObject.SetActive(false);
+            }
+            
+            if (_isCurrentSet)
+            {
+                button.transform.position = _currentMovable.transform.position;
+            }
+            
+            if (_isMinSet && !_isCurrentSet)
+            {
+                button.Sprite.enabled = true;
+                button.transform.position = _minMovable.transform.position;
+            }
         }
-
+        
         private void FixedUpdate()
         {
-            if (IsCurrentMovableLocked) return;
-            
-            if (_movables.Count == 0)
-            {
-                _isCurrentMovableSet = false;
-                return;
-            }
+            if (_movables.Count == 0) return;
 
             var minMovable = _movables[0];
             var minDistance = (minMovable.transform.position - transform.position).magnitude;
@@ -65,42 +80,22 @@ namespace Environment
                 }
             }
             
-            _currentMovable = minMovable;
-            _isCurrentMovableSet = true;
+            _minMovable = minMovable;
+            _isMinSet = true;
         }
-
-        private void Update()
+        
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!_isCurrentMovableSet)
-            {
-                SwitchButton(false);
-                manager.player.IsMovableAvailable = false;
-                return;
-            }
-
-            SwitchButton(true);
-            button.transform.position = _currentMovable.transform.position;
-            
-            manager.player.CurrentMovable = _currentMovable;
-            manager.player.IsMovableAvailable = true;
-            _currentMovable.GravitationLocked = IsCurrentMovableLocked;
-            _currentMovable.gameObject.layer = (IsCurrentMovableLocked) ? interactLayer.value : movableLayer.value;
+            if (!other.CompareTag(Tag.Movable)) return;
+            var movable = other.GetComponent<Movable>();
+            if (movable != null) _movables.Add(movable);
         }
-
+        
         private void OnTriggerExit2D(Collider2D other)
         {
             if (!other.CompareTag(Tag.Movable)) return;
             var movable = other.GetComponent<Movable>();
             if (movable != null) _movables.Remove(movable);
-        }
-
-        #endregion
-
-        #region Support Methods
-
-        private void SwitchButton(bool enable)
-        {
-            button.Sprite.enabled = enable;
         }
 
         #endregion

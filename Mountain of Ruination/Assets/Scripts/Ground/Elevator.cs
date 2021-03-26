@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Ground
 {
-    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(EdgeCollider2D))]
     public class Elevator : MonoBehaviour
     {
         #region Fields
@@ -11,7 +11,7 @@ namespace Ground
         private Vector3 _previousPosition;
         private List<GameObject> _attached;
         
-        private BoxCollider2D _collider;
+        private EdgeCollider2D _collider;
         private ContactFilter2D _filter;
         
         private float _time;
@@ -45,7 +45,7 @@ namespace Ground
         private void Start()
         {
             _attached = new List<GameObject>();
-            _collider = GetComponent<BoxCollider2D>();
+            _collider = GetComponent<EdgeCollider2D>();
             _filter = new ContactFilter2D
             {
                 useLayerMask = true,

@@ -10,11 +10,7 @@ namespace Environment
         public float rotationStopSpeed = 1;
         
         private Rigidbody2D _body;
-
-        public bool RotationLocked
-        {
-            set => _body.freezeRotation = value;
-        }
+        
         public bool GravitationLocked
         {
             set => _body.gravityScale = (value) ? 0 : 1;

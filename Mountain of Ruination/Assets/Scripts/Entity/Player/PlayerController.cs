@@ -1,7 +1,6 @@
 ﻿using System;
 using Damage;
 using Entity.Movement;
-using Environment;
 using UnityEngine;
 using Util;
 
@@ -77,9 +76,8 @@ namespace Entity.Player
         private float _weaponX;
         private Vector2 _velocity;
         private MovementController _movement;
-
-        public Movable CurrentMovable { get; set; }
-        public bool IsMovableAvailable { get; set; }
+        
+        public bool IsInteracting => !_isAiming && ToInteract;
         public bool IsLocked { get; set; }
         private bool IsMovingBackwards
         {
@@ -123,7 +121,6 @@ namespace Entity.Player
             UpdateMovement();
             if (IsLocked) return;
             UpdateDirection();
-            UpdateInteracting();
             UpdateCombatState();
             UpdateAimPositions();
             UpdateAnimation();
@@ -201,25 +198,6 @@ namespace Entity.Player
                     FlipDirection();
                     _weaponX *= -1;
                 }
-            }
-        }
-
-        private void UpdateInteracting()
-        {
-            if (!_isAiming && ToInteract && IsMovableAvailable)
-            {
-                manager.movable.IsCurrentMovableLocked = true;
-                var position = (Vector2)transform.position;
-                CurrentMovable.Move(
-                    MouseDelta.normalized * mouseSpeed,
-                    position,
-                    _velocity,
-                    manager.movable.radius
-                    );
-            }
-            else
-            {
-                manager.movable.IsCurrentMovableLocked = false;
             }
         }
 
