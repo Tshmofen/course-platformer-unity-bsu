@@ -11,14 +11,17 @@ namespace Environment
     {
         #region Fields and properties
 
-        public LayerMask movableLayer;
-        public LayerMask interactLayer;
+        [Header("Interacting")]
         public float radius = 3;
+        public LayerMask hitLayers;
+        public float interactBuffer = 1.5f;
         [Header("External")]
         public InteractButton button;
         public InteractPointer pointer;
         public PlayerManager manager;
         
+        private int _movableLayer;
+        private int _actionLayer;
         private List<Movable> _movables;
         private Movable _currentMovable;
         private Movable _minMovable;
@@ -31,17 +34,24 @@ namespace Environment
 
         private void Start()
         {
-            if (movableLayer  == default) movableLayer = LayerMask.NameToLayer("Movable");
-            if (interactLayer == default) interactLayer = LayerMask.NameToLayer("MovableInteract");
+            _movableLayer = LayerMask.NameToLayer("Movable");
+            _actionLayer = LayerMask.NameToLayer("MovableAction");
             GetComponent<CircleCollider2D>().radius = radius;
             _movables = new List<Movable>();
         }
         
         private void Update()
         {
+            if (!_isMinSet || !IsPointCanReachPlayer(_minMovable.transform.position))
+            {
+                button.Sprite.enabled = false;
+            }
+            
             if (!_isCurrentSet && manager.player.IsInteracting && _isMinSet)
             {
                 _currentMovable = _minMovable;
+                _currentMovable.GravitationLocked = true;
+                _currentMovable.gameObject.layer = _actionLayer;
                 _isCurrentSet = true;
                 pointer.gameObject.SetActive(true);
             }
@@ -49,12 +59,17 @@ namespace Environment
             if (_isCurrentSet && !manager.player.IsInteracting)
             {
                 _isCurrentSet = false;
+                _currentMovable.GravitationLocked = false;
+                _currentMovable.gameObject.layer = _movableLayer;
                 pointer.gameObject.SetActive(false);
             }
             
             if (_isCurrentSet)
             {
-                button.transform.position = _currentMovable.transform.position;
+                var movablePosition = _currentMovable.transform.position;
+                button.transform.position = movablePosition;
+                _currentMovable.Move(pointer.transform.position);
+                UpdatePlayerInteracting(movablePosition);
             }
             
             if (_isMinSet && !_isCurrentSet)
@@ -66,22 +81,27 @@ namespace Environment
         
         private void FixedUpdate()
         {
-            if (_movables.Count == 0) return;
+            if (_movables.Count == 0)
+            {
+                _isMinSet = false;
+                return;
+            }
 
             var minMovable = _movables[0];
             var minDistance = (minMovable.transform.position - transform.position).magnitude;
             foreach (var movable in _movables)
             {
-                var distance = (movable.transform.position - transform.position).magnitude;
-                if (distance < minDistance)
+                var movablePosition = movable.transform.position;
+                var distance = (movablePosition - transform.position).magnitude;
+                if (distance < minDistance && IsPointCanReachPlayer(movablePosition))
                 {
                     minDistance = distance;
                     minMovable = movable;
                 }
             }
-            
-            _minMovable = minMovable;
+
             _isMinSet = true;
+            _minMovable = minMovable;
         }
         
         private void OnTriggerEnter2D(Collider2D other)
@@ -96,6 +116,29 @@ namespace Environment
             if (!other.CompareTag(Tag.Movable)) return;
             var movable = other.GetComponent<Movable>();
             if (movable != null) _movables.Remove(movable);
+        }
+
+        #endregion
+
+        #region Suport Methods
+
+        private void UpdatePlayerInteracting(Vector2 movablePosition)
+        {
+            var distance = (movablePosition - (Vector2)manager.player.transform.position).magnitude;
+            manager.player.IsInteracting =
+                (distance < radius + interactBuffer) && IsPointCanReachPlayer(movablePosition);
+        }
+
+        private bool IsPointCanReachPlayer(Vector2 point)
+        {
+            var direction = (Vector2)manager.player.transform.position - point;
+            var hit = Physics2D.Raycast(
+                point,
+                direction,
+                direction.magnitude,
+                hitLayers
+            );
+            return hit.collider == null;
         }
 
         #endregion

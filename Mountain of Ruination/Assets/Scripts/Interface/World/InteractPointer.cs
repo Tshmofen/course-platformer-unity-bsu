@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Util;
 
 namespace Interface.World
@@ -8,8 +7,6 @@ namespace Interface.World
     {
         #region Fields & properties
 
-        private Vector2 _position;
-        
         [Header("Position")]
         public float radius = 3;
         [Header("Movement")]
@@ -30,12 +27,13 @@ namespace Interface.World
             var move = InputUtil.GetMousePositionDelta();
             if (move != Vector2.zero)
             {
-                _position += move * (speed * Time.deltaTime);
-                var distance = _position.magnitude;
-                if (distance > radius)
-                    _position = _position.normalized * radius;
+                var pointerTransform = transform;
+                var position = (Vector2)pointerTransform.position + move * (speed * Time.deltaTime);
+                var parentPosition = (Vector2) pointerTransform.parent.position;
+                var distance = position - parentPosition;
+                if (distance.magnitude > radius) position = parentPosition + distance.normalized * radius;
 
-                transform.localPosition = _position;
+                pointerTransform.position = position;
             }
         }
 

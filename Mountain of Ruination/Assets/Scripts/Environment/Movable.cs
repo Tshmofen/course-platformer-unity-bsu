@@ -7,10 +7,12 @@ namespace Environment
     {
         #region Fields & properties
 
-        public float rotationStopSpeed = 1;
+        public float rotationStopSpeed = 15;
+        public float moveTime = 0.25f;
+        public LayerMask _hitLayers;
         
         private Rigidbody2D _body;
-        
+
         public bool GravitationLocked
         {
             set => _body.gravityScale = (value) ? 0 : 1;
@@ -29,12 +31,18 @@ namespace Environment
 
         #region Public
 
-        public void Move(Vector2 moveVelocity, Vector2 playerPosition, Vector2 playerVelocity, float radius)
+        public void Move(Vector2 toPosition)
         {
-            var position = transform.position;
-            var velocity = moveVelocity + playerVelocity;
-            var newPosition = (Vector2)position + velocity * Time.deltaTime;
-            _body.velocity = ((newPosition - playerPosition).magnitude > radius) ? playerVelocity : velocity;
+            var position = (Vector2)transform.position;
+            var direction = (toPosition - position);
+            var hit = Physics2D.Raycast(
+                position,
+                direction, 
+                direction.magnitude,
+                _hitLayers
+                );
+            if (hit.collider != null) direction = hit.point - position;
+            _body.velocity = direction / moveTime;
 
             if (_body.angularVelocity > 0)
             {
@@ -50,7 +58,6 @@ namespace Environment
                 rotation = (rotation >= 0) ? 0 : rotation;
                 _body.angularVelocity = rotation;
             }
-            
         }
 
         #endregion

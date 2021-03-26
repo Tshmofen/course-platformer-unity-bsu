@@ -77,7 +77,12 @@ namespace Entity.Player
         private Vector2 _velocity;
         private MovementController _movement;
         
-        public bool IsInteracting => !_isAiming && ToInteract;
+        public bool IsInteracting
+        {
+            get => !_isAiming && ToInteract;
+            set => ToInteract = value;
+        }
+
         public bool IsLocked { get; set; }
         private bool IsMovingBackwards
         {
