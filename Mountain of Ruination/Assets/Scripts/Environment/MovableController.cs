@@ -42,7 +42,7 @@ namespace Environment
         
         private void Update()
         {
-            if (!_isMinSet || !IsPointCanReachPlayer(_minMovable.transform.position))
+            if (!_isMinSet && !_isCurrentSet || !IsPointCanReachPlayer(_minMovable.transform.position))
             {
                 button.Sprite.enabled = false;
             }
@@ -100,7 +100,7 @@ namespace Environment
                 }
             }
 
-            _isMinSet = true;
+            _isMinSet = minMovable != _movables[0] || IsPointCanReachPlayer(minMovable.transform.position);
             _minMovable = minMovable;
         }
         

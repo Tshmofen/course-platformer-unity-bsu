@@ -10,6 +10,7 @@ namespace Environment
         public float rotationStopSpeed = 15;
         public float moveTime = 0.25f;
         public LayerMask _hitLayers;
+        public float acceleration = 1f;
         
         private Rigidbody2D _body;
 
@@ -42,6 +43,7 @@ namespace Environment
                 _hitLayers
                 );
             if (hit.collider != null) direction = hit.point - position;
+
             _body.velocity = direction / moveTime;
 
             if (_body.angularVelocity > 0)
@@ -58,6 +60,26 @@ namespace Environment
                 rotation = (rotation >= 0) ? 0 : rotation;
                 _body.angularVelocity = rotation;
             }
+        }
+
+        #endregion
+
+        #region Support methods
+
+        private float Accelerate(float origin, float target)
+        {
+            if (target > origin)
+            {
+                origin += acceleration * Time.deltaTime;
+                origin = (origin > target) ? target : origin;
+            }
+            else
+            {
+                origin -= acceleration * Time.deltaTime;
+                origin = (origin < target) ? target : origin;
+            }
+
+            return origin;
         }
 
         #endregion
