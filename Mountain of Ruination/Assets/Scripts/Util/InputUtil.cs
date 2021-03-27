@@ -39,6 +39,11 @@ namespace Util
         {
             return Input.GetKeyDown(KeyCode.E);
         }
+
+        public static bool GetIgnorePlatform()
+        {
+            return Input.GetKeyDown(KeyCode.S);
+        }
         
         public static bool GetContinuousAttack()
         {

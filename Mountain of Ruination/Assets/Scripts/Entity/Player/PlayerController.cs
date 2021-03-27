@@ -49,6 +49,7 @@ namespace Entity.Player
         private Vector2 MouseDelta { get; set; }
         private bool ToJump { get; set; }
         private bool ToContinueJump { get; set; }
+        private bool ToIgnorePlatform { get; set; }
 
         private bool IsAiming
         {
@@ -144,6 +145,7 @@ namespace Entity.Player
             IsAiming ^= InputUtil.GetCombatMode();
             ToAttack = InputUtil.GetAttack();
             ToInteract ^= InputUtil.GetInteract();
+            ToIgnorePlatform = InputUtil.GetIgnorePlatform();
 
             /* Todo enable on combat animation appearing
             if (!IsAiming && ToAttack)
@@ -158,6 +160,8 @@ namespace Entity.Player
         {
             if (!IsLocked)
             {
+                _movement.ignoreOneWayPlatformsThisFrame = ToIgnorePlatform;
+
                 if (ToJump && IsGrounded)
                 {
                     _playJumpAnimation = true;

@@ -16,7 +16,7 @@ TagManager:
   - Entity
   - Player
   - Ground
-  - PostProcess
+  - GroundPlatform
   - Background
   - Foreground
   - Interface
