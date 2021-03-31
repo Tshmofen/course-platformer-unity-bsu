@@ -1,24 +1,18 @@
-﻿using UnityEditor;
+﻿using Interface.Scene;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Interface.Menu
 {
     public class MainMenuManager : MonoBehaviour
     {
-        #region Unity assign
-
-        public Button initialButton;
-
-        #endregion
-
-        #region Unity call
-
-        private void Start()
-        {
-            initialButton.Select();
-        }
+        #region Fields & properties
+        
+        public StandaloneInputModule inputModule;
+        public Image loadingBackground;
+        public float loadingFadeTime = 0.7f;
 
         #endregion
 
@@ -26,7 +20,12 @@ namespace Interface.Menu
         
         public void HandleNewGame()
         {
-            SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
+            inputModule.enabled = false;
+
+            var loader = gameObject.AddComponent<SceneLoader>();
+            loader.background = loadingBackground;
+            loader.fadeTime = loadingFadeTime;
+            loader.Load("PrologueScene");
         }
 
         public void HandleOptions()
