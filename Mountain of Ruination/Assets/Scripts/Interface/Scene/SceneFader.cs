@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Interface.Scene
@@ -18,6 +19,11 @@ namespace Interface.Scene
         #endregion
 
         #region Unity calls
+
+        private void Start()
+        {
+            background.enabled = true;
+        }
 
         private void Update()
         {
