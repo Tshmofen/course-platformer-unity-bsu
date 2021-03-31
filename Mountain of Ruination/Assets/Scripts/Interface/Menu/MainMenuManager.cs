@@ -13,6 +13,7 @@ namespace Interface.Menu
         public StandaloneInputModule inputModule;
         public Image loadingBackground;
         public float loadingFadeTime = 0.7f;
+        public SceneAsset initialScene;
 
         #endregion
 
@@ -25,7 +26,7 @@ namespace Interface.Menu
             var loader = gameObject.AddComponent<SceneLoader>();
             loader.background = loadingBackground;
             loader.fadeTime = loadingFadeTime;
-            loader.Load("PrologueScene");
+            loader.Load(initialScene.name);
         }
 
         public void HandleOptions()

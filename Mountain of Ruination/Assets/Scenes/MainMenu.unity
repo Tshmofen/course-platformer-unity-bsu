@@ -541,6 +541,7 @@ MonoBehaviour:
   inputModule: {fileID: 1089796742}
   loadingBackground: {fileID: 1693950931}
   loadingFadeTime: 0.7
+  initialScene: {fileID: 102900000, guid: 407622dcee2897240904e93d80db6de1, type: 3}
 --- !u!1 &1089796741
 GameObject:
   m_ObjectHideFlags: 0
