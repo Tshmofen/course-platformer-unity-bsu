@@ -20,8 +20,6 @@ namespace Environment
         public InteractPointer pointer;
         public PlayerManager manager;
         
-        private int _movableLayer;
-        private int _actionLayer;
         private List<Movable> _movables;
         private Movable _currentMovable;
         private Movable _minMovable;
@@ -34,8 +32,6 @@ namespace Environment
 
         private void Start()
         {
-            _movableLayer = LayerMask.NameToLayer("Movable");
-            _actionLayer = LayerMask.NameToLayer("MovableAction");
             GetComponent<CircleCollider2D>().radius = radius;
             _movables = new List<Movable>();
         }
@@ -51,7 +47,7 @@ namespace Environment
             {
                 _currentMovable = _minMovable;
                 _currentMovable.GravitationLocked = true;
-                _currentMovable.gameObject.layer = _actionLayer;
+                _currentMovable.ChangeLayer(true);
                 _isCurrentSet = true;
                 pointer.gameObject.SetActive(true);
             }
@@ -59,8 +55,9 @@ namespace Environment
             if (_isCurrentSet && !manager.player.IsInteracting)
             {
                 _isCurrentSet = false;
+                _currentMovable.PlayerTransform = manager.player.transform;
                 _currentMovable.GravitationLocked = false;
-                _currentMovable.gameObject.layer = _movableLayer;
+                _currentMovable.ChangeLayer(false);
                 pointer.gameObject.SetActive(false);
             }
             

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Environment
 {
@@ -6,14 +7,19 @@ namespace Environment
     public class Movable : MonoBehaviour
     {
         #region Fields & properties
-
+        
         public float rotationStopSpeed = 15;
         public float moveTime = 0.25f;
-        public LayerMask _hitLayers;
-        public float acceleration = 1f;
-        
-        private Rigidbody2D _body;
+        public LayerMask hitLayers;
+        public float changeRadius = 1.7f;
 
+        private Rigidbody2D _body;
+        private int _movableLayer;
+        private int _actionLayer;
+        private bool _isChangingLayer;
+
+        public Transform PlayerTransform { get; set; }
+        
         public bool GravitationLocked
         {
             set => _body.gravityScale = (value) ? 0 : 1;
@@ -26,6 +32,8 @@ namespace Environment
         private void Start()
         {
             _body = GetComponent<Rigidbody2D>();
+            _movableLayer = LayerMask.NameToLayer("Movable");
+            _actionLayer = LayerMask.NameToLayer("MovableAction");
         }
 
         #endregion
@@ -40,7 +48,7 @@ namespace Environment
                 position,
                 direction, 
                 direction.magnitude,
-                _hitLayers
+                hitLayers
                 );
             if (hit.collider != null) direction = hit.point - position;
 
@@ -62,24 +70,36 @@ namespace Environment
             }
         }
 
+        public void ChangeLayer(bool inAction)
+        {
+            if (inAction)
+            {
+                gameObject.layer = _actionLayer;
+            }
+            else if (!_isChangingLayer)
+            {
+                StartCoroutine(ReturnLayerToUsual());
+            }
+        }
+
         #endregion
 
         #region Support methods
 
-        private float Accelerate(float origin, float target)
+        private IEnumerator ReturnLayerToUsual()
         {
-            if (target > origin)
+            _isChangingLayer = true;
+            while (true)
             {
-                origin += acceleration * Time.deltaTime;
-                origin = (origin > target) ? target : origin;
+                yield return new WaitForFixedUpdate();
+                var distance = PlayerTransform.position - transform.position;
+                if (distance.magnitude > changeRadius)
+                {
+                    _isChangingLayer = false;
+                    gameObject.layer = _movableLayer;
+                    yield break;
+                }
             }
-            else
-            {
-                origin -= acceleration * Time.deltaTime;
-                origin = (origin < target) ? target : origin;
-            }
-
-            return origin;
         }
 
         #endregion
