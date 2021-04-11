@@ -1,4 +1,5 @@
-﻿using Interface.Scene;
+﻿using System;
+using Interface.Scene;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,14 +12,22 @@ namespace Interface.Menu
         #region Fields & properties
         
         public StandaloneInputModule inputModule;
+        public EventSystem eventSystem;
         public Image loadingBackground;
         public float loadingFadeTime = 0.7f;
         public SceneAsset initialScene;
+        public GameObject initialButton;
 
         #endregion
 
-        #region Support methods
-        
+        #region Unity calls
+
+        private void Start()
+        {
+            Time.timeScale = 1;
+            eventSystem.SetSelectedGameObject(initialButton);
+        }
+
         public void HandleNewGame()
         {
             inputModule.enabled = false;

@@ -1,6 +1,8 @@
-﻿using UnityEditor;
+﻿using Interface.Scene;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Util;
 
 namespace Interface.Menu
@@ -9,9 +11,14 @@ namespace Interface.Menu
     {
         #region Fields & properties
 
+        [Header("Pause menu")]
         public GameObject menuObject;
         public GameObject mainButton;
         public EventSystem eventSystem;
+        [Header("Menu returning")]
+        public Image loadingBackground;
+        public float loadingFadeTime = 0.7f;
+        public SceneAsset mainMenuScene;
 
         private bool _isMenuEnabled;
         private bool _wasMenuEnabled;
@@ -42,6 +49,15 @@ namespace Interface.Menu
             EnableMenu(_isMenuEnabled, _wasMenuEnabled);
         }
 
+        // called by a button
+        public void HandleMainMenu()
+        {
+            var loader = gameObject.AddComponent<SceneLoader>();
+            loader.background = loadingBackground;
+            loader.fadeTime = loadingFadeTime;
+            loader.Load(mainMenuScene.name);
+        }
+        
         // called by a button
         public void HandleExit()
         {

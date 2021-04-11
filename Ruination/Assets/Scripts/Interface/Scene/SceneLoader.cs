@@ -31,7 +31,7 @@ namespace Interface.Scene
             if (_toFade)
             {
                 background.enabled = true;
-                _currentFade += Time.deltaTime;
+                _currentFade += Time.unscaledDeltaTime;
                 if (_currentFade >= fadeTime)
                 {
                     _currentFade = fadeTime;

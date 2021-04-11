@@ -28,7 +28,7 @@ namespace Interface.Scene
         {
             if (_currentFade >= fadeTime)
             {
-                Destroy(background.gameObject);
+                background.enabled = false;
                 Destroy(this);
             }
 

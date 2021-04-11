@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 130458016}
   - component: {fileID: 130458015}
   - component: {fileID: 130458018}
+  - component: {fileID: 130458019}
   m_Layer: 5
   m_Name: NewGame
   m_TagString: Untagged
@@ -277,6 +278,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &130458019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130458013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8d3f64a2044dc8a1f6f1522526f742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &141196323
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,9 +552,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputModule: {fileID: 1089796742}
+  eventSystem: {fileID: 1089796743}
   loadingBackground: {fileID: 1693950931}
   loadingFadeTime: 0.7
   initialScene: {fileID: 102900000, guid: 407622dcee2897240904e93d80db6de1, type: 3}
+  initialButton: {fileID: 130458013}
 --- !u!1 &1089796741
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +771,7 @@ GameObject:
   - component: {fileID: 1547249498}
   - component: {fileID: 1547249497}
   - component: {fileID: 1547249496}
+  - component: {fileID: 1547249500}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -897,6 +913,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547249494}
   m_CullTransparentMesh: 1
+--- !u!114 &1547249500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547249494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8d3f64a2044dc8a1f6f1522526f742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1636899358
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,6 +938,7 @@ GameObject:
   - component: {fileID: 1636899362}
   - component: {fileID: 1636899361}
   - component: {fileID: 1636899360}
+  - component: {fileID: 1636899364}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -1051,6 +1080,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636899358}
   m_CullTransparentMesh: 1
+--- !u!114 &1636899364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636899358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8d3f64a2044dc8a1f6f1522526f742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1649204985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,8 +1104,9 @@ GameObject:
   - component: {fileID: 1649204988}
   - component: {fileID: 1649204987}
   - component: {fileID: 1649204986}
+  - component: {fileID: 1649204990}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: ScreenSpace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1154,6 +1196,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1649204990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649204985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8437cb88698498199da9e86621a93a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 1693950931}
+  fadeTime: 0.7
+  waitTime: 0.3
 --- !u!1 &1667968010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,13 +1390,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693950929}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
