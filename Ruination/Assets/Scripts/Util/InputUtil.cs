@@ -73,6 +73,11 @@ namespace Util
             return (Vector2) Input.mousePosition - objectPosition;
         }
 
+        public static bool GetPauseMenu()
+        {
+            return Input.GetKeyDown(KeyCode.Escape);
+        }
+
         #endregion
     }
 }

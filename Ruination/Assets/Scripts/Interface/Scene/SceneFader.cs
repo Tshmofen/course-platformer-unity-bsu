@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Interface.Scene
@@ -34,11 +33,11 @@ namespace Interface.Scene
             }
 
             if (_currentWait < waitTime) 
-                _currentWait += Time.deltaTime;
+                _currentWait += Time.unscaledDeltaTime;
 
             if (_currentWait >= waitTime)
             {
-                _currentFade += Time.deltaTime;
+                _currentFade += Time.unscaledDeltaTime;
                 if (_currentFade > fadeTime) _currentFade = fadeTime;
                 
                 var color = background.color;
