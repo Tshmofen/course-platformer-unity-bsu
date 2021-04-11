@@ -111,7 +111,7 @@ MonoBehaviour:
   - {x: -0.5, y: 0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -17276
+  m_InstanceId: -2148
 --- !u!61 &3582027998122719757
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -176,4 +176,4 @@ MonoBehaviour:
   hitLayers:
     serializedVersion: 2
     m_Bits: 0
-  changeRadius: 1.7
+  changeRadius: 1.1
