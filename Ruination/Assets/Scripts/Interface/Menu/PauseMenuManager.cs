@@ -15,6 +15,7 @@ namespace Interface.Menu
 
         private bool _isMenuEnabled;
         private bool _wasMenuEnabled;
+        private GameObject _lastButton;
 
         #endregion
 
@@ -22,7 +23,8 @@ namespace Interface.Menu
 
         private void Start()
         {
-            EnableMenu(false);
+            _lastButton = mainButton;
+            EnableMenu(false, false);
         }
 
         private void Update()
@@ -30,29 +32,14 @@ namespace Interface.Menu
             _wasMenuEnabled = _isMenuEnabled;
             _isMenuEnabled ^= InputUtil.GetPauseMenu();
             if (_wasMenuEnabled && !_isMenuEnabled || !_wasMenuEnabled && _isMenuEnabled) 
-                EnableMenu(_isMenuEnabled);
-        }
-
-        #endregion
-
-        #region Support methods
-
-        private void EnableMenu(bool enable)
-        {
-            Time.timeScale = enable ? 0 : 1;
-            menuObject.SetActive(enable);
-            Cursor.lockState = (enable) ? CursorLockMode.None : CursorLockMode.Locked;
+                EnableMenu(_isMenuEnabled, _wasMenuEnabled);
         }
         
-        #endregion
-
-        #region Public
-
         // called by a button
         public void HandleContinue()
         {
             _isMenuEnabled = false;
-            EnableMenu(_isMenuEnabled);
+            EnableMenu(_isMenuEnabled, _wasMenuEnabled);
         }
 
         // called by a button
@@ -60,6 +47,19 @@ namespace Interface.Menu
         {
             EditorApplication.isPlaying = false;
             Application.Quit();
+        }
+
+        #endregion
+
+        #region Support methods
+
+        private void EnableMenu(bool enable, bool wasEnabled)
+        {
+            Time.timeScale = enable ? 0 : 1;
+            menuObject.SetActive(enable);
+            Cursor.lockState = (enable) ? CursorLockMode.None : CursorLockMode.Locked;
+            if (wasEnabled && !enable) _lastButton = eventSystem.currentSelectedGameObject;
+            if (!wasEnabled && enable) eventSystem.SetSelectedGameObject(_lastButton);
         }
         
         #endregion
