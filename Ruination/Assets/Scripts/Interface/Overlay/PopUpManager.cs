@@ -5,7 +5,7 @@ using Util;
 namespace Interface.Overlay
 {
     [RequireComponent(typeof(Canvas))]
-    public class OverlayManager : MonoBehaviour
+    public class PopUpManager : MonoBehaviour
     {
         #region Fields and properties
 
@@ -20,7 +20,7 @@ namespace Interface.Overlay
 
         private void Awake()
         {
-            InterfaceUtil.OverlayManager = this;
+            InterfaceUtil.PopUpManager = this;
         }
 
         private void Start()

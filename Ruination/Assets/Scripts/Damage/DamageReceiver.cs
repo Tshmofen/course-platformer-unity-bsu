@@ -96,7 +96,7 @@ namespace Damage
             var abovePosition = _collider.bounds.size;
             abovePosition /= 2;
             InterfaceUtil
-                .OverlayManager
+                .PopUpManager
                 .ShowPopUp(
                     transform.position + abovePosition,
                     damage.ToString(CultureInfo.InvariantCulture),

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Interface.Menu
+namespace Interface.Overlay
 {
     [RequireComponent(typeof(Animator))]
     public class AnimatorKeeper : MonoBehaviour

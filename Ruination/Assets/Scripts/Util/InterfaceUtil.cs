@@ -7,7 +7,7 @@ namespace Util
         #region Fields and properties
 
         // the only overlay in scene, that will render interface
-        public static OverlayManager OverlayManager;
+        public static PopUpManager PopUpManager;
 
         #endregion
     }

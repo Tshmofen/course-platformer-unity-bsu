@@ -1,5 +1,4 @@
-﻿using System;
-using Interface.Scene;
+﻿using Interface.Scene;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;

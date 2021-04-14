@@ -3,11 +3,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Util;
 
 namespace Interface.Menu
 {
-    public class PauseMenuManager : MonoBehaviour
+    public class PauseMenu : MonoBehaviour
     {
         #region Fields & properties
 
@@ -19,34 +18,28 @@ namespace Interface.Menu
         public Image loadingBackground;
         public float loadingFadeTime = 0.7f;
         public SceneAsset mainMenuScene;
-
-        private bool _isMenuEnabled;
-        private bool _wasMenuEnabled;
+        
         private GameObject _lastButton;
+        
+        public bool IsMenuEnabled { get; set; }
+        public bool WasMenuEnabled { get; set; }
 
         #endregion
 
         #region Unity calls
-
+        
         private void Start()
         {
             _lastButton = mainButton;
             EnableMenu(false, false);
         }
-
-        private void Update()
-        {
-            _wasMenuEnabled = _isMenuEnabled;
-            _isMenuEnabled ^= InputUtil.GetPauseMenu();
-            if (_wasMenuEnabled && !_isMenuEnabled || !_wasMenuEnabled && _isMenuEnabled) 
-                EnableMenu(_isMenuEnabled, _wasMenuEnabled);
-        }
+        
         
         // called by a button
         public void HandleContinue()
         {
-            _isMenuEnabled = false;
-            EnableMenu(_isMenuEnabled, _wasMenuEnabled);
+            IsMenuEnabled = false;
+            EnableMenu(IsMenuEnabled, WasMenuEnabled);
         }
 
         // called by a button
@@ -67,9 +60,9 @@ namespace Interface.Menu
 
         #endregion
 
-        #region Support methods
+        #region Public
 
-        private void EnableMenu(bool enable, bool wasEnabled)
+        public void EnableMenu(bool enable, bool wasEnabled)
         {
             Time.timeScale = enable ? 0 : 1;
             menuObject.SetActive(enable);
@@ -77,7 +70,7 @@ namespace Interface.Menu
             if (wasEnabled && !enable) _lastButton = eventSystem.currentSelectedGameObject;
             if (!wasEnabled && enable) eventSystem.SetSelectedGameObject(_lastButton);
         }
-        
+
         #endregion
     }
 }
