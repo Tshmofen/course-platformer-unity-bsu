@@ -1,6 +1,5 @@
 ﻿using Interface.Menu;
 using UnityEngine;
-using Util;
 
 namespace Interface.Manager
 {
@@ -8,9 +7,8 @@ namespace Interface.Manager
     {
         #region Fields & properties
 
-        [Header("External Menus")] 
-        public PauseMenu pauseMenu;
-        public InventoryMenu inventoryMenu;
+        [Header("External Menus")]
+        public AbstractMenu[] menus;
 
         #endregion
 
@@ -18,31 +16,14 @@ namespace Interface.Manager
 
         private void Update()
         {
-            UpdatePause();
-            UpdateInventory();
-        }
-        
-
-        #endregion
-
-        #region Update Parts
-
-        private void UpdatePause()
-        {
-            pauseMenu.WasMenuEnabled = pauseMenu.IsMenuEnabled;
-            pauseMenu.IsMenuEnabled ^= InputUtil.GetPauseMenu();
-            if (pauseMenu.WasMenuEnabled && !pauseMenu.IsMenuEnabled 
-                || !pauseMenu.WasMenuEnabled && pauseMenu.IsMenuEnabled) 
-                pauseMenu.EnableMenu(pauseMenu.IsMenuEnabled, pauseMenu.WasMenuEnabled);
-        }
-
-        private void UpdateInventory()
-        {
-            inventoryMenu.WasMenuEnabled = inventoryMenu.IsMenuEnabled;
-            inventoryMenu.IsMenuEnabled ^= InputUtil.GetInventoryMenu();
-            if (inventoryMenu.WasMenuEnabled && !inventoryMenu.IsMenuEnabled
-                || !inventoryMenu.WasMenuEnabled && inventoryMenu.IsMenuEnabled)
-                inventoryMenu.EnableMenu(inventoryMenu.IsMenuEnabled, inventoryMenu.WasMenuEnabled);
+            foreach (var menu in menus)
+            {
+                menu.WasMenuEnabled = menu.IsMenuEnabled;
+                menu.IsMenuEnabled ^= menu.GetMenuControls();
+                if (menu.WasMenuEnabled && !menu.IsMenuEnabled 
+                    || !menu.WasMenuEnabled && menu.IsMenuEnabled) 
+                    menu.EnableMenu(menu.IsMenuEnabled, menu.WasMenuEnabled);
+            }
         }
         
         #endregion

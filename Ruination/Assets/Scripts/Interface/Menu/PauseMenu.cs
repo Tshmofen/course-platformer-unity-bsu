@@ -3,10 +3,11 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Util;
 
 namespace Interface.Menu
 {
-    public class PauseMenu : MonoBehaviour
+    public class PauseMenu : AbstractMenu
     {
         #region Fields & properties
 
@@ -20,9 +21,6 @@ namespace Interface.Menu
         public SceneAsset mainMenuScene;
         
         private GameObject _lastButton;
-        
-        public bool IsMenuEnabled { get; set; }
-        public bool WasMenuEnabled { get; set; }
 
         #endregion
 
@@ -62,7 +60,7 @@ namespace Interface.Menu
 
         #region Public
 
-        public void EnableMenu(bool enable, bool wasEnabled)
+        public override void EnableMenu(bool enable, bool wasEnabled)
         {
             Time.timeScale = enable ? 0 : 1;
             menuObject.SetActive(enable);
@@ -70,6 +68,8 @@ namespace Interface.Menu
             if (wasEnabled && !enable) _lastButton = eventSystem.currentSelectedGameObject;
             if (!wasEnabled && enable) eventSystem.SetSelectedGameObject(_lastButton);
         }
+        
+        public override bool GetMenuControls() => InputUtil.GetPauseMenu();
 
         #endregion
     }

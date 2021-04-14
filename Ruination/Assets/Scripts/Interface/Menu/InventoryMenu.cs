@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using Util;
 
 namespace Interface.Menu
 {
-    public class InventoryMenu : MonoBehaviour
+    public class InventoryMenu : AbstractMenu
     {
         #region Fields & properties
 
@@ -11,9 +12,6 @@ namespace Interface.Menu
         public GameObject menuObject;
         public GameObject mainButton;
         public EventSystem eventSystem;
-        
-        public bool IsMenuEnabled { get; set; }
-        public bool WasMenuEnabled { get; set; }
 
         #endregion
 
@@ -22,20 +20,20 @@ namespace Interface.Menu
         public void HandleExit()
         {
             IsMenuEnabled = false;
-            EnableMenu(IsMenuEnabled, WasMenuEnabled);
+            EnableMenu(this.IsMenuEnabled, this.WasMenuEnabled);
         }
 
         #endregion
 
         #region Public
 
-        public void EnableMenu(bool enable, bool wasEnabled)
+        public override void EnableMenu(bool enable, bool wasEnabled)
         {
             menuObject.SetActive(enable);
             Cursor.lockState = (enable) ? CursorLockMode.None : CursorLockMode.Locked;
-            /*if (wasEnabled && !enable) _lastButton = eventSystem.currentSelectedGameObject;
-            if (!wasEnabled && enable) eventSystem.SetSelectedGameObject(_lastButton);*/
         }
+
+        public override bool GetMenuControls() => InputUtil.GetInventoryMenu();
 
         #endregion
     }
