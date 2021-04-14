@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Interface.Overlay;
+using UnityEngine;
 using UnityEngine.UI;
 using Util;
 
-namespace Interface.Overlay
+namespace Interface.Manager
 {
     [RequireComponent(typeof(Canvas))]
     public class PopUpManager : MonoBehaviour

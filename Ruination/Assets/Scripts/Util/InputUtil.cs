@@ -77,6 +77,11 @@ namespace Util
         {
             return Input.GetKeyDown(KeyCode.Escape);
         }
+        
+        public static bool GetInventoryMenu()
+        {
+            return Input.GetKeyDown(KeyCode.I);
+        }
 
         #endregion
     }

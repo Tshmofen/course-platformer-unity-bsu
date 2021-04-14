@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Interface.Menu;
+using UnityEngine;
 using Util;
 
-namespace Interface.Menu
+namespace Interface.Manager
 {
     public class GameOverlayManager : MonoBehaviour
     {
@@ -9,6 +10,7 @@ namespace Interface.Menu
 
         [Header("External Menus")] 
         public PauseMenu pauseMenu;
+        public InventoryMenu inventoryMenu;
 
         #endregion
 
@@ -36,7 +38,11 @@ namespace Interface.Menu
 
         private void UpdateInventory()
         {
-            // TODO inventory handling
+            inventoryMenu.WasMenuEnabled = inventoryMenu.IsMenuEnabled;
+            inventoryMenu.IsMenuEnabled ^= InputUtil.GetInventoryMenu();
+            if (inventoryMenu.WasMenuEnabled && !inventoryMenu.IsMenuEnabled
+                || !inventoryMenu.WasMenuEnabled && inventoryMenu.IsMenuEnabled)
+                inventoryMenu.EnableMenu(inventoryMenu.IsMenuEnabled, inventoryMenu.WasMenuEnabled);
         }
         
         #endregion
