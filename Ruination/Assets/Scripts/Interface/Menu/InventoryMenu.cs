@@ -17,7 +17,10 @@ namespace Interface.Menu
         //public GameObject mainButton;
         public TextMeshProUGUI descriptionMesh;
         public Image fullItemImage;
-
+        public GameObject itemGroupObject;
+        [Header("External")] 
+        public GameObject itemButtonPrefab;
+        
         #endregion
 
         #region Unity calls
@@ -42,6 +45,15 @@ namespace Interface.Menu
         {
             descriptionMesh.text = item.description;
             fullItemImage.sprite = item.spriteFull;
+        }
+
+        public void FilterItems(TypeObject typeObject)
+        {
+            var type = typeObject.type;
+            foreach (var item in _items)
+                item.gameObject.SetActive(
+                    type == ItemType.Default || item.types.Contains(type)
+                    );
         }
 
         #endregion

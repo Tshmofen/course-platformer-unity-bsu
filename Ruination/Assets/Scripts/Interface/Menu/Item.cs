@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,10 +16,11 @@ namespace Interface.Menu
         public Image miniImageObject;
         [Header("Item parts")]
         public string itemName; 
-        [TextArea(15,20)]
+        [TextArea(10,15)]
         public string description;
         public Sprite spriteFull;
         public Sprite spriteMini;
+        public List<ItemType> types;
 
         #endregion
 
@@ -39,6 +41,5 @@ namespace Interface.Menu
         #endif
 
         #endregion
-        
     }
 }

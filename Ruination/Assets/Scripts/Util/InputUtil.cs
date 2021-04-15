@@ -5,7 +5,7 @@ namespace Util
 {
     public static class InputUtil
     {
-        #region Public
+        #region Character actions
 
         public static Vector2 GetMove()
         {
@@ -54,6 +54,10 @@ namespace Util
         {
             return Input.GetKey(KeyCode.Mouse1);
         }
+        
+        #endregion
+
+        #region Mouse
 
         public static Vector2 GetMousePositionDelta()
         {
@@ -72,6 +76,15 @@ namespace Util
             Vector2 objectPosition = Camera.main.WorldToScreenPoint(@object.transform.position);
             return (Vector2) Input.mousePosition - objectPosition;
         }
+        
+        #endregion
+
+        #region Interface
+        
+        public static bool GetCloseAnyMenu()
+        {
+            return Input.GetKeyDown(KeyCode.Escape);
+        }
 
         public static bool GetPauseMenu()
         {
@@ -82,7 +95,7 @@ namespace Util
         {
             return Input.GetKeyDown(KeyCode.I);
         }
-
+        
         #endregion
     }
 }
