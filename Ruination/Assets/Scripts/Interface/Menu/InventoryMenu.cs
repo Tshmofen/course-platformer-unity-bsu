@@ -1,7 +1,6 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Util;
 
@@ -11,12 +10,13 @@ namespace Interface.Menu
     {
         #region Fields & properties
 
+        private List<Item> _items;
+
         [Header("Inventory menu")]
         public GameObject menuObject;
         //public GameObject mainButton;
         public TextMeshProUGUI descriptionMesh;
         public Image fullItemImage;
-        public EventSystem eventSystem;
 
         #endregion
 
@@ -25,6 +25,9 @@ namespace Interface.Menu
         private void Start()
         {
             EnableMenu(IsMenuEnabled, WasMenuEnabled);
+            _items = new List<Item>(GetComponentsInChildren<Item>());
+            if (_items.Count != 0)
+                SetCurrentItem(_items[0]);
         }
 
         // called by a button
