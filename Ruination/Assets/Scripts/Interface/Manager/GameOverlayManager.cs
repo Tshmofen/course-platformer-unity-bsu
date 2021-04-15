@@ -25,7 +25,7 @@ namespace Interface.Manager
                     menu.EnableMenu(menu.IsMenuEnabled, menu.WasMenuEnabled);
             }
         }
-        
+
         #endregion
     }
 }

@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Util;
 
 namespace Interface.Menu
@@ -10,17 +13,32 @@ namespace Interface.Menu
 
         [Header("Inventory menu")]
         public GameObject menuObject;
-        public GameObject mainButton;
+        //public GameObject mainButton;
+        public TextMeshProUGUI descriptionMesh;
+        public Image fullItemImage;
         public EventSystem eventSystem;
 
         #endregion
 
         #region Unity calls
 
+        private void Start()
+        {
+            EnableMenu(IsMenuEnabled, WasMenuEnabled);
+        }
+
+        // called by a button
         public void HandleExit()
         {
             IsMenuEnabled = false;
             EnableMenu(this.IsMenuEnabled, this.WasMenuEnabled);
+        }
+        
+        // called by a button
+        public void SetCurrentItem(Item item)
+        {
+            descriptionMesh.text = item.description;
+            fullItemImage.sprite = item.spriteFull;
         }
 
         #endregion

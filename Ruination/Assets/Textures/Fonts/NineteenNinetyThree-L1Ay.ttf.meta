@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2763bc3e5e53d0f49b149217ec128634
+guid: d1b88e036f0779e489c88e710135f0c2
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - OldStyle 1
+  - Nineteen Ninety Three
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

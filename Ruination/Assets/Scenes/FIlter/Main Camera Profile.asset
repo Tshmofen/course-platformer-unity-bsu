@@ -211,17 +211,17 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: Infinity
-          outSlope: Infinity
+          inSlope: 0
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.029038113
-          value: 0
-          inSlope: 0
-          outSlope: 0
+          time: 0.15607986
+          value: 0.01509434
+          inSlope: -9.829155
+          outSlope: -9.829155
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
