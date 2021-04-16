@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GroundAttlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 8192
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 2
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
+    totalSpriteSurfaceArea: 17408
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -7442466831354495073, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: -2758364981388734925, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: -1544141426327130054, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: 3171808008472339440, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: -4295036799630443274, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: 818413500724086597, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: -6973030652947874646, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: 7509354994493868590, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: -4187769007935139591, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: -168299473261762064, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: 553709322798177895, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: -1562508329771358811, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: 3408509812448030950, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: -1421306759884879181, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: 4989970518786976911, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: -5469024873739612135, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: -2866031040649608532, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - MountainGround_6
+  - MountainGround_7
+  - MountainGround_4
+  - MountainGround_5
+  - MountainGround_2
+  - MountainGround_3
+  - MountainGround_0
+  - MountainGround_1
+  - MountainGround_8
+  - MountainGround_9
+  - MountainGround_15
+  - MountainGround_14
+  - MountainGround_16
+  - MountainGround_11
+  - MountainGround_10
+  - MountainGround_13
+  - MountainGround_12
+  m_RenderDataMap: {}
+  m_Tag: GroundAttlas
+  m_IsVariant: 0
