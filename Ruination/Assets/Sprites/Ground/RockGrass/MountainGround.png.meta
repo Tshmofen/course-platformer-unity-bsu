@@ -53,6 +53,15 @@ TextureImporter:
   - first:
       213: 3408509812448030950
     second: MountainGround_16
+  - first:
+      213: -13425948240993718
+    second: MountainGround_17
+  - first:
+      213: 343873085457291524
+    second: MountainGround_18
+  - first:
+      213: 7501832800569803437
+    second: MountainGround_19
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -229,7 +238,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -16, y: -16}
+      - - {x: 14, y: 0}
+        - {x: -16, y: -16}
         - {x: 16, y: -16}
         - {x: 16, y: 0}
       tessellationDetail: 0
@@ -244,7 +254,7 @@ TextureImporter:
       name: MountainGround_4
       rect:
         serializedVersion: 2
-        x: 164
+        x: 165
         y: 115
         width: 32
         height: 32
@@ -253,7 +263,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -16, y: 0}
+      - - {x: 14, y: 16}
+        - {x: -16, y: 0}
         - {x: -16, y: -16}
         - {x: 16, y: -16}
         - {x: 16, y: 16}
@@ -341,7 +352,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -16, y: 0}
+      - - {x: -14, y: 0}
+        - {x: -16, y: 0}
         - {x: -16, y: -16}
         - {x: 16, y: -16}
       tessellationDetail: 0
@@ -356,7 +368,7 @@ TextureImporter:
       name: MountainGround_9
       rect:
         serializedVersion: 2
-        x: 164
+        x: 165
         y: 75
         width: 32
         height: 32
@@ -365,7 +377,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -16, y: 16}
+      - - {x: -14, y: 16}
+        - {x: -16, y: 16}
         - {x: -16, y: -16}
         - {x: 16, y: -16}
         - {x: 16, y: 0}
@@ -381,7 +394,7 @@ TextureImporter:
       name: MountainGround_10
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 38
         width: 32
         height: 32
@@ -393,6 +406,7 @@ TextureImporter:
       - - {x: -16, y: -16}
         - {x: 16, y: -16}
         - {x: 16, y: 16}
+        - {x: 15, y: 16}
       tessellationDetail: 0
       bones: []
       spriteID: f8c28f3bfbfef3540800000000000000
@@ -405,7 +419,7 @@ TextureImporter:
       name: MountainGround_11
       rect:
         serializedVersion: 2
-        x: 40
+        x: 41
         y: 38
         width: 32
         height: 32
@@ -414,7 +428,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -16, y: 16}
+      - - {x: -15, y: 16}
+        - {x: -16, y: 16}
         - {x: -16, y: -16}
         - {x: 16, y: -16}
       tessellationDetail: 0
@@ -429,8 +444,8 @@ TextureImporter:
       name: MountainGround_12
       rect:
         serializedVersion: 2
-        x: 79
-        y: 35
+        x: 80
+        y: 38
         width: 32
         height: 32
       alignment: 0
@@ -451,7 +466,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 126
-        y: 35
+        y: 38
         width: 32
         height: 32
       alignment: 0
@@ -471,8 +486,8 @@ TextureImporter:
       name: MountainGround_14
       rect:
         serializedVersion: 2
-        x: 164
-        y: 35
+        x: 165
+        y: 38
         width: 32
         height: 32
       alignment: 0
@@ -492,7 +507,7 @@ TextureImporter:
       name: MountainGround_15
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
         width: 32
         height: 32
@@ -526,6 +541,69 @@ TextureImporter:
       bones: []
       spriteID: 6e0f5688d957d4f20800000000000000
       internalID: 3408509812448030950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MountainGround_17
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a42a254db2d40dff0800000000000000
+      internalID: -13425948240993718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MountainGround_18
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 409df72dfbea5c400800000000000000
+      internalID: 343873085457291524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MountainGround_19
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da2465a8f2ddb1860800000000000000
+      internalID: 7501832800569803437
       vertices: []
       indices: 
       edges: []

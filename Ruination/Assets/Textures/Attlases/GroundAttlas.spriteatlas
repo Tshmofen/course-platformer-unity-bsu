@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
-    totalSpriteSurfaceArea: 17408
+    totalSpriteSurfaceArea: 20480
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -62,11 +62,14 @@ SpriteAtlas:
   - {fileID: -168299473261762064, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: 553709322798177895, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: -1562508329771358811, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: -13425948240993718, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: 3408509812448030950, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: -1421306759884879181, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: 4989970518786976911, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: -5469024873739612135, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: -2866031040649608532, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: 7501832800569803437, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
+  - {fileID: 343873085457291524, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   m_PackedSpriteNamesToIndex:
   - MountainGround_6
   - MountainGround_7
@@ -80,11 +83,14 @@ SpriteAtlas:
   - MountainGround_9
   - MountainGround_15
   - MountainGround_14
+  - MountainGround_17
   - MountainGround_16
   - MountainGround_11
   - MountainGround_10
   - MountainGround_13
   - MountainGround_12
+  - MountainGround_19
+  - MountainGround_18
   m_RenderDataMap: {}
   m_Tag: GroundAttlas
   m_IsVariant: 0
