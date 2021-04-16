@@ -29,7 +29,7 @@ namespace Interface.Menu
         private void Start()
         {
             _lastButton = mainButton;
-            EnableMenu(false, false);
+            EnableMenu(IsMenuEnabled, WasMenuEnabled);
         }
         
         
