@@ -26,6 +26,8 @@ namespace Environment.Background
 
         private void OnBecameInvisible()
         {
+            if (_camera == null) return;
+            
             var transformCloud = transform;
             var transformCamera = _camera.transform;
             var positionCamera = transformCamera.position;
