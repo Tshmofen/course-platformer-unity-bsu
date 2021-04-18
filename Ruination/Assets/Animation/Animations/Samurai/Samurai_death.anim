@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Death
+  m_Name: Samurai_death
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -37,7 +37,7 @@ AnimationClip:
     - time: 1.45
       value: {fileID: 6495761399759928590, guid: 9f560de36ab690f46b33f172c96afceb,
         type: 3}
-    - time: 1.7666667
+    - time: 1.7166667
       value: {fileID: 7854471163323729487, guid: 9f560de36ab690f46b33f172c96afceb,
         type: 3}
     - time: 4
