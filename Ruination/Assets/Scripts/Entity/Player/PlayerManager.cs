@@ -1,4 +1,5 @@
 ﻿using Environment;
+using Environment.Interactive;
 
 namespace Entity.Player
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Environment
+namespace Environment.Interactive
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class Movable : MonoBehaviour
