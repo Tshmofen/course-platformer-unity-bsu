@@ -44,15 +44,10 @@ namespace Util
         {
             return Input.GetKeyDown(KeyCode.S);
         }
-        
-        public static bool GetContinuousAttack()
-        {
-            return Input.GetKey(KeyCode.Mouse0);
-        }
 
-        public static bool GetSpecialAbility()
+        public static bool GetParry()
         {
-            return Input.GetKey(KeyCode.Mouse1);
+            return Input.GetKeyDown(KeyCode.Mouse1);
         }
         
         #endregion

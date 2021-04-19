@@ -9,33 +9,6 @@ namespace Damage
     [RequireComponent(typeof(HealthStats), typeof(BoxCollider2D))]
     public class DamageReceiver : MonoBehaviour
     {
-        #region Public
-
-        public void ReceiveDamage(DamageStats damage, DamageType type)
-        {
-            if (IsReceiveDamage)
-            {
-                var damageAmount = CalculateDamage(damage, type);
-                _health.CurrentHealth -= damageAmount;
-                if (_health.CurrentHealth < 0) _health.CurrentHealth = 0;
-
-                ShowPopUp(damageAmount);
-                EnableHealthBar();
-                
-                if (_health.CurrentHealth == 0)
-                    StartDieState();
-                else
-                    StartInjureState();
-            }
-        }
-
-        public void DestroyReceiver()
-        {
-            manager.destroyer.DestroyEntity();
-        }
-
-        #endregion
-        
         #region Fields and properties
 
         private static readonly string BindersPath = "/Interactive/Interface/Overlay/Enemies";
@@ -46,15 +19,16 @@ namespace Damage
         private GameObject _binder;
         private bool _isBinderSet;
         
-        public EntityManager manager;
+        [Header("Visuals")]
         public bool showHealthBar = true;
         public GameObject healthBinderPrefab;
+        [Header("External")] 
+        public bool isReceiveDamage = true;
+        public EntityManager manager;
         
         // animation hashed strings
         private static readonly int ToDie = Animator.StringToHash("toDie");
         private static readonly int ToInjure = Animator.StringToHash("toInjure");
-
-        public bool IsReceiveDamage { get; set; }
 
         #endregion
         
@@ -64,7 +38,7 @@ namespace Damage
         {
             _health = GetComponent<HealthStats>();
             _collider = GetComponent<BoxCollider2D>();
-            IsReceiveDamage = true;
+            isReceiveDamage = true;
         }
 
         // Also destroys created health bar
@@ -130,6 +104,33 @@ namespace Damage
         private void StartInjureState()
         {
             manager.animator.SetTrigger(ToInjure);
+        }
+
+        #endregion
+        
+        #region Public
+
+        public void ReceiveDamage(DamageStats damage, DamageType type)
+        {
+            if (isReceiveDamage)
+            {
+                var damageAmount = CalculateDamage(damage, type);
+                _health.CurrentHealth -= (int)damageAmount;
+                if (_health.CurrentHealth < 0) _health.CurrentHealth = 0;
+
+                ShowPopUp(damageAmount);
+                EnableHealthBar();
+                
+                if (_health.CurrentHealth == 0)
+                    StartDieState();
+                else
+                    StartInjureState();
+            }
+        }
+
+        public void DestroyReceiver()
+        {
+            manager.destroyer.DestroyEntity();
         }
 
         #endregion

@@ -8,7 +8,7 @@ namespace Damage
 
         private void Start()
         {
-            CurrentHealth = maxHealth;
+            CurrentHealth = (int)maxHealth;
         }
 
         #endregion
@@ -20,7 +20,7 @@ namespace Damage
         [Range(0, 1)] public float pierceArmor;
         [Range(0, 1)] public float heavyArmor;
 
-        public float CurrentHealth { get; set; }
+        public int CurrentHealth { get; set; }
 
         #endregion
     }

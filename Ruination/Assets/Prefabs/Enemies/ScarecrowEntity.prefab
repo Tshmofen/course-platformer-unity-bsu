@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5260039356515124995}
   - component: {fileID: 5260039356515124994}
   - component: {fileID: 5260039356515125052}
-  - component: {fileID: 3949157061239444019}
   - component: {fileID: 5260039356515125053}
   - component: {fileID: 5260039356515124993}
   - component: {fileID: 5260039356515124992}
@@ -78,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300082, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9056604, g: 0.7732289, b: 0.7732289, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -113,19 +112,6 @@ MonoBehaviour:
     m_Extent: {x: 0.70794344, y: 1.0001252, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
---- !u!114 &3949157061239444019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5260039356515124997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38f48a8d66b2adc46887f23a3a88ac01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
 --- !u!61 &5260039356515125053
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -218,7 +204,7 @@ MonoBehaviour:
   speed: 1
   directionStep: 0.75
   gravity: 20
-  pathNodes: 020000000500000003000000
+  pathNodes: 04000000070000000600000007000000
   targetRadius: 0.1
   playerLayer:
     serializedVersion: 2
@@ -239,7 +225,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039356596892898}
-  - component: {fileID: 6285249920362750683}
   m_Layer: 7
   m_Name: bone_10
   m_TagString: Untagged
@@ -261,32 +246,6 @@ Transform:
   m_Father: {fileID: 5260039357798168187}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 99.56427}
---- !u!114 &6285249920362750683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5260039356596892901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 0
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 777ff018000000006f5534f7811295c36bad82de6164cc35
-  m_ShapePath:
-  - {x: -0.0860907, y: -0.09068537, z: -0.000000008716597}
-  - {x: 0.6330961, y: -0.019834362, z: -0.000000008716597}
-  - {x: 0.619894, y: 0.075478986, z: -0.000000008716597}
-  - {x: -0.10887591, y: 0.10408391, z: -0.000000008716597}
-  m_ShapePathHash: -637210228
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -49956
 --- !u!1 &5260039356823118828
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +255,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039356823118829}
-  - component: {fileID: 6992261585788670490}
   m_Layer: 7
   m_Name: bone_8
   m_TagString: Untagged
@@ -319,37 +277,6 @@ Transform:
   m_Father: {fileID: 5260039357798168187}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6992261585788670490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5260039356823118828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 0
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 777ff018000000006f5534f7811295c36bad82de6164cc35
-  m_ShapePath:
-  - {x: 0.030345106, y: -0.25865164, z: -0.000000008716597}
-  - {x: 0.3872669, y: -0.41197234, z: -0.000000008716597}
-  - {x: 0.53531563, y: -0.5229326, z: -0.000000008716597}
-  - {x: 0.551406, y: -0.2429678, z: -0.000000008716597}
-  - {x: 1.0706438, y: -0.037225563, z: -0.000000008716597}
-  - {x: 0.55929613, y: 0.20962648, z: -0.000000008716597}
-  - {x: 0.5206808, y: 0.48367378, z: -0.000000008716597}
-  - {x: 0.36577865, y: 0.37179914, z: -0.000000008716597}
-  - {x: 0.035846002, y: 0.20643623, z: -0.000000008716597}
-  m_ShapePathHash: 446105903
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -49946
 --- !u!1 &5260039357220609267
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +286,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039357220609264}
-  - component: {fileID: 3819000682594499318}
   m_Layer: 7
   m_Name: bone_7
   m_TagString: Untagged
@@ -381,32 +307,6 @@ Transform:
   m_Father: {fileID: 5260039357798168187}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3819000682594499318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5260039357220609267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 0
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 777ff018000000006f5534f7811295c36bad82de6164cc35
-  m_ShapePath:
-  - {x: -0.13275395, y: -0.12528808, z: -0.000000008716597}
-  - {x: 0.6055855, y: -0.076305665, z: -0.000000008716597}
-  - {x: 0.6478089, y: 0.0817232, z: -0.000000008716597}
-  - {x: -0.08936656, y: 0.1141466, z: -0.000000008716597}
-  m_ShapePathHash: 255708492
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -49940
 --- !u!1 &5260039357248826635
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,7 +355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5260039357268912998
 Transform:
   m_ObjectHideFlags: 0
@@ -533,7 +433,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039357605441558}
-  - component: {fileID: 7407047564425951330}
   m_Layer: 7
   m_Name: bone_1
   m_TagString: Untagged
@@ -556,36 +455,6 @@ Transform:
   m_Father: {fileID: 13004843442747381}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7407047564425951330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5260039357605441561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 0
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 777ff018000000006f5534f7811295c36bad82de6164cc35
-  m_ShapePath:
-  - {x: -0.0024688968, y: -0.0838828, z: -0.000000008716597}
-  - {x: 0.46748403, y: -0.0859821, z: -0.000000008716597}
-  - {x: 0.56699026, y: -0.28499457, z: -0.000000008716597}
-  - {x: 0.9794391, y: -0.32812583, z: -0.000000008716597}
-  - {x: 0.9523008, y: 0.33717126, z: -0.000000008716597}
-  - {x: 0.58508223, y: 0.266813, z: -0.000000008716597}
-  - {x: 0.44034585, y: 0.1039844, z: -0.000000008716597}
-  - {x: 0.024668831, y: 0.056745257, z: -0.000000008716597}
-  m_ShapePathHash: 2140057134
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -49928
 --- !u!1 &5260039357798168186
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +464,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260039357798168187}
-  - component: {fileID: 5135691643839500294}
   m_Layer: 7
   m_Name: bone_5
   m_TagString: Untagged
@@ -620,32 +488,6 @@ Transform:
   m_Father: {fileID: 5260039357605441558}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5135691643839500294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5260039357798168186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 0
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 777ff018000000006f5534f7811295c36bad82de6164cc35
-  m_ShapePath:
-  - {x: -0.0024373403, y: -0.265045, z: -0.000000008716597}
-  - {x: 0.73440063, y: -0.28241256, z: -0.000000008716597}
-  - {x: 0.76110524, y: 0.21871895, z: -0.000000008716597}
-  - {x: 0.04335555, y: 0.2625338, z: -0.000000008716597}
-  m_ShapePathHash: 1505005298
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -49934
 --- !u!1 &5369368767460016876
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,8 +644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f77d6b0f527ff419e33064cd20faf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInAttack: 0
-  manager: {fileID: 742657096}
 --- !u!1 &8079245082144805267
 GameObject:
   m_ObjectHideFlags: 0
