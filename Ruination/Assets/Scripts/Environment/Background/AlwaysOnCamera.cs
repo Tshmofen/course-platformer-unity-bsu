@@ -17,11 +17,15 @@ namespace Environment.Background
             _renderer = GetComponent<Renderer>();
             _rendererPaired = pairedObject.GetComponent<Renderer>();
         }
-        
-        private void OnBecameInvisible()
+
+        private void OnBecameInvisible() => MoveInView();
+
+        private void OnBecameVisible() => MoveInView();
+
+        private void MoveInView()
         {
             if (_camera == null) return;
-
+            
             var transformObject = transform;
             var transformCamera = _camera.transform;
             var positionObject = transformObject.position;
@@ -30,22 +34,23 @@ namespace Environment.Background
             var objectHalfWidth = _renderer.bounds.extents.x;
             var pairedHalfWidth = _rendererPaired.bounds.extents.x;
             var cameraHalfWidth = _camera.orthographicSize * _camera.aspect;
-
+            
             var objectRightEdgeInView =
                 positionObject.x + objectHalfWidth > positionCamera.x - cameraHalfWidth &&
                 positionObject.x + objectHalfWidth < positionCamera.x + cameraHalfWidth;
             var objectLeftEdgeInView =
                 positionObject.x - objectHalfWidth > positionCamera.x - cameraHalfWidth &&
                 positionObject.x - objectHalfWidth < positionCamera.x + cameraHalfWidth;
-            if (objectRightEdgeInView || objectLeftEdgeInView ) 
-                return;
-
-            // if object right to camera add minus
-            var minus = (positionObject.x - positionCamera.x > 0) ? -1 : 1;
-            var newPosition = pairedObject.transform.position;
-            newPosition.x += minus * pairedHalfWidth * 0.99f;
-            newPosition.x += minus * objectHalfWidth;
-            transformObject.position = newPosition;
+            
+            if (!objectLeftEdgeInView && !objectRightEdgeInView)
+            {
+                // if object right to camera add minus
+                var minus = (positionObject.x - positionCamera.x > 0) ? -1 : 1;
+                var newPosition = pairedObject.transform.position;
+                newPosition.x += minus * pairedHalfWidth * 0.99f;
+                newPosition.x += minus * objectHalfWidth;
+                transformObject.position = newPosition;
+            }
         }
     }
 }
