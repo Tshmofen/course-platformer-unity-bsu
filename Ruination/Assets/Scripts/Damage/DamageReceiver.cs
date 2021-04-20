@@ -10,9 +10,6 @@ namespace Damage
     public class DamageReceiver : MonoBehaviour
     {
         #region Fields and properties
-
-        private static readonly string BindersPath = "/Interactive/Interface/Overlay/Enemies";
-        
         private HealthStats _health;
         private BoxCollider2D _collider;
 
@@ -23,6 +20,7 @@ namespace Damage
         public bool showHealthBar = true;
         public GameObject healthBinderPrefab;
         [Header("External")] 
+        public GameObject bindersRoot;
         public bool isReceiveDamage = true;
         public EntityManager manager;
         
@@ -83,8 +81,7 @@ namespace Damage
             if (showHealthBar && !_isBinderSet)
             { 
                 _isBinderSet = true;
-                var binders = GameObject.Find(BindersPath);
-                _binder = Instantiate(healthBinderPrefab, binders.transform);
+                _binder = Instantiate(healthBinderPrefab, bindersRoot.transform);
                 var binderScript = _binder.GetComponent<HealthBinder>();
                 
                 binderScript.health = _health;

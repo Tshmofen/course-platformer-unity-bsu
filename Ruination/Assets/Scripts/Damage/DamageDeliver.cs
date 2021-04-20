@@ -1,35 +1,26 @@
-﻿using Entity;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Damage
 {
-    [RequireComponent(typeof(BoxCollider2D), typeof(DamageStats))]
+    [RequireComponent(typeof(Collider2D))]
     public class DamageDeliver : MonoBehaviour
     {
-        #region Fields and properties
+        public DamageType type = DamageType.LightDamage;
+        public DamageStats stats;
 
-        public DamageType Type { get; set; }
-        private BoxCollider2D DamageCollider { get; set; }
-        private DamageStats Stats { get; set; }
-
-        #endregion
-
-        #region Unity calls
+        private Collider2D _damageCollider;
 
         private void Start()
         {
-            DamageCollider = GetComponent<BoxCollider2D>();
-            DamageCollider.enabled = false;
-            Stats = GetComponent<DamageStats>();
+            _damageCollider = GetComponent<Collider2D>();
+            _damageCollider.enabled = false;
         }
 
         private void OnTriggerEnter2D(Collider2D otherCollider)
         {
             var receiver = otherCollider.GetComponent<DamageReceiver>();
-            if (receiver != null) receiver.ReceiveDamage(Stats, Type);
+            if (receiver != null) receiver.ReceiveDamage(stats, type);
         }
-
-        #endregion
     }
 
     #region Support enum

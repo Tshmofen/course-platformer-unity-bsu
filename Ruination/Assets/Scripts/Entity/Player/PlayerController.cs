@@ -199,15 +199,9 @@ namespace Entity.Player
                 return;
             
             if (ToParry)
-            {
                 manager.animator.SetTrigger(HashToAttackHeavy);
-                manager.weapon.Type = DamageType.HeavyDamage;
-            }
             else if (ToAttack)
-            {
                 manager.animator.SetTrigger(HashToAttackLight);
-                manager.weapon.Type = DamageType.LightDamage;
-            }
         }
 
         private void UpdateAnimation()
@@ -234,6 +228,7 @@ namespace Entity.Player
         {
             _isFacingRight = !_isFacingRight;
             transform.forward *= -1;
+            manager.weapon.transform.forward *= -1;
         }
         
 
