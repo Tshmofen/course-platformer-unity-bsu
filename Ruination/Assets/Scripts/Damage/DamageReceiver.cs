@@ -117,7 +117,7 @@ namespace Damage
 
                 ShowPopUp(damageAmount);
                 EnableHealthBar();
-                
+
                 if (_health.CurrentHealth == 0)
                     StartDieState();
                 else
