@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Environment.Background
 {
@@ -16,12 +17,23 @@ namespace Environment.Background
             _camera = Camera.main;
             _renderer = GetComponent<Renderer>();
             _rendererPaired = pairedObject.GetComponent<Renderer>();
+            StartCoroutine(StartPeriodicCheck());
         }
 
         private void OnBecameInvisible() => MoveInView();
 
         private void OnBecameVisible() => MoveInView();
 
+        private IEnumerator StartPeriodicCheck() 
+        { 
+            while(true) 
+            {
+                MoveInView();
+                yield return new WaitForSeconds(.5f);
+            }
+            // ReSharper disable once IteratorNeverReturns
+        }
+        
         private void MoveInView()
         {
             if (_camera == null) return;
