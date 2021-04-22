@@ -44,12 +44,23 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
-    totalSpriteSurfaceArea: 20480
+    totalSpriteSurfaceArea: 31744
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: -4776590889944914924, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: -985819780597901983, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: 5877084129846867321, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: -2852214323557125030, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: -533832872924203954, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: -1485730390909920248, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: 1851523541637136097, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: -4200507896497557560, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: 6124787104046813296, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: -2378298256820096772, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: 3060175500306595061, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: -7442466831354495073, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: -2758364981388734925, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: -1544141426327130054, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
@@ -71,6 +82,17 @@ SpriteAtlas:
   - {fileID: 7501832800569803437, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: 343873085457291524, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   m_PackedSpriteNamesToIndex:
+  - MountainGroundEdgy_9
+  - MountainGroundEdgy_8
+  - MountainGroundEdgy_5
+  - MountainGroundEdgy_4
+  - MountainGroundEdgy_7
+  - MountainGroundEdgy_6
+  - MountainGroundEdgy_1
+  - MountainGroundEdgy_0
+  - MountainGroundEdgy_3
+  - MountainGroundEdgy_2
+  - MountainGroundEdgy_10
   - MountainGround_6
   - MountainGround_7
   - MountainGround_4

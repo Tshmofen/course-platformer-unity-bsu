@@ -42,7 +42,7 @@ namespace Util
 
         public static bool GetIgnorePlatform()
         {
-            return Input.GetKeyDown(KeyCode.S);
+            return Input.GetKey(KeyCode.S) || Input.GetKeyDown(KeyCode.S);
         }
 
         public static bool GetParry()
