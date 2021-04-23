@@ -20,6 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_d6224525bb674f7a8e62c259d6fa13ad:
+        m_Texture: {fileID: 2800000, guid: d0498b59246577046bc80a99c72a1e45, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _AlphaTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -58,11 +62,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Boolean_9b6ff0bf146c4fd3be9cd5ddd3815a07: 1
+    - Vector1_e1d8df8a791a45db83344eda504e4715: 5
     - _EnableExternalAlpha: 0
     - _Refraction: 1
     - _WaterSpeed: 0.04
+    - _WaveScale: 5
     m_Colors:
+    - Color_349f2888e03c4955948eec7e6ce9ee3e: {r: 0.5516643, g: 0.6444331, b: 0.7264151,
+        a: 1}
+    - Vector2_5a7821c00af2480ba757e2006d14c51f: {r: 0.1, g: 0, b: 0, a: 0}
     - _Color: {r: 0.759434, g: 0.8104631, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _Offset: {r: 0, g: 0.04, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _WaveSpeed: {r: 0.1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

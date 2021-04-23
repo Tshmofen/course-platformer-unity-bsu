@@ -35,6 +35,12 @@ TextureImporter:
   - first:
       213: 3060175500306595061
     second: MountainGroundEdgy_10
+  - first:
+      213: -7839507471865450669
+    second: MountainGroundEdgy_11
+  - first:
+      213: -8346178231618157379
+    second: MountainGroundEdgy_12
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -140,7 +146,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 118
+        y: 156
         width: 32
         height: 32
       alignment: 0
@@ -161,7 +167,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 40
-        y: 118
+        y: 156
         width: 32
         height: 32
       alignment: 0
@@ -182,7 +188,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 118
+        y: 156
         width: 32
         height: 32
       alignment: 0
@@ -203,7 +209,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 78
+        y: 116
         width: 32
         height: 32
       alignment: 0
@@ -224,7 +230,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 40
-        y: 78
+        y: 116
         width: 32
         height: 32
       alignment: 0
@@ -245,7 +251,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 78
+        y: 116
         width: 32
         height: 32
       alignment: 0
@@ -266,7 +272,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 37
+        y: 75
         width: 32
         height: 32
       alignment: 0
@@ -287,7 +293,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 40
-        y: 37
+        y: 75
         width: 32
         height: 32
       alignment: 0
@@ -307,8 +313,8 @@ TextureImporter:
       name: MountainGroundEdgy_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 80
+        y: 75
         width: 32
         height: 32
       alignment: 0
@@ -328,8 +334,8 @@ TextureImporter:
       name: MountainGroundEdgy_9
       rect:
         serializedVersion: 2
-        x: 40
-        y: 0
+        x: 0
+        y: 38
         width: 32
         height: 32
       alignment: 0
@@ -349,12 +355,12 @@ TextureImporter:
       name: MountainGroundEdgy_10
       rect:
         serializedVersion: 2
-        x: 80
-        y: 37
+        x: 40
+        y: 38
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -362,6 +368,48 @@ TextureImporter:
       bones: []
       spriteID: 5fcb02e676de77a20800000000000000
       internalID: 3060175500306595061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MountainGroundEdgy_11
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 38
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35f60756d79743390800000000000000
+      internalID: -7839507471865450669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MountainGroundEdgy_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db44d484e1b6c2c80800000000000000
+      internalID: -8346178231618157379
       vertices: []
       indices: 
       edges: []
