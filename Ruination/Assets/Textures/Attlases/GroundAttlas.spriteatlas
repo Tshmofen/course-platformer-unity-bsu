@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
-    totalSpriteSurfaceArea: 66560
+    totalSpriteSurfaceArea: 67584
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -63,6 +63,7 @@ SpriteAtlas:
   - {fileID: 3060175500306595061, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: -7839507471865450669, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: -8346178231618157379, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: -6627870410531630256, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: -7442466831354495073, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: -2758364981388734925, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: -1544141426327130054, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
@@ -129,6 +130,7 @@ SpriteAtlas:
   - MountainGroundEdgy_10
   - MountainGroundEdgy_11
   - MountainGroundEdgy_12
+  - MountainGroundEdgy_13
   - MountainGround_6
   - MountainGround_7
   - MountainGround_4

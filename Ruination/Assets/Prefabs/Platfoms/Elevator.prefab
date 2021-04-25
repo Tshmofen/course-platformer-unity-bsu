@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4932746941608690943
 Transform:
   m_ObjectHideFlags: 0
@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: becdfaebb41544cca9049b7978cacb9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fromPoint: {x: 22.02, y: -2.113882}
-  toPoint: {x: 22.02, y: 6.92}
+  fromPoint: {x: 155.029, y: 11.93}
+  toPoint: {x: 155.029, y: 25.925}
   oneWayTime: 7
   waitTime: 0.75
   accelerationPart: 0.3
@@ -176,4 +176,4 @@ MonoBehaviour:
   - {x: -1, y: 0.08, z: 0}
   m_ShapePathHash: 1201488725
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1312854
+  m_InstanceId: -1430

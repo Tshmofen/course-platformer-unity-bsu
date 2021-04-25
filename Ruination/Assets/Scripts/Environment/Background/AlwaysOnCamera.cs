@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Environment.Background
 {
+    [ExecuteInEditMode]
     public class AlwaysOnCamera : MonoBehaviour
     {
         private Camera _camera;

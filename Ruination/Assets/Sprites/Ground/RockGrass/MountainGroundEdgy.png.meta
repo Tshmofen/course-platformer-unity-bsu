@@ -41,6 +41,9 @@ TextureImporter:
   - first:
       213: -8346178231618157379
     second: MountainGroundEdgy_12
+  - first:
+      213: -6627870410531630256
+    second: MountainGroundEdgy_13
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -458,6 +461,40 @@ TextureImporter:
       bones: []
       spriteID: db44d484e1b6c2c80800000000000000
       internalID: -8346178231618157379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MountainGroundEdgy_13
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -13, y: 16}
+        - {x: -16, y: 14}
+        - {x: -16, y: 12}
+        - {x: -15, y: 12}
+        - {x: -15, y: 7}
+        - {x: -9, y: 0}
+        - {x: -7, y: -1}
+        - {x: 4, y: -1}
+        - {x: 8, y: 0}
+        - {x: 13, y: 3}
+        - {x: 15, y: 7}
+        - {x: 16, y: 14}
+        - {x: 14, y: 16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05390f24af21504a0800000000000000
+      internalID: -6627870410531630256
       vertices: []
       indices: 
       edges: []

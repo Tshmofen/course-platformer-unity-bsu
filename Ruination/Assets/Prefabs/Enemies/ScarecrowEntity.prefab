@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5260039356515124997}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.07, y: -1.21, z: 0}
+  m_LocalPosition: {x: -0.227, y: -0.279, z: 0}
   m_LocalScale: {x: 0.7112, y: 0.7112, z: 0.7112}
   m_Children:
   - {fileID: 13004843442747381}
@@ -204,7 +204,7 @@ MonoBehaviour:
   speed: 1
   directionStep: 0.75
   gravity: 20
-  pathNodes: 04000000070000000600000007000000
+  pathNodes: 03000000040000000300000005000000
   targetRadius: 0.1
   playerLayer:
     serializedVersion: 2
@@ -216,6 +216,7 @@ MonoBehaviour:
   playerCheckPeriod: 0.3
   attackRadius: 1
   manager: {fileID: 742657096}
+  isInAttack: 0
 --- !u!1 &5260039356596892901
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27fd2638279ec7e46bb753365bd00b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 6575612950246783138}
+  weapon: {fileID: 0}
   health: {fileID: 1179284848}
   animator: {fileID: 3650312624376784179}
   destroyer: {fileID: 467535452}
@@ -424,6 +425,8 @@ MonoBehaviour:
   dyingMaterial: {fileID: 2100000, guid: 0ead5c0fdc1b8844ba9a95c5ac36c041, type: 2}
   noiseScale: 15
   disableOnDeath: 0
+  edgeColor: {r: 0.7924528, g: 0.14578143, b: 0.14578143, a: 1}
+  colorIntensity: 25
 --- !u!1 &5260039357605441561
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +551,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6655727416464583845}
   m_LocalRotation: {x: -0, y: -0, z: -0.0015945084, w: 0.99999875}
-  m_LocalPosition: {x: -16.07, y: -1.21, z: 0}
+  m_LocalPosition: {x: -0.22699738, y: -0.27900004, z: 0}
   m_LocalScale: {x: 0.99452996, y: 0.50334996, z: 0.95113}
   m_Children: []
   m_Father: {fileID: 5260039357268912998}
@@ -644,6 +647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f77d6b0f527ff419e33064cd20faf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  stats: {fileID: 8393859204547512502}
 --- !u!1 &8079245082144805267
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +677,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8079245082144805267}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.07, y: -1.21, z: 0}
+  m_LocalPosition: {x: -0.22699738, y: -0.27900004, z: 0}
   m_LocalScale: {x: 0.7112, y: 0.7112, z: 0.7112}
   m_Children: []
   m_Father: {fileID: 5260039357268912998}
@@ -707,9 +712,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 200
-  lightArmor: 0.1
-  pierceArmor: 0.7
-  heavyArmor: 0.6
+  lightArmor: 0.4
+  pierceArmor: 0.4
+  heavyArmor: 0.3
 --- !u!61 &1179284850
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -748,7 +753,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1303a0b7a6f444580fc180693453c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 742657096}
   showHealthBar: 1
   healthBinderPrefab: {fileID: 7783780376402188255, guid: ebb197a3f2bc75a4e9d5308bcd02a5b0,
     type: 3}
+  bindersRoot: {fileID: 0}
+  isReceiveDamage: 1
+  manager: {fileID: 742657096}
