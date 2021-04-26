@@ -15,46 +15,22 @@ namespace Util
             return move;
         }
 
-        public static bool GetJump()
-        {
-            return Input.GetKeyDown(KeyCode.Space);
-        }
+        public static bool GetJump() => Input.GetKeyDown(KeyCode.Space);
 
-        public static bool GetContinuousJump()
-        {
-            return Input.GetKey(KeyCode.Space);
-        }
+        public static bool GetContinuousJump() => Input.GetKey(KeyCode.Space);
 
-        public static bool GetCombatMode()
-        {
-            return Input.GetKeyDown(KeyCode.Tab);
-        }
+        public static bool GetEvade() => Input.GetKeyDown(KeyCode.LeftShift);
 
-        public static bool GetAttack()
-        {
-            return Input.GetKeyDown(KeyCode.Mouse0);
-        }
+        public static bool GetCombatMode() => Input.GetKeyDown(KeyCode.Tab);
 
-        public static bool GetInteract()
-        {
-            return Input.GetKeyDown(KeyCode.E);
-        }
+        public static bool GetAttack() => Input.GetKeyDown(KeyCode.Mouse0);
 
-        public static bool GetIgnorePlatform()
-        {
-            return Input.GetKeyDown(KeyCode.S);
-        }
+        public static bool GetInteract() => Input.GetKeyDown(KeyCode.E);
         
-        public static bool GetContinuousAttack()
-        {
-            return Input.GetKey(KeyCode.Mouse0);
-        }
+        public static bool GetIgnorePlatform() => Input.GetKey(KeyCode.S) || Input.GetKeyDown(KeyCode.S);
 
-        public static bool GetSpecialAbility()
-        {
-            return Input.GetKey(KeyCode.Mouse1);
-        }
-        
+        public static bool GetParry() => Input.GetKeyDown(KeyCode.Mouse1);
+
         #endregion
 
         #region Mouse
@@ -81,21 +57,12 @@ namespace Util
 
         #region Interface
         
-        public static bool GetCloseAnyMenu()
-        {
-            return Input.GetKeyDown(KeyCode.Escape);
-        }
+        public static bool GetCloseAnyMenu() => Input.GetKeyDown(KeyCode.Escape);
 
-        public static bool GetPauseMenu()
-        {
-            return Input.GetKeyDown(KeyCode.Escape);
-        }
-        
-        public static bool GetInventoryMenu()
-        {
-            return Input.GetKeyDown(KeyCode.I);
-        }
-        
+        public static bool GetPauseMenu() => Input.GetKeyDown(KeyCode.Escape);
+
+        public static bool GetInventoryMenu() => Input.GetKeyDown(KeyCode.I);
+
         #endregion
     }
 }

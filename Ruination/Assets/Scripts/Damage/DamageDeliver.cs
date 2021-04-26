@@ -1,55 +1,26 @@
-﻿using Entity;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Damage
 {
-    [RequireComponent(typeof(BoxCollider2D), typeof(DamageStats))]
+    [RequireComponent(typeof(Collider2D))]
     public class DamageDeliver : MonoBehaviour
     {
-        #region Public
+        public DamageType type = DamageType.LightDamage;
+        public DamageStats stats;
 
-        // toggle animation, that should handle collider enabling and isInAttack bool
-        public void ToAttack()
-        {
-            if (!isInAttack) manager.animator.SetTrigger(Attack);
-            manager.animator.SetBool(IsInAttack, isInAttack);
-        }
-
-        #endregion
-
-        #region Fields and properties
-
-        [Header("Combat")] 
-        public bool isInAttack;
-        [Header("External")] 
-        public EntityManager manager;
-
-        // animation hashed strings
-        private static readonly int IsInAttack = Animator.StringToHash("isInAttack");
-        private static readonly int Attack = Animator.StringToHash("toAttack");
-
-        public DamageType Type { get; set; }
-        private BoxCollider2D DamageCollider { get; set; }
-        private DamageStats Stats { get; set; }
-
-        #endregion
-
-        #region Unity calls
+        private Collider2D _damageCollider;
 
         private void Start()
         {
-            DamageCollider = GetComponent<BoxCollider2D>();
-            DamageCollider.enabled = false;
-            Stats = GetComponent<DamageStats>();
+            _damageCollider = GetComponent<Collider2D>();
+            _damageCollider.enabled = false;
         }
 
         private void OnTriggerEnter2D(Collider2D otherCollider)
         {
             var receiver = otherCollider.GetComponent<DamageReceiver>();
-            if (receiver != null && isInAttack) receiver.ReceiveDamage(Stats, Type);
+            if (receiver != null) receiver.ReceiveDamage(stats, type);
         }
-
-        #endregion
     }
 
     #region Support enum

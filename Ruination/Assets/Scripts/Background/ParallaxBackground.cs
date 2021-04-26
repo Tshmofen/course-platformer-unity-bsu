@@ -71,7 +71,6 @@ namespace Background
 
                 if (layer != null)
                 {
-                    layer.name = "Layer-" + i;
                     _parallaxLayers.Add(layer);
                 }
             }

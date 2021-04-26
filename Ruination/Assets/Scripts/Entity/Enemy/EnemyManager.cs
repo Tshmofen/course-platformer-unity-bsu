@@ -1,6 +1,4 @@
-﻿// ReSharper disable NotAccessedField.Global
-
-namespace Entity.Enemy
+﻿namespace Entity.Enemy
 {
     public class EnemyManager : EntityManager
     {

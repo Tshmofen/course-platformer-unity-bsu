@@ -9,6 +9,10 @@ namespace Entity.Enemy
     public class EnemyController : MonoBehaviour
     {
         #region Fields and properties
+        
+        private static readonly int HashVelocityX = Animator.StringToHash("velocityX");
+        private static readonly int HashToAttack = Animator.StringToHash("toAttack");
+        private static readonly int HashInAttack = Animator.StringToHash("inAttack");
 
         private Vector2 _player;
         private Vector2 _target;
@@ -75,9 +79,10 @@ namespace Entity.Enemy
         [Header("Combat")] 
         public float attackRadius = 0.5f;
 
-        [Header("External")] 
+        [Header("External")]
         public EnemyManager manager;
-        private static readonly int VelocityX = Animator.StringToHash("velocityX");
+        public bool isInAttack;
+        
 
         #endregion
 
@@ -133,7 +138,7 @@ namespace Entity.Enemy
         {
             _target = _player;
             var distance = (_target - (Vector2) transform.position).magnitude;
-            if (distance < attackRadius) manager.weapon.ToAttack();
+            if (distance < attackRadius) manager.animator.SetTrigger(HashToAttack);
         }
 
         // set target as one of path nodes
@@ -162,7 +167,8 @@ namespace Entity.Enemy
         // update animation
         private void UpdateAnimationState()
         {
-            manager.animator.SetFloat(VelocityX, _velocity.x / speed);
+            manager.animator.SetFloat(HashVelocityX, _velocity.x / speed);
+            manager.animator.SetBool(HashInAttack, isInAttack);
         }
 
         #endregion

@@ -1,4 +1,3 @@
-using System;
 using Damage;
 using TMPro;
 using UnityEditor;
@@ -9,7 +8,6 @@ namespace Interface.Overlay
 {
     public class HealthBinder : MonoBehaviour
     {
-
         #region Fields
         
         #region Unity assigns
@@ -29,8 +27,7 @@ namespace Interface.Overlay
         private int _previousHealth = -1;
         
         #endregion
-
-
+        
         #region Unity calls
 
         private void Start()
@@ -41,10 +38,10 @@ namespace Interface.Overlay
         private void FixedUpdate()
         {
             healthImage.fillAmount = health.CurrentHealth / health.maxHealth;
-            if ((int) health.CurrentHealth != _previousHealth)
+            if (health.CurrentHealth != _previousHealth)
             {
                 counter.text = $"{health.CurrentHealth} / {health.maxHealth}";
-                _previousHealth = (int)health.CurrentHealth;
+                _previousHealth = health.CurrentHealth;
             }
         }
 

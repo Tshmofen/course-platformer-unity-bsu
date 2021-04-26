@@ -9,7 +9,7 @@ namespace Interface.Manager
         #region Fields & properties
 
         private bool _isMenuEnabled;
-        private AbstractMenu enabledMenu;
+        private AbstractMenu _enabledMenu;
 
         [Header("External Menus")]
         public AbstractMenu[] menus;
@@ -22,7 +22,7 @@ namespace Interface.Manager
         {
             foreach (var menu in menus)
             {
-                if (_isMenuEnabled && menu != enabledMenu) continue;
+                if (_isMenuEnabled && menu != _enabledMenu) continue;
                 
                 if (InputUtil.GetCloseAnyMenu()) 
                     _isMenuEnabled = false;
@@ -32,7 +32,7 @@ namespace Interface.Manager
                 if (InputUtil.GetCloseAnyMenu() && menu.WasMenuEnabled) menu.IsMenuEnabled = false;
                 if (menu.IsMenuEnabled)
                 {
-                    enabledMenu = menu;
+                    _enabledMenu = menu;
                     _isMenuEnabled = true;
                 }
                 if (menu.WasMenuEnabled && !menu.IsMenuEnabled 
