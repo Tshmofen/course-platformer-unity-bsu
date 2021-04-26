@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
-    totalSpriteSurfaceArea: 67584
+    totalSpriteSurfaceArea: 74752
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -60,6 +60,10 @@ SpriteAtlas:
   - {fileID: -4200507896497557560, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: 6124787104046813296, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: -2378298256820096772, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: -4383789231533213460, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: 6370372254536031838, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: -3148658457006315567, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: -2001424510825339576, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: 3060175500306595061, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: -7839507471865450669, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: -8346178231618157379, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
@@ -86,7 +90,10 @@ SpriteAtlas:
   - {fileID: 343873085457291524, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: -5865392847989981650, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 3980289114445293721, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
+  - {fileID: 7468438879040008742, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
+  - {fileID: 1818192262049993202, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 6584254348966982469, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
+  - {fileID: 2406340500330994078, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 7286501511507852796, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 3891188322741796046, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 6627379467381968897, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
@@ -127,6 +134,10 @@ SpriteAtlas:
   - MountainGroundEdgy_0
   - MountainGroundEdgy_3
   - MountainGroundEdgy_2
+  - MountainGroundEdgy_14
+  - MountainGroundEdgy_15
+  - MountainGroundEdgy_16
+  - MountainGroundEdgy_17
   - MountainGroundEdgy_10
   - MountainGroundEdgy_11
   - MountainGroundEdgy_12
@@ -153,7 +164,10 @@ SpriteAtlas:
   - MountainGround_18
   - RockSlides_30
   - RockSlides_31
+  - RockSlides_32
+  - RockSlides_33
   - RockSlides_23
+  - RockSlides_34
   - RockSlides_22
   - RockSlides_21
   - RockSlides_20

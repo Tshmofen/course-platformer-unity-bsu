@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Ground
+namespace Environment.Interactive
 {
     [RequireComponent(typeof(EdgeCollider2D))]
     public class Elevator : MonoBehaviour
