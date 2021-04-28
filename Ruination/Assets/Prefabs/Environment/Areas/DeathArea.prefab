@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 931072169064797172}
   - component: {fileID: 3451616449846176584}
-  - component: {fileID: 8928888971927463436}
   - component: {fileID: 7568575037663211303}
   m_Layer: 7
   m_Name: DeathArea
@@ -58,26 +57,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.70645905, y: 1.2659245}
-      - {x: -9.471129, y: 3.4348524}
-      - {x: -9.48552, y: -0.61201847}
-      - {x: 9.485529, y: -0.7269342}
-      - {x: 9.487632, y: 1.3135943}
---- !u!114 &8928888971927463436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2286483875912862998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa8f7d204f083824cbf0f4fabd151687, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageLight: 0
-  damageHeavy: 99999
-  damagePierce: 0
+    - - {x: 8.02478, y: -2.018403}
+      - {x: -0.21212006, y: -2.1377745}
+      - {x: -7.9348907, y: -2.0237017}
+      - {x: -9.430305, y: -0.31306386}
+      - {x: -9.898957, y: -4.0411386}
+      - {x: -0.26084137, y: -4.7304487}
+      - {x: 9.631456, y: -3.8885334}
+      - {x: 9.463309, y: -0.21856594}
 --- !u!114 &7568575037663211303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,4 +77,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675a8a5782914886b8e3bbfa5902f854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 1
+  playerCamera: {fileID: 0}

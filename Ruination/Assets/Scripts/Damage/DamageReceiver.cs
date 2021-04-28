@@ -25,8 +25,8 @@ namespace Damage
         public EntityManager manager;
         
         // animation hashed strings
-        private static readonly int ToDie = Animator.StringToHash("toDie");
-        private static readonly int ToInjure = Animator.StringToHash("toInjure");
+        private static readonly int HashToDie = Animator.StringToHash("toDie");
+        private static readonly int HashToInjure = Animator.StringToHash("toInjure");
 
         #endregion
         
@@ -49,6 +49,35 @@ namespace Damage
         #endregion
 
         #region Support methods
+        
+        public void ReceiveDamage(DamageStats damage, DamageType type)
+        {
+            if (isReceiveDamage)
+            {
+                var damageAmount = CalculateDamage(damage, type);
+                _health.CurrentHealth -= (int)damageAmount;
+                if (_health.CurrentHealth < 0) _health.CurrentHealth = 0;
+
+                ShowPopUp(damageAmount);
+                EnableHealthBar();
+
+                if (_health.CurrentHealth == 0)
+                    StartDieState();
+                else
+                    StartInjureState();
+            }
+        }
+
+        public void DestroyReceiver()
+        {
+            manager.destroyer.DestroyEntity();
+        }
+
+        public void KillReceiver()
+        {
+            _health.CurrentHealth = 0;
+            StartDieState();
+        }
         
         private float CalculateDamage(DamageStats damage, DamageType type)
         {
@@ -94,40 +123,13 @@ namespace Damage
         // toDie state should have corresponding behaviour
         private void StartDieState()
         {
-            manager.animator.SetTrigger(ToDie);
+            manager.animator.SetTrigger(HashToDie);
         }
 
         // toInjure state should have corresponding behaviour
         private void StartInjureState()
         {
-            manager.animator.SetTrigger(ToInjure);
-        }
-
-        #endregion
-        
-        #region Public
-
-        public void ReceiveDamage(DamageStats damage, DamageType type)
-        {
-            if (isReceiveDamage)
-            {
-                var damageAmount = CalculateDamage(damage, type);
-                _health.CurrentHealth -= (int)damageAmount;
-                if (_health.CurrentHealth < 0) _health.CurrentHealth = 0;
-
-                ShowPopUp(damageAmount);
-                EnableHealthBar();
-
-                if (_health.CurrentHealth == 0)
-                    StartDieState();
-                else
-                    StartInjureState();
-            }
-        }
-
-        public void DestroyReceiver()
-        {
-            manager.destroyer.DestroyEntity();
+            manager.animator.SetTrigger(HashToInjure);
         }
 
         #endregion

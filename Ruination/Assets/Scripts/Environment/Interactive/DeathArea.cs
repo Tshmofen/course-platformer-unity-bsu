@@ -1,27 +1,24 @@
-﻿using System;
-using Damage;
-using Entity;
+﻿using Cinemachine;
+using Entity.Player;
 using UnityEngine;
 
 namespace Environment.Interactive
 {
-    [RequireComponent(typeof(DamageStats))]
     public class DeathArea : MonoBehaviour
     {
-        private DamageStats _stats;
-
-        public DamageType damageType = DamageType.HeavyDamage;
-
-        private void Start()
-        {
-            _stats = GetComponent<DamageStats>();
-        }
-
+        public CinemachineVirtualCamera playerCamera;
+            
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var manager = other.GetComponent<EntityManager>();
-            if (manager != null)
-                manager.health.ReceiveDamage(_stats, damageType);
+            var player = other.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                var cameraStop = new GameObject();
+                cameraStop.transform.position = player.transform.position;
+                playerCamera.Follow = cameraStop.transform;
+                
+                player.manager.health.KillReceiver();
+            }
         }
     }
 }
