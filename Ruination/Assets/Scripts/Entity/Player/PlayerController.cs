@@ -209,8 +209,9 @@ namespace Entity.Player
         // flips character is it's necessary
         private void UpdateDirection()
         {
+            if (isInAttack || isEvading) return;
             var input = InputUtil.GetMove();
-            if (!isInAttack && input.x > 0 && !_isFacingRight || input.x < 0 && _isFacingRight)
+            if (input.x > 0 && !_isFacingRight || input.x < 0 && _isFacingRight)
                 FlipDirection();
         }
 

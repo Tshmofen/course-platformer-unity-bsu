@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace Interface.Menu
 {
     [ExecuteInEditMode]
-    public class Item : MonoBehaviour
+    public class InventoryItem : MonoBehaviour
     {
         #region Fields & properties
 

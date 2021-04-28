@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Environment.Interactive
+namespace Environment.Furniture
 {
     public class AnimationActivator : MonoBehaviour
     {

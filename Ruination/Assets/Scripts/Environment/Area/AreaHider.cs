@@ -2,10 +2,10 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Environment.Interactive
+namespace Environment.Area
 {
     [RequireComponent(typeof(Tilemap))]
-    public class Hider : MonoBehaviour
+    public class AreaHider : MonoBehaviour
     {
         private Tilemap _tiles;
 

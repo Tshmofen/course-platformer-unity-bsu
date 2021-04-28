@@ -2,7 +2,7 @@
 using Entity.Player;
 using UnityEngine;
 
-namespace Environment.Interactive
+namespace Environment.Area
 {
     public class DeathArea : MonoBehaviour
     {

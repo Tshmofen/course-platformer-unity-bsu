@@ -10,7 +10,7 @@ namespace Interface.Menu
     {
         #region Fields & properties
 
-        private List<Item> _items;
+        private List<InventoryItem> _items;
         private Button _lastFilterButton;
         private Button _lastItemButton;
 
@@ -37,7 +37,7 @@ namespace Interface.Menu
             SetItemButton(firstItemButton);
             
             EnableMenu(IsMenuEnabled, WasMenuEnabled);
-            _items = new List<Item>(GetComponentsInChildren<Item>());
+            _items = new List<InventoryItem>(GetComponentsInChildren<InventoryItem>());
             if (_items.Count != 0)
                 SetItem(_items[0]);
         }
@@ -50,10 +50,10 @@ namespace Interface.Menu
         }
         
         // called by a button
-        public void SetItem(Item item)
+        public void SetItem(InventoryItem inventoryItem)
         {
-            descriptionMesh.text = item.description;
-            fullItemImage.sprite = item.spriteFull;
+            descriptionMesh.text = inventoryItem.description;
+            fullItemImage.sprite = inventoryItem.spriteFull;
         }
         
         // called by a button
