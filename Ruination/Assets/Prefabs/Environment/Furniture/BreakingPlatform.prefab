@@ -204,7 +204,7 @@ MonoBehaviour:
   - {x: 0.0313, y: -0.0626, z: 0}
   m_ShapePathHash: 2000534525
   m_Mesh: {fileID: 0}
-  m_InstanceId: -821426
+  m_InstanceId: 112634
 --- !u!50 &8842170260709858425
 Rigidbody2D:
   serializedVersion: 4
@@ -368,7 +368,7 @@ MonoBehaviour:
   - {x: -0.40625, y: -0.0625, z: 0}
   m_ShapePathHash: -1407271571
   m_Mesh: {fileID: 0}
-  m_InstanceId: -835694
+  m_InstanceId: 113066
 --- !u!50 &8842170261244730985
 Rigidbody2D:
   serializedVersion: 4
@@ -571,6 +571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5029974941e45a386dca186117f1305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToStartBreak: 0.01
+  timeToStartBreak: 0
   animator: {fileID: 8842170261396645717}
   breakTrigger: toBroke

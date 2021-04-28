@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5886605218289009261}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 22.441, y: -9.631, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -101,8 +101,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.5, y: 0.28}
-  - {x: 0.5, y: 0.28}
+  - {x: -0.5, y: 0.27}
+  - {x: 0.5, y: 0.27}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -154,4 +154,4 @@ MonoBehaviour:
   - {x: -0.5, y: 0.28125, z: 0}
   m_ShapePathHash: 189667457
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1695978
+  m_InstanceId: -292064
