@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
-    totalSpriteSurfaceArea: 74752
+    totalSpriteSurfaceArea: 82944
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -95,12 +95,20 @@ SpriteAtlas:
   - {fileID: 6584254348966982469, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 2406340500330994078, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 7286501511507852796, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
+  - {fileID: 344406689602545432, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 3891188322741796046, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
+  - {fileID: 8347579819244770720, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 6627379467381968897, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
+  - {fileID: -1689384977640346701, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 3630115958340937466, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
+  - {fileID: -1137552163751864915, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: -4548813008906519790, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
+  - {fileID: -4348295895298666346, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 8385585834054203425, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
+  - {fileID: -1102961493522229770, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: -5064041408804359982, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
+  - {fileID: 4071129852100694711, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
+  - {fileID: 8848110142705454072, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: -8200088134403268795, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: -8020330227966590525, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
   - {fileID: 8906789833847802739, guid: dac025dffd272ea4f8995778eb746d00, type: 3}
@@ -169,12 +177,20 @@ SpriteAtlas:
   - RockSlides_23
   - RockSlides_34
   - RockSlides_22
+  - RockSlides_35
   - RockSlides_21
+  - RockSlides_36
   - RockSlides_20
+  - RockSlides_37
   - RockSlides_27
+  - RockSlides_38
   - RockSlides_26
+  - RockSlides_39
   - RockSlides_25
+  - RockSlides_41
   - RockSlides_24
+  - RockSlides_40
+  - RockSlides_42
   - RockSlides_29
   - RockSlides_28
   - RockSlides_3
