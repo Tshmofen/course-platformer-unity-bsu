@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Entity.Player;
+using Environment.Interactive;
 using Interface.World;
 using UnityEngine;
 using Util;
 
-namespace Environment.Interactive
+namespace Entity.Player
 {
     [RequireComponent(typeof(CircleCollider2D))]
     public class MovableController : MonoBehaviour
@@ -19,6 +19,7 @@ namespace Environment.Interactive
         public InteractButton button;
         public InteractPointer pointer;
         public PlayerManager manager;
+        public bool isLocked;
         
         private List<Movable> _movables;
         private Movable _currentMovable;
