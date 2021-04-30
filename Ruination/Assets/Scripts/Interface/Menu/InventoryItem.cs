@@ -1,45 +1,47 @@
-﻿using System.Collections.Generic;
+﻿using System.IO;
+using DataStore.Collectibles;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 namespace Interface.Menu
 {
-    [ExecuteInEditMode]
     public class InventoryItem : MonoBehaviour
     {
-        #region Fields & properties
-
         [Header("Menu objects")] 
         public TextMeshProUGUI nameMesh;
-        public Image miniImageObject;
-        [Header("Item parts")]
-        public string itemName; 
-        [TextArea(10,15)]
-        public string description;
-        public Sprite spriteFull;
-        public Sprite spriteMini;
-        public List<ItemType> types;
-
-        #endregion
-
-        #region Unity calls
+        public Image miniSpriteObject;
+        [Header("Item")] 
+        public int itemID = 1;
+        
+        public CollectibleItemData ItemData;
+        [HideInInspector] public Sprite loadedSpriteFull;
+        [HideInInspector] public Sprite loadedSpriteMini;
 
         private void Start()
         {
-            nameMesh.text = itemName;
-            miniImageObject.sprite = spriteMini;
+            ItemData = CollectiblesContainer.GetItem(itemID);
+            
+            loadedSpriteFull = LoadSprite(ItemData.PathSpriteFull);
+            loadedSpriteMini = LoadSprite(ItemData.PathSpriteMini);
+            
+            nameMesh.text = ItemData.Name;
+            miniSpriteObject.sprite = loadedSpriteMini;
         }
 
-        #if UNITY_EDITOR
-        private void Update()
+        private static Sprite LoadSprite(string path, int pixelsPerUnit = 32)
         {
-            nameMesh.text = itemName;
-            miniImageObject.sprite = spriteMini;
+            var texture = Resources.Load(path) as Texture2D;
+            if (texture == null) throw new FileLoadException($"Can't load file by path: {path}");
+            
+            return Sprite.Create(
+                texture, 
+                new Rect(0, 0, texture.width, texture.height), 
+                new Vector2(0, 0), 
+                pixelsPerUnit, 
+                0,
+                SpriteMeshType.Tight
+            );
         }
-        #endif
-
-        #endregion
     }
 }

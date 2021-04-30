@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Collectibles>
+    <Items>
+        <Item>
+            <ID>1</ID>
+            <Name>Katana</Name>
+            <Description>A classic blue katana with no special characteristics other than color. \nIn complete with walnut-colored wooden sheaths.
+            </Description>
+            <PathSpriteFull>Sprites/Items/katana_full</PathSpriteFull>
+            <PathSpriteMini>Sprites/Items/katana_mini</PathSpriteMini>
+            <Types>
+                <Type>Default</Type>
+                <Type>Weapon</Type>
+            </Types>
+        </Item>
+		<Item>
+            <ID>2</ID>
+            <Name>Test</Name>
+            <Description>ANother item</Description>
+            <Types>
+                <Type>Consumable</Type>
+            </Types>
+        </Item>
+    </Items>
+</Collectibles>

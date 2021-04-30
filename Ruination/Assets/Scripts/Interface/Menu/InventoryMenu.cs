@@ -23,7 +23,6 @@ namespace Interface.Menu
         public Button firstItemButton;
         [Header("Visuals")] 
         public Color filterColor;
-        public Color itemColor;
 
         #endregion
 
@@ -52,8 +51,8 @@ namespace Interface.Menu
         // called by a button
         public void SetItem(InventoryItem inventoryItem)
         {
-            descriptionMesh.text = inventoryItem.description;
-            fullItemImage.sprite = inventoryItem.spriteFull;
+            descriptionMesh.text = inventoryItem.ItemData.Description;
+            fullItemImage.sprite = inventoryItem.loadedSpriteFull;
         }
         
         // called by a button
@@ -70,12 +69,11 @@ namespace Interface.Menu
         }
 
         // called by a button
-        public void SetFilter(TypeObject typeObject)
+        public void SetFilter(string inventoryItemType)
         {
-            var type = typeObject.type;
             foreach (var item in _items)
                 item.gameObject.SetActive(
-                    type == ItemType.Default || item.types.Contains(type)
+                    item.ItemData.Types.Contains(inventoryItemType)
                     );
         }
 
