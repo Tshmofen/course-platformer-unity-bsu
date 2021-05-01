@@ -15,6 +15,8 @@ namespace DataStore.Collectibles
                     var store = CollectibleStore.ReadCollectibles();
                     _collectibles = new Dictionary<int, CollectibleItemData>();
                     foreach (var item in store.Items)
+                        item.Description = item.Description.Replace("\\n", "\n");
+                    foreach (var item in store.Items)
                         _collectibles.Add(item.ID, item);
                 }
                 return _collectibles;

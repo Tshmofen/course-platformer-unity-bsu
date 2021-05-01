@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using DataStore.Collectibles;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Util;
 
@@ -10,11 +12,13 @@ namespace Interface.Menu
     {
         #region Fields & properties
 
+        private GameObject _contentObject;
         private List<InventoryItem> _items;
         private Button _lastFilterButton;
         private Button _lastItemButton;
 
-        [Header("Inventory objects")]
+        [Header("Inventory objects")] 
+        public GameObject itemButtonPrefab;
         public GameObject menuObject;
         public TextMeshProUGUI descriptionMesh;
         public Image fullItemImage;
@@ -30,6 +34,8 @@ namespace Interface.Menu
 
         private void Start()
         {
+            _contentObject = GetComponentInChildren<VerticalLayoutGroup>().gameObject;
+            
             _lastFilterButton = filterAllButton;
             SetFilterButton(filterAllButton);
             _lastItemButton = firstItemButton;
@@ -38,7 +44,10 @@ namespace Interface.Menu
             EnableMenu(IsMenuEnabled, WasMenuEnabled);
             _items = new List<InventoryItem>(GetComponentsInChildren<InventoryItem>());
             if (_items.Count != 0)
+            {
+                _items[0].SetItemId(_items[0].itemID);
                 SetItem(_items[0]);
+            }
         }
 
         // called by a button
@@ -73,8 +82,10 @@ namespace Interface.Menu
         {
             foreach (var item in _items)
                 item.gameObject.SetActive(
-                    item.ItemData.Types.Contains(inventoryItemType)
+                        inventoryItemType == CollectibleType.Default || 
+                        item.ItemData.Types.Contains(inventoryItemType)
                     );
+            
         }
 
         // called by a button
@@ -101,6 +112,18 @@ namespace Interface.Menu
         }
 
         public override bool GetMenuControls() => InputUtil.GetInventoryMenu();
+
+        public void AddItem(int id)
+        {
+            var newItem = Instantiate(itemButtonPrefab, _contentObject.transform);
+            var itemButton = newItem.GetComponent<Button>();
+            var inventoryItem = newItem.GetComponent<InventoryItem>();
+            
+            _items.Add(inventoryItem);
+            inventoryItem.SetItemId(id);
+            itemButton.onClick.AddListener(() => SetItemButton(newItem.GetComponent<Button>()));
+            itemButton.onClick.AddListener(() => SetItem(inventoryItem));
+        }
 
         #endregion
     }

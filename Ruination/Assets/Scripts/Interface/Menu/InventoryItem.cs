@@ -20,19 +20,13 @@ namespace Interface.Menu
 
         private void Start()
         {
-            ItemData = CollectiblesContainer.GetItem(itemID);
-            
-            loadedSpriteFull = LoadSprite(ItemData.PathSpriteFull);
-            loadedSpriteMini = LoadSprite(ItemData.PathSpriteMini);
-            
-            nameMesh.text = ItemData.Name;
-            miniSpriteObject.sprite = loadedSpriteMini;
+            SetItemId(itemID);
         }
 
         private static Sprite LoadSprite(string path, int pixelsPerUnit = 32)
         {
             var texture = Resources.Load(path) as Texture2D;
-            if (texture == null) throw new FileLoadException($"Can't load file by path: {path}");
+            if (texture == null) return null;
             
             return Sprite.Create(
                 texture, 
@@ -42,6 +36,18 @@ namespace Interface.Menu
                 0,
                 SpriteMeshType.Tight
             );
+        }
+
+        public void SetItemId(int id)
+        {
+            itemID = id;
+            ItemData = CollectiblesContainer.GetItem(id);
+            
+            loadedSpriteFull = LoadSprite(ItemData.PathSpriteFull);
+            loadedSpriteMini = LoadSprite(ItemData.PathSpriteMini);
+            
+            nameMesh.text = ItemData.Name;
+            miniSpriteObject.sprite = loadedSpriteMini;
         }
     }
 }
