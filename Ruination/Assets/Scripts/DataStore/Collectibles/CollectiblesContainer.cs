@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace DataStore.Collectibles
 {
@@ -15,7 +16,14 @@ namespace DataStore.Collectibles
                     var store = CollectibleStore.ReadCollectibles();
                     _collectibles = new Dictionary<int, CollectibleItemData>();
                     foreach (var item in store.Items)
-                        item.Description = item.Description.Replace("\\n", "\n");
+                    {
+                        var regex = new Regex(@"[\s]{2,}");
+                        item.Description = regex
+                            .Replace(item.Description, "")
+                            .Replace("\\n", "\n")
+                            .Trim();
+                    }
+
                     foreach (var item in store.Items)
                         _collectibles.Add(item.ID, item);
                 }

@@ -4,12 +4,14 @@
 		<Item>
             <ID>0</ID>
             <Name>EmptyItem</Name>
-            <Description>You need to set or change collectible item id; </Description>
+            <Description>You need to set or change collectible item id.</Description>
         </Item>
         <Item>
             <ID>1</ID>
             <Name>Katana</Name>
-            <Description>A classic blue katana with no special characteristics other than color.\n\nIn complete with walnut-colored wooden sheaths.
+            <Description>
+                A classic blue katana with no special characteristics other than color.\n\n
+                In complete with walnut-colored wooden sheaths.
 			</Description>
             <PathSpriteFull>Sprites/Items/katana_full</PathSpriteFull>
             <PathSpriteMini>Sprites/Items/katana_mini</PathSpriteMini>
@@ -19,10 +21,22 @@
         </Item>
 		<Item>
             <ID>2</ID>
-            <Name>Test</Name>
-            <Description>ANother item</Description>
+            <Name>The Mask</Name>
+            <Description>
+                Traditional mask with large white eye sockets and no pupils.\n\n
+                
+                Although outwardly the eye sockets seem impenetrable, 
+                the view from the inside of the mask is unobstructed. 
+                Also the mask is surprisingly durable, 
+                as you figured it out in a vain attempts to take it off.\n\n
+                
+                This strange mask emits a faint, ominous light.\n
+                Maybe you can somehow use the energy hidden in this item.
+            </Description>
+            <PathSpriteFull>Sprites/Items/mask_full</PathSpriteFull>
+            <PathSpriteMini>Sprites/Items/mask_mini</PathSpriteMini>
             <Types>
-                <Type>Consumable</Type>
+                <Type>Default</Type>
             </Types>
         </Item>
     </Items>

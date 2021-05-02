@@ -54,7 +54,7 @@ namespace Interface.Menu
         public void HandleExit()
         {
             IsMenuEnabled = false;
-            EnableMenu(this.IsMenuEnabled, this.WasMenuEnabled);
+            EnableMenu(IsMenuEnabled, WasMenuEnabled);
         }
         
         // called by a button
