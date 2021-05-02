@@ -35,8 +35,15 @@
             </Description>
             <PathSpriteFull>Sprites/Items/mask_full</PathSpriteFull>
             <PathSpriteMini>Sprites/Items/mask_mini</PathSpriteMini>
+        </Item>
+        <Item>
+            <ID>3</ID>
+            <Name>Temp Heal Item</Name>
+            <Description>
+                Heals some amount of hp
+            </Description>
             <Types>
-                <Type>Default</Type>
+                <Type>Consumable</Type>
             </Types>
         </Item>
     </Items>
