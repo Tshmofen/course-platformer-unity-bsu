@@ -2,7 +2,6 @@
 using DataStore.Collectibles;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 using Util;
 
@@ -106,9 +105,15 @@ namespace Interface.Menu
 
         #region Public
 
-        public void EnableUseMenu(Transform buttonTransform)
+        public void EnableUseMenu()
         {
-            //TODO
+            var useMenuTransform = useMenuObject.GetComponent<RectTransform>();
+            var useMenuRect = useMenuTransform.rect;
+            var newPosition = Input.mousePosition;
+            
+            newPosition += new Vector3(useMenuRect.width / 2, -useMenuRect.height / 2);
+            useMenuTransform.position = newPosition;
+            useMenuObject.SetActive(true);
         }
         
         public override void EnableMenu(bool enable, bool wasEnabled)
