@@ -20,6 +20,7 @@ namespace Interface.Menu
         [Header("Inventory objects")] 
         public GameObject itemButtonPrefab;
         public GameObject menuObject;
+        public GameObject useMenuObject;
         public TextMeshProUGUI descriptionMesh;
         public Image fullItemImage;
         [Header("Initial buttons")]
@@ -105,6 +106,11 @@ namespace Interface.Menu
 
         #region Public
 
+        public void EnableUseMenu(Transform buttonTransform)
+        {
+            //TODO
+        }
+        
         public override void EnableMenu(bool enable, bool wasEnabled)
         {
             menuObject.SetActive(enable);

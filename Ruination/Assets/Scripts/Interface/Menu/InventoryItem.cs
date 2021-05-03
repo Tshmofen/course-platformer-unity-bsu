@@ -18,10 +18,7 @@ namespace Interface.Menu
         [HideInInspector] public Sprite loadedSpriteFull;
         [HideInInspector] public Sprite loadedSpriteMini;
 
-        private void Start()
-        {
-            SetItemId(itemID);
-        }
+        private void Start() => SetItemId(itemID);
 
         private static Sprite LoadSprite(string path, int pixelsPerUnit = 32)
         {

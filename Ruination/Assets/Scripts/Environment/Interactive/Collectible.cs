@@ -6,8 +6,8 @@ namespace Environment.Interactive
     {
         public int itemID = 1;
         public InventoryMenu inventory;
-        
-        public override void Collect()
+
+        private void Collect()
         {
             var collectible = gameObject;
             inventory.AddItem(itemID);
@@ -15,9 +15,6 @@ namespace Environment.Interactive
             Destroy(collectible);
         }
 
-        public override void Interact()
-        {
-            // TODO
-        }
+        public override void Interact() => Collect();
     }
 }

@@ -31,7 +31,7 @@ namespace Entity.Player
             
             interactButton.SetActive(true);
             if (InputUtil.GetInteract())
-                _interacts[0].Collect();
+                _interacts[0].Interact();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
