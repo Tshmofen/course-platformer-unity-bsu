@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Damage
+namespace Entity.Damage
 {
     [RequireComponent(typeof(Collider2D))]
     public class DamageDeliver : MonoBehaviour

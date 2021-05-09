@@ -1,11 +1,10 @@
 ﻿using System.Globalization;
-using Entity;
 using Entity.Manager;
 using Interface.Overlay;
 using UnityEngine;
 using Util;
 
-namespace Damage
+namespace Entity.Damage
 {
     [RequireComponent(typeof(HealthStats), typeof(BoxCollider2D))]
     public class DamageReceiver : MonoBehaviour

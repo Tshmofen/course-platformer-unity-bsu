@@ -1,4 +1,4 @@
-using Damage;
+using Entity.Damage;
 using TMPro;
 using UnityEditor;
 using UnityEngine;

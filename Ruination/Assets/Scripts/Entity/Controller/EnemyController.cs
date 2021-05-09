@@ -1,41 +1,43 @@
 ﻿using System.Collections;
-using Entity.Manager;
-using Entity.Movement;
 using ThirdParty.QPathFinder.Script;
 using UnityEngine;
 
 namespace Entity.Controller
 {
-    [RequireComponent(typeof(MovementController))]
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : AbstractEntityController
     {
         #region Fields and properties
-        
-        private static readonly int HashVelocityScaleX = Animator.StringToHash("velocityScaleX");
-        private static readonly int HashVelocityY = Animator.StringToHash("velocityY");
-        private static readonly int HashInFall = Animator.StringToHash("inFall");
-        private static readonly int HashToAttackLight = Animator.StringToHash("toAttackLight");
-        private static readonly int HashToAttackHeavy = Animator.StringToHash("toAttackHeavy");
-        private static readonly int HashToJump = Animator.StringToHash("toJump");
-        private static readonly int HashInAttack = Animator.StringToHash("inAttack");
-        private static readonly int HashToEvade = Animator.StringToHash("toEvade");
 
-        private Vector2 _player;
+        #region Initial Fields
+        
+        [Header("Patrolling")] 
+        public int[] pathNodes;
+        public float targetRadius = 0.2f;
+        public float playerDistance = 0.6f;
+        [Header("Detection")] 
+        public LayerMask playerLayer;
+        public LayerMask groundLayer;
+        public float detectionRadius = 5;
+        public float playerCheckPeriod = 0.2f;
+        [Header("Combat")] 
+        public float attackRadius = 1f;
+        
+        #endregion
+        
+        private Vector2 _playerPosition;
         private Vector2 _target;
+        
+        private Vector2 _velocity;
+        private PathFinder _pathFinder;
+        
         private bool _isRightToTarget;
         private bool _isLeftToTarget;
-
-        private int _pathIndex;
         private bool _isMoveToEnd;
+        private int _pathIndex;
+        
+        private bool _toAttackLight;
 
-        private Vector2 _velocity;
-        private float _direction;
-
-        private MovementController _movement;
-        private PathFinder _pathFinder;
-
-        public bool IsLocked { get; set; }
-        // also set player position in vector player
+        // this property also set player position in vector player
         private bool IsPlayerNearby
         {
             get
@@ -51,8 +53,8 @@ namespace Entity.Controller
 
                 if (size != 0)
                 {
-                    _player = colliders[0].transform.position;
-                    var direction = _player - position;
+                    _playerPosition = colliders[0].transform.position;
+                    var direction = _playerPosition - position;
                     var hit = Physics2D.Raycast(position, direction, direction.magnitude, groundLayer);
                     return hit.collider is null;
                 }
@@ -64,38 +66,12 @@ namespace Entity.Controller
 
         #endregion
 
-        #region Initial Fields
-
-        [Header("Movement")] 
-        public float speed = 1;
-        public float directionStep = 0.75f;
-        public float gravity = 20;
-        
-        [Header("Patrolling")] 
-        public int[] pathNodes;
-        public float targetRadius = 0.2f;
-        
-        [Header("Detection")] 
-        public LayerMask playerLayer;
-        public LayerMask groundLayer;
-        public float detectionRadius = 5;
-        public float playerCheckPeriod = 0.2f;
-        
-        [Header("Combat")] 
-        public float attackRadius = 1f;
-
-        [Header("External")]
-        public EnemyManager manager;
-        public bool isInAttack;
-        
-
-        #endregion
-
         #region Unity Calls
 
-        private void Start()
+        protected override void Start()
         {
-            _movement = GetComponent<MovementController>();
+            base.Start();
+            
             _pathFinder = PathFinder.Instance;
             _pathFinder.graphData.ReGenerateIDs();
             _isMoveToEnd = true;
@@ -110,20 +86,15 @@ namespace Entity.Controller
 
         private void Update()
         {
-            if (IsLocked)
-            {
-                ChangePosition();
-                return;
-            }
-
             UpdatePositionToTarget();
 
             if (CanMoveToPlayer)
                 UpdatePlayerChase();
             else
                 UpdatePatrolling();
-
-            Move();
+            if (isLocked) return;
+            UpdateMovement();
+            UpdateDirection();
             UpdateAnimationState();
         }
 
@@ -141,9 +112,9 @@ namespace Entity.Controller
         // set player position as target
         private void UpdatePlayerChase()
         {
-            _target = _player;
+            _target = _playerPosition;
             var distance = (_target - (Vector2) transform.position).magnitude;
-            if (distance < attackRadius) manager.animator.SetTrigger(HashToAttackLight);
+            _toAttackLight = (distance < attackRadius);
         }
 
         // set target as one of path nodes
@@ -158,22 +129,39 @@ namespace Entity.Controller
         }
 
         // changes direction if needed and move to target
-        private void Move()
+        private void UpdateMovement()
         {
-            if (_isLeftToTarget)
-                ChangeDirection(directionStep);
-            else if (_isRightToTarget)
-                ChangeDirection(-directionStep);
-            else
-                ChangeDirection(directionStep, true);
-            ChangePosition();
+            var distance = (_playerPosition - (Vector2)transform.position).magnitude;
+            if (isInAttack || distance < playerDistance) _velocity.x = 0;
+            else _velocity.x = (_isLeftToTarget) ? moveSpeed : -moveSpeed;
+            _velocity.y -= gravity * Time.deltaTime; // (m/s^2)
+
+            Movement.Move(_velocity * Time.deltaTime);
+            _velocity = Movement.Velocity;
+        }
+
+        private void UpdateDirection()
+        {
+            if (isLocked || isInAttack)
+                return;
+            if (_velocity.x > 0 && !IsFacingRight || _velocity.x < 0 && IsFacingRight)
+                FlipDirection();
         }
 
         // update animation
         private void UpdateAnimationState()
         {
-            manager.animator.SetFloat(HashVelocityScaleX, _velocity.x / speed);
-            manager.animator.SetBool(HashInAttack, isInAttack);
+            var velocityScaleX = GetMoveScale(_velocity.x, moveSpeed);
+            var velocityScaleY = _velocity.y;
+            var inFall = !IsGrounded;
+            var inAttack = isInAttack;
+            var toAttackLight = _toAttackLight;
+
+            SetAnimationState(
+                velocityScaleX, velocityScaleY, inFall,
+                inAttack, toAttackLight, false,
+                false, false
+            );
         }
 
         #endregion
@@ -203,7 +191,7 @@ namespace Entity.Controller
                 return;
             }
 
-            var nearest = _pathFinder.FindNearestNode(_player);
+            var nearest = _pathFinder.FindNearestNode(_playerPosition);
             var current = _pathFinder.FindNearestNode(transform.position);
             CanMoveToPlayer = false;
             _pathFinder.FindShortestPathOfNodes(current, nearest, Execution.Synchronous, nodes =>
@@ -216,42 +204,6 @@ namespace Entity.Controller
                     CanMoveToPlayer = true;
                 }
             });
-        }
-
-        // smoothly change direction according to time
-        // when toZero is true, delta should be positive
-        private void ChangeDirection(float delta, bool toZero = false)
-        {
-            delta *= Time.deltaTime;
-            if (!toZero)
-            {
-                _direction += delta;
-                _direction = _direction > 1 ? 1 : _direction;
-                _direction = _direction < -1 ? -1 : _direction;
-            }
-            else
-            {
-                if (_direction > 0)
-                {
-                    _direction -= delta;
-                    _direction = _direction < 0 ? 0 : _direction;
-                }
-                else if (_direction < 0)
-                {
-                    _direction += delta;
-                    _direction = _direction > 0 ? 0 : _direction;
-                }
-            }
-        }
-
-        // interact with movement controller to move entity
-        private void ChangePosition()
-        {
-            _velocity.x = (!IsLocked) ? speed * _direction : 0;
-            _velocity.y -= gravity * Time.deltaTime; // (m/s^2)
-
-            _movement.Move(_velocity * Time.deltaTime);
-            _velocity = _movement.Velocity;
         }
 
         // iterates over pathNodes from the start to the end, and then in backwards

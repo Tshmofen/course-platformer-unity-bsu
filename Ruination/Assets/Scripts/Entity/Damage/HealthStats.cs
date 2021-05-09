@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Damage
+namespace Entity.Damage
 {
     public class HealthStats : MonoBehaviour
     {

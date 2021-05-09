@@ -1,50 +1,24 @@
-﻿using System;
-using Entity.Manager;
-using Entity.Movement;
-using UnityEngine;
+﻿using UnityEngine;
 using Util;
 
 namespace Entity.Controller
 {
-    [RequireComponent(typeof(MovementController))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : AbstractEntityController
     {
         #region Fields and properties
 
-        #region Hashes
-
-        // animation hashes
-        private static readonly int HashVelocityScaleX = Animator.StringToHash("velocityScaleX");
-        private static readonly int HashVelocityY = Animator.StringToHash("velocityY");
-        private static readonly int HashInFall = Animator.StringToHash("inFall");
-        private static readonly int HashToAttackLight = Animator.StringToHash("toAttackLight");
-        private static readonly int HashToAttackHeavy = Animator.StringToHash("toAttackHeavy");
-        private static readonly int HashToJump = Animator.StringToHash("toJump");
-        private static readonly int HashInAttack = Animator.StringToHash("inAttack");
-        private static readonly int HashToEvade = Animator.StringToHash("toEvade");
-
-        #endregion
-
         #region Unity assigns
-
-        [Header("Horizontal Movement")] 
-        public float moveSpeed = 4.5f;
-        public float backwardsSpeed = 2.5f;
-        public float evadeSpeed = 7;
-        public float waitForEvadeTime = 0.3f;
+        
         [Header("Vertical Movement")] 
         public float jumpHeight = 3;
         public float jumpManualDumping = 5;
-        public float gravity = 20;
-        public float slopeMoveUpdateDelay = 0.1f;
         public int maxAttacksInFly = 1;
         public int maxEvadesInFly;
-        [Header("External")] 
-        public PlayerManager manager;
-        public bool isInAttack;
-        public bool isLocked;
+        [Header("Evading")]
+        public float evadeSpeed = 7;
+        public float waitForEvadeTime = 0.3f;
         public bool isEvading;
-
+        
         #endregion
 
         #region Input
@@ -60,22 +34,20 @@ namespace Entity.Controller
         private bool IsInParryMode { get; set; }
 
         #endregion
-
+        
+        private Vector2 _velocity;
+        
         private bool _wasToContinueJump;
-        private bool _isFacingRight;
         private bool _playJumpAnimation;
         private bool _notMoveThisFrame;
-        
-        private bool _wasMovingSlope;
-        private float _wasMovingSlopeTime;
-        
+
         private bool _wasEvading;
         private bool _isEvadingForbidden;
         private float _evadeForbidTime;
         private int _evadesInFly;
 
-        private Vector2 _velocity;
-        private MovementController _movement;
+        private bool _toAttackLight;
+        private bool _toAttackHeavy;
         private int _attacksInFly;
 
         public bool IsInteracting
@@ -83,43 +55,15 @@ namespace Entity.Controller
             get => !isInAttack && ToInteract;
             set => ToInteract = value;
         }
-        private bool IsMovingBackwards
-        {
-            get
-            {
-                var isBackwards = MoveX > 0 && !_isFacingRight || MoveX < 0 && _isFacingRight;
-                return isInAttack && isBackwards;
-            }
-        }
-        private bool IsGrounded
-        {
-            get
-            {
-                var grounded = _wasMovingSlope || _movement.IsGrounded;
-
-                if (_movement.CollisionState.MovingDownSlope || _movement.CollisionState.MovingUpSlope)
-                {
-                    _wasMovingSlope = true;
-                    _wasMovingSlopeTime = Time.time;
-                }
-                else if (Time.time - _wasMovingSlopeTime > slopeMoveUpdateDelay)
-                {
-                    _wasMovingSlope = false;
-                }
-
-                return grounded;
-            }
-        }
 
         #endregion
 
         #region Unity calls
 
-        private void Start()
+        protected override void Start()
         {
-            _movement = GetComponent<MovementController>();
+            base.Start();
             Cursor.lockState = CursorLockMode.Locked;
-            _isFacingRight = true;
         }
 
         private void Update()
@@ -159,7 +103,7 @@ namespace Entity.Controller
 
         private void UpdateCounters()
         {
-            switch (_movement.IsGrounded)
+            switch (Movement.IsGrounded)
             {
                 case false when (ToAttack || ToParry):
                     _attacksInFly++;
@@ -203,8 +147,8 @@ namespace Entity.Controller
             }
             
             var move = (Vector3)_velocity * Time.deltaTime;
-            _movement.Move(move);
-            _velocity = _movement.Velocity;
+            Movement.Move(move);
+            _velocity = Movement.Velocity;
         }
 
         // flips character is it's necessary
@@ -212,7 +156,7 @@ namespace Entity.Controller
         {
             if (isInAttack || isEvading) return;
             var input = InputUtil.GetMove();
-            if (input.x > 0 && !_isFacingRight || input.x < 0 && _isFacingRight)
+            if (input.x > 0 && !IsFacingRight || input.x < 0 && IsFacingRight)
                 FlipDirection();
         }
 
@@ -235,65 +179,43 @@ namespace Entity.Controller
         // starts attack
         private void UpdateCombatState()
         {
-            if (_attacksInFly > maxAttacksInFly)
-                return;
+            _toAttackHeavy = ToParry;
+            _toAttackLight = !ToParry && ToAttack;
             
-            if (ToParry)
-                manager.animator.SetTrigger(HashToAttackHeavy);
-            else if (ToAttack)
-                manager.animator.SetTrigger(HashToAttackLight);
+            if (isInAttack || _attacksInFly > maxAttacksInFly)
+            {
+                _toAttackHeavy = false;
+                _toAttackLight = false;
+            }
         }
 
         private void UpdateAnimation()
         {
-            manager.animator.SetFloat(HashVelocityScaleX, GetHorizontalMoveScale());
-            manager.animator.SetFloat(HashVelocityY, _velocity.y);
-            manager.animator.SetBool(HashInFall, !IsGrounded);
-            manager.animator.SetBool(HashInAttack, isInAttack);
+            var velocityScaleX = GetMoveScale(_velocity.x, moveSpeed);
+            var velocityScaleY = _velocity.y;
+            var inFall = !IsGrounded;
+            var inAttack = isInAttack;
+            var toEvade = ToEvade && !isInAttack;
+            var toJump = _playJumpAnimation;
+            var toAttackLight = _toAttackLight;
+            var toAttackHeavy = _toAttackHeavy;
 
-            if (ToEvade && !isInAttack)
-                manager.animator.SetTrigger(HashToEvade);
-            
-            // crutch: turn off jump trigger manually after animation start
-            if (!_playJumpAnimation && manager.animator.GetBool(HashToJump)) 
-                manager.animator.SetBool(HashToJump, false);
-            if (_playJumpAnimation)
-            {
-                _playJumpAnimation = false; 
-                manager.animator.SetTrigger(HashToJump);
-            }
-        }
-
-        private void FlipDirection()
-        {
-            _isFacingRight = !_isFacingRight;
-            transform.forward *= -1;
-            manager.weapon.transform.forward *= -1;
-        }
-
-        // returns movement scale from -1 to 1
-        // depends on current speed and direction
-        private float GetHorizontalMoveScale()
-        {
-            float velocityScale;
-
-            if (IsMovingBackwards)
-                velocityScale = -Math.Abs(_velocity.x / backwardsSpeed);
-            else
-                velocityScale = Math.Abs(_velocity.x / moveSpeed);
-
-            return velocityScale;
+            SetAnimationState(
+                velocityScaleX, velocityScaleY, inFall,
+                inAttack, toAttackLight, toAttackHeavy,
+                toJump, toEvade
+                );
         }
 
         #region Movement behaviour
         
         private void UseUsualMovement()
         {
-            _movement.ignoreOneWayPlatformsThisFrame = ToIgnorePlatform;
+            Movement.ignoreOneWayPlatformsThisFrame = ToIgnorePlatform;
 
-            if (ToJump && IsGrounded)
+            _playJumpAnimation = ToJump && IsGrounded;
+            if (_playJumpAnimation)
             {
-                _playJumpAnimation = true;
                 _velocity.y = Mathf.Sqrt(2f * jumpHeight * gravity);
                 _wasToContinueJump = true;
             }
@@ -308,9 +230,8 @@ namespace Entity.Controller
 
                 _wasToContinueJump = false;
             }
-
-            var speed = (IsMovingBackwards)? backwardsSpeed : moveSpeed;
-            _velocity.x = speed * MoveX;
+            
+            _velocity.x = moveSpeed * MoveX;
         }
 
         private void UseLockedMovement()
@@ -326,7 +247,7 @@ namespace Entity.Controller
 
         private void UseEvadeMovement()
         {
-            var minus = (_isFacingRight) ? 1 : -1;
+            var minus = (IsFacingRight) ? 1 : -1;
             _velocity = new Vector2(minus * evadeSpeed, 0);
             _wasEvading = true;
         }
