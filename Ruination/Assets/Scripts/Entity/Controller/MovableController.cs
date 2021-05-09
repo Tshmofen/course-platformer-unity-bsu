@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using Entity.Manager;
 using Environment.Interactive;
 using Interface.World;
 using UnityEngine;
 using Util;
 
-namespace Entity.Player
+namespace Entity.Controller
 {
     [RequireComponent(typeof(CircleCollider2D))]
     public class MovableController : MonoBehaviour

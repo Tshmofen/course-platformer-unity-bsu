@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Interface.Scene
+namespace Interface.Fading
 {
     public class SceneFader : MonoBehaviour
     {

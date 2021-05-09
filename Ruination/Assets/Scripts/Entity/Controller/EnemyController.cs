@@ -1,18 +1,24 @@
 ﻿using System.Collections;
+using Entity.Manager;
 using Entity.Movement;
 using ThirdParty.QPathFinder.Script;
 using UnityEngine;
 
-namespace Entity.Enemy
+namespace Entity.Controller
 {
     [RequireComponent(typeof(MovementController))]
     public class EnemyController : MonoBehaviour
     {
         #region Fields and properties
         
-        private static readonly int HashVelocityX = Animator.StringToHash("velocityX");
-        private static readonly int HashToAttack = Animator.StringToHash("toAttack");
+        private static readonly int HashVelocityScaleX = Animator.StringToHash("velocityScaleX");
+        private static readonly int HashVelocityY = Animator.StringToHash("velocityY");
+        private static readonly int HashInFall = Animator.StringToHash("inFall");
+        private static readonly int HashToAttackLight = Animator.StringToHash("toAttackLight");
+        private static readonly int HashToAttackHeavy = Animator.StringToHash("toAttackHeavy");
+        private static readonly int HashToJump = Animator.StringToHash("toJump");
         private static readonly int HashInAttack = Animator.StringToHash("inAttack");
+        private static readonly int HashToEvade = Animator.StringToHash("toEvade");
 
         private Vector2 _player;
         private Vector2 _target;
@@ -29,7 +35,6 @@ namespace Entity.Enemy
         private PathFinder _pathFinder;
 
         public bool IsLocked { get; set; }
-        
         // also set player position in vector player
         private bool IsPlayerNearby
         {
@@ -63,7 +68,7 @@ namespace Entity.Enemy
 
         [Header("Movement")] 
         public float speed = 1;
-        public float directionStep = 0.01f;
+        public float directionStep = 0.75f;
         public float gravity = 20;
         
         [Header("Patrolling")] 
@@ -77,7 +82,7 @@ namespace Entity.Enemy
         public float playerCheckPeriod = 0.2f;
         
         [Header("Combat")] 
-        public float attackRadius = 0.5f;
+        public float attackRadius = 1f;
 
         [Header("External")]
         public EnemyManager manager;
@@ -138,7 +143,7 @@ namespace Entity.Enemy
         {
             _target = _player;
             var distance = (_target - (Vector2) transform.position).magnitude;
-            if (distance < attackRadius) manager.animator.SetTrigger(HashToAttack);
+            if (distance < attackRadius) manager.animator.SetTrigger(HashToAttackLight);
         }
 
         // set target as one of path nodes
@@ -167,7 +172,7 @@ namespace Entity.Enemy
         // update animation
         private void UpdateAnimationState()
         {
-            manager.animator.SetFloat(HashVelocityX, _velocity.x / speed);
+            manager.animator.SetFloat(HashVelocityScaleX, _velocity.x / speed);
             manager.animator.SetBool(HashInAttack, isInAttack);
         }
 

@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Entity;
+using Entity.Manager;
 using Interface.Overlay;
 using UnityEngine;
 using Util;

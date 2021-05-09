@@ -1,7 +1,6 @@
-﻿using Environment;
-using Environment.Interactive;
+﻿using Entity.Controller;
 
-namespace Entity.Player
+namespace Entity.Manager
 {
     public class PlayerManager : EntityManager
     {

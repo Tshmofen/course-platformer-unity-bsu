@@ -1,4 +1,5 @@
 ﻿using Entity;
+using Entity.Manager;
 using UnityEngine;
 
 namespace Animation.DamageReceiver

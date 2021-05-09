@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Entity.Manager;
+using UnityEngine;
 
 namespace Entity
 {

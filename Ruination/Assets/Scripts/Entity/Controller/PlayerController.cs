@@ -1,9 +1,10 @@
 ﻿using System;
+using Entity.Manager;
 using Entity.Movement;
 using UnityEngine;
 using Util;
 
-namespace Entity.Player
+namespace Entity.Controller
 {
     [RequireComponent(typeof(MovementController))]
     public class PlayerController : MonoBehaviour

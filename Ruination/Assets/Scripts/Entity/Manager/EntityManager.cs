@@ -1,7 +1,7 @@
 ﻿using Damage;
 using UnityEngine;
 
-namespace Entity
+namespace Entity.Manager
 {
     public class EntityManager : MonoBehaviour
     {

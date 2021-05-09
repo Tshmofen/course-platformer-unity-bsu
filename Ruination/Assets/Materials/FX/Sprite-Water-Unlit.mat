@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sprite-Water-Unlit 1
+  m_Name: Sprite-Water-Unlit
   m_Shader: {fileID: -6465566751694194690, guid: 9e355b55b3063474f98ffaa8d3a5fac9,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA

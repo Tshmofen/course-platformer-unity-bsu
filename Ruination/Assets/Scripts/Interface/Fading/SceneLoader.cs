@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Interface.Scene
+namespace Interface.Fading
 {
     public class SceneLoader : MonoBehaviour
     {

@@ -1,4 +1,6 @@
-﻿namespace Entity.Enemy
+﻿using Entity.Controller;
+
+namespace Entity.Manager
 {
     public class EnemyManager : EntityManager
     {

@@ -1,4 +1,4 @@
-﻿using Interface.Scene;
+﻿using Interface.Fading;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;

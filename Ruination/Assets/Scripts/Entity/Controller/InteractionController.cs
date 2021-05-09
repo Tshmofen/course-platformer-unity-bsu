@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Environment.Interactive;
 using UnityEngine;
 using Util;
 
-namespace Entity.Player
+namespace Entity.Controller
 {
     public class InteractionController : MonoBehaviour
     {

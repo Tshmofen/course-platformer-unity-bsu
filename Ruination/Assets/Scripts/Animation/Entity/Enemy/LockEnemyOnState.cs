@@ -1,4 +1,4 @@
-﻿using Entity.Enemy;
+﻿using Entity.Manager;
 using UnityEngine;
 
 namespace Animation.Entity.Enemy
