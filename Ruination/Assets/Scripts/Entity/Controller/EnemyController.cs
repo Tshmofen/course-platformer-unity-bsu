@@ -87,11 +87,7 @@ namespace Entity.Controller
         private void Update()
         {
             UpdatePositionToTarget();
-
-            if (CanMoveToPlayer)
-                UpdatePlayerChase();
-            else
-                UpdatePatrolling();
+            UpdatePatrolling();
             if (isLocked) return;
             UpdateMovement();
             UpdateDirection();
@@ -120,6 +116,8 @@ namespace Entity.Controller
         // set target as one of path nodes
         private void UpdatePatrolling()
         {
+            if (CanMoveToPlayer)
+                UpdatePlayerChase();
             if (!_isRightToTarget && !_isLeftToTarget)
             {
                 _pathIndex = GetNextNodeIndex();
@@ -194,7 +192,8 @@ namespace Entity.Controller
             var nearest = _pathFinder.FindNearestNode(_playerPosition);
             var current = _pathFinder.FindNearestNode(transform.position);
             CanMoveToPlayer = false;
-            _pathFinder.FindShortestPathOfNodes(current, nearest, Execution.Synchronous, nodes =>
+            _pathFinder.FindShortestPathOfNodes(current, nearest,
+                Execution.Synchronous, nodes =>
             {
                 if (nodes != null && nodes.Count != 0)
                 {

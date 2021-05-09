@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
-    totalSpriteSurfaceArea: 82944
+    totalSpriteSurfaceArea: 95232
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -68,6 +68,18 @@ SpriteAtlas:
   - {fileID: -7839507471865450669, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: -8346178231618157379, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: -6627870410531630256, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: 556530189025366737, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: 2326304054162573754, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: -7225512925871877664, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: 2482014102518608977, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: -3348062934533217571, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: -4048665207900645208, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: -5160660819957252609, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: 6859263829080826081, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: 4408241631364836248, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: 6324531904809182244, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: 5775632523447700598, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: 6766710538194844706, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
   - {fileID: -7442466831354495073, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: -2758364981388734925, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
   - {fileID: -1544141426327130054, guid: 101c179c15569714e8164b049a0f54d8, type: 3}
@@ -150,6 +162,18 @@ SpriteAtlas:
   - MountainGroundEdgy_11
   - MountainGroundEdgy_12
   - MountainGroundEdgy_13
+  - Bricks_8
+  - Bricks_9
+  - Bricks_4
+  - Bricks_5
+  - Bricks_6
+  - Bricks_7
+  - Bricks_0
+  - Bricks_1
+  - Bricks_2
+  - Bricks_11
+  - Bricks_3
+  - Bricks_10
   - MountainGround_6
   - MountainGround_7
   - MountainGround_4

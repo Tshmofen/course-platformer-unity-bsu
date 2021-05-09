@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glow-Lit
+  m_Name: Sprite-Glow-Lit
   m_Shader: {fileID: -6465566751694194690, guid: 41ff018c5d555e1409fefdc4a4d0e6ab,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
