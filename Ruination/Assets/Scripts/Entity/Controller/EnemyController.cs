@@ -30,8 +30,10 @@ namespace Entity.Controller
         private Vector2 _velocity;
         private PathFinder _pathFinder;
         
-        private bool _isRightToTarget;
-        private bool _isLeftToTarget;
+        private bool _isOnTarget;
+        private bool _wasOnTarget;
+        
+        private bool _isMovingRight;
         private bool _isMoveToEnd;
         private int _pathIndex;
         
@@ -101,8 +103,12 @@ namespace Entity.Controller
         private void UpdatePositionToTarget()
         {
             var position = transform.position;
-            _isRightToTarget = _target.x - position.x < -targetRadius;
-            _isLeftToTarget = _target.x - position.x > targetRadius;
+            var isRightToTarget = _target.x - position.x < -targetRadius;
+            var isLeftToTarget = _target.x - position.x > targetRadius;
+
+            _isMovingRight = isLeftToTarget;
+            _wasOnTarget = _isOnTarget;
+            _isOnTarget = !isLeftToTarget && !isRightToTarget;
         }
 
         // set player position as target
@@ -118,7 +124,7 @@ namespace Entity.Controller
         {
             if (CanMoveToPlayer)
                 UpdatePlayerChase();
-            if (!_isRightToTarget && !_isLeftToTarget)
+            if (_isOnTarget && !_wasOnTarget)
             {
                 _pathIndex = GetNextNodeIndex();
                 var node = _pathFinder.graphData.GetNode(pathNodes[_pathIndex]);
@@ -130,8 +136,10 @@ namespace Entity.Controller
         private void UpdateMovement()
         {
             var distance = (_playerPosition - (Vector2)transform.position).magnitude;
+            
             if (isInAttack || distance < playerDistance) _velocity.x = 0;
-            else _velocity.x = (_isLeftToTarget) ? moveSpeed : -moveSpeed;
+            else _velocity.x = (_isMovingRight) ? moveSpeed : -moveSpeed;
+            
             _velocity.y -= gravity * Time.deltaTime; // (m/s^2)
 
             Movement.Move(_velocity * Time.deltaTime);
@@ -165,8 +173,7 @@ namespace Entity.Controller
         #endregion
 
         #region Support Methods
-
-        // ReSharper disable Unity.PerformanceAnalysis
+        
         private IEnumerator DoPlayerCheck()
         {
             while (true)
