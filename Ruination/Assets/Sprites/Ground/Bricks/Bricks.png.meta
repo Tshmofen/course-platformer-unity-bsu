@@ -44,6 +44,12 @@ TextureImporter:
   - first:
       213: -771744083097051549
     second: Bricks_13
+  - first:
+      213: -7493662373440314518
+    second: Bricks_14
+  - first:
+      213: 8377601346417164459
+    second: Bricks_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -149,7 +155,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 152
+        y: 148
         width: 32
         height: 32
       alignment: 0
@@ -170,7 +176,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 37
-        y: 152
+        y: 148
         width: 32
         height: 32
       alignment: 0
@@ -191,7 +197,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 74
-        y: 152
+        y: 148
         width: 32
         height: 32
       alignment: 0
@@ -211,8 +217,8 @@ TextureImporter:
       name: Bricks_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 115
+        x: 124
+        y: 148
         width: 32
         height: 32
       alignment: 0
@@ -232,8 +238,8 @@ TextureImporter:
       name: Bricks_4
       rect:
         serializedVersion: 2
-        x: 74
-        y: 115
+        x: 0
+        y: 111
         width: 32
         height: 32
       alignment: 0
@@ -253,8 +259,8 @@ TextureImporter:
       name: Bricks_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 78
+        x: 37
+        y: 111
         width: 32
         height: 32
       alignment: 0
@@ -274,8 +280,8 @@ TextureImporter:
       name: Bricks_6
       rect:
         serializedVersion: 2
-        x: 37
-        y: 78
+        x: 74
+        y: 111
         width: 32
         height: 32
       alignment: 0
@@ -295,8 +301,8 @@ TextureImporter:
       name: Bricks_7
       rect:
         serializedVersion: 2
-        x: 74
-        y: 78
+        x: 124
+        y: 111
         width: 32
         height: 32
       alignment: 0
@@ -317,7 +323,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 35
+        y: 74
         width: 32
         height: 32
       alignment: 0
@@ -338,7 +344,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 37
-        y: 35
+        y: 74
         width: 32
         height: 32
       alignment: 0
@@ -359,7 +365,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 74
-        y: 35
+        y: 74
         width: 32
         height: 32
       alignment: 0
@@ -367,16 +373,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 15, y: 8}
-        - {x: 7, y: 8}
-        - {x: 7, y: 0}
-        - {x: 0, y: 0}
-        - {x: 0, y: -8}
-        - {x: -9, y: -8}
-        - {x: -9, y: -16}
+      - - {x: -16, y: 16}
+        - {x: -16, y: -16}
         - {x: 16, y: -16}
         - {x: 16, y: 16}
-        - {x: 15, y: 16}
       tessellationDetail: 0
       bones: []
       spriteID: 22cfef6026f28ed50800000000000000
@@ -389,8 +389,8 @@ TextureImporter:
       name: Bricks_11
       rect:
         serializedVersion: 2
-        x: 111
-        y: 35
+        x: 124
+        y: 74
         width: 32
         height: 32
       alignment: 0
@@ -398,14 +398,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -16, y: 8}
+      - - {x: -16, y: 16}
         - {x: -16, y: -16}
-        - {x: 8, y: -16}
-        - {x: 8, y: -8}
-        - {x: 1, y: -8}
-        - {x: 1, y: 0}
-        - {x: -8, y: 0}
+        - {x: 16, y: -16}
+        - {x: 16, y: 16}
       tessellationDetail: 0
       bones: []
       spriteID: 424a6c4324045c750800000000000000
@@ -418,8 +414,8 @@ TextureImporter:
       name: Bricks_12
       rect:
         serializedVersion: 2
-        x: 74
-        y: 0
+        x: 0
+        y: 37
         width: 32
         height: 32
       alignment: 0
@@ -427,18 +423,14 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -16, y: 16}
-        - {x: -16, y: 15}
-        - {x: -8, y: 15}
-        - {x: -8, y: 7}
-        - {x: 0, y: 7}
-        - {x: 0, y: -1}
-        - {x: 8, y: -1}
-        - {x: 8, y: -9}
-        - {x: 15, y: -9}
-        - {x: 15, y: -16}
+      - - {x: 7, y: 8}
+        - {x: 7, y: 0}
+        - {x: -1, y: 0}
+        - {x: -1, y: -8}
+        - {x: -9, y: -8}
+        - {x: -9, y: -16}
         - {x: 16, y: -16}
-        - {x: 16, y: 16}
+        - {x: 16, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: 6e1c3415155ebadc0800000000000000
@@ -451,7 +443,64 @@ TextureImporter:
       name: Bricks_13
       rect:
         serializedVersion: 2
-        x: 111
+        x: 37
+        y: 37
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 1, y: 0}
+        - {x: -7, y: 0}
+        - {x: -7, y: 8}
+        - {x: -15, y: 8}
+        - {x: -15, y: 16}
+        - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 9, y: -16}
+        - {x: 9, y: -8}
+        - {x: 1, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36e9d7568d63a45f0800000000000000
+      internalID: -771744083097051549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bricks_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16, y: 16}
+        - {x: -16, y: 15}
+        - {x: 15, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a63216446c9210890800000000000000
+      internalID: -7493662373440314518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bricks_15
+      rect:
+        serializedVersion: 2
+        x: 37
         y: 0
         width: 32
         height: 32
@@ -463,19 +512,12 @@ TextureImporter:
       - - {x: -16, y: 16}
         - {x: -16, y: -16}
         - {x: -15, y: -16}
-        - {x: -15, y: -9}
-        - {x: -8, y: -9}
-        - {x: -8, y: -1}
-        - {x: 0, y: -1}
-        - {x: 0, y: 7}
-        - {x: 8, y: 7}
-        - {x: 8, y: 15}
         - {x: 16, y: 15}
         - {x: 16, y: 16}
       tessellationDetail: 0
       bones: []
-      spriteID: 36e9d7568d63a45f0800000000000000
-      internalID: -771744083097051549
+      spriteID: ba08703c908334470800000000000000
+      internalID: 8377601346417164459
       vertices: []
       indices: 
       edges: []

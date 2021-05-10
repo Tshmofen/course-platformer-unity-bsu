@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
-    totalSpriteSurfaceArea: 95232
+    totalSpriteSurfaceArea: 99328
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -73,9 +73,13 @@ SpriteAtlas:
   - {fileID: -7225512925871877664, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
   - {fileID: 2482014102518608977, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
   - {fileID: -3348062934533217571, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: 8377601346417164459, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
   - {fileID: -4048665207900645208, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: -7493662373440314518, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
   - {fileID: -5160660819957252609, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: -771744083097051549, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
   - {fileID: 6859263829080826081, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
+  - {fileID: -3626552937498295834, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
   - {fileID: 4408241631364836248, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
   - {fileID: 6324531904809182244, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
   - {fileID: 5775632523447700598, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
@@ -167,9 +171,13 @@ SpriteAtlas:
   - Bricks_4
   - Bricks_5
   - Bricks_6
+  - Bricks_15
   - Bricks_7
+  - Bricks_14
   - Bricks_0
+  - Bricks_13
   - Bricks_1
+  - Bricks_12
   - Bricks_2
   - Bricks_11
   - Bricks_3
