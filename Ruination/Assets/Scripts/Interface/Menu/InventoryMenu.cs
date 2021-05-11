@@ -7,7 +7,7 @@ using Util;
 
 namespace Interface.Menu
 {
-    public class InventoryMenu : AbstractMenu
+    public class InventoryMenu : BaseMenu
     {
         #region Fields & properties
 
@@ -41,7 +41,7 @@ namespace Interface.Menu
             _lastItemButton = firstItemButton;
             SetItemButton(firstItemButton);
             
-            EnableMenu(IsMenuEnabled, WasMenuEnabled);
+            EnableMenu(false);
             _items = new List<InventoryItem>(GetComponentsInChildren<InventoryItem>());
             if (_items.Count != 0)
             {
@@ -53,8 +53,8 @@ namespace Interface.Menu
         // called by a button
         public void HandleExit()
         {
-            IsMenuEnabled = false;
-            EnableMenu(IsMenuEnabled, WasMenuEnabled);
+            IsEnabled = false;
+            EnableMenu(IsEnabled);
         }
         
         // called by a button
@@ -115,9 +115,10 @@ namespace Interface.Menu
             useMenuTransform.position = newPosition;
             useMenuObject.SetActive(true);
         }
-        
-        public override void EnableMenu(bool enable, bool wasEnabled)
+
+        public override void EnableMenu(bool enable)
         {
+            IsEnabled = enable;
             menuObject.SetActive(enable);
             Cursor.lockState = (enable) ? CursorLockMode.None : CursorLockMode.Locked;
         }

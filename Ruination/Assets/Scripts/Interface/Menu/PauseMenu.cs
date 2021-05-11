@@ -7,7 +7,7 @@ using Util;
 
 namespace Interface.Menu
 {
-    public class PauseMenu : AbstractMenu
+    public class PauseMenu : BaseMenu
     {
         #region Fields & properties
 
@@ -21,6 +21,7 @@ namespace Interface.Menu
         public SceneAsset mainMenuScene;
         
         private GameObject _lastButton;
+        private bool _wasEnabled;
 
         #endregion
 
@@ -29,15 +30,14 @@ namespace Interface.Menu
         private void Start()
         {
             _lastButton = mainButton;
-            EnableMenu(IsMenuEnabled, WasMenuEnabled);
+            IsEnabled = true;
+            EnableMenu(false);
         }
-        
-        
+
         // called by a button
         public void HandleContinue()
         {
-            IsMenuEnabled = false;
-            EnableMenu(IsMenuEnabled, WasMenuEnabled);
+            EnableMenu(false);
         }
 
         // called by a button
@@ -60,13 +60,20 @@ namespace Interface.Menu
 
         #region Public
 
-        public override void EnableMenu(bool enable, bool wasEnabled)
+        public override void EnableMenu(bool enable)
         {
+            _wasEnabled = IsEnabled;
+            IsEnabled = enable;
+            
+            if (_wasEnabled && enable || !_wasEnabled && !enable)
+                return;
+
             Time.timeScale = enable ? 0 : 1;
             menuObject.SetActive(enable);
+            
             Cursor.lockState = (enable) ? CursorLockMode.None : CursorLockMode.Locked;
-            if (wasEnabled && !enable) _lastButton = eventSystem.currentSelectedGameObject;
-            if (!wasEnabled && enable) eventSystem.SetSelectedGameObject(_lastButton);
+            if (_wasEnabled && !enable) _lastButton = eventSystem.currentSelectedGameObject;
+            if (!_wasEnabled && enable) eventSystem.SetSelectedGameObject(_lastButton);
         }
         
         public override bool GetMenuControls() => InputUtil.GetPauseMenu();

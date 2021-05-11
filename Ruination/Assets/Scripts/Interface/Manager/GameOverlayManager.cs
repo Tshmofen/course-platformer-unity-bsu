@@ -1,18 +1,15 @@
-﻿using Interface.Menu;
+﻿using System.Linq;
+using Interface.Menu;
 using UnityEngine;
-using Util;
 
 namespace Interface.Manager
 {
     public class GameOverlayManager : MonoBehaviour
     {
         #region Fields & properties
-
-        private bool _isMenuEnabled;
-        private AbstractMenu _enabledMenu;
-
+        
         [Header("External Menus")]
-        public AbstractMenu[] menus;
+        public BaseMenu[] menus;
 
         #endregion
 
@@ -20,25 +17,27 @@ namespace Interface.Manager
 
         private void Update()
         {
-            foreach (var menu in menus)
+            var enabledMenus = menus.Where(menu => menu.IsEnabled).ToList();
+            
+            if (enabledMenus.Count != 0)
             {
-                if (_isMenuEnabled && menu != _enabledMenu) continue;
+                var menu = enabledMenus[0];
                 
-                if (InputUtil.GetCloseAnyMenu()) 
-                    _isMenuEnabled = false;
-                    
-                menu.WasMenuEnabled = menu.IsMenuEnabled;
-                menu.IsMenuEnabled ^= menu.GetMenuControls();
-                if (InputUtil.GetCloseAnyMenu() && menu.WasMenuEnabled) menu.IsMenuEnabled = false;
-                if (menu.IsMenuEnabled)
-                {
-                    _enabledMenu = menu;
-                    _isMenuEnabled = true;
-                }
-                if (menu.WasMenuEnabled && !menu.IsMenuEnabled 
-                    || !menu.WasMenuEnabled && menu.IsMenuEnabled) 
-                    menu.EnableMenu(menu.IsMenuEnabled, menu.WasMenuEnabled);
+                var forceDisable = menu.IsEnabled && BaseMenu.GetCloseAnyMenu();
+                var toEnable = !forceDisable && menu.IsEnabled ^ menu.GetMenuControls();
+
+                menu.EnableMenu(toEnable);
             }
+            else 
+                foreach (var menu in menus)
+                {
+                    var toEnable = menu.IsEnabled ^ menu.GetMenuControls();
+                    if (toEnable)
+                    {
+                        menu.EnableMenu(true);
+                        break;
+                    }
+                }
         }
 
         #endregion
