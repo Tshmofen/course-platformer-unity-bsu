@@ -1,8 +1,9 @@
 ﻿using Interface.Menu;
+using UnityEngine;
 
 namespace Environment.Interactive
 {
-    public class Collectible : AbstractInteractive
+    public class Collectible : MonoBehaviour, IInteractive
     {
         public int itemID = 1;
         public InventoryMenu inventory;
@@ -15,6 +16,6 @@ namespace Environment.Interactive
             Destroy(collectible);
         }
 
-        public override void Interact() => Collect();
+        public void Interact() => Collect();
     }
 }

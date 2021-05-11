@@ -9,7 +9,7 @@ namespace Entity.Controller
     {
         #region Fields & properties
 
-        private List<AbstractInteractive> _interacts;
+        private List<IInteractive> _interacts;
 
         public GameObject interactButton;
         
@@ -20,7 +20,7 @@ namespace Entity.Controller
         
         private void Start()
         {
-            _interacts = new List<AbstractInteractive>();
+            _interacts = new List<IInteractive>();
             interactButton.SetActive(false);
         }
 
@@ -35,7 +35,7 @@ namespace Entity.Controller
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var interactive = other.GetComponent<AbstractInteractive>();
+            var interactive = other.GetComponent<IInteractive>();
             if (interactive != null)
             {
                 _interacts.Add(interactive);
@@ -44,7 +44,7 @@ namespace Entity.Controller
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            var interactive = other.GetComponent<AbstractInteractive>();
+            var interactive = other.GetComponent<IInteractive>();
             if (interactive != null)
             {
                 _interacts.Remove(interactive);

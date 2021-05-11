@@ -78,7 +78,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.59375, y: 4.0625}
+  m_Size: {x: 2.4375, y: 4.5625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -112,4 +112,4 @@ MonoBehaviour:
   - {x: -1.3275757, y: 1.2273979, z: 0}
   m_ShapePathHash: -1790962377
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1472
+  m_InstanceId: -1402

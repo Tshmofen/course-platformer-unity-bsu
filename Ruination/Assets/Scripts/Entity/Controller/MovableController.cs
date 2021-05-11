@@ -105,14 +105,14 @@ namespace Entity.Controller
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.CompareTag(Tag.Movable)) return;
+            if (!other.CompareTag(TagStorage.MovableTag)) return;
             var movable = other.GetComponent<Movable>();
             if (movable != null) _movables.Add(movable);
         }
         
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (!other.CompareTag(Tag.Movable)) return;
+            if (!other.CompareTag(TagStorage.MovableTag)) return;
             var movable = other.GetComponent<Movable>();
             if (movable != null) _movables.Remove(movable);
         }
