@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Util;
 
 namespace Environment.Furniture
 {
@@ -7,10 +8,12 @@ namespace Environment.Furniture
         private float _currentWaitTime;
         private int _hashBoolParameter;
         
-        public float timeToActivate = 2;
-        public string activatorTag = "Activator";
+        [Header("Animation")]
         public Animator animator;
         public string boolParameter = "isOpen";
+        [Header("Behaviour")]
+        public float timeToActivate = 2;
+        public string activatorTag = TagStorage.ActivatorTag;
 
         private void Start()
         {

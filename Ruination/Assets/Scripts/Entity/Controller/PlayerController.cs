@@ -3,7 +3,7 @@ using Util;
 
 namespace Entity.Controller
 {
-    public class PlayerController : AbstractEntityController
+    public class PlayerController : BaseEntityController
     {
         #region Fields and properties
 
@@ -58,7 +58,7 @@ namespace Entity.Controller
 
         #endregion
 
-        #region Unity calls
+        #region Unity behaviour
 
         protected override void Start()
         {
@@ -82,10 +82,6 @@ namespace Entity.Controller
             UpdateAnimation();
         }
 
-        #endregion
-        
-        #region Support methods
-        
         private void GetControls()
         {
             MoveX = InputUtil.GetMove().x;

@@ -13,8 +13,6 @@ namespace Interface.Manager
 
         #endregion
 
-        #region Unity calls
-
         private void Update()
         {
             var enabledMenus = menus.Where(menu => menu.IsEnabled).ToList();
@@ -39,7 +37,5 @@ namespace Interface.Manager
                     }
                 }
         }
-
-        #endregion
     }
 }

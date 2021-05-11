@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Entity.Manager
 {
-    public class EntityManager : MonoBehaviour
+    public abstract class EntityManager : MonoBehaviour
     {
         [Header("Attached objects")] 
         public GameObject weapon;

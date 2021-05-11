@@ -1,22 +1,16 @@
-﻿using Entity;
-using Entity.Manager;
+﻿using Entity.Manager;
 using UnityEngine;
 
 namespace Animation.DamageReceiver
 {
     public class DestroyOnState : StateMachineBehaviour
     {
-        #region Fields
-
         private EntityManager _manager;
 
+        [Header("Timings")]
         [Range(0,1)] public float destroyTime = 1;
         [Range(0,1)] public float timeTolerance = 0.05f;
-
-        #endregion
         
-        #region Unity calls
-
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             _manager = animator.GetComponent<EntityManager>();
@@ -35,7 +29,5 @@ namespace Animation.DamageReceiver
             
             _manager.destroyer.CurrentFade = 1 - state;
         }
-
-        #endregion
     }
 }

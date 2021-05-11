@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Entity.Controller
 {
-    public class EnemyController : AbstractEntityController
+    public class EnemyController : BaseEntityController
     {
         #region Fields and properties
 
@@ -68,7 +68,7 @@ namespace Entity.Controller
 
         #endregion
 
-        #region Unity Calls
+        #region Unity behaviour
 
         protected override void Start()
         {
@@ -95,10 +95,6 @@ namespace Entity.Controller
             UpdateDirection();
             UpdateAnimationState();
         }
-
-        #endregion
-
-        #region Update Parts
 
         private void UpdatePositionToTarget()
         {
@@ -169,10 +165,6 @@ namespace Entity.Controller
                 false, false
             );
         }
-
-        #endregion
-
-        #region Support Methods
         
         private IEnumerator DoPlayerCheck()
         {

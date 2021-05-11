@@ -5,6 +5,5 @@ namespace Entity.Manager
     public class PlayerManager : EntityManager
     {
         public PlayerController player;
-        public MovableController movable;
     }
 }

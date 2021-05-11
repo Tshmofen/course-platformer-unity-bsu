@@ -23,10 +23,6 @@ namespace Environment.Furniture
         private Vector2 _maxVelocityStart;
         private Vector2 _maxVelocityEnd;
 
-        #endregion
-        
-        #region Unity assigns
-
         [Header("Movement")] 
         public Vector2 fromPoint;
         public Vector2 toPoint;
@@ -40,7 +36,7 @@ namespace Environment.Furniture
 
         #endregion
 
-        #region Unity call
+        #region Unity behaviour
 
         private void Start()
         {
@@ -62,10 +58,7 @@ namespace Environment.Furniture
             _maxVelocityEnd = toPoint - (_maxVelocityStart - fromPoint);
         }
 
-        public void FixedUpdate()
-        {
-            ResetAttachments();
-        }
+        public void FixedUpdate() => ResetAttachments();
 
         public void Update()
         { 
@@ -73,10 +66,6 @@ namespace Environment.Furniture
             UpdateAttachedPositions();
         }
 
-        #endregion
-
-        #region Update parts
-        
         // memorize previous position and moves the elevator
         private void UpdatePosition()
         {
@@ -108,10 +97,6 @@ namespace Environment.Furniture
             }
         }
 
-        #endregion
-
-        #region Support Methods
-
         // update the internal time counter and return the time, excluding the wait time
         // time at first increases and the decreases to zero
         private float UpdateAndGetTime()
@@ -142,11 +127,8 @@ namespace Environment.Furniture
         private Vector2 GetMoveFunction(float time)
         {
             if (time < accelerationPart * oneWayTime)
-            {
-                var uTime = time;
-                return fromPoint + _acceleration * (uTime * uTime) / 2;
-            }
-            
+                return fromPoint + _acceleration * (time * time) / 2;
+
             if (time > (1 - accelerationPart) * oneWayTime)
             {
                 var dTime = time - (1 - accelerationPart) * oneWayTime;

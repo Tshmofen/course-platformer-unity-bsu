@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Entity.Controller
 {
     [RequireComponent(typeof(MovementController))]
-    public abstract class AbstractEntityController : MonoBehaviour
+    public abstract class BaseEntityController : MonoBehaviour
     {
         #region Animation hashes
         

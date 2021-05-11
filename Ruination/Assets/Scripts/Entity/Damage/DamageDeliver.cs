@@ -22,15 +22,11 @@ namespace Entity.Damage
             if (receiver != null) receiver.ReceiveDamage(stats, type);
         }
     }
-
-    #region Support enum
-
+    
     public enum DamageType
     {
         LightDamage,
         HeavyDamage,
         PierceDamage
     }
-
-    #endregion
 }

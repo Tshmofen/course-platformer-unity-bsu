@@ -18,9 +18,7 @@ namespace Interface.Fading
         private bool _toLoad;
         
         #endregion
-
-        #region Unity calls
-
+        
         private void Start()
         {
             _currentFade = 0;
@@ -49,17 +47,11 @@ namespace Interface.Fading
                 SceneManager.LoadSceneAsync(_scene);
             }
         }
-
-        #endregion
-
-        #region Public
-
+        
         public void Load(string scene)
         {
             _scene = scene;
             _toFade = true;
         }
-
-        #endregion
     }
 }

@@ -28,8 +28,6 @@ namespace Interface.Overlay
         
         #endregion
         
-        #region Unity calls
-
         private void Start()
         {
             _camera = Camera.main;
@@ -52,14 +50,11 @@ namespace Interface.Overlay
                 transform.position = _camera.WorldToScreenPoint(target.position+ (Vector3) offset);
             }
         }
-
-        #endregion
     }
     
     
-#if UNITY_EDITOR
-    #region editor
-    
+    #if UNITY_EDITOR
+
     [CustomEditor(typeof(HealthBinder))]
     public class HealthBinderEditor : Editor
     {
@@ -81,7 +76,5 @@ namespace Interface.Overlay
         }
     }
     
-    #endregion
-#endif
-    
+    #endif
 }

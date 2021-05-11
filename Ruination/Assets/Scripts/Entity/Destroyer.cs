@@ -6,32 +6,24 @@ namespace Entity
     [RequireComponent(typeof(EntityManager))]
     public class Destroyer : MonoBehaviour
     {
-        #region Fields and properties
-        
-        #region Unity assigns
-
-        public Material dyingMaterial;
-        public float noiseScale = 20;
-        public bool disableOnDeath;
-        public Color edgeColor;
-        public float colorIntensity = 1;
-
-        #endregion
-
-        private Material _currentMaterial;
-        
         private static readonly int HashFade = Shader.PropertyToID("_Fade");
         private static readonly int HashScale = Shader.PropertyToID("_Scale");
         private static readonly int HashEdgeColor = Shader.PropertyToID("_EdgeColor");
 
+        [Header("Visuals")]
+        public Material dyingMaterial;
+        public float noiseScale = 20;
+        public Color edgeColor;
+        public float colorIntensity = 1;
+        [Header("Behaviour")]
+        public bool disableOnDeath;
+        
+        private Material _currentMaterial;
+        
         public float CurrentFade
         {
             set => _currentMaterial.SetFloat(HashFade, value);
         }
-
-        #endregion
-        
-        #region Public
 
         public void EnableDeathMaterial()
         {
@@ -55,7 +47,5 @@ namespace Entity
             else
                 Destroy(gameObject);
         }
-
-        #endregion
     }
 }

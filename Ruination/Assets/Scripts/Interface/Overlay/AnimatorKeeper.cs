@@ -2,6 +2,7 @@
 
 namespace Interface.Overlay
 {
+    // Used to preserve animation state of menu buttons on disable/enable
     [RequireComponent(typeof(Animator))]
     public class AnimatorKeeper : MonoBehaviour
     {

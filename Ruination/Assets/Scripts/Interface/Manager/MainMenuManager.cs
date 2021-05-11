@@ -19,8 +19,6 @@ namespace Interface.Manager
 
         #endregion
 
-        #region Unity calls
-
         private void Start()
         {
             Time.timeScale = 1;
@@ -46,7 +44,5 @@ namespace Interface.Manager
             EditorApplication.isPlaying = false;
             Application.Quit();
         }
-        
-        #endregion
     }
 }

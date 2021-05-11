@@ -7,16 +7,9 @@ namespace Entity.Controller
 {
     public class InteractionController : MonoBehaviour
     {
-        #region Fields & properties
-
         private List<IInteractive> _interacts;
 
         public GameObject interactButton;
-        
-        #endregion
-
-
-        #region Unity calls
         
         private void Start()
         {
@@ -37,9 +30,8 @@ namespace Entity.Controller
         {
             var interactive = other.GetComponent<IInteractive>();
             if (interactive != null)
-            {
                 _interacts.Add(interactive);
-            }
+            
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -48,10 +40,9 @@ namespace Entity.Controller
             if (interactive != null)
             {
                 _interacts.Remove(interactive);
-                if (_interacts.Count == 0) interactButton.SetActive(false);
+                if (_interacts.Count == 0) 
+                    interactButton.SetActive(false);
             }
         }
-        
-        #endregion
     }
 }

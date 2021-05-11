@@ -4,9 +4,9 @@ namespace Environment.Background
 {
     public class CloudController : MonoBehaviour
     {
-        private Camera _camera;
-        
         public float speedX = 0.1f;
+        
+        private Camera _camera;
 
         private void Start()
         {

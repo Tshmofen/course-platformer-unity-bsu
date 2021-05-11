@@ -6,10 +6,10 @@ namespace Position
     [ExecuteInEditMode]
     public class ObjectFollower : MonoBehaviour
     {
-        #region Unity assign
+        #region Fields
 
+        [Header("Position")]
         public GameObject target;
-
         public bool customOffset;
         public Vector2 positionOffset;
         [Range(0, 360)] public float angleOffset;

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using DataStore.Collectibles;
+﻿using DataStore.Collectibles;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

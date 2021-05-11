@@ -30,7 +30,7 @@ namespace Entity.Controller
 
         #endregion
 
-        #region Unity calls
+        #region Unity behaviour
 
         private void Start()
         {
@@ -116,10 +116,6 @@ namespace Entity.Controller
             var movable = other.GetComponent<Movable>();
             if (movable != null) _movables.Remove(movable);
         }
-
-        #endregion
-
-        #region Suport Methods
 
         private void UpdatePlayerInteracting(Vector2 movablePosition)
         {

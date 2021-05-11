@@ -10,6 +10,7 @@ namespace Entity.Damage
     public class DamageReceiver : MonoBehaviour
     {
         #region Fields and properties
+        
         private HealthStats _health;
         private BoxCollider2D _collider;
 
@@ -30,7 +31,7 @@ namespace Entity.Damage
 
         #endregion
         
-        #region Unity calls
+        #region Unity behaviour
 
         private void Start()
         {
@@ -46,10 +47,6 @@ namespace Entity.Damage
                 Destroy(_binder);
         }
 
-        #endregion
-
-        #region Support methods
-        
         public void ReceiveDamage(DamageStats damage, DamageType type)
         {
             if (isReceiveDamage)

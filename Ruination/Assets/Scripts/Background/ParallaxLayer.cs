@@ -5,14 +5,8 @@ namespace Background
     [ExecuteInEditMode]
     public class ParallaxLayer : MonoBehaviour
     {
-        #region Fields and properties
-
         public float parallaxFactorX;
         public float parallaxFactorY;
-
-        #endregion
-
-        #region Public
 
         public void MoveX(float delta)
         {
@@ -23,7 +17,5 @@ namespace Background
         {
             transform.localPosition -= new Vector3(0, delta * parallaxFactorY, 0);
         }
-
-        #endregion
     }
 }

@@ -30,18 +30,17 @@ namespace Interface.Menu
 
         #endregion
 
-        #region Unity calls
-
+        #region Unity behaviour
         private void Start()
         {
-            _contentObject = GetComponentInChildren<VerticalLayoutGroup>().gameObject;
+            EnableMenu(false);
             
             _lastFilterButton = filterAllButton;
             SetFilterButton(filterAllButton);
             _lastItemButton = firstItemButton;
             SetItemButton(firstItemButton);
-            
-            EnableMenu(false);
+
+            _contentObject = GetComponentInChildren<VerticalLayoutGroup>().gameObject;
             _items = new List<InventoryItem>(GetComponentsInChildren<InventoryItem>());
             if (_items.Count != 0)
             {

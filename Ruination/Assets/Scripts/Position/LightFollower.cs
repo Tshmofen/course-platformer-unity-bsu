@@ -7,6 +7,7 @@ namespace Position
     {
         public GameObject target;
         
+        [Header("Position")]
         [Range(0, 360)] public float angleOffset = 180;
         public float radius = 10;
 
@@ -14,7 +15,8 @@ namespace Position
         {
             var targetPosition = target.transform.position;
             var lightTransform = transform;
-            lightTransform.position = targetPosition + Quaternion.Euler(0, 0, angleOffset) * Vector3.right * radius;
+            lightTransform.position 
+                = targetPosition + Quaternion.Euler(0, 0, angleOffset) * Vector3.right * radius;
         }
     }
 }

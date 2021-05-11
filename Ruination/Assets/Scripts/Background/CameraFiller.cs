@@ -6,24 +6,16 @@ namespace Background
     [RequireComponent(typeof(SpriteRenderer))]
     public class CameraFiller : MonoBehaviour
     {
-        #region Fields
-
-        #region Unity assigns
-
-        public Camera fillCamera;
-
-        #endregion
-
+        private Sprite _sprite;
         private float _previousSize;
-
-        #endregion
-
-        #region Unity call
+        
+        public Camera fillCamera;
 
         private void Start()
         {
-            FillView();
+            _sprite = GetComponent<SpriteRenderer>().sprite;
             _previousSize = fillCamera.orthographicSize;
+            FillView();
         }
 
         private void FixedUpdate()
@@ -32,24 +24,17 @@ namespace Background
             if (Math.Abs(size - _previousSize) > 0.01f) FillView(); 
             _previousSize = size;
         }
-
-        #endregion
-
-        #region Support Methods
-
+        
         private void FillView()
         {
-            var sprite = GetComponent<SpriteRenderer>().sprite;
-
-            var width = sprite.bounds.size.x;
-            var height = sprite.bounds.size.y;
+            var width = _sprite.bounds.size.x;
+            var height = _sprite.bounds.size.y;
      
             var worldScreenHeight = fillCamera.orthographicSize * 2.0f;
             var worldScreenWidth = worldScreenHeight * Screen.width / Screen.height;
 
-            transform.localScale = new Vector2(worldScreenWidth / width, worldScreenHeight / height) * 1.1f;
+            var newScale = new Vector2(worldScreenWidth / width, worldScreenHeight / height) * 1.1f;
+            transform.localScale = newScale;
         }
-
-        #endregion
     }
 }

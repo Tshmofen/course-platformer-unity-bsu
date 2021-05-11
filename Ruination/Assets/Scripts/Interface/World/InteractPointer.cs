@@ -13,9 +13,7 @@ namespace Interface.World
         public float speed = 7;
 
         #endregion
-
-        #region Unity calls
-
+        
         private void Start()
         {
             transform.localPosition = Vector3.zero;
@@ -36,7 +34,5 @@ namespace Interface.World
                 pointerTransform.position = position;
             }
         }
-
-        #endregion
     }
 }

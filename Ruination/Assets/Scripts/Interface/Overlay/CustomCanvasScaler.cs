@@ -45,7 +45,8 @@ namespace Interface.Overlay
                         // We take the log of the relative width and height before taking the average.
                         // Then we transform it back in the original space.
                         // the reason to transform in and out of logarithmic space is to have better behavior.
-                        // If one axis has twice resolution and the other has half, it should even out if widthOrHeight value is at 0.5.
+                        // If one axis has twice resolution and the other has half, it should even out if
+                        // widthOrHeight value is at 0.5.
                         // In normal space the average would be (0.5 + 2) / 2 = 1.25
                         // In logarithmic space the average is (-1 + 1) / 2 = 0
                         var logWidth = Mathf.Log(screenSize.x / m_ReferenceResolution.x, KLogBase);
@@ -56,12 +57,18 @@ namespace Interface.Overlay
                     }
                 case ScreenMatchMode.Expand:
                     {
-                        scale = Mathf.Min(screenSize.x / m_ReferenceResolution.x, screenSize.y / m_ReferenceResolution.y);
+                        scale = Mathf.Min(
+                            screenSize.x / m_ReferenceResolution.x, 
+                            screenSize.y / m_ReferenceResolution.y
+                            );
                         break;
                     }
                 case ScreenMatchMode.Shrink:
                     {
-                        scale = Mathf.Max(screenSize.x / m_ReferenceResolution.x, screenSize.y / m_ReferenceResolution.y);
+                        scale = Mathf.Max(
+                            screenSize.x / m_ReferenceResolution.x,
+                            screenSize.y / m_ReferenceResolution.y
+                            );
                         break;
                     }
             }

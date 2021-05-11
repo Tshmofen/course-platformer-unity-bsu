@@ -4,9 +4,11 @@ namespace Environment.Furniture
 {
     public class BreakingPlatform : MonoBehaviour
     {
-        public float timeToStartBreak = 0.3f;
+        [Header("Animation")]
         public Animator animator;
         public string breakTrigger = "toBroke";
+        [Header("Behaviour")]
+        public float timeToStartBreak = 0.3f;
 
         private float _currentTime;
         private int _hashBreak;
@@ -38,7 +40,10 @@ namespace Environment.Furniture
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D _) => _enters++;
+        private void OnTriggerEnter2D(Collider2D _)
+        {
+            _enters++;
+        }
 
         private void OnTriggerExit2D(Collider2D _)
         {

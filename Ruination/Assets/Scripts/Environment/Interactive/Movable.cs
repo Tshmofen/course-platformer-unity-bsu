@@ -8,15 +8,16 @@ namespace Environment.Interactive
     {
         #region Fields & properties
         
-        public float rotationStopSpeed = 15;
-        public float moveTime = 0.25f;
-        public LayerMask hitLayers;
-        public float changeRadius = 1.7f;
-
         private Rigidbody2D _body;
         private int _movableLayer;
         private int _actionLayer;
         private bool _isChangingLayer;
+        
+        [Header("Movement")]
+        public float rotationStopSpeed = 15;
+        public float moveTime = 0.25f;
+        public LayerMask hitLayers;
+        public float changeRadius = 1.7f;
 
         public Transform PlayerTransform { get; set; }
         
@@ -26,20 +27,14 @@ namespace Environment.Interactive
         }
 
         #endregion
-
-        #region Unity calls
-
+        
         private void Start()
         {
             _body = GetComponent<Rigidbody2D>();
             _movableLayer = LayerMask.NameToLayer("Movable");
             _actionLayer = LayerMask.NameToLayer("MovableAction");
         }
-
-        #endregion
-
-        #region Public
-
+        
         public void Move(Vector2 toPosition)
         {
             var position = (Vector2)transform.position;
@@ -82,10 +77,6 @@ namespace Environment.Interactive
             }
         }
 
-        #endregion
-
-        #region Support methods
-
         private IEnumerator ReturnLayerToUsual()
         {
             _isChangingLayer = true;
@@ -101,7 +92,5 @@ namespace Environment.Interactive
                 }
             }
         }
-
-        #endregion
     }
 }
