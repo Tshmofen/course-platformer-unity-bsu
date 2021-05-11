@@ -1,69 +1,48 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Interface.Fading
 {
+    [RequireComponent(typeof(Animator), typeof(Image))]
     public class SceneFader : MonoBehaviour
     {
         #region Fields & properties
+        
+        private int _startHash; 
+        private int _fromBlackHash; 
+        private int _waitHash; 
+        private int _fadeHash; 
+        
+        private Animator _animator;
 
-        [Header("Visuals")] 
-        public Image background;
-        public float fadeTime = 0.7f;
-        public float waitTime = 0.3f;
-
-        private float _currentWait;
-        private float _currentFadeTime;
-        private bool _isFading;
+        [Header("Animator")] 
+        public string startTriggerName = "startFade";
+        public string fromBlackBoolName = "fromBlack";
+        public string waitTimeFloatName = "waitTime";
+        public string fadeTimeFloatName = "fadeTime";
+        [Header("Visuals")]
+        public float fadeTime = 1;
+        public float waitTime = 0.5f;
 
         #endregion
 
         private void Start()
         {
-            StartFading();
+            _startHash = Animator.StringToHash(startTriggerName);
+            _fromBlackHash = Animator.StringToHash(fromBlackBoolName);
+            _waitHash = Animator.StringToHash(waitTimeFloatName);
+            _fadeHash = Animator.StringToHash(fadeTimeFloatName);
+            _animator = GetComponent<Animator>();
+            
+            StartFade();
         }
 
-        // May be called by a transport animation
-        public void StartFading()
+        public void StartFade(bool fromBlack = true)
         {
-            background.enabled = true;
-            _currentFadeTime = 0;
-            _currentWait = 0;
-            if (!_isFading)
-            {
-                _isFading = true;
-                StartCoroutine(ContinueFading());
-            }
+            _animator.SetBool(_fromBlackHash, fromBlack);
+            _animator.SetFloat(_waitHash, 1 / waitTime);
+            _animator.SetFloat(_fadeHash, 1 / fadeTime);
+            _animator.SetTrigger(_startHash);
         }
-
-        private IEnumerator ContinueFading()
-        {
-            while (_currentFadeTime < fadeTime)
-            {
-                if (Time.unscaledDeltaTime > 0.1) 
-                    yield return null;
-
-                if (_currentWait >= waitTime)
-                {
-                    _currentFadeTime += Time.unscaledDeltaTime;
-                    if (_currentFadeTime > fadeTime) _currentFadeTime = fadeTime;
-                
-                    var color = background.color;
-                    color.a = 1 - _currentFadeTime / fadeTime;
-                    background.color = color;
-                }
-                else
-                {
-                    _currentWait += Time.unscaledDeltaTime;
-                }
-                
-                yield return null;
-            }
-
-            _isFading = false;
-            background.enabled = false;
-        }
-        
     }
 }
