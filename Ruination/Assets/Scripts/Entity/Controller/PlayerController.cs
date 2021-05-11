@@ -75,10 +75,12 @@ namespace Entity.Controller
             UpdateCounters();
             CorrectControls();
             UpdateMovement();
-            if (isLocked) return;
-            UpdateDirection();
-            UpdateTimer();
-            UpdateCombatState();
+            if (!isLocked)
+            {
+                UpdateDirection();
+                UpdateTimer();
+                UpdateCombatState();
+            }
             UpdateAnimation();
         }
 

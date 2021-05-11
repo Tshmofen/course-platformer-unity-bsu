@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Interface.Fading
@@ -8,13 +9,12 @@ namespace Interface.Fading
     {
         #region Fields & properties
         
+        private Animator _animator;
         private int _startHash; 
         private int _fromBlackHash; 
         private int _waitHash; 
-        private int _fadeHash; 
+        private int _fadeHash;
         
-        private Animator _animator;
-
         [Header("Animator")] 
         public string startTriggerName = "startFade";
         public string fromBlackBoolName = "fromBlack";
@@ -44,5 +44,17 @@ namespace Interface.Fading
             _animator.SetFloat(_fadeHash, 1 / fadeTime);
             _animator.SetTrigger(_startHash);
         }
+
+        #region Callbacks
+        
+        public event Action OnFadeAddingEnd;
+        public event Action OnFadeRemovingEnd;
+
+        // called as events of animation
+        public void CallFadeAddingEnd() => OnFadeAddingEnd?.Invoke();
+        public void CallFadeRemovingEnd() => OnFadeRemovingEnd?.Invoke();
+
+        #endregion
+        
     }
 }
