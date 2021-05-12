@@ -1,23 +1,22 @@
 ﻿using Interface.Fading;
+using Interface.Menu;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Interface.Manager
 {
     public class MainMenuManager : MonoBehaviour
     {
-        #region Fields & properties
-        
+        [Header("Menu")]
         public StandaloneInputModule inputModule;
         public EventSystem eventSystem;
-        public Image loadingBackground;
-        public float loadingFadeTime = 0.7f;
-        public SceneAsset initialScene;
+        public OptionsMenu optionsMenu;
         public GameObject initialButton;
-
-        #endregion
+        [Header("Scene changer")]
+        public SceneFader fader;
+        public SceneAsset initialScene;
+        public float loadingFadeTime = 0.7f;
 
         private void Start()
         {
@@ -30,14 +29,14 @@ namespace Interface.Manager
             inputModule.enabled = false;
 
             var loader = gameObject.AddComponent<SceneLoader>();
-            loader.background = loadingBackground;
-            loader.fadeTime = loadingFadeTime;
-            loader.Load(initialScene.name);
+            loader.scene = initialScene;
+            
+            fader.OnFadeAddingEnd += loader.LoadScene;
+            fader.fadeTime = loadingFadeTime;
+            fader.StartFade(false);
         }
 
-        public void HandleOptions()
-        {
-        }
+        public void HandleOptions() => optionsMenu.EnableMenu(true);
 
         public void HandleExit()
         {

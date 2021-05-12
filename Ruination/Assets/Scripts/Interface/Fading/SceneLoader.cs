@@ -1,57 +1,18 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Interface.Fading
 {
     public class SceneLoader : MonoBehaviour
     {
-        #region Fields & properties
-
-        [Header("Loading visuals")] 
-        public float fadeTime = 0.3f;
-        public Image background;
-
-        private string _scene;
-        private float _currentFade;
-        private bool _toFade;
+        public SceneAsset scene;
+        
         private bool _toLoad;
-        
-        #endregion
-        
-        private void Start()
-        {
-            _currentFade = 0;
-        }
 
-        private void Update()
+        public void LoadScene()
         {
-            if (_toFade)
-            {
-                background.enabled = true;
-                _currentFade += Time.unscaledDeltaTime;
-                if (_currentFade >= fadeTime)
-                {
-                    _currentFade = fadeTime;
-                    _toFade = false;
-                    _toLoad = true;
-                }
-                
-                var color = background.color;
-                color.a = _currentFade / fadeTime;
-                background.color = color;
-            }
-
-            if (_toLoad)
-            {
-                SceneManager.LoadSceneAsync(_scene);
-            }
-        }
-        
-        public void Load(string scene)
-        {
-            _scene = scene;
-            _toFade = true;
+            SceneManager.LoadScene(scene.name);
         }
     }
 }

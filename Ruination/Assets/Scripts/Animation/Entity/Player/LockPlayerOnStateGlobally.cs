@@ -9,14 +9,27 @@ namespace Animation.Entity.Player
     {
         private PlayerController _player;
         private bool _isInState;
+        private bool _sceneHasPlayer;
         
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (_player == null)
-                _player = GameObject.FindWithTag(TagStorage.PlayerTag).GetComponent<PlayerController>();
+            {
+                 var playerObject = GameObject.FindWithTag(TagStorage.PlayerTag);
+                _sceneHasPlayer = playerObject != null;
+                if (_sceneHasPlayer) 
+                    _player = playerObject.GetComponent<PlayerController>();
+            }
 
-            _isInState = true;
-            _player.StartCoroutine(OverwriteTheField());
+            if (_sceneHasPlayer)
+            {
+                _isInState = true;
+                _player.StartCoroutine(OverwriteTheField());
+            }
+            else
+            {
+                Debug.Log("Found scene without player!");
+            }
         }
         
         // there are some tricky place in unity system, i.e. we can't change field affected

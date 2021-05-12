@@ -34,10 +34,10 @@ namespace Interface.Fading
             _fadeHash = Animator.StringToHash(fadeTimeFloatName);
             _animator = GetComponent<Animator>();
             
-            StartFade();
+            StartFade(true);
         }
 
-        public void StartFade(bool fromBlack = true)
+        public void StartFade(bool fromBlack)
         {
             _animator.SetBool(_fromBlackHash, fromBlack);
             _animator.SetFloat(_waitHash, 1 / waitTime);

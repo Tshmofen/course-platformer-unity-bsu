@@ -16,6 +16,8 @@ namespace Environment.Interactive
         public SceneFader fader;
         public float fadeTime = 0.5f;
         public float waitTime = 0.5f;
+        [Header("External")] 
+        public InteractionController interaction;
 
         private void Start()
         {
@@ -26,17 +28,18 @@ namespace Environment.Interactive
         {
             fader.fadeTime = fadeTime;
             fader.waitTime = waitTime;
-            
-            fader.OnFadeAddingEnd += HandleTransportation;
 
+            interaction.isLocked = true;
+            fader.OnFadeAddingEnd += HandleTransportation;
             fader.StartFade(false);
         }
 
         private void HandleTransportation()
         {
             fader.OnFadeAddingEnd -= HandleTransportation;
-            fader.StartFade();
             
+            fader.StartFade(true);
+            interaction.isLocked = false;
             _player.transform.position = destinationObject.transform.position + (Vector3)offset;
         }
     }

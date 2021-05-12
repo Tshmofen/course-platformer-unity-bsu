@@ -9,7 +9,9 @@ namespace Entity.Controller
     {
         private List<IInteractive> _interacts;
 
+        [Header("External")]
         public GameObject interactButton;
+        public bool isLocked;
         
         private void Start()
         {
@@ -19,7 +21,11 @@ namespace Entity.Controller
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (_interacts.Count == 0) return;
+            if (isLocked || _interacts.Count == 0)
+            {
+                interactButton.SetActive(false);
+                return;
+            }
             
             interactButton.SetActive(true);
             if (InputUtil.GetInteract())

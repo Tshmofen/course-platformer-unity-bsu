@@ -82,14 +82,17 @@ namespace Entity.Controller
             manager.animator.SetFloat(HashVelocityScaleX, velocityScaleX);
             manager.animator.SetFloat(HashVelocityScaleY, velocityScaleY);
             manager.animator.SetBool(HashInFall, inFall);
-            manager.animator.SetBool(HashInAttack, inAttack);
-            if (toAttackLight) manager.animator.SetTrigger(HashToAttackLight);
-            if (toAttackHeavy) manager.animator.SetTrigger(HashToAttackHeavy);
-            if (toEvade) manager.animator.SetTrigger(HashToEvade);
-            
-            if (!toJump && manager.animator.GetBool(HashToJump))
-                manager.animator.SetBool(HashToJump, false);
-            if (toJump) manager.animator.SetTrigger(HashToJump);
+            if(!isLocked) 
+            {
+                manager.animator.SetBool(HashInAttack, inAttack);
+                if (toAttackLight) manager.animator.SetTrigger(HashToAttackLight);
+                if (toAttackHeavy) manager.animator.SetTrigger(HashToAttackHeavy);
+                if (toEvade) manager.animator.SetTrigger(HashToEvade);
+                
+                if (!toJump && manager.animator.GetBool(HashToJump))
+                    manager.animator.SetBool(HashToJump, false);
+                if (toJump) manager.animator.SetTrigger(HashToJump);
+            }
         }
         
         // returns movement scale from -1 to 1

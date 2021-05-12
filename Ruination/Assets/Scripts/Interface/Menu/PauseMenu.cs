@@ -2,7 +2,6 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using Util;
 
 namespace Interface.Menu
@@ -15,8 +14,8 @@ namespace Interface.Menu
         public GameObject menuObject;
         public GameObject mainButton;
         public EventSystem eventSystem;
-        [Header("Menu returning")]
-        public Image loadingBackground;
+        [Header("Scene changing")]
+        public SceneFader fader;
         public float loadingFadeTime = 0.7f;
         public SceneAsset mainMenuScene;
         
@@ -44,9 +43,11 @@ namespace Interface.Menu
         public void HandleMainMenu()
         {
             var loader = gameObject.AddComponent<SceneLoader>();
-            loader.background = loadingBackground;
-            loader.fadeTime = loadingFadeTime;
-            loader.Load(mainMenuScene.name);
+            loader.scene = mainMenuScene;
+            
+            fader.OnFadeAddingEnd += loader.LoadScene;
+            fader.fadeTime = loadingFadeTime;
+            fader.StartFade(false);
         }
         
         // called by a button
