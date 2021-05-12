@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using Util;
 
@@ -11,43 +12,36 @@ namespace Interface.Menu
         public Slider musicSlider;
         public Slider effectSlider;
         public Slider ambientSlider;
+        [Header("Audio Groups")] 
+        public AudioMixer masterMixer;
+        
         
         private void Start()
         {
-            if (PlayerPrefs.HasKey(PrefsProperties.MasterVolume))
-                masterSlider.value = PlayerPrefs.GetFloat(PrefsProperties.MasterVolume);
+            if (PlayerPrefs.HasKey(AudioProperties.MasterVolume))
+                masterSlider.value = PlayerPrefs.GetFloat(AudioProperties.MasterVolume);
             
-            if (PlayerPrefs.HasKey(PrefsProperties.MusicVolume))
-                musicSlider.value = PlayerPrefs.GetFloat(PrefsProperties.MusicVolume);
+            if (PlayerPrefs.HasKey(AudioProperties.MusicVolume))
+                musicSlider.value = PlayerPrefs.GetFloat(AudioProperties.MusicVolume);
             
-            if (PlayerPrefs.HasKey(PrefsProperties.EffectVolume))
-                effectSlider.value = PlayerPrefs.GetFloat(PrefsProperties.EffectVolume);
+            if (PlayerPrefs.HasKey(AudioProperties.EffectVolume))
+                effectSlider.value = PlayerPrefs.GetFloat(AudioProperties.EffectVolume);
             
-            if (PlayerPrefs.HasKey(PrefsProperties.AmbientVolume))
-                ambientSlider.value = PlayerPrefs.GetFloat(PrefsProperties.AmbientVolume);
+            if (PlayerPrefs.HasKey(AudioProperties.AmbientVolume))
+                ambientSlider.value = PlayerPrefs.GetFloat(AudioProperties.AmbientVolume);
             
+            UpdateMixerState();
             EnableMenu(false);
         }
 
-        public void HandleMasterSlider()
+        // called by a slider change
+        public void UpdateMixerState()
         {
-            AudioListener.volume = masterSlider.value;
-            SaveState();
-        }
-        
-        public void HandleMusicSlider()
-        {
-            
-        }
-        
-        public void HandleEffectSlider()
-        {
-            
-        }
-        
-        public void HandleAmbientSlider()
-        {
-            
+            masterMixer.SetFloat(AudioProperties.MasterVolume, Mathf.Log(masterSlider.value) * 20);
+            masterMixer.SetFloat(AudioProperties.MusicVolume, Mathf.Log(musicSlider.value) * 20);
+            masterMixer.SetFloat(AudioProperties.EffectVolume, Mathf.Log(effectSlider.value) * 20);
+            masterMixer.SetFloat(AudioProperties.AmbientVolume, Mathf.Log(ambientSlider.value) * 20);
+            SaveStateInPrefs();
         }
         
         public override void EnableMenu(bool enable)
@@ -57,12 +51,12 @@ namespace Interface.Menu
         
         public override bool GetMenuControls() => false;
 
-        private void SaveState()
+        private void SaveStateInPrefs()
         {
-            PlayerPrefs.SetFloat(PrefsProperties.MasterVolume, masterSlider.value);
-            PlayerPrefs.SetFloat(PrefsProperties.MusicVolume, musicSlider.value);
-            PlayerPrefs.SetFloat(PrefsProperties.EffectVolume, effectSlider.value);
-            PlayerPrefs.SetFloat(PrefsProperties.AmbientVolume, ambientSlider.value);
+            PlayerPrefs.SetFloat(AudioProperties.MasterVolume, masterSlider.value);
+            PlayerPrefs.SetFloat(AudioProperties.MusicVolume, musicSlider.value);
+            PlayerPrefs.SetFloat(AudioProperties.EffectVolume, effectSlider.value);
+            PlayerPrefs.SetFloat(AudioProperties.AmbientVolume, ambientSlider.value);
             PlayerPrefs.Save();
         }
     }

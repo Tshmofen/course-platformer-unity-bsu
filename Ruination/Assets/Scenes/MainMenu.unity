@@ -446,13 +446,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1074351451}
   m_HandleRect: {fileID: 532113349}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.00000001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 524322220}
+        m_TargetAssemblyTypeName: Interface.Menu.OptionsMenu, Assembly-CSharp
+        m_MethodName: UpdateMixerState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &410313222
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,6 +862,7 @@ MonoBehaviour:
   musicSlider: {fileID: 258047561}
   effectSlider: {fileID: 774043126}
   ambientSlider: {fileID: 881801453}
+  masterMixer: {fileID: 24100000, guid: 311f24bc85b1fb246b7c7e573522cb46, type: 2}
 --- !u!1 &532113348
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1128,7 @@ AudioSource:
   m_GameObject: {fileID: 626253079}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 311f24bc85b1fb246b7c7e573522cb46,
+  OutputAudioMixerGroup: {fileID: 3359770980624198018, guid: 311f24bc85b1fb246b7c7e573522cb46,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 5b21c45a47584074594c59af696d393e, type: 3}
   m_PlayOnAwake: 1
@@ -1532,13 +1545,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 2028718054}
   m_HandleRect: {fileID: 2112045186}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.00000001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 524322220}
+        m_TargetAssemblyTypeName: Interface.Menu.OptionsMenu, Assembly-CSharp
+        m_MethodName: UpdateMixerState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &781260704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,13 +1722,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1668952417}
   m_HandleRect: {fileID: 1324491071}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.00000001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 524322220}
+        m_TargetAssemblyTypeName: Interface.Menu.OptionsMenu, Assembly-CSharp
+        m_MethodName: UpdateMixerState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &946817985
 GameObject:
   m_ObjectHideFlags: 0
@@ -2619,7 +2656,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1462552491}
   m_HandleRect: {fileID: 1042437140}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.00000001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
@@ -2628,7 +2665,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 524322220}
         m_TargetAssemblyTypeName: Interface.Menu.OptionsMenu, Assembly-CSharp
-        m_MethodName: HandleMasterSlider
+        m_MethodName: UpdateMixerState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
