@@ -1,4 +1,5 @@
-﻿using Entity.Damage;
+﻿using Entity.Controller;
+using Entity.Damage;
 using UnityEngine;
 
 namespace Entity.Manager
@@ -10,5 +11,6 @@ namespace Entity.Manager
         public DamageReceiver health;
         public Animator animator;
         public Destroyer destroyer;
+        public AudioController audioController;
     }
 }
