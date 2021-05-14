@@ -12,12 +12,16 @@ namespace Environment.Interactive
         private int _movableLayer;
         private int _actionLayer;
         private bool _isChangingLayer;
+        private int _currentSoundsAmount;
         
         [Header("Movement")]
         public float rotationStopSpeed = 15;
         public float moveTime = 0.25f;
         public LayerMask hitLayers;
         public float changeRadius = 1.7f;
+        [Header("Audio")] 
+        public AudioSource collisionAudio;
+        public int maxSoundsTogether = 2;
 
         public Transform PlayerTransform { get; set; }
         
@@ -91,6 +95,22 @@ namespace Environment.Interactive
                     yield break;
                 }
             }
+        }
+
+        private void OnCollisionEnter2D(Collision2D _)
+        {
+            if (_currentSoundsAmount < maxSoundsTogether)
+            {
+                collisionAudio.PlayOneShot(collisionAudio.clip);
+                StartCoroutine(AddOneShot());
+            }
+        }
+
+        private IEnumerator AddOneShot()
+        {
+            _currentSoundsAmount++;
+            yield return new WaitForSeconds(collisionAudio.clip.length);
+            _currentSoundsAmount--;
         }
     }
 }

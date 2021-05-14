@@ -155,7 +155,7 @@ namespace Entity.Controller
         {
             var velocityScaleX = GetMoveScale(_velocity.x, moveSpeed);
             var velocityScaleY = _velocity.y;
-            var inFall = !IsGrounded;
+            var inFall = !IsGroundedAfterSlope;
             var inAttack = isInAttack;
             var toAttackLight = _toAttackLight;
 

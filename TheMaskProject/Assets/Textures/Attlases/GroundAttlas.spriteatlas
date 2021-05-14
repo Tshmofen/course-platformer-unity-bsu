@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 092496aded787f14492861c3c1d1cf93, type: 3}
-    totalSpriteSurfaceArea: 99328
+    totalSpriteSurfaceArea: 102400
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -68,6 +68,9 @@ SpriteAtlas:
   - {fileID: -7839507471865450669, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: -8346178231618157379, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
   - {fileID: -6627870410531630256, guid: 00260a90d05e3a9449b21a2e25aa6acb, type: 3}
+  - {fileID: -9222173421197868092, guid: 3749b965ae17f914c8fc36728901ca6d, type: 3}
+  - {fileID: 9099550941828711940, guid: 3749b965ae17f914c8fc36728901ca6d, type: 3}
+  - {fileID: 2713312195522289922, guid: 3749b965ae17f914c8fc36728901ca6d, type: 3}
   - {fileID: 556530189025366737, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
   - {fileID: 2326304054162573754, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
   - {fileID: -7225512925871877664, guid: 4cd40bd5dde51d143bf5144de662b13f, type: 3}
@@ -166,6 +169,9 @@ SpriteAtlas:
   - MountainGroundEdgy_11
   - MountainGroundEdgy_12
   - MountainGroundEdgy_13
+  - BricksTatami_fabric_0
+  - BricksTatami_fabric_1
+  - BricksTatami_fabric_2
   - Bricks_8
   - Bricks_9
   - Bricks_4

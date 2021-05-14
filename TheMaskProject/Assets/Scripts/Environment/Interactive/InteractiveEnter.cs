@@ -1,6 +1,7 @@
 ﻿using Entity.Controller;
 using Interface.Fading;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using Util;
 
 namespace Environment.Interactive
@@ -16,6 +17,8 @@ namespace Environment.Interactive
         public SceneFader fader;
         public float fadeTime = 0.5f;
         public float waitTime = 0.5f;
+        public Light2D globalLight;
+        public float newLightIntensity = 1;
         [Header("External")] 
         public InteractionController interaction;
 
@@ -41,6 +44,7 @@ namespace Environment.Interactive
             fader.StartFade(true);
             interaction.isLocked = false;
             _player.transform.position = destinationObject.transform.position + (Vector3)offset;
+            globalLight.intensity = newLightIntensity;
         }
     }
 }

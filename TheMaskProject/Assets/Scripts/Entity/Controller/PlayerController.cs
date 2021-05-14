@@ -138,12 +138,6 @@ namespace Entity.Controller
             else
                 UseUsualMovement();
 
-            if (_notMoveThisFrame)
-            {
-                _notMoveThisFrame = false;
-                return;
-            }
-            
             var move = (Vector3)_velocity * Time.deltaTime;
             Movement.Move(move);
             _velocity = Movement.Velocity;
@@ -191,7 +185,7 @@ namespace Entity.Controller
         {
             var velocityScaleX = GetMoveScale(_velocity.x, moveSpeed);
             var velocityScaleY = _velocity.y;
-            var inFall = !IsGrounded;
+            var inFall = !IsGroundedAfterSlope;
             var inAttack = isInAttack;
             var toEvade = ToEvade && !isInAttack;
             var toJump = _playJumpAnimation;
@@ -211,7 +205,7 @@ namespace Entity.Controller
         {
             Movement.ignoreOneWayPlatformsThisFrame = ToIgnorePlatform;
 
-            _playJumpAnimation = ToJump && IsGrounded;
+            _playJumpAnimation = ToJump && Movement.IsGrounded;
             if (_playJumpAnimation)
             {
                 _velocity.y = Mathf.Sqrt(2f * jumpHeight * gravity);
@@ -239,8 +233,8 @@ namespace Entity.Controller
 
         private void UseAttackMovement()
         {
-            _velocity = Vector2.zero;
-            _notMoveThisFrame = true;
+            // this time we use direct IsGrounded property cause we don't need to consider slops 
+            if (Movement.IsGrounded) _velocity.x = 0;
         }
 
         private void UseEvadeMovement()

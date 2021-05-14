@@ -67,7 +67,7 @@ namespace Entity.Controller
                         groundName = render.sprite.texture.name;
                 }
             }
-
+            
             return Footstep.ConvertNameToType(groundName);
         }
         

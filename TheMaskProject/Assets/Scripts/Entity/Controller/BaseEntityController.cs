@@ -37,7 +37,7 @@ namespace Entity.Controller
         private bool _wasMovingSlope;
         private float _wasMovingSlopeTime;
 
-        protected bool IsGrounded
+        protected bool IsGroundedAfterSlope
         {
             get
             {
