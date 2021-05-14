@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Position
+namespace Environment.Follower
 {
     [ExecuteInEditMode]
     public class LightFollower : MonoBehaviour

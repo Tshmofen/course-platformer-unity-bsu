@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Position
+namespace Environment.Follower
 {
     [ExecuteInEditMode]
     public class ObjectFollower : MonoBehaviour
