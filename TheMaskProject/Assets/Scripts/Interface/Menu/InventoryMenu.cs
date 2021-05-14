@@ -29,8 +29,7 @@ namespace Interface.Menu
         public Color filterColor;
 
         #endregion
-
-        #region Unity behaviour
+        
         private void Start()
         {
             EnableMenu(false);
@@ -100,10 +99,6 @@ namespace Interface.Menu
             button.colors = colors;
         } 
 
-        #endregion
-
-        #region Public
-
         public void EnableUseMenu()
         {
             var useMenuTransform = useMenuObject.GetComponent<RectTransform>();
@@ -135,7 +130,5 @@ namespace Interface.Menu
             itemButton.onClick.AddListener(() => SetItemButton(newItem.GetComponent<Button>()));
             itemButton.onClick.AddListener(() => SetItem(inventoryItem));
         }
-
-        #endregion
     }
 }

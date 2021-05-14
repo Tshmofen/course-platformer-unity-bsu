@@ -18,7 +18,7 @@ namespace Interface.Menu
         public SceneFader fader;
         public float loadingFadeTime = 0.7f;
         public SceneAsset mainMenuScene;
-        
+
         private GameObject _lastButton;
         private bool _wasEnabled;
 

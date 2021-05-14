@@ -13,7 +13,7 @@ namespace Entity.Controller
 
         [Header("Footsteps")]
         public Tilemap groundMap;
-        [Header("Raycasting")]
+        [Header("Ray Casting")]
         public LayerMask groundMask;
         public float rayThreshold = 1;
         public float offset = 0.3f;
@@ -36,7 +36,6 @@ namespace Entity.Controller
         public void PlayFootstep(int stepNumber)
         {
             var type = GetStepType();
-            Debug.Log($"{type}, {stepNumber}");
             _steps
                 .First(step => step.stepType == type && step.stepNumber == stepNumber)
                 .Play();
@@ -58,7 +57,8 @@ namespace Entity.Controller
                 {
                     var tileOffset = new Vector2(0, offset);
                     var position = groundMap.WorldToCell(hit.point - tileOffset);
-                    groundName = groundMap.GetTile(position).name;
+                    var tile = groundMap.GetTile(position);
+                    if (tile) groundName = tile.name;
                 }
                 else
                 {
