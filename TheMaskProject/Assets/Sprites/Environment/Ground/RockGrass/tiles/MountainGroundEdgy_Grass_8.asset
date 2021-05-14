@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: MountainGroundEdgy_0
+  m_Name: MountainGroundEdgy_Grass_8
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -4200507896497557560, guid: 00260a90d05e3a9449b21a2e25aa6acb,
+  m_Sprite: {fileID: -985819780597901983, guid: 00260a90d05e3a9449b21a2e25aa6acb,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:

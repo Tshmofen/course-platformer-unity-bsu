@@ -84,7 +84,7 @@ namespace Environment.Interactive
             {
                 yield return new WaitForFixedUpdate();
                 var distance = PlayerTransform.position - transform.position;
-                if (distance.magnitude > changeRadius)
+                if (distance.magnitude > changeRadius && _body.velocity.magnitude == 0)
                 {
                     _isChangingLayer = false;
                     gameObject.layer = _movableLayer;

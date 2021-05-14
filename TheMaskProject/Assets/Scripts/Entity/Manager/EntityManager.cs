@@ -11,6 +11,6 @@ namespace Entity.Manager
         public DamageReceiver health;
         public Animator animator;
         public Destroyer destroyer;
-        public AudioController audioController;
+        public EntityAudioController entityAudioController;
     }
 }

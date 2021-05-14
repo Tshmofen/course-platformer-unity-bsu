@@ -6,6 +6,8 @@ namespace Entity.Manager
     {
         public PlayerController player;
 
-        public void PlaySound(string soundName) => audioController.PlaySound(soundName);
+        public void PlaySound(string soundName) => entityAudioController.PlaySound(soundName);
+
+        public void PlayFootstep(int footNumber) => entityAudioController.PlayFootstep(footNumber);
     }
 }
