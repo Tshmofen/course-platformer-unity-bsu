@@ -8,9 +8,11 @@ namespace Environment.Area
     public class AreaHider : MonoBehaviour
     {
         private Tilemap _tiles;
-        private bool _isFading;
 
+        [Header("Visuals")]
         public float fadeSpeed = 0.3f;
+        [Header("Audio")] 
+        public AudioSource foundSound;
 
         private void Start()
         {
@@ -19,13 +21,13 @@ namespace Environment.Area
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!_isFading) StartCoroutine(FadeColor());
             GetComponent<Collider2D>().enabled = false;
+            foundSound.Play();
+            StartCoroutine(FadeColor());
         }
 
         private IEnumerator FadeColor()
         {
-            _isFading = true;
             while (_tiles.color.a > 0)
             {
                 var currentColor = _tiles.color;
