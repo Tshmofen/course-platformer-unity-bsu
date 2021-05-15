@@ -19,6 +19,8 @@ namespace Environment.Interactive
         public float waitTime = 0.5f;
         public Light2D globalLight;
         public float newLightIntensity = 1;
+        [Header("Audio")] 
+        public AudioSource doorSound;
         [Header("External")] 
         public InteractionController interaction;
 
@@ -42,6 +44,7 @@ namespace Environment.Interactive
             fader.OnFadeAddingEnd -= HandleTransportation;
             
             fader.StartFade(true);
+            doorSound.Play();
             interaction.isLocked = false;
             _player.transform.position = destinationObject.transform.position + (Vector3)offset;
             globalLight.intensity = newLightIntensity;

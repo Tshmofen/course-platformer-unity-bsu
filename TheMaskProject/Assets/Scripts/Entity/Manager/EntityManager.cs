@@ -12,5 +12,11 @@ namespace Entity.Manager
         public Animator animator;
         public Destroyer destroyer;
         public EntityAudioController entityAudioController;
+        
+        public void PlaySound(string soundName) => entityAudioController.PlaySound(soundName);
+
+        public void PlayFootstep(int footNumber) => entityAudioController.PlayFootstep(footNumber);
+
+        public void StopSound(string soundName) => entityAudioController.StopSound(soundName);
     }
 }

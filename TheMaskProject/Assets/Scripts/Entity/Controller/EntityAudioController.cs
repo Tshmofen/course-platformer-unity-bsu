@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Entity.Audio;
 using UnityEngine;
@@ -27,9 +28,15 @@ namespace Entity.Controller
         // should be used whenever it's needed to play sound
         public void PlaySound(string soundName)
         {
-            var sound = _sources.AsEnumerable()
-                .First(source => source.name == soundName);
+            var sound = FindSound(soundName);
             if (sound) sound.Play();
+            else Debug.Log($"Can't find sound {soundName}");
+        }
+        
+        public void StopSound(string soundName)
+        {
+            var sound = FindSound(soundName);
+            if (sound) sound.Stop(); 
             else Debug.Log($"Can't find sound {soundName}");
         }
 
@@ -71,5 +78,6 @@ namespace Entity.Controller
             return Footstep.ConvertNameToType(groundName);
         }
         
+        private AudioSource FindSound(string sound) => _sources.AsEnumerable().First(source => source.name == sound);
     }
 }

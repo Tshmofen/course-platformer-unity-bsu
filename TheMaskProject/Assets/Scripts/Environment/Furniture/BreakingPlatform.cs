@@ -7,10 +7,9 @@ namespace Environment.Furniture
         [Header("Animation")]
         public Animator animator;
         public string breakTrigger = "toBroke";
-        [Header("Behaviour")]
-        public float timeToStartBreak = 0.3f;
-
-        private float _currentTime;
+        [Header("Audio")] 
+        public AudioSource breakingSound;
+        
         private int _hashBreak;
         private int _enters;
 
@@ -26,29 +25,12 @@ namespace Environment.Furniture
             
             var otherLowEdge = otherBounds.center.y - otherBounds.extents.y;
             var lowEdge = bounds.center.y - bounds.extents.y;
-            if (otherLowEdge < lowEdge)
-                return;
 
-            if (_currentTime > timeToStartBreak)
+            if (otherLowEdge >= lowEdge)
             {
                 animator.SetTrigger(_hashBreak);
-                _currentTime = 0;
+                breakingSound.Play();
             }
-            else 
-            {
-                _currentTime += Time.deltaTime;
-            }
-        }
-
-        private void OnTriggerEnter2D(Collider2D _)
-        {
-            _enters++;
-        }
-
-        private void OnTriggerExit2D(Collider2D _)
-        {
-            _enters--;
-            if (_enters == 0) _currentTime = 0;
         }
     }
 }

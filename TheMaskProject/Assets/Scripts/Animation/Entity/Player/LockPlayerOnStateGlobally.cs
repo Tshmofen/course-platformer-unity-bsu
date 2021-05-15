@@ -21,7 +21,7 @@ namespace Animation.Entity.Player
                     _player = playerObject.GetComponent<PlayerController>();
             }
 
-            if (_sceneHasPlayer)
+            if (_sceneHasPlayer && _player.gameObject.activeSelf)
             {
                 _isInState = true;
                 _player.StartCoroutine(OverwriteTheField());
