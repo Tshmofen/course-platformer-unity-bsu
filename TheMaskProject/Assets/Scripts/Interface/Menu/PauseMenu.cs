@@ -17,7 +17,7 @@ namespace Interface.Menu
         [Header("Scene changing")]
         public SceneFader fader;
         public float loadingFadeTime = 0.7f;
-        public SceneAsset mainMenuScene;
+        public string mainMenuScene;
 
         private GameObject _lastButton;
         private bool _wasEnabled;
@@ -43,7 +43,7 @@ namespace Interface.Menu
         public void HandleMainMenu()
         {
             var loader = gameObject.AddComponent<SceneLoader>();
-            loader.scene = mainMenuScene;
+            loader.sceneName = mainMenuScene;
             
             fader.OnFadeAddingEnd += loader.LoadScene;
             fader.fadeTime = loadingFadeTime;
@@ -53,7 +53,9 @@ namespace Interface.Menu
         // called by a button
         public void HandleExit()
         {
-            EditorApplication.isPlaying = false;
+            #if  UNITY_EDITOR
+                EditorApplication.isPlaying = false;        
+            #endif
             Application.Quit();
         }
 

@@ -2224,7 +2224,7 @@ MonoBehaviour:
   optionsMenu: {fileID: 524322220}
   initialButton: {fileID: 130458013}
   fader: {fileID: 1693950933}
-  initialScene: {fileID: 102900000, guid: 407622dcee2897240904e93d80db6de1, type: 3}
+  initialSceneName: PrologueScene
   loadingFadeTime: 0.7
 --- !u!1 &1089796741
 GameObject:

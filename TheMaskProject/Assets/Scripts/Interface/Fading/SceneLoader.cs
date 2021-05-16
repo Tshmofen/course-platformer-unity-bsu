@@ -6,13 +6,13 @@ namespace Interface.Fading
 {
     public class SceneLoader : MonoBehaviour
     {
-        public SceneAsset scene;
+        public string sceneName;
         
         private bool _toLoad;
 
         public void LoadScene()
         {
-            SceneManager.LoadScene(scene.name);
+            SceneManager.LoadScene(sceneName);
         }
     }
 }

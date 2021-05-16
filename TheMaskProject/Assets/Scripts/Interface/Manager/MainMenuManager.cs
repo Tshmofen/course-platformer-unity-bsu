@@ -15,7 +15,7 @@ namespace Interface.Manager
         public GameObject initialButton;
         [Header("Scene changer")]
         public SceneFader fader;
-        public SceneAsset initialScene;
+        public string initialSceneName;
         public float loadingFadeTime = 0.7f;
 
         private void Start()
@@ -29,7 +29,7 @@ namespace Interface.Manager
             inputModule.enabled = false;
 
             var loader = gameObject.AddComponent<SceneLoader>();
-            loader.scene = initialScene;
+            loader.sceneName = initialSceneName;
             
             fader.OnFadeAddingEnd += loader.LoadScene;
             fader.fadeTime = loadingFadeTime;
@@ -40,7 +40,10 @@ namespace Interface.Manager
 
         public void HandleExit()
         {
+            #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
+            #endif
+            
             Application.Quit();
         }
     }
