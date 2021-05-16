@@ -157,6 +157,8 @@ namespace Entity.Enemy
         // iterates over pathNodes from the start to the end, and then in backwards
         private int GetNextNodeIndex()
         {
+            if (pathNodes.Length == 1) return 0;
+
             var index = _pathIndex;
             index += _isMoveToEnd ? 1 : -1;
 

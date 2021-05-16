@@ -52,7 +52,7 @@ namespace Entity.Player
 
         public bool IsInteracting
         {
-            get => !isInAttack && ToInteract;
+            get => !IsAttacking && ToInteract;
             set => ToInteract = value;
         }
 
@@ -75,7 +75,7 @@ namespace Entity.Player
             UpdateCounters();
             CorrectControls();
             UpdateMovement();
-            if (!isLocked)
+            if (!IsLocked)
             {
                 UpdateDirection();
                 UpdateTimer();
@@ -118,7 +118,7 @@ namespace Entity.Player
 
         private void CorrectControls()
         {
-            if (isInAttack || _attacksInFly > maxAttacksInFly)
+            if (IsAttacking || _attacksInFly > maxAttacksInFly)
                 ToAttack = ToParry = false;
             if (_isEvadingForbidden || isEvading || _evadesInFly > maxEvadesInFly)
                 ToEvade = false;
@@ -129,9 +129,9 @@ namespace Entity.Player
         {
             _velocity.y -= gravity * Time.deltaTime; // (m/s^2)
             
-            if (isLocked)
+            if (IsLocked)
                 UseLockedMovement();
-            else if (isInAttack)
+            else if (IsAttacking)
                 UseAttackMovement();
             else if (isEvading)
                 UseEvadeMovement();
@@ -146,7 +146,7 @@ namespace Entity.Player
         // flips character is it's necessary
         private void UpdateDirection()
         {
-            if (isInAttack || isEvading) return;
+            if (IsAttacking || isEvading) return;
             var input = InputUtil.GetMove();
             if (input.x > 0 && !IsFacingRight || input.x < 0 && IsFacingRight)
                 FlipDirection();
@@ -174,7 +174,7 @@ namespace Entity.Player
             _toAttackHeavy = ToParry;
             _toAttackLight = !ToParry && ToAttack;
             
-            if (isInAttack || _attacksInFly > maxAttacksInFly)
+            if (IsAttacking || _attacksInFly > maxAttacksInFly)
             {
                 _toAttackHeavy = false;
                 _toAttackLight = false;
@@ -186,8 +186,8 @@ namespace Entity.Player
             var velocityScaleX = GetMoveScale(_velocity.x, moveSpeed);
             var velocityScaleY = _velocity.y;
             var inFall = !IsGroundedAfterSlope;
-            var inAttack = isInAttack;
-            var toEvade = ToEvade && !isInAttack;
+            var inAttack = IsAttacking;
+            var toEvade = ToEvade && !IsAttacking;
             var toJump = _playJumpAnimation;
             var toAttackLight = _toAttackLight;
             var toAttackHeavy = _toAttackHeavy;

@@ -1,5 +1,4 @@
 ﻿using System;
-using Entity.Manager;
 using Entity.Movement;
 using UnityEngine;
 
@@ -8,6 +7,8 @@ namespace Entity
     [RequireComponent(typeof(MovementController))]
     public abstract class BaseEntityController : MonoBehaviour
     {
+        #region Fields
+
         #region Animation hashes
         
         // animation hashes
@@ -28,15 +29,15 @@ namespace Entity
         public float gravity = 20;
         public float slopeMoveUpdateDelay = 0.1f;
         [Header("External")]
-        public BaseEntityManager manager;
-        public bool isInAttack;
-        public bool isLocked;
+        public EntityManager manager;
 
-        protected MovementController Movement;
-        
         private bool _wasMovingSlope;
         private float _wasMovingSlopeTime;
-
+        
+        protected MovementController Movement;
+        
+        protected bool IsAttacking { get; private set; }
+        protected bool IsLocked { get; private set; }
         protected bool IsGroundedAfterSlope
         {
             get
@@ -57,6 +58,18 @@ namespace Entity
             }
         }
         protected bool IsFacingRight { get; private set; }
+        
+        #endregion
+
+        #region Animation events (mostly)
+
+        public void EnableAttackState() => IsAttacking = true;
+        public void DisableAttackState() => IsAttacking = false;
+        
+        public void Lock() => IsLocked = true;
+        public void Unlock() => IsLocked = false;
+
+        #endregion
 
         protected virtual void Start()
         {
@@ -64,8 +77,6 @@ namespace Entity
             IsFacingRight = true;
         }
 
-        #region Support Methods
-        
         protected void FlipDirection()
         {
             IsFacingRight = !IsFacingRight;
@@ -82,7 +93,7 @@ namespace Entity
             manager.animator.SetFloat(HashVelocityScaleX, velocityScaleX);
             manager.animator.SetFloat(HashVelocityScaleY, velocityScaleY);
             manager.animator.SetBool(HashInFall, inFall);
-            if(!isLocked) 
+            if(!IsLocked) 
             {
                 manager.animator.SetBool(HashInAttack, inAttack);
                 if (toAttackLight) manager.animator.SetTrigger(HashToAttackLight);
@@ -97,7 +108,5 @@ namespace Entity
         
         // returns movement scale from -1 to 1
         protected static float GetMoveScale(float speed, float maxSpeed) => Math.Abs(speed / maxSpeed);
-        
-        #endregion
     }
 }

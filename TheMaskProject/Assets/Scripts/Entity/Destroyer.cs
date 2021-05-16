@@ -1,9 +1,8 @@
-﻿using Entity.Manager;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Entity
 {
-    [RequireComponent(typeof(BaseEntityManager))]
+    [RequireComponent(typeof(EntityManager))]
     public class Destroyer : MonoBehaviour
     {
         private static readonly int HashFade = Shader.PropertyToID("_Fade");

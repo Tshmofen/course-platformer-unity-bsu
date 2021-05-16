@@ -15,7 +15,6 @@ namespace Entity.Enemy
         private bool _isRightToTarget;
         
         private bool _isOnTarget;
-        private bool _wasOnTarget;
         private bool _toAttackLight;
 
         protected override void Start()
@@ -26,7 +25,7 @@ namespace Entity.Enemy
 
         private void Update()
         {
-            if (!isLocked)
+            if (!IsLocked)
             {
                 UpdateTargeting();
                 UpdateMovement();
@@ -60,17 +59,17 @@ namespace Entity.Enemy
             ResetPositioning(EnemyPosition);
             
             var distance = (EnemyPosition - (Vector2) transform.position).magnitude;
-            _toAttackLight = !isInAttack && (distance < attackRadius);
+            _toAttackLight = !IsAttacking && (distance < attackRadius);
         }
 
         private void UpdatePatrolling()
         {
             ResetPositioning(_patrolNode);
             
-            _wasOnTarget = _isOnTarget;
+            var wasOnTarget = _isOnTarget;
             _isOnTarget = !_isLeftToTarget && !_isRightToTarget;
             
-            if (_isOnTarget && !_wasOnTarget)
+            if (_isOnTarget && !wasOnTarget)
             {
                 _patrolNode = GetNextNode();
             }
@@ -80,7 +79,7 @@ namespace Entity.Enemy
         private void UpdateMovement()
         {
             _velocity.x = (_isLeftToTarget) ? moveSpeed : -moveSpeed;
-            if (isInAttack)
+            if (IsAttacking || !_isLeftToTarget && !_isRightToTarget)
             {
                 _velocity.x = 0;
             }
@@ -93,7 +92,7 @@ namespace Entity.Enemy
 
         private void UpdateDirection()
         {
-            if (isLocked || isInAttack)
+            if (IsLocked || IsAttacking)
                 return;
             if (_isLeftToTarget && !IsFacingRight || !_isLeftToTarget && IsFacingRight)
                 FlipDirection();
@@ -105,8 +104,8 @@ namespace Entity.Enemy
             var velocityScaleX = GetMoveScale(_velocity.x, moveSpeed);
             var velocityScaleY = _velocity.y;
             var inFall = !IsGroundedAfterSlope;
-            var inAttack = isInAttack;
-            var toAttackLight = !isInAttack && _toAttackLight;
+            var inAttack = IsAttacking;
+            var toAttackLight = !IsAttacking && _toAttackLight;
 
             SetAnimationState(
                 velocityScaleX, velocityScaleY, inFall,

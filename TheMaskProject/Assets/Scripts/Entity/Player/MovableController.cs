@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Entity.Manager;
 using Environment.Interactive;
 using Interface.World;
 using UnityEngine;
@@ -19,9 +18,8 @@ namespace Entity.Player
         [Header("External")]
         public InteractButton button;
         public InteractPointer pointer;
-        public PlayerManager manager;
-        public bool isLocked;
-        
+        public PlayerController player;
+
         private List<Movable> _movables;
         private Movable _currentMovable;
         private Movable _minMovable;
@@ -45,7 +43,7 @@ namespace Entity.Player
                 button.Sprite.enabled = false;
             }
             
-            if (!_isCurrentSet && manager.player.IsInteracting && _isMinSet)
+            if (!_isCurrentSet && player.IsInteracting && _isMinSet)
             {
                 _currentMovable = _minMovable;
                 _currentMovable.GravitationLocked = true;
@@ -54,10 +52,10 @@ namespace Entity.Player
                 pointer.gameObject.SetActive(true);
             }
             
-            if (_isCurrentSet && !manager.player.IsInteracting)
+            if (_isCurrentSet && !player.IsInteracting)
             {
                 _isCurrentSet = false;
-                _currentMovable.PlayerTransform = manager.player.transform;
+                _currentMovable.PlayerTransform = player.transform;
                 _currentMovable.GravitationLocked = false;
                 _currentMovable.ChangeLayer(false);
                 pointer.gameObject.SetActive(false);
@@ -119,14 +117,14 @@ namespace Entity.Player
 
         private void UpdatePlayerInteracting(Vector2 movablePosition)
         {
-            var distance = (movablePosition - (Vector2)manager.player.transform.position).magnitude;
-            manager.player.IsInteracting =
+            var distance = (movablePosition - (Vector2)player.transform.position).magnitude;
+            player.IsInteracting =
                 (distance < radius + interactBuffer) && IsPointCanReachPlayer(movablePosition);
         }
 
         private bool IsPointCanReachPlayer(Vector2 point)
         {
-            var direction = (Vector2)manager.player.transform.position - point;
+            var direction = (Vector2)player.transform.position - point;
             var hit = Physics2D.Raycast(
                 point,
                 direction,

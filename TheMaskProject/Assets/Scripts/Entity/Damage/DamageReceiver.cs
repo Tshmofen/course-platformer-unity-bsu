@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Globalization;
-using Entity.Manager;
 using Interface.Overlay;
 using UnityEngine;
 using Util;
@@ -17,7 +16,7 @@ namespace Entity.Damage
         public GameObject healthBinderPrefab;
         [Header("External")] 
         public GameObject bindersRoot;
-        public BaseEntityManager manager;
+        public EntityManager manager;
         
         private HealthStats _health;
         private BoxCollider2D _collider;
