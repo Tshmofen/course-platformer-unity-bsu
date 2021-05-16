@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<Collectibles>
+    <Items>
+		<Item>
+            <ID>0</ID>
+            <Name>EmptyItem</Name>
+            <Description>You need to set or change collectible item id.</Description>
+        </Item>
+        <Item>
+            <ID>1</ID>
+            <Name>Katana</Name>
+            <Description>
+                A classic blue katana with no special characteristics other than color.\n\n
+                In complete with walnut-colored wooden sheaths.
+			</Description>
+            <PathSpriteFull>Sprites/Items/katana_full</PathSpriteFull>
+            <PathSpriteMini>Sprites/Items/katana_mini</PathSpriteMini>
+            <Types>
+                <Type>Weapon</Type>
+            </Types>
+        </Item>
+		<Item>
+            <ID>2</ID>
+            <Name>The Mask</Name>
+            <Description>
+                Traditional mask with large white eye sockets and no pupils.\n\n
+                
+                Although outwardly the eye sockets seem impenetrable, 
+                the view from the inside of the mask is unobstructed. 
+                Also the mask is surprisingly durable, 
+                as you figured it out in a vain attempts to take it off.\n\n
+                
+                This strange mask emits a faint, ominous light.\n
+                Maybe you can somehow use the energy hidden in this item.
+            </Description>
+            <PathSpriteFull>Sprites/Items/mask_full</PathSpriteFull>
+            <PathSpriteMini>Sprites/Items/mask_mini</PathSpriteMini>
+        </Item>
+        <Item>
+            <ID>3</ID>
+            <Name>Medicine Flask</Name>
+            <Description>
+                Turquoise flask with paper wrapper.\n\n
+                
+                Some kind of herb is depicted on the paper. 
+                You recognize this medical healing mixture by its characteristic scent and the depiction.
+                However, the name of the herb does not occur to you in any way.\n\n
+
+                Maybe this mixture can be used to heal small wounds?
+            </Description>
+            <Types>
+                <Type>Consumable</Type>
+            </Types>
+            <PathSpriteFull>Sprites/Items/medicine_full</PathSpriteFull>
+            <PathSpriteMini>Sprites/Items/medicine_mini</PathSpriteMini>
+        </Item>
+    </Items>
+</Collectibles>
