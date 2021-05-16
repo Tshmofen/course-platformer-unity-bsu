@@ -14,14 +14,14 @@ namespace Environment.Interactive
         [Header("Audio")] 
         public AudioSource pickupSound;
 
-        private void Collect()
+        protected virtual void Collect()
         {
             inventory.AddItem(itemID);
             pickupSound.Play();
             DisableItem();
         }
 
-        private void DisableItem()
+        protected void DisableItem()
         {
             particles.SetActive(false);
             GetComponent<SpriteRenderer>().enabled = false;

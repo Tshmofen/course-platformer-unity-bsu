@@ -4943,7 +4943,7 @@ GameObject:
   - component: {fileID: 3855768319996544481}
   - component: {fileID: 3855768319996544482}
   - component: {fileID: 3855768319996544480}
-  - component: {fileID: 3855768319996544483}
+  - component: {fileID: 2129239993}
   m_Layer: 16
   m_Name: BaseCollectible
   m_TagString: Untagged
@@ -5044,7 +5044,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.46875, y: 0.46875}
   m_EdgeRadius: 0
---- !u!114 &3855768319996544483
+--- !u!114 &2129239993
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5053,10 +5053,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3855768319996544542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbd3a143be104449afeeaa4b45472e03, type: 3}
+  m_Script: {fileID: 11500000, guid: 9222fb27c0dd4781b2b50c636f9ee876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 3
   inventory: {fileID: 0}
   particles: {fileID: 1885448368}
   pickupSound: {fileID: 1564695951}
+  healingBox: {fileID: 0}

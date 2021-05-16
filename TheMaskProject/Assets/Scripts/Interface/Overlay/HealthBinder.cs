@@ -35,7 +35,7 @@ namespace Interface.Overlay
 
         private void FixedUpdate()
         {
-            healthImage.fillAmount = health.CurrentHealth / health.maxHealth;
+            healthImage.fillAmount = health.CurrentHealth / (float)health.maxHealth;
             if (health.CurrentHealth != _previousHealth)
             {
                 counter.text = $"{health.CurrentHealth} / {health.maxHealth}";

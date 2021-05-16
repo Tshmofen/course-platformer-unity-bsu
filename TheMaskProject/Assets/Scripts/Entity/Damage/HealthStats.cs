@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Entity.Damage
 {
     public class HealthStats : MonoBehaviour
     {
-        public float maxHealth;
+        public int maxHealth;
         [Range(0, 1)] public float lightArmor;
         [Range(0, 1)] public float pierceArmor;
         [Range(0, 1)] public float heavyArmor;
@@ -13,7 +14,7 @@ namespace Entity.Damage
         
         private void Start()
         {
-            CurrentHealth = (int)maxHealth;
+            CurrentHealth = maxHealth;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DataStore.Collectibles;
 using TMPro;
 using UnityEngine;
@@ -19,7 +20,6 @@ namespace Interface.Menu
         [Header("Inventory objects")] 
         public GameObject itemButtonPrefab;
         public GameObject menuObject;
-        public GameObject useMenuObject;
         public TextMeshProUGUI descriptionMesh;
         public Image fullItemImage;
         [Header("Initial buttons")]
@@ -97,17 +97,6 @@ namespace Interface.Menu
             var colors = button.colors;
             colors.normalColor = filterColor;
             button.colors = colors;
-        } 
-
-        public void EnableUseMenu()
-        {
-            var useMenuTransform = useMenuObject.GetComponent<RectTransform>();
-            var useMenuRect = useMenuTransform.rect;
-            var newPosition = Input.mousePosition;
-            
-            newPosition += new Vector3(useMenuRect.width / 2, -useMenuRect.height / 2);
-            useMenuTransform.position = newPosition;
-            useMenuObject.SetActive(true);
         }
 
         public override void EnableMenu(bool enable)
@@ -130,5 +119,7 @@ namespace Interface.Menu
             itemButton.onClick.AddListener(() => SetItemButton(newItem.GetComponent<Button>()));
             itemButton.onClick.AddListener(() => SetItem(inventoryItem));
         }
+
+        public bool HaveItem(int id) => _items.Any(item => item.itemID == id);
     }
 }

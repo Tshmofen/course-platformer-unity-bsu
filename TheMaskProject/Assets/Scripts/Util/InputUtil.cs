@@ -31,6 +31,8 @@ namespace Util
 
         public static bool GetParry() => Input.GetKeyDown(KeyCode.Mouse1);
 
+        public static bool GetHeal() => Input.GetKeyDown(KeyCode.R);
+
         #endregion
 
         #region Mouse

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Background
+namespace Environment.Background
 {
     [ExecuteInEditMode]
     public class ParallaxLayer : MonoBehaviour

@@ -38,13 +38,21 @@
         </Item>
         <Item>
             <ID>3</ID>
-            <Name>Temp Heal Item</Name>
+            <Name>Medicine Flask</Name>
             <Description>
-                Heals some amount of hp
+                Turquoise flask with paper wrapper.\n\n
+                
+                Some kind of herb is depicted on the paper. 
+                You recognize this medical healing mixture by its characteristic scent and the depiction.
+                However, the name of the herb does not occur to you in any way.\n\n
+
+                Maybe this mixture can be used to heal small wounds?
             </Description>
             <Types>
                 <Type>Consumable</Type>
             </Types>
+            <PathSpriteFull>Sprites/Items/medicine_full</PathSpriteFull>
+            <PathSpriteMini>Sprites/Items/medicine_mini</PathSpriteMini>
         </Item>
     </Items>
 </Collectibles>

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Background
+namespace Environment.Background
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class CameraFiller : MonoBehaviour

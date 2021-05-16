@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Background
+namespace Environment.Background
 {
     [ExecuteInEditMode]
     public class ParallaxBackground : MonoBehaviour
