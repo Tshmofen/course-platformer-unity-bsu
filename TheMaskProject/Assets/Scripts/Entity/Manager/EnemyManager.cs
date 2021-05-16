@@ -1,9 +1,9 @@
-﻿using Entity.Controller;
+﻿using Entity.Enemy;
 
 namespace Entity.Manager
 {
-    public class EnemyManager : EntityManager
+    public class EnemyManager : BaseEntityManager
     {
-        public EnemyController enemy;
+        public BaseEnemyController enemy;
     }
 }

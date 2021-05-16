@@ -1,8 +1,8 @@
-﻿using Entity.Controller;
+﻿using Entity.Player;
 
 namespace Entity.Manager
 {
-    public class PlayerManager : EntityManager
+    public class PlayerManager : BaseEntityManager
     {
         public PlayerController player;
     }

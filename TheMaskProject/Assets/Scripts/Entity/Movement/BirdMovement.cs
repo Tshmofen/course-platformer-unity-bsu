@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Entity.Controller
+namespace Entity.Movement
 {
-    public class BirdController : MonoBehaviour
+    public class BirdMovement : MonoBehaviour
     {
         private int _direction;
         

@@ -5,7 +5,7 @@ using Interface.World;
 using UnityEngine;
 using Util;
 
-namespace Entity.Controller
+namespace Entity.Player
 {
     [RequireComponent(typeof(CircleCollider2D))]
     public class MovableController : MonoBehaviour

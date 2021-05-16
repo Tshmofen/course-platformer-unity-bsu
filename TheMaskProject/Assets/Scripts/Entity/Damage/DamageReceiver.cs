@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections;
+using System.Globalization;
 using Entity.Manager;
 using Interface.Overlay;
 using UnityEngine;
@@ -11,33 +12,33 @@ namespace Entity.Damage
     {
         #region Fields and properties
         
-        private HealthStats _health;
-        private BoxCollider2D _collider;
-
-        private GameObject _binder;
-        private bool _isBinderSet;
-        
         [Header("Visuals")]
         public bool showHealthBar = true;
         public GameObject healthBinderPrefab;
         [Header("External")] 
         public GameObject bindersRoot;
-        public bool isReceiveDamage = true;
-        public EntityManager manager;
+        public BaseEntityManager manager;
         
+        private HealthStats _health;
+        private BoxCollider2D _collider;
+        private bool _isReceiveDamage = true;
+        
+        private float _notReceiveDamageTime;
+
+        private GameObject _binder;
+        private bool _isBinderSet;
+
         // animation hashed strings
         private static readonly int HashToDie = Animator.StringToHash("toDie");
         private static readonly int HashToInjure = Animator.StringToHash("toInjure");
 
         #endregion
         
-        #region Unity behaviour
-
         private void Start()
         {
             _health = GetComponent<HealthStats>();
             _collider = GetComponent<BoxCollider2D>();
-            isReceiveDamage = true;
+            _isReceiveDamage = true;
         }
 
         // Also destroys created health bar
@@ -49,7 +50,7 @@ namespace Entity.Damage
 
         public void ReceiveDamage(DamageStats damage, DamageType type)
         {
-            if (isReceiveDamage)
+            if (_isReceiveDamage)
             {
                 var damageAmount = CalculateDamage(damage, type);
                 _health.CurrentHealth -= (int)damageAmount;
@@ -65,17 +66,14 @@ namespace Entity.Damage
             }
         }
 
-        public void DestroyReceiver()
-        {
-            manager.destroyer.DestroyEntity();
-        }
-
         public void KillReceiver()
         {
             _health.CurrentHealth = 0;
             StartDieState();
         }
-        
+
+        public void NotReceiveDamageFor(float duration) => StartCoroutine(NotReceiveDamageApply(duration));
+
         private float CalculateDamage(DamageStats damage, DamageType type)
         {
             var damageAmount = type switch
@@ -129,6 +127,14 @@ namespace Entity.Damage
             manager.animator.SetTrigger(HashToInjure);
         }
 
-        #endregion
+        private IEnumerator NotReceiveDamageApply(float duration)
+        {
+            for (var time = 0f; time <= duration; time += Time.deltaTime)
+            {
+                _isReceiveDamage = false;
+                yield return null;
+            }
+            _isReceiveDamage = true;
+        }
     }
 }

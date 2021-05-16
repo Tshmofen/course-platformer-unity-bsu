@@ -10,12 +10,12 @@ namespace Animation.Entity
         
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<EntityManager>().entityAudioController.PlaySound(soundName);
+            animator.GetComponent<BaseEntityManager>().entityAudioController.PlaySound(soundName);
         }
         
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<EntityManager>().entityAudioController.StopSound(soundName);
+            animator.GetComponent<BaseEntityManager>().entityAudioController.StopSound(soundName);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Entity.Controller;
+using Entity.Player;
 using UnityEngine;
 using Util;
 

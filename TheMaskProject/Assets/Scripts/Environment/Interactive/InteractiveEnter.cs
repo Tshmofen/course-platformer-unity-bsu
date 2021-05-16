@@ -1,4 +1,4 @@
-﻿using Entity.Controller;
+﻿using Entity.Player;
 using Interface.Fading;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;

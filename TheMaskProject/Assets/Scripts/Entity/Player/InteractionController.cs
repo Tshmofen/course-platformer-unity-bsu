@@ -3,7 +3,7 @@ using Environment.Interactive;
 using UnityEngine;
 using Util;
 
-namespace Entity.Controller
+namespace Entity.Player
 {
     public class InteractionController : MonoBehaviour
     {

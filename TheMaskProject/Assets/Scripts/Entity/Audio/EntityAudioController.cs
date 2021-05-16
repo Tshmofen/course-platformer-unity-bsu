@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Entity.Audio;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Entity.Controller
+namespace Entity.Audio
 {
     public class EntityAudioController : MonoBehaviour
     {
         private List<AudioSource> _sources;
         private List<Footstep> _steps;
 
+        [Header("General")] 
+        public bool applyCustomRolloff;
+        public float minDistance;
+        public float maxDistance;
         [Header("Footsteps")]
         public Tilemap groundMap;
         [Header("Ray Casting")]
@@ -23,6 +25,16 @@ namespace Entity.Controller
         {
             _sources = new List<AudioSource>(GetComponentsInChildren<AudioSource>());
             _steps = new List<Footstep>(GetComponentsInChildren<Footstep>());
+
+            if (applyCustomRolloff)
+            {
+                foreach (var source in _sources)
+                {
+                    source.rolloffMode = AudioRolloffMode.Linear;
+                    source.minDistance = minDistance;
+                    source.maxDistance = maxDistance;
+                }
+            }
         }
         
         // should be used whenever it's needed to play sound

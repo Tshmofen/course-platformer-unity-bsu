@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Entity
 {
-    [RequireComponent(typeof(EntityManager))]
+    [RequireComponent(typeof(BaseEntityManager))]
     public class Destroyer : MonoBehaviour
     {
         private static readonly int HashFade = Shader.PropertyToID("_Fade");

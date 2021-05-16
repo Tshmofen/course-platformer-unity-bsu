@@ -1,5 +1,5 @@
 ﻿using Cinemachine;
-using Entity.Controller;
+using Entity.Player;
 using UnityEngine;
 
 namespace Environment.Area

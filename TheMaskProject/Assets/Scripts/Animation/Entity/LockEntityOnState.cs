@@ -1,4 +1,4 @@
-﻿using Entity.Controller;
+﻿using Entity;
 using Entity.Manager;
 using UnityEngine;
 

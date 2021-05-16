@@ -3,7 +3,7 @@ using Entity.Manager;
 using Entity.Movement;
 using UnityEngine;
 
-namespace Entity.Controller
+namespace Entity
 {
     [RequireComponent(typeof(MovementController))]
     public abstract class BaseEntityController : MonoBehaviour
@@ -28,7 +28,7 @@ namespace Entity.Controller
         public float gravity = 20;
         public float slopeMoveUpdateDelay = 0.1f;
         [Header("External")]
-        public EntityManager manager;
+        public BaseEntityManager manager;
         public bool isInAttack;
         public bool isLocked;
 
