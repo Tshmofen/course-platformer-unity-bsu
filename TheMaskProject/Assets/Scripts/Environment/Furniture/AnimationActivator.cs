@@ -11,7 +11,8 @@ namespace Environment.Furniture
         [Header("Animation")]
         public Animator animator;
         public string boolParameter = "isOpen";
-        [Header("Behaviour")]
+        [Header("Behaviour")] 
+        public bool stayEnabledOnExit;
         public float timeToActivate = 2;
         public string activatorTag = TagStorage.ActivatorTag;
 
@@ -32,7 +33,7 @@ namespace Environment.Furniture
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (!other.CompareTag(activatorTag)) return;
+            if (stayEnabledOnExit || !other.CompareTag(activatorTag)) return;
             
             _currentWaitTime = 0;
             animator.SetBool(_hashBoolParameter, false);

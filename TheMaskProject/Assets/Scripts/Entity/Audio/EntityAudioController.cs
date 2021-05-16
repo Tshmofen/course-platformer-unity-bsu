@@ -30,6 +30,7 @@ namespace Entity.Audio
             {
                 foreach (var source in _sources)
                 {
+                    source.spatialBlend = 1;
                     source.rolloffMode = AudioRolloffMode.Linear;
                     source.minDistance = minDistance;
                     source.maxDistance = maxDistance;

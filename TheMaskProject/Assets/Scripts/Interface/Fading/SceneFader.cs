@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,6 +35,8 @@ namespace Interface.Fading
             _fadeHash = Animator.StringToHash(fadeTimeFloatName);
             _animator = GetComponent<Animator>();
             
+            _animator.updateMode = AnimatorUpdateMode.Normal;
+            StartCoroutine(ChangeAnimatorMode());
             StartFade(true);
         }
 
@@ -55,6 +58,11 @@ namespace Interface.Fading
         public void CallFadeRemovingEnd() => OnFadeRemovingEnd?.Invoke();
 
         #endregion
-        
+
+        private IEnumerator ChangeAnimatorMode()
+        {
+            yield return new WaitForSeconds(0.3f);
+            _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
     }
 }
