@@ -1,32 +1,63 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Entity.Enemy
 {
     public class PriestController : BaseEnemyController
     {
+        private static readonly int HashToAttackRush = Animator.StringToHash("toAttackRush");
+        private enum Attack
+        {
+            Light,
+            Heavy,
+            Rush
+        }
+
         [Header("Combat")] 
         public float attackRadius = 1f;
         public float targetRadius = 0.2f;
+        public int lightAttacksBeforeHeavy = 2;
+        public float rushMinDistance = 3;
+        public float rushMaxDistance = 4;
+        [Header("Timings")] 
+        public float attackLightWait = 0.5f;
+        public float attackHeavyWait = 0.5f;
+        public float attackRushWait = 0.5f;
 
         private Vector2 _velocity;
         private Vector2 _patrolNode;
 
         private bool _isLeftToTarget;
         private bool _isRightToTarget;
-        
         private bool _isOnTarget;
+        
         private bool _toAttackLight;
+        private bool _toAttackHeavy;
+        private bool _toAttackRush;
+        
+        private int _lightAttacksCount;
+        private Dictionary<Attack, (bool forbidden, float time)> _forbids;
 
         protected override void Start()
         {
             base.Start();
             _patrolNode = GetNextNode();
+            
+            _forbids = new Dictionary<Attack, (bool forbidden, float time)>
+            {
+                {Attack.Light, (false, 0)},
+                {Attack.Heavy, (false, 0)},
+                {Attack.Rush, (false, 0)}
+            };
         }
 
         private void Update()
         {
+            if (Time.deltaTime == 0) return;
+            
             if (!IsLocked)
             {
+                UpdateTimer();
                 UpdateTargeting();
                 UpdateMovement();
                 UpdateDirection();
@@ -34,6 +65,33 @@ namespace Entity.Enemy
             UpdateAnimationState();
         }
 
+        private void UpdateTimer()
+        {
+            if (_forbids[Attack.Light].forbidden)
+            {
+                if (_forbids[Attack.Light].time < attackLightWait)
+                    _forbids[Attack.Light] = (true, _forbids[Attack.Light].time + Time.deltaTime);
+                else
+                    _forbids[Attack.Light] = (false, attackLightWait);
+            }
+            
+            if (_forbids[Attack.Heavy].forbidden)
+            {
+                if (_forbids[Attack.Heavy].time < attackHeavyWait)
+                    _forbids[Attack.Heavy] = (true, _forbids[Attack.Heavy].time + Time.deltaTime);
+                else
+                    _forbids[Attack.Heavy] = (false, attackHeavyWait);
+            }
+            
+            if (_forbids[Attack.Rush].forbidden)
+            {
+                if (_forbids[Attack.Rush].time < attackRushWait)
+                    _forbids[Attack.Rush] = (true, _forbids[Attack.Rush].time + Time.deltaTime);
+                else
+                    _forbids[Attack.Rush] = (false, attackRushWait);
+            }
+        }
+        
         // set target as one of path nodes
         private void UpdateTargeting()
         {
@@ -53,13 +111,40 @@ namespace Entity.Enemy
             _isRightToTarget = target.x - position.x < -targetRadius;
         }
          
-        // set player position as target
+        // Handles attacks
         private void UpdateEnemyChase()
         {
             ResetPositioning(EnemyPosition);
             
+            _toAttackHeavy = false;
+            _toAttackLight = false;
+            _toAttackRush = false;
             var distance = (EnemyPosition - (Vector2) transform.position).magnitude;
-            _toAttackLight = !IsAttacking && (distance < attackRadius);
+            var isUsualAttackAvailable =
+                !_forbids[Attack.Light].forbidden || !_forbids[Attack.Heavy].forbidden;
+            
+            if (!IsAttacking && isUsualAttackAvailable && distance <= attackRadius )
+            {
+                if (_lightAttacksCount < lightAttacksBeforeHeavy)
+                {
+                    _lightAttacksCount++;
+                    _toAttackLight = true;
+                    _forbids[Attack.Light] = (true, 0);
+                }
+                else
+                {
+                    _lightAttacksCount = 0;
+                    _toAttackHeavy = true;
+                    _forbids[Attack.Heavy] = (true, 0);
+                }
+            }
+
+            if (!IsAttacking && !_forbids[Attack.Rush].forbidden && 
+                distance > rushMinDistance && distance < rushMaxDistance)
+            {
+                _toAttackRush = true;
+                _forbids[Attack.Rush] = (true, 0);
+            }
         }
 
         private void UpdatePatrolling()
@@ -78,15 +163,19 @@ namespace Entity.Enemy
         // changes direction if needed and move to target
         private void UpdateMovement()
         {
-            _velocity.x = (_isLeftToTarget) ? moveSpeed : -moveSpeed;
-            if (IsAttacking || !_isLeftToTarget && !_isRightToTarget)
-            {
-                _velocity.x = 0;
-            }
-
             _velocity.y -= gravity * Time.deltaTime; // (m/s^2)
-            Movement.Move(_velocity * Time.deltaTime);
+            var isOnTarget = !_isLeftToTarget && !_isRightToTarget;
             
+            if (IsEvading)
+                UseEvadeMovement();
+            else if (IsAttacking)
+                UseAttackMovement();
+            else if (isOnTarget)
+                UseTargetMovement();
+            else
+                UseUsualMovement();
+            
+            Movement.Move(_velocity * Time.deltaTime);
             _velocity = Movement.Velocity;
         }
 
@@ -106,12 +195,41 @@ namespace Entity.Enemy
             var inFall = !IsGroundedAfterSlope;
             var inAttack = IsAttacking;
             var toAttackLight = !IsAttacking && _toAttackLight;
+            var toAttackHeavy = !IsAttacking && _toAttackHeavy;
+            var toAttackRush = !IsAttacking && _toAttackRush;
 
             SetAnimationState(
                 velocityScaleX, velocityScaleY, inFall,
-                inAttack, toAttackLight, false,
+                inAttack, toAttackLight, toAttackHeavy,
                 false, false
             );
+            
+            if (toAttackRush) manager.animator.SetTrigger(HashToAttackRush);
         }
+
+        #region Movement Behaviour
+
+        private void UseAttackMovement()
+        {
+            _velocity.x = 0;
+        }
+
+        private void UseTargetMovement()
+        {
+            _velocity.x = 0;
+        }
+
+        private void UseEvadeMovement()
+        {
+            var minus = (IsFacingRight) ? 1 : -1;
+            _velocity = new Vector2(minus * evadeSpeed, 0);
+        }
+
+        private void UseUsualMovement()
+        {
+            _velocity.x = (_isLeftToTarget) ? moveSpeed : -moveSpeed;
+        }
+
+        #endregion
     }
 }

@@ -4,19 +4,21 @@ using UnityEngine;
 
 namespace Interface.Manager
 {
-    public class GameOverlayManager : MonoBehaviour
+    public class InterfaceManager : MonoBehaviour
     {
         #region Fields & properties
         
         [Header("External Menus")]
         public BaseMenu[] menus;
+        public bool isLocked;
 
         #endregion
 
         private void Update()
         {
-            var enabledMenus = menus.Where(menu => menu.IsEnabled).ToList();
+            if (isLocked) return;
             
+            var enabledMenus = menus.Where(menu => menu.IsEnabled).ToList();
             if (enabledMenus.Count != 0)
             {
                 var menu = enabledMenus[0];
@@ -26,7 +28,8 @@ namespace Interface.Manager
 
                 menu.EnableMenu(toEnable);
             }
-            else 
+            else
+            {
                 foreach (var menu in menus)
                 {
                     var toEnable = menu.IsEnabled ^ menu.GetMenuControls();
@@ -36,6 +39,7 @@ namespace Interface.Manager
                         break;
                     }
                 }
+            }
         }
     }
 }

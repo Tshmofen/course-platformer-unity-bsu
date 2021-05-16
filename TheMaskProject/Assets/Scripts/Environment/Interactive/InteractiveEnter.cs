@@ -31,23 +31,30 @@ namespace Environment.Interactive
 
         public void Interact()
         {
+            interaction.isLocked = true;
+            
             fader.fadeTime = fadeTime;
             fader.waitTime = waitTime;
-
-            interaction.isLocked = true;
-            fader.OnFadeAddingEnd += HandleTransportation;
             fader.StartFade(false);
+            fader.OnFadeAddingEnd += HandleTransportation;
+            
+            doorSound.Play();
         }
 
         private void HandleTransportation()
         {
-            fader.OnFadeAddingEnd -= HandleTransportation;
-            
-            fader.StartFade(true);
-            doorSound.Play();
-            interaction.isLocked = false;
             _player.transform.position = destinationObject.transform.position + (Vector3)offset;
             globalLight.intensity = newLightIntensity;
+            
+            void Unlock()
+            {
+                fader.OnFadeRemovingEnd -= Unlock;
+                interaction.isLocked = false;
+            }
+            
+            fader.OnFadeAddingEnd -= HandleTransportation;
+            fader.OnFadeRemovingEnd += Unlock;
+            fader.StartFade(true);
         }
     }
 }

@@ -14,11 +14,7 @@ namespace Entity.Player
         public float jumpManualDumping = 5;
         public int maxAttacksInFly = 1;
         public int maxEvadesInFly;
-        [Header("Evading")]
-        public float evadeSpeed = 7;
-        public float waitForEvadeTime = 0.3f;
-        public bool isEvading;
-        
+
         #endregion
 
         #region Input
@@ -120,7 +116,7 @@ namespace Entity.Player
         {
             if (IsAttacking || _attacksInFly > maxAttacksInFly)
                 ToAttack = ToParry = false;
-            if (_isEvadingForbidden || isEvading || _evadesInFly > maxEvadesInFly)
+            if (_isEvadingForbidden || IsEvading || _evadesInFly > maxEvadesInFly)
                 ToEvade = false;
         }
 
@@ -133,7 +129,7 @@ namespace Entity.Player
                 UseLockedMovement();
             else if (IsAttacking)
                 UseAttackMovement();
-            else if (isEvading)
+            else if (IsEvading)
                 UseEvadeMovement();
             else
                 UseUsualMovement();
@@ -146,7 +142,7 @@ namespace Entity.Player
         // flips character is it's necessary
         private void UpdateDirection()
         {
-            if (IsAttacking || isEvading) return;
+            if (IsAttacking || IsEvading) return;
             var input = InputUtil.GetMove();
             if (input.x > 0 && !IsFacingRight || input.x < 0 && IsFacingRight)
                 FlipDirection();
@@ -154,7 +150,7 @@ namespace Entity.Player
 
         private void UpdateTimer()
         {
-            if (_wasEvading && !isEvading)
+            if (_wasEvading && !IsEvading)
             {
                 _isEvadingForbidden = true;
                 if (_evadeForbidTime < waitForEvadeTime)

@@ -19,9 +19,7 @@ namespace Entity
         #region For animation events
         
         public void PlaySound(string soundName) => entityAudioController.PlaySound(soundName);
-
         public void PlayFootstep(int footNumber) => entityAudioController.PlayFootstep(footNumber);
-
         public void StopSound(string soundName) => entityAudioController.StopSound(soundName);
 
         public void NotReceiveDamageFor(float duration) => health.NotReceiveDamageFor(duration);
@@ -29,8 +27,11 @@ namespace Entity
         public void Lock() => entity.Lock();
         public void Unlock() => entity.Unlock();
 
-        public void EnableAttackState() => entity.EnableAttackState();
-        public void DisableAttackState() => entity.DisableAttackState();
+        public void StartAttackState() => entity.StartAttackState();
+        public void StopAttackState() => entity.StopAttackState();
+
+        public void StartEvadeState() => entity.StartEvadeState();
+        public void StopEvadeState() => entity.StopEvadeState();
 
         #endregion
     }

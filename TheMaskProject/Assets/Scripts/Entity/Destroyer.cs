@@ -14,9 +14,7 @@ namespace Entity
         public float noiseScale = 20;
         public Color edgeColor;
         public float colorIntensity = 1;
-        [Header("Behaviour")]
-        public bool disableOnDeath;
-        
+
         private Material _currentMaterial;
         
         public float CurrentFade
@@ -24,7 +22,7 @@ namespace Entity
             set => _currentMaterial.SetFloat(HashFade, value);
         }
 
-        public void EnableDeathMaterial()
+        public virtual void EnableDeathMaterial()
         {
             _currentMaterial = Instantiate(dyingMaterial);
             _currentMaterial.SetFloat(HashScale, noiseScale);
@@ -38,13 +36,7 @@ namespace Entity
                 sprite.material = _currentMaterial;
             }
         }
-        
-        public void DestroyEntity()
-        {
-            if (disableOnDeath)
-                gameObject.SetActive(false);
-            else
-                Destroy(gameObject);
-        }
+
+        public virtual void DestroyEntity() => Destroy(gameObject);
     }
 }

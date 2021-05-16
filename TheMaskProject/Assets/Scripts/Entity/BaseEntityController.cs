@@ -25,19 +25,24 @@ namespace Entity
         
         [Header("Horizontal Movement")]
         public float moveSpeed = 4.5f;
+        [Header("Evading")]
+        public float evadeSpeed = 7;
+        public float waitForEvadeTime = 0.3f;
         [Header("Other")]
         public float gravity = 20;
         public float slopeMoveUpdateDelay = 0.1f;
         [Header("External")]
         public EntityManager manager;
+        
 
         private bool _wasMovingSlope;
         private float _wasMovingSlopeTime;
         
         protected MovementController Movement;
-        
-        protected bool IsAttacking { get; private set; }
+
         protected bool IsLocked { get; private set; }
+        protected bool IsAttacking { get; private set; }
+        protected bool IsEvading { get; private set; }
         protected bool IsGroundedAfterSlope
         {
             get
@@ -63,11 +68,14 @@ namespace Entity
 
         #region Animation events (mostly)
 
-        public void EnableAttackState() => IsAttacking = true;
-        public void DisableAttackState() => IsAttacking = false;
-        
         public void Lock() => IsLocked = true;
         public void Unlock() => IsLocked = false;
+        
+        public void StartAttackState() => IsAttacking = true;
+        public void StopAttackState() => IsAttacking = false;
+
+        public void StartEvadeState() => IsEvading = true;
+        public void StopEvadeState() => IsEvading = false;
 
         #endregion
 
