@@ -1,9 +1,8 @@
-﻿using UnityEngine;
-
-namespace Environment.Interactive
+﻿namespace Environment.Interactive
 {
     public interface IInteractive
     {
         public void Interact();
     }
 }
+

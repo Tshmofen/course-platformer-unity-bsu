@@ -13,3 +13,4 @@ namespace DataStore.Collectibles
         public List<CollectibleItemData> Items;
     }
 }
+
