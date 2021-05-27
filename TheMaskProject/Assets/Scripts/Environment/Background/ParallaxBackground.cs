@@ -1,44 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Entity;
 using UnityEngine;
+
 
 namespace Environment.Background
 {
-    [ExecuteInEditMode]
     public class ParallaxBackground : MonoBehaviour
     {
         private Vector2 _oldPosition;
         private List<ParallaxLayer> _parallaxLayers;
 
-        public Camera parallaxCamera;
-        public bool movingWithCamera;
-        
+        [Header("Cameras")]
+        public GameObject cameraObject;
+        public CameraUpdater cameraUpdater;
+
         private void Start()
         {
-            _oldPosition = parallaxCamera.transform.position;
+            _oldPosition = cameraObject.transform.position;
             _parallaxLayers = new List<ParallaxLayer>();
             SetLayers();
+            
+            cameraUpdater.OnCameraUpdateEnd += UpdatePosition;
         }
-
-        private void Update() => UpdatePosition();
 
         private void UpdatePosition()
         {
-            Vector2 newPosition = parallaxCamera.transform.position;
+            var newPosition = (Vector2)cameraObject.transform.position;
+            transform.position = newPosition;
+            var delta = _oldPosition - newPosition;
+            _oldPosition = newPosition;
             
-            // on position change move layers
-            if (newPosition != _oldPosition)
-            {
-                if (movingWithCamera)
-                    transform.position = newPosition;
-
-                if (Math.Abs(newPosition.x - _oldPosition.x) != 0)
-                    MoveLayers(_oldPosition.x - newPosition.x, true);
-                if (Math.Abs(newPosition.y - _oldPosition.y) != 0)
-                    MoveLayers(_oldPosition.y - newPosition.y, false);
-
-                _oldPosition = newPosition;
-            }
+            if (delta.x != 0) MoveLayers(delta.x, true);
+            if (delta.y != 0) MoveLayers(delta.y, false);
         }
 
         // should be called, when changed amount of layers
