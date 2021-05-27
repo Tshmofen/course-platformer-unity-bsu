@@ -16,3 +16,4 @@ namespace DataStore.Collectibles
         public List<string> Types;
     }
 }
+
