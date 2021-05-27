@@ -1,6 +1,7 @@
-# Course-Platformer-Unity
+# The Mask Project
 
-Coursework for BSU on creating a game based on the Unity Engine.
+2D action platformer based on the Unity Engine.  
+Coursework for the Mechanics and Mathematics Faculty of BSU.
 
 ---
 
@@ -12,6 +13,11 @@ Design documents is [[here]](https://docs.google.com/spreadsheets/d/16kuMLNiDDJD
 ---
 
 **Authors**  
-*Ivanov Timofey  
-Edward Krainiy  
-Mathew Danilevich* 
+*Ivanov Timofey* - Lead, dev, sound, art  
+*Edward Krainiy* - Design, art  
+*Mathew Danilevich* - Animation, art
+
+---
+
+*Copyright (c) Timofey Ivanov, 2021  
+All rights reserved*
