@@ -7,5 +7,12 @@ namespace Entity.Damage
         public float damageLight;
         public float damageHeavy;
         public float damagePierce;
+
+        private void Start()
+        {
+            #if true
+                        
+            #endif
+        }
     }
 }
