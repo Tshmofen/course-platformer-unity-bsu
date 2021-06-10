@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3582027998122719757}
   - component: {fileID: 3582027998122719792}
   - component: {fileID: 3582027998122719798}
+  - component: {fileID: 986696723463285971}
   - component: {fileID: 1769910513}
   m_Layer: 6
   m_Name: BoxCrate
@@ -112,7 +113,7 @@ MonoBehaviour:
   - {x: -0.5, y: 0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -2686
+  m_InstanceId: -2624
 --- !u!61 &3582027998122719757
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,7 +138,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.955, y: 0.955}
   m_EdgeRadius: 0
 --- !u!50 &3582027998122719792
 Rigidbody2D:
@@ -153,7 +154,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: c4eecb32589d1e04bae35d083348417c, type: 2}
   m_Interpolate: 2
@@ -172,14 +173,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5b0ca5b4cb4c05953237bf93b793f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationStopSpeed: 60
   moveTime: 0.25
   hitLayers:
     serializedVersion: 2
     m_Bits: 132672
   changeRadius: 1.1
+--- !u!114 &986696723463285971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582027998122719759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e91234354d433e93ffa7356d3d267c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSounds: 2
   collisionAudio: {fileID: 1769910513}
-  maxSoundsTogether: 2
 --- !u!82 &1769910513
 AudioSource:
   m_ObjectHideFlags: 0
