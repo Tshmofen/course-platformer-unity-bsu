@@ -25,7 +25,7 @@ namespace Util
 
         public static bool GetAttack() => Input.GetKeyDown(KeyCode.Mouse0);
 
-        public static bool GetInteract() => Input.GetKeyDown(KeyCode.E);
+        public static bool GetInteract() => Input.GetKey(KeyCode.E);
         
         public static bool GetIgnorePlatform() => Input.GetKey(KeyCode.S) || Input.GetKeyDown(KeyCode.S);
 

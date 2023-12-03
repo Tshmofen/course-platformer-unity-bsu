@@ -14,6 +14,7 @@ namespace Environment.Interactive
         public GameObject destinationObject;
         public Vector2 offset;
         [Header("Visuals")]
+        public string interactText = "Enter";
         public SceneFader fader;
         public float fadeTime = 0.5f;
         public float waitTime = 0.5f;
@@ -28,6 +29,8 @@ namespace Environment.Interactive
         {
             _player = GameObject.FindWithTag(TagStorage.PlayerTag).GetComponent<PlayerController>();
         }
+
+        public string InteractText => interactText;
 
         public void Interact()
         {

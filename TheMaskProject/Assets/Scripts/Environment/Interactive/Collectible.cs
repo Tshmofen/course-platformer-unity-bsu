@@ -11,6 +11,8 @@ namespace Environment.Interactive
         public InventoryMenu inventory;
         [Header("Visuals")] 
         public GameObject particles;
+
+        public string interactText = "Pickup";
         [Header("Audio")] 
         public AudioSource pickupSound;
 
@@ -28,6 +30,7 @@ namespace Environment.Interactive
             GetComponent<Collider2D>().enabled = false;
         }
 
+        public string InteractText => interactText;
         public void Interact() => Collect();
     }
 }

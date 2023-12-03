@@ -63,6 +63,8 @@ namespace Entity
             }
         }
         protected bool IsFacingRight { get; private set; }
+
+        public event Action OnDirectionFlip;
         
         #endregion
 
@@ -90,6 +92,7 @@ namespace Entity
             IsFacingRight = !IsFacingRight;
             transform.forward *= -1;
             manager.weapon.transform.forward *= -1;
+            OnDirectionFlip?.Invoke();
         }
 
         // temp crutch: turning off jump trigger manually after animation start

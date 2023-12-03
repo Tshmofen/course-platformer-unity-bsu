@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Environment.Interactive;
+using TMPro;
 using UnityEngine;
 using Util;
 
@@ -12,6 +13,7 @@ namespace Entity.Player
 
         [Header("External")]
         public GameObject interactButton;
+        public TextMeshProUGUI interactText;
         public bool isLocked;
         
         private void Start()
@@ -35,6 +37,7 @@ namespace Entity.Player
             }
             
             interactButton.SetActive(true);
+            interactText.text = _interacts[0].InteractText;
             if (InputUtil.GetInteract())
             {
                 _interacts[0].Interact();
